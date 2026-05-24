@@ -12,7 +12,7 @@ conversation_start.yaml
           -> Cidy_Intent_Clarifier.yaml   [Intent-Clarifier]
               -> Cidy_Intent_Router.yaml  [Intent-Router]
                   -> Formulate_Response_DA.yaml
-                  -> Fromulate_Response_RPTC.yaml
+                  -> Formulate_Response_RPTC.yaml
                   -> FormulateResponse    [missing or ambiguous PDF topic]
                   -> user_feedback.yaml
 
@@ -37,6 +37,19 @@ Utility/system-like topics
       -> Fallback                         [missing or built-in]
 ```
 
+## Validation Flows
+
+Use these flows as smoke tests for the classifier, clarifier, router, and response-topic wiring.
+
+| Scenario | Test question | Clarification | Expected behavior |
+| --- | --- | --- | --- |
+| Happy path -> developed topic | What is required in a DA concept note? | None | Routes directly to `Formulate Response DA`. Expected variables: `knowledgeDomain=da`, `fundingStream=DA`, `topicArea=project_planning_design`, `requiresClarification=No`. |
+| Clarification path -> developed topic | How do I write an evaluation report? | Choose Development Account (DA) | First asks fund clarification. After DA selection, routes to `Formulate Response DA` with `topicArea=evaluation_design`. |
+| Clarification path -> not-yet-developed topic | What are the reporting requirements? | Choose RPTC | First asks fund clarification. After RPTC selection, routes to the RPTC branch or the temporary "not developed yet" message, depending on the current router/response-topic alignment. |
+| Vague path | I need help with a project. Where do I start? | Choose Development Account (DA) only if asked after domain clarification | Should ask domain clarification, not force DA/RPTC/PDF immediately. Expected clarification type: `domain`. |
+| Out of scope | What is the weather in New York today? | None | Should classify as `out_of_scope`, show the scope message, then go to the feedback/escalation path. No clarification. |
+| Happy path -> undeveloped topic | How does Cidy work? | None | Should route to `about_cidy` or the temporary "About Cidy is not yet developed" message. No clarification. |
+
 ## Topic Inventory
 
 | File | Purpose | Entry trigger | Calls |
@@ -47,7 +60,7 @@ Utility/system-like topics
 | `Cidy_Intent_Clarifier.yaml` | Resolves unclear fund, domain, or artifact classifications through targeted questions. | `OnRecognizedIntent` | `Intent-Router` |
 | `Cidy_Intent_Router.yaml` | Routes finalized intent variables to response, feedback, or not-yet-developed handling. | `OnRecognizedIntent` | `UserFeedback2`, `DA`, `FormulateResponseCopy`, `FormulateResponse` |
 | `Formulate_Response_DA.yaml` | Searches DA knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
-| `Fromulate_Response_RPTC.yaml` | Searches RPTC knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
+| `Formulate_Response_RPTC.yaml` | Searches RPTC knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_General.yaml` | Searches the general CDPMO knowledge source and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_Programme_Development.yaml` | Intended to search programme-development sources, currently using DA-oriented instructions/source IDs in the file. | `OnRecognizedIntent` | `AssessConfidence` |
 | `assess_confidence.yaml` | Parses/formats a generated answer into answer, sources, confidence score, confidence label, and explanation. | `OnRecognizedIntent` | `ShareResponse`, `ApologizeWarn` |
@@ -73,7 +86,7 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `Intent-Router` | `Cidy_Intent_Router.yaml` |
 | `UserFeedback2` | `user_feedback.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |
-| `FormulateResponseCopy` | `Fromulate_Response_RPTC.yaml` |
+| `FormulateResponseCopy` | `Formulate_Response_RPTC.yaml` |
 | `AssessConfidence` | `assess_confidence.yaml` |
 | `ApologizeWarn` | `warn.yaml` |
 | `ShareResponse` | `share_response.yaml` |
@@ -114,12 +127,11 @@ Resolved since the previous scan:
 2. `Formulate_Response_Programme_Development.yaml` appears available but is not used by the router. Its prompt text still says the user is asking about the Development Account, and its knowledge-source IDs look DA-oriented, so it should be reviewed before wiring it in.
 3. `Formulate_Response_General.yaml` appears available but is not used by the router. It looks more aligned with `general_cd` than the current "not developed" router branch.
 4. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
-5. RPTC topic-area values in `Fromulate_Response_RPTC.yaml` do not fully match the classifier's allowed `topic_area` list. For example, the RPTC file checks `policy_compliance`, `reporting_documentation`, `process_governance`, `design_evaluation`, and `definition`, while the classifier uses values such as `policy_guidance_compliance`, `monitoring_reporting`, `governance_roles`, `evaluation_design`, and `general`. This means many RPTC questions will fall through to the generic RPTC search.
+5. RPTC topic-area values in `Formulate_Response_RPTC.yaml` do not fully match the classifier's allowed `topic_area` list. For example, the RPTC file checks `policy_compliance`, `reporting_documentation`, `process_governance`, `design_evaluation`, and `definition`, while the classifier uses values such as `policy_guidance_compliance`, `monitoring_reporting`, `governance_roles`, `evaluation_design`, and `general`. This means many RPTC questions will fall through to the generic RPTC search.
 6. Several user-facing/debug strings contain mojibake such as `DEBUG â€”`. These should likely be corrected to plain ASCII hyphens or proper UTF-8 em dashes in Copilot Studio exports.
 7. `share_response.yaml` sends `**DEBUG :Answer:**` to the user. If this is production-facing, remove `DEBUG :`.
 8. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
-9. The file `Fromulate_Response_RPTC.yaml` appears to have a typo in the filename: `Fromulate` instead of `Formulate`.
-10. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
+9. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
 ## Suggested Next Cleanup Pass
 
