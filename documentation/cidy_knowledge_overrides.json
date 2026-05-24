@@ -1,0 +1,58 @@
+{
+  "description": "Manual metadata merged into generated cidy_knowledge_inventory.json. Use this for owner units, curated labels, management notes, and manager updates that should survive regeneration.",
+  "domainOverrides": [
+    {
+      "id": "da",
+      "label": "Development Account",
+      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general."
+    },
+    {
+      "id": "rptc",
+      "label": "Regular Programme of Technical Cooperation",
+      "notes": "Developed route, but topic-area names in the response YAML do not fully match classifier output values."
+    },
+    {
+      "id": "pdf",
+      "label": "Peace and Development Trust Fund / UNPDF"
+    },
+    {
+      "id": "general_cd",
+      "label": "General CDPMO"
+    },
+    {
+      "id": "about_cidy",
+      "label": "About Cidy"
+    },
+    {
+      "id": "programme_development",
+      "label": "Programme Development"
+    },
+    {
+      "id": "project_evaluation_evidence",
+      "label": "Project Evaluation Evidence"
+    }
+  ],
+  "folderOverrides": [
+    {
+      "id": "da_project_planning_design",
+      "folderName": "Project Planning and Design"
+    },
+    {
+      "id": "da_evaluation_design",
+      "folderName": "Evaluations"
+    },
+    {
+      "id": "general_cd_general",
+      "folderName": "CDPMO Knowledge v2"
+    },
+    {
+      "id": "programme_development_steering_committee",
+      "folderName": "Capacity Development Steering Committee"
+    },
+    {
+      "id": "programme_development_tag",
+      "folderName": "Capacity Development Tag Team"
+    }
+  ],
+  "managerUpdates": []
+}

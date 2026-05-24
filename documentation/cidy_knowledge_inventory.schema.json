@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ronengit77.github.io/cidy/documentation/cidy_knowledge_inventory.schema.json",
+  "title": "Cidy Knowledge Inventory",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "generatedFrom",
+    "domains",
+    "folders",
+    "knownGaps",
+    "managerUpdates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "lastReviewed": {
+      "type": "string"
+    },
+    "generatedFrom": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain"
+      }
+    },
+    "folders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/folder"
+      }
+    },
+    "knownGaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knownGap"
+      }
+    },
+    "managerUpdates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/managerUpdate"
+      }
+    }
+  },
+  "$defs": {
+    "domain": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "fundingStream",
+        "routerStatus",
+        "yamlFile"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "fundingStream": {
+          "type": "string"
+        },
+        "routerStatus": {
+          "type": "string",
+          "enum": [
+            "wired",
+            "not_wired",
+            "missing_yaml"
+          ]
+        },
+        "routerDialog": {
+          "type": "string"
+        },
+        "yamlFile": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "ownerUnit": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "folder": {
+      "type": "object",
+      "required": [
+        "id",
+        "domain",
+        "topicArea",
+        "folderName",
+        "knowledgeSourceId",
+        "yamlFile",
+        "mappingStatus",
+        "instructions"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "topicArea": {
+          "type": "string"
+        },
+        "folderName": {
+          "type": "string"
+        },
+        "knowledgeSourceId": {
+          "type": "string"
+        },
+        "yamlFile": {
+          "type": "string"
+        },
+        "mappingStatus": {
+          "type": "string",
+          "enum": [
+            "mapped",
+            "fallback",
+            "mapped_needs_topic_area_alignment",
+            "yaml_exists_not_wired",
+            "review_required"
+          ]
+        },
+        "ownerUnit": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "knownGap": {
+      "type": "object",
+      "required": [
+        "id",
+        "severity",
+        "title",
+        "yamlFile",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "yamlFile": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "managerUpdate": {
+      "type": "object",
+      "required": [
+        "id",
+        "date",
+        "domain",
+        "changeType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "ownerUnit": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domainLabel": {
+          "type": "string"
+        },
+        "topicArea": {
+          "type": "string"
+        },
+        "changeType": {
+          "type": "string",
+          "enum": [
+            "new_folder",
+            "changed_folder",
+            "update_instructions",
+            "deprecated_folder",
+            "create_yaml",
+            "wiring",
+            "review"
+          ]
+        },
+        "yamlFile": {
+          "type": "string"
+        },
+        "folderName": {
+          "type": "string"
+        },
+        "knowledgeSourceId": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
