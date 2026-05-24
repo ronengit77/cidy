@@ -1,0 +1,370 @@
+{
+  "schema": {
+    "Scenario": "string",
+    "Test question": "string",
+    "Clarification": "string",
+    "Expected behavior": "string"
+  },
+  "testCases": [
+    {
+      "Scenario": "Happy path - DA project planning",
+      "Test question": "What is required in a DA concept note?",
+      "Clarification": "",
+      "Expected behavior": "Intent Classifier sets knowledge_domain=da, funding_stream=DA, topic_area=project_planning_design, requires_clarification=No. Intent Clarifier bypasses. Intent Router routes to Formulate Response DA."
+    },
+    {
+      "Scenario": "Happy path - DA project document",
+      "Test question": "For DA, how do I prepare a project document?",
+      "Clarification": "",
+      "Expected behavior": "Routes directly to Formulate Response DA with topic_area=project_planning_design."
+    },
+    {
+      "Scenario": "Happy path - DA monitoring and reporting",
+      "Test question": "What are the DA requirements for project monitoring and reporting?",
+      "Clarification": "",
+      "Expected behavior": "Routes directly to Formulate Response DA with topic_area=monitoring_reporting."
+    },
+    {
+      "Scenario": "Happy path - DA budget eligibility",
+      "Test question": "Under the Development Account, are travel costs eligible?",
+      "Clarification": "",
+      "Expected behavior": "Routes directly to Formulate Response DA with topic_area=budget_finance or eligibility_budget if available."
+    },
+    {
+      "Scenario": "Happy path - DA Section 35 signal",
+      "Test question": "What does Section 35 say about project design?",
+      "Clarification": "",
+      "Expected behavior": "Recognizes Section 35 as DA signal and routes to Formulate Response DA."
+    },
+    {
+      "Scenario": "Happy path - DA evaluation design",
+      "Test question": "How do I design a DA terminal evaluation?",
+      "Clarification": "",
+      "Expected behavior": "Routes directly to Formulate Response DA with topic_area=evaluation_design. This is guidance on designing an evaluation, not actual evaluation evidence."
+    },
+    {
+      "Scenario": "Happy path - DA evaluation template",
+      "Test question": "What is the DA evaluation report template?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response DA with topic_area=evaluation_design or templates."
+    },
+    {
+      "Scenario": "Happy path - DA general start",
+      "Test question": "How do I start a new DA project?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response DA. Topic may be general or project_planning_design."
+    },
+    {
+      "Scenario": "Happy path - DA latest tranche",
+      "Test question": "Which DA tranche guidance should I use for a new project?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response DA and should prefer the latest tranche guidance."
+    },
+    {
+      "Scenario": "Happy path - DA checklist",
+      "Test question": "Is there a DA checklist for reviewing concept notes?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response DA with topic_area=project_planning_design or templates."
+    },
+    {
+      "Scenario": "Happy path - project evaluation evidence",
+      "Test question": "What do project evaluations say about sustainability?",
+      "Clarification": "",
+      "Expected behavior": "Routes directly to Formulate Response Project Evaluation Evidence. This is actual evaluation evidence, not evaluation design guidance."
+    },
+    {
+      "Scenario": "Happy path - evaluation recommendations",
+      "Test question": "Summarize recommendations from project evaluations related to stakeholder engagement.",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=recommendations."
+    },
+    {
+      "Scenario": "Happy path - lessons learned",
+      "Test question": "What lessons learned are available from past capacity development projects?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=lessons_learned."
+    },
+    {
+      "Scenario": "Happy path - DA evaluation evidence distinction",
+      "Test question": "What have evaluations said about DA projects?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence, using DA as context if available. It should not route to DA evaluation design guidance."
+    },
+    {
+      "Scenario": "Happy path - recurring evaluation findings",
+      "Test question": "Are there recurring findings from past project evaluations?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=evaluation_evidence."
+    },
+    {
+      "Scenario": "Happy path - evaluation weaknesses",
+      "Test question": "What do evaluation reports say about project design weaknesses?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence."
+    },
+    {
+      "Scenario": "Happy path - partnerships in evaluations",
+      "Test question": "What have previous evaluations found about partnerships?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence."
+    },
+    {
+      "Scenario": "Happy path - sustainability recommendations",
+      "Test question": "What do evaluations recommend about sustainability?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=recommendations."
+    },
+    {
+      "Scenario": "Happy path - Programme Development CD Strategy",
+      "Test question": "What is DESA's capacity development strategy?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response Programme Development with topic_area=cd_strategy."
+    },
+    {
+      "Scenario": "Happy path - Programme Development Steering Committee",
+      "Test question": "What has the Steering Committee discussed about programme development?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=steering_committee."
+    },
+    {
+      "Scenario": "Happy path - Programme Development TAG",
+      "Test question": "What are the TAG meeting materials about?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=tag_meetings."
+    },
+    {
+      "Scenario": "Happy path - Programme Development general",
+      "Test question": "What guidance exists on programme development in Cidy?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=general."
+    },
+    {
+      "Scenario": "Happy path - RPTC budget and finance",
+      "Test question": "What are the RPTC budget and finance requirements?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=budget_finance or policy_guidance_compliance."
+    },
+    {
+      "Scenario": "Happy path - RPTC governance",
+      "Test question": "What are the RPTC governance arrangements?",
+      "Clarification": "",
+      "Expected behavior": "Routes to RPTC or the temporary not-yet-developed RPTC message if that response topic is not configured."
+    },
+    {
+      "Scenario": "Happy path - RPTC roles",
+      "Test question": "What are RPTC roles and responsibilities?",
+      "Clarification": "",
+      "Expected behavior": "Routes to RPTC with topic_area=governance_roles or temporary not-yet-developed message."
+    },
+    {
+      "Scenario": "Happy path - RPTC programme design standards",
+      "Test question": "What programme design standards apply to RPTC?",
+      "Clarification": "",
+      "Expected behavior": "Routes to RPTC with topic_area=programme_design_standards."
+    },
+    {
+      "Scenario": "Happy path - RPTC evaluation criteria",
+      "Test question": "What are the RPTC evaluation criteria?",
+      "Clarification": "",
+      "Expected behavior": "Routes to RPTC with topic_area=evaluation_criteria."
+    },
+    {
+      "Scenario": "Happy path - RPTC reports",
+      "Test question": "Where can I find guidance on RPTC reports?",
+      "Clarification": "",
+      "Expected behavior": "Routes to RPTC with topic_area=reports."
+    },
+    {
+      "Scenario": "Happy path - PDF / UNPDF",
+      "Test question": "What does the UNPDF guidance say about reporting?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response PDF or the temporary not-yet-developed PDF message."
+    },
+    {
+      "Scenario": "Happy path - About Cidy undeveloped",
+      "Test question": "How does Cidy work?",
+      "Clarification": "",
+      "Expected behavior": "Routes to About Cidy or a temporary not-yet-developed About Cidy message. No clarification should be required."
+    },
+    {
+      "Scenario": "Happy path - About Cidy coverage",
+      "Test question": "What knowledge sources does Cidy currently use?",
+      "Clarification": "",
+      "Expected behavior": "Routes to About Cidy or temporary not-yet-developed message."
+    },
+    {
+      "Scenario": "Happy path - About Cidy maintenance",
+      "Test question": "Who maintains Cidy's knowledge?",
+      "Clarification": "",
+      "Expected behavior": "Routes to About Cidy or temporary not-yet-developed message."
+    },
+    {
+      "Scenario": "Clarification path - fund to DA",
+      "Test question": "How do I write an evaluation report?",
+      "Clarification": "Development Account (DA)",
+      "Expected behavior": "Classifier asks fund clarification. Clarifier maps Development Account (DA) to knowledge_domain=da, funding_stream=DA, topic_area=evaluation_design, intentStatus=ready_to_route. Router routes to Formulate Response DA."
+    },
+    {
+      "Scenario": "Clarification path - fund to RPTC",
+      "Test question": "What are the reporting requirements?",
+      "Clarification": "RPTC",
+      "Expected behavior": "Classifier asks fund clarification. Clarifier maps to knowledge_domain=rptc, funding_stream=RPTC. Router routes to RPTC or temporary not-yet-developed RPTC message."
+    },
+    {
+      "Scenario": "Clarification path - fund to PDF",
+      "Test question": "Which reporting template should I use?",
+      "Clarification": "UNPDF / PDF",
+      "Expected behavior": "Classifier asks fund or artifact clarification. After UNPDF/PDF selection, Clarifier maps to knowledge_domain=pdf, funding_stream=PDF. Router routes to PDF or temporary not-yet-developed message."
+    },
+    {
+      "Scenario": "Clarification path - fund not sure",
+      "Test question": "Are travel costs eligible?",
+      "Clarification": "Not sure",
+      "Expected behavior": "Classifier asks fund clarification. Clarifier maps Not sure to general_cd or programme_development depending configured default. Router should avoid unsafe fund-specific answer and likely route to User Feedback or general guidance."
+    },
+    {
+      "Scenario": "Clarification path - domain to DA",
+      "Test question": "I need help with a project. Where do I start?",
+      "Clarification": "Development Account (DA)",
+      "Expected behavior": "Classifier asks domain clarification. Clarifier maps to knowledge_domain=da, funding_stream=DA, topic_area=general or project_planning_design. Router routes to Formulate Response DA."
+    },
+    {
+      "Scenario": "Clarification path - domain to Programme Development",
+      "Test question": "I need help with a project. Where do I start?",
+      "Clarification": "Programme Development",
+      "Expected behavior": "Clarifier maps to knowledge_domain=programme_development, funding_stream=UNCLEAR. Router routes to Programme Development."
+    },
+    {
+      "Scenario": "Clarification path - domain to Evaluation Evidence",
+      "Test question": "I need help understanding project performance. Where should I look?",
+      "Clarification": "Project Evaluations / Lessons Learned",
+      "Expected behavior": "Clarifier maps to knowledge_domain=project_evaluation_evidence and routes to Project Evaluation Evidence."
+    },
+    {
+      "Scenario": "Clarification path - domain to About Cidy",
+      "Test question": "I need help. What is this tool?",
+      "Clarification": "About Cidy",
+      "Expected behavior": "Clarifier maps to knowledge_domain=about_cidy. Router routes to About Cidy or temporary not-yet-developed message."
+    },
+    {
+      "Scenario": "Clarification path - domain to RPTC",
+      "Test question": "Can you help me with a project report?",
+      "Clarification": "RPTC",
+      "Expected behavior": "Clarifier maps to knowledge_domain=rptc, funding_stream=RPTC. Router routes to RPTC."
+    },
+    {
+      "Scenario": "Clarification path - domain typed DA",
+      "Test question": "Can you help me with a project?",
+      "Clarification": "DA",
+      "Expected behavior": "Typed answer DA should normalize to knowledge_domain=da and funding_stream=DA. Router routes to DA."
+    },
+    {
+      "Scenario": "Clarification path - domain typed Development Account",
+      "Test question": "Can you help me with a project?",
+      "Clarification": "Development Account",
+      "Expected behavior": "Typed answer should normalize to DA. Router routes to Formulate Response DA."
+    },
+    {
+      "Scenario": "Clarification path - domain typed UNPDF",
+      "Test question": "What guidance applies to this project?",
+      "Clarification": "UNPDF",
+      "Expected behavior": "Typed answer should normalize to knowledge_domain=pdf, funding_stream=PDF."
+    },
+    {
+      "Scenario": "Clarification path - artifact concept note",
+      "Test question": "Where is the template?",
+      "Clarification": "Concept note",
+      "Expected behavior": "Classifier asks artifact clarification. Clarifier maps topic_area=project_planning_design. If funding stream remains unclear, it may ask a second fund clarification or route to Programme Development/general depending configuration."
+    },
+    {
+      "Scenario": "Clarification path - artifact evaluation report",
+      "Test question": "How do I fill out the document?",
+      "Clarification": "Evaluation report",
+      "Expected behavior": "Clarifier maps topic_area=evaluation_design. If fund is unclear and fund-specific guidance is needed, it asks second clarification; otherwise routes based on current domain."
+    },
+    {
+      "Scenario": "Clarification path - artifact progress report",
+      "Test question": "Can you help me write the report?",
+      "Clarification": "Progress report",
+      "Expected behavior": "Clarifier maps topic_area=monitoring_reporting. If fund is unclear, it may ask fund clarification before routing."
+    },
+    {
+      "Scenario": "Clarification path - artifact management response",
+      "Test question": "Which form should I use after an evaluation?",
+      "Clarification": "Management response",
+      "Expected behavior": "Clarifier maps topic_area=evaluation_design. Route depends on clarified/current domain, usually DA if DA is selected later."
+    },
+    {
+      "Scenario": "Clarification path - second attempt succeeds",
+      "Test question": "Which template should I use?",
+      "Clarification": "Attempt 1: something invalid. Attempt 2: Development Account (DA).",
+      "Expected behavior": "Clarifier increments attempts, reprompts once, then maps DA correctly and routes to Formulate Response DA before max attempts is exceeded."
+    },
+    {
+      "Scenario": "Clarification path - max attempts dead end",
+      "Test question": "Which template should I use?",
+      "Clarification": "Attempt 1: random text. Attempt 2: still random text.",
+      "Expected behavior": "Clarifier sets intentStatus=dead_end and requiresClarification=No. Router routes to User Feedback."
+    },
+    {
+      "Scenario": "Vague path - domain clarification",
+      "Test question": "Where do I start?",
+      "Clarification": "",
+      "Expected behavior": "Classifier should not route directly. It should set requires_clarification=Yes, clarification_type=domain."
+    },
+    {
+      "Scenario": "Vague path - template clarification",
+      "Test question": "I need a template.",
+      "Clarification": "",
+      "Expected behavior": "Classifier should ask artifact or fund clarification, not search knowledge directly."
+    },
+    {
+      "Scenario": "Vague path - report clarification",
+      "Test question": "Can you help me write the report?",
+      "Clarification": "",
+      "Expected behavior": "Classifier should ask artifact and/or fund clarification. It should not route until enough information is available."
+    },
+    {
+      "Scenario": "Vague path - guidance clarification",
+      "Test question": "What guidance is available?",
+      "Clarification": "",
+      "Expected behavior": "Classifier should ask domain clarification because the domain is unclear."
+    },
+    {
+      "Scenario": "Vague path - project support clarification",
+      "Test question": "Can Cidy help me with my project?",
+      "Clarification": "",
+      "Expected behavior": "Classifier should ask domain clarification or route to About Cidy depending model judgment; should not fabricate a specific fund."
+    },
+    {
+      "Scenario": "Out of scope - weather",
+      "Test question": "What is the weather in New York today?",
+      "Clarification": "",
+      "Expected behavior": "Classifier sets knowledge_domain=out_of_scope, requires_clarification=No. Router sends controlled scope message and routes to User Feedback."
+    },
+    {
+      "Scenario": "Out of scope - sports",
+      "Test question": "Who won the last World Cup?",
+      "Clarification": "",
+      "Expected behavior": "Routes to User Feedback as out_of_scope. No clarification should be asked."
+    },
+    {
+      "Scenario": "Out of scope - poem",
+      "Test question": "Write me a poem about cats.",
+      "Clarification": "",
+      "Expected behavior": "Routes to User Feedback as out_of_scope. No knowledge search."
+    },
+    {
+      "Scenario": "Out of scope - laptop help",
+      "Test question": "How do I fix my laptop screen?",
+      "Clarification": "",
+      "Expected behavior": "Routes to User Feedback as out_of_scope."
+    },
+    {
+      "Scenario": "Out of scope - stock investment",
+      "Test question": "What stock should I buy this week?",
+      "Clarification": "",
+      "Expected behavior": "Routes to User Feedback as out_of_scope."
+    }
+  ]
+}

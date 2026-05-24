@@ -37,3 +37,18 @@ Human-maintained metadata should go in `cidy_knowledge_overrides.json`, especial
 - review notes.
 
 The generator merges overrides into the generated inventory so those notes survive future YAML scraping.
+
+## Running Intent Route Tests
+
+Run the structural route simulator after updating intent, clarifier, router, or response-topic YAMLs:
+
+```powershell
+.\tools\run_intent_test_cases.ps1
+```
+
+The runner reads `documentation/Cidy_Intent_Test_Cases_60.json` and writes:
+
+- `documentation/cidy_intent_test_results.json` for every test case and route trace,
+- `documentation/cidy_intent_test_failures.json` for failed cases only.
+
+The runner does not execute Copilot Studio's AI classifier. It simulates the expected route from the test-case expectation text and validates whether the current YAML inventory can support that route.
