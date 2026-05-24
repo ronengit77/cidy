@@ -1,0 +1,63 @@
+kind: AdaptiveDialog
+modelDescription: This topic saves the user's response as a global variable.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  condition: true
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_checkAwait
+      conditions:
+        - id: conditionItem_awaiting
+          condition: =Global.awaitingNewQuestion = true
+          actions:
+            - kind: SetVariable
+              id: clear_flag
+              variable: Global.awaitingNewQuestion
+              value: =false
+
+            - kind: SetVariable
+              id: capture_newQuestion
+              variable: Global.userQuestion
+              value: =System.Activity.Text
+
+            - kind: SetVariable
+              id: log_newQuestion
+              variable: Global.transcript
+              value: "=Global.transcript & \"USER: \" & System.Activity.Text & Char(13) & Char(10) & Char(13) & Char(10)"
+
+            - kind: BeginDialog
+              id: goToClassifyFromLoop
+              dialog: copilots_header_3141e.topic.Intent_c8W
+
+            - kind: EndDialog
+              id: end_afterLoop
+
+    - kind: Question
+      id: question_ZfhAtz
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Global.userQuestion
+      prompt: "**Please describe what you are looking for:**"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: setVariable_yWRCNY
+      variable: Global.transcript
+      value: ="TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: setVariable_yWwTw0
+      variable: Global.transcript
+      value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: BeginDialog
+      id: 8B1Pt0
+      dialog: copilots_header_3141e.topic.Intent_c8W
+
+inputType: {}
+outputType: {}

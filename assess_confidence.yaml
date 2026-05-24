@@ -1,0 +1,62 @@
+kind: AdaptiveDialog
+modelDescription: This topic evaluates the reliability of a generated response by assessing the availability and strength of supporting sources. It assigns a numeric confidence score to help determine whether the response can be shared directly, should be presented with caution, or requires escalation to a subject matter expert.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_J9p8bn
+      displayName: Formatting Response JSON
+      input:
+        binding:
+          Raw_20Input: =Global.draftResponse
+
+      output:
+        binding:
+          predictionOutput: Global.jsonResponse
+
+      aIModelId: 98bc018f-3dc0-43ce-b008-0e77f7e85098
+
+    - kind: SetVariable
+      id: setVariable_answer
+      variable: Global.formattedAnswer
+      value: =Text(ParseJSON(Global.jsonResponse.text).answer)
+
+    - kind: SetVariable
+      id: setVariable_sources
+      variable: Global.formattedSources
+      value: =Text(ParseJSON(Global.jsonResponse.text).sources)
+
+    - kind: SetVariable
+      id: setVariable_confidence
+      variable: Global.confidenceScore
+      value: =Value(Text(ParseJSON(Global.jsonResponse.text).confidence))
+
+    - kind: SetVariable
+      id: setVariable_label
+      variable: Global.confidenceLabel
+      value: =Text(ParseJSON(Global.jsonResponse.text).confidenceLabel)
+
+    - kind: SetVariable
+      id: setVariable_explanation
+      variable: Global.confidenceExplanation
+      value: =Text(ParseJSON(Global.jsonResponse.text).confidenceExplanation)
+
+    - kind: ConditionGroup
+      id: conditionGroup_confidence
+      conditions:
+        - id: conditionItem_high
+          condition: =Global.confidenceScore >= 4
+          actions:
+            - kind: BeginDialog
+              id: goToShare
+              dialog: copilots_header_3141e.topic.ShareResponse
+
+      elseActions:
+        - kind: BeginDialog
+          id: goToWarn
+          dialog: copilots_header_3141e.topic.ApologizeWarn
+
+inputType: {}
+outputType: {}

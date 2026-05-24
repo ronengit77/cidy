@@ -1,0 +1,30 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendActivity_XSPG5a
+      displayName: Welcome Message
+      activity: |-
+        Hello, {System.User.FirstName}!
+
+        **I'm Cidy, the UN DESA Capacity Development Assistant.**
+
+        I can help you find the right guidance, templates, and processes related to UN DESA capacity development activities, including DA, RPTC, and other relevant institutional resources.
+
+        I'll answer your questions using official documents and will always show source links and a confidence level for each response.
+
+        If I'm not confident that an answer is fully supported by available guidance, I'll let you know and help escalate your question to the appropriate team.
+
+        A good prompt will mention which funding stream and topic area your question is regarding (e.g., RPTC or DA or general AND reporting or evaluation or governance, etc.)
+        Example prompt: *"When is a final evaluation required for a Development Account project?"*
+
+    - kind: SetVariable
+      id: setVariable_bGQ2Qa
+      variable: Topic.conversationID
+      value: =System.Conversation.Id
+
+    - kind: BeginDialog
+      id: Fwgg2N
+      dialog: copilots_header_3141e.topic.UserInquiry2

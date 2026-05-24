@@ -1,0 +1,211 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_HSTczN
+      conditions:
+        - id: conditionItem_cGKijT
+          condition: =Global.topicArea = "policy_compliance"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: VteyUC
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
+                  - copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ
+
+        - id: conditionItem_a98AD7
+          condition: =Global.topicArea = "reporting_documentation"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: vWkDD5
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu
+
+        - id: conditionItem_AZI6Jl
+          condition: =Global.topicArea = "process_governance"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: YgRjBH
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
+                  - copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg
+
+        - id: conditionItem_2cplcy
+          condition: =Global.topicArea = "budget_finance"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: bTSDcR
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX
+
+        - id: conditionItem_GWUkJW
+          condition: =Global.topicArea = "design_evaluation"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: GK2LPh
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA
+
+        - id: conditionItem_wZNiqD
+          condition: =Global.topicArea = "definition"
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: SUtjCV
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO
+                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
+                  - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
+
+      elseActions:
+        - kind: SearchAndSummarizeContent
+          id: SdPeJr
+          autoSend: false
+          variable: Global.draftResponse
+          userInput: =Global.userQuestion
+          additionalInstructions: |-
+            You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+            Answer the question using ONLY the provided RPTC knowledge sources.
+            Format your response as follows:
+            ANSWER: Your detailed answer
+            SOURCES: List each source document title and link used
+            CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+          fileSearchDataSource:
+            searchFilesMode:
+              kind: DoNotSearchFiles
+
+          knowledgeSources:
+            kind: SearchSpecificKnowledgeSources
+            knowledgeSources:
+              - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
+
+    - kind: ConditionGroup
+      id: conditionGroup_cxOFGO
+      conditions:
+        - id: conditionItem_dliUzg
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: oQLadz
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided RPTC knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,170 @@
+kind: AdaptiveDialog
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escalate
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Talk to agent
+      - Talk to a person
+      - Talk to someone
+      - Call back
+      - Call customer service
+      - Call me please
+      - Call support
+      - Call technical support
+      - Can an agent call me
+      - Can I call
+      - Can I get in touch with someone else
+      - Can I get real agent support
+      - Can I get transferred to a person to call
+      - Can I have a call in number Or can I be called
+      - Can I have a representative call me
+      - Can I schedule a call
+      - Can I speak to a representative
+      - Can I talk to a human
+      - Can I talk to a human assistant
+      - Can someone call me
+      - Chat with a human
+      - Chat with a representative
+      - Chat with agent
+      - Chat with someone please
+      - Connect me to a live agent
+      - Connect me to a person
+      - Could some one contact me by phone
+      - Customer agent
+      - Customer representative
+      - Customer service
+      - I need a manager to contact me
+      - I need customer service
+      - I need help from a person
+      - I need to speak with a live argent
+      - I need to talk to a specialist please
+      - I want to talk to customer service
+      - I want to proceed with live support
+      - I want to speak with a consultant
+      - I want to speak with a live tech
+      - I would like to speak with an associate
+      - I would like to talk to a technician
+      - Talk with tech support member
+
+  actions:
+    - kind: SendActivity
+      id: msg_escalate_intro
+      activity: "I understand you'd might like to speak with a someone. If so, feel free to describe your experience in this session below, a CDPMO colleague will receive a transcript of this conversation by mail. "
+
+    - kind: Question
+      id: question_1VH4Qx
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.userIssueNotes
+      prompt: "Please describe in brief your issue with Cidy's reponse:"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: setVariable_transcript_label
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY: \" & \"I understand you'd like to speak with a staff member. Let me collect a few details so they can follow up with you.\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: SetVariable
+      id: setVariable_transcript_confirm
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY: \" & \"Thank you. Your details have been noted and staff will follow up with you shortly.\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: AnswerQuestionWithAI
+      id: generate_summary
+      autoSend: false
+      variable: Global.issueSummary
+      userInput: =Global.transcript
+      additionalInstructions: |-
+        You are summarizing an escalated inquiry from the CIDY knowledge agent.
+        Write 2-3 sentences maximum. Cover: what the user was asking about, why CIDY could not fully resolve it, and the confidence level (Global.confidenceLabel).
+        Be concise and professional. Address this to a UN DESA support staff member.
+      input: =Global.transcript
+
+    - kind: BeginDialog
+      id: Qgi5DL
+      input:
+        binding:
+          Body: |-
+            ="<h2>CIDY ESCALATION REQUEST</h2>" &
+
+            "<p>A user requested human follow-up or Cidy was unable to provide a sufficiently reliable answer from the available knowledge base.</p>" &
+
+            "<hr>" &
+
+            "<h3>Authenticated User / System User Details</h3>" &
+            "<p>" &
+            "<strong>Display name:</strong> " & Coalesce(System.User.DisplayName, "Not available") & "<br>" &
+            "<strong>First name:</strong> " & Coalesce(System.User.FirstName, "Not available") & "<br>" &
+            "<strong>Last name:</strong> " & Coalesce(System.User.LastName, "Not available") & "<br>" &
+            "<strong>User email:</strong> " & Coalesce(System.User.Email, "Not available") &
+            "</p>" &
+            "<h3>User Issue Notes</h3>" &
+            "<p>" &
+            Substitute(Coalesce(Topic.userIssueNotes, "No additional user issue notes provided."), Char(10), "<br>") &
+            "</p>" &
+            "<h3>Interaction Context</h3>" &
+            "<p>" &
+            "<strong>Interaction timestamp:</strong> " & Text(Now()) & "<br>" &
+            "<strong>Bot name:</strong> " & Coalesce(System.Bot.Name, "Not available") &
+            "</p>" &
+
+            "<h3>Classification / Routing</h3>" &
+            "<p>" &
+            "<strong>Funding stream:</strong> " & Coalesce(Global.fundingStream, "Not classified") & "<br>" &
+            "<strong>Topic area:</strong> " & Coalesce(Global.topicArea, "Not classified") &
+            "</p>" &
+
+            "<h3>Source-Use Instructions Applied</h3>" &
+            "<p>" &
+            Substitute(Coalesce(Global.sourceUseInstructions, "Not available"), Char(10), "<br>") &
+            "</p>" &
+
+            "<h3>User Question</h3>" &
+            "<p>" &
+            Substitute(Coalesce(Global.userQuestion, "Not available"), Char(10), "<br>") &
+            "</p>" &
+
+            "<h3>Issue Summary</h3>" &
+            "<p>" &
+            Substitute(Coalesce(Global.issueSummary, "No issue summary was generated."), Char(10), "<br>") &
+            "</p>" &
+
+            "<h3>Conversation Transcript</h3>" &
+            "<div style='white-space:normal; border:1px solid #ddd; padding:10px;'>" &
+            Substitute(Coalesce(Global.transcript, "Transcript not available."), Char(10), "<br>") &
+            "</div>" &
+
+            "<h3>Technical Notes for Reviewer</h3>" &
+            "<ul>" &
+            "<li>Check whether the selected funding stream and topic area are correct.</li>" &
+            "<li>Check whether Cidy used the appropriate DA knowledge folder.</li>" &
+            "<li>Check whether the cited sources follow the folder source-use instructions.</li>" &
+            "<li>If the answer failed because knowledge is missing, update the relevant knowledge folder or source-use instructions.</li>" &
+            "</ul>"
+          Subject: "=\"Automated Escalation from Cidy: \"& Global.fundingStream &\"-\"& Global.topicArea"
+          To: ronen.rapoport@un.org
+
+      dialog: copilots_header_3141e.action.Office365Outlook-SendanemailV2
+
+    - kind: SendActivity
+      id: msg_closing
+      conversationOutcome: Escalated
+      activity: Your inquiry has been escalated. A staff member will reach back by email or Teams. Thank you for reaching out to CIDY!
+
+    - kind: SetVariable
+      id: setVariable_transcript_closing
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY: \" & \"Your inquiry has been escalated. A staff member will be in touch. Thank you for reaching out to CIDY!\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: EndDialog
+      id: end_escalate
+
+inputType: {}
+outputType: {}

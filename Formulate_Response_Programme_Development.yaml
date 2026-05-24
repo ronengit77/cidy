@@ -1,0 +1,130 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_rsyEfm
+      conditions:
+        - id: conditionItem_mMA5gI
+          condition: =Global.topicArea = "steering_committee"
+          actions:
+            - kind: SetTextVariable
+              id: uajO8c
+              variable: Global.sourceUseInstructions
+              value: This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like What was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings.
+
+            - kind: SearchAndSummarizeContent
+              id: iWuL74
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
+
+        - id: conditionItem_O9CKVo
+          condition: =Global.topicArea = "tag"
+          actions:
+            - kind: SetTextVariable
+              id: 7XENFr
+              variable: Global.sourceUseInstructions
+              value: This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like What was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings.
+
+            - kind: SearchAndSummarizeContent
+              id: NWnG1Y
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo
+
+      elseActions:
+        - kind: SearchAndSummarizeContent
+          id: J7vEWX
+          autoSend: false
+          variable: Global.draftResponse
+          userInput: =Global.userQuestion
+          additionalInstructions: |-
+            You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+            Answer the question using ONLY the provided DA knowledge sources.
+            Format your response as follows:
+            ANSWER: Your detailed answer
+            SOURCES: List each source document title and link used
+            CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+          fileSearchDataSource:
+            searchFilesMode:
+              kind: DoNotSearchFiles
+
+          knowledgeSources:
+            kind: SearchSpecificKnowledgeSources
+            knowledgeSources:
+              - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+
+    - kind: ConditionGroup
+      id: conditionGroup_fallback
+      conditions:
+        - id: conditionItem_noResult
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_DA_fallback
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                The specific knowledge folder did not contain a relevant answer. Search the general DA knowledge base.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

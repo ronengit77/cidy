@@ -1,0 +1,186 @@
+kind: AdaptiveDialog
+modelDescription: Collects user feedback and routes to ask another question, escalate, or close.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: Question
+      id: question_feedback
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.feedbackChoice
+      prompt: Was this answer helpful?
+      entity:
+        kind: EmbeddedEntity
+        sensitivityLevel: None
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Yes
+              displayName: Yes
+
+            - id: No
+              displayName: No
+
+    - kind: SetVariable
+      id: log_feedback_prompt
+      variable: Global.transcript
+      value: |
+        =Global.transcript & "CIDY: " & "Was this answer helpful?" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: log_feedback_answer
+      variable: Global.transcript
+      value: |
+        =Global.transcript & "USER: " & Text(Topic.feedbackChoice) & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: set_user_feedback
+      variable: Global.userFeedback
+      value: |
+        =Switch(
+          Text(Topic.feedbackChoice),
+          "Yes", "yes",
+          "No", "no",
+          "unknown"
+        )
+
+    - kind: Question
+      id: question_next_action
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.nextActionChoice
+      prompt: What would you like to do next?
+      entity:
+        kind: EmbeddedEntity
+        sensitivityLevel: None
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Ask another question
+              displayName: Ask another question
+
+            - id: Escalate to a human
+              displayName: Escalate to a human
+
+            - id: Close the session
+              displayName: Close the session
+
+    - kind: SetVariable
+      id: log_next_action_prompt
+      variable: Global.transcript
+      value: |
+        =Global.transcript & "CIDY: " & "What would you like to do next?" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: log_next_action_answer
+      variable: Global.transcript
+      value: |
+        =Global.transcript & "USER: " & Text(Topic.nextActionChoice) & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: set_next_action
+      variable: Global.askAnother
+      value: |
+        =Switch(
+          Text(Topic.nextActionChoice),
+          "Ask another question", "yes",
+          "Escalate to a human", "escalate",
+          "Close the session", "no",
+          "unknown"
+        )
+
+    - kind: ConditionGroup
+      id: conditionGroup_next_action
+      conditions:
+        - id: condition_ask_another
+          condition: =Global.askAnother = "yes"
+          actions:
+            - kind: SetVariable
+              id: clear_fundingStream
+              variable: Global.fundingStream
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_topicArea
+              variable: Global.topicArea
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_draftResponse
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_sourceUseInstructions
+              variable: Global.sourceUseInstructions
+              value: =Blank()
+
+            - kind: Question
+              id: question_newInput
+              interruptionPolicy:
+                allowInterruption: false
+
+              variable: Topic.newQuestion
+              prompt: Of course. Please type your next question.
+              entity:
+                kind: StringPrebuiltEntity
+                sensitivityLevel: None
+
+            - kind: SetVariable
+              id: set_globalQuestion
+              variable: Global.userQuestion
+              value: =Topic.newQuestion
+
+            - kind: SetVariable
+              id: log_new_question_prompt
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: " & "Of course. Please type your next question." & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: log_new_question_answer
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "USER: " & Topic.newQuestion & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: BeginDialog
+              id: goToIntentDirect
+              dialog: copilots_header_3141e.topic.Intent_c8W
+
+        - id: condition_escalate
+          condition: =Global.askAnother = "escalate"
+          actions:
+            - kind: BeginDialog
+              id: goToEscalate
+              dialog: copilots_header_3141e.topic.Escalate
+
+        - id: condition_close
+          condition: =Global.askAnother = "no"
+          actions:
+            - kind: SendActivity
+              id: msg_close
+              activity: Thank you. The session is now closed.
+
+            - kind: SetVariable
+              id: log_close
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: " & "Thank you. The session is now closed." & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: EndDialog
+              id: end_close
+
+      elseActions:
+        - kind: SendActivity
+          id: msg_fallback
+          activity: I could not determine what you would like to do next. Please start a new question or request human follow-up.
+
+        - kind: EndDialog
+          id: end_fallback
+
+inputType: {}
+outputType: {}

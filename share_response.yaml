@@ -1,0 +1,43 @@
+kind: AdaptiveDialog
+modelDescription: Delivers the final answer to the user, including any warning message and confidence indicator.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_hasWarning
+      conditions:
+        - id: conditionItem_hasWarn
+          condition: =!IsBlank(Global.warningMessage)
+          actions:
+            - kind: SendActivity
+              id: sendWarning
+              activity: "{Global.warningMessage}"
+
+            - kind: SetVariable
+              id: setVariable_transcriptWarning
+              variable: Global.transcript
+              value: "=Global.transcript & \"CIDY: \" & Global.warningMessage & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: SendActivity
+      id: sendResponse
+      activity: |-
+        **DEBUG :Answer:** {Global.formattedAnswer}
+
+        **Sources:**
+        {Global.formattedSources}
+
+        **Confidence:** {Global.confidenceLabel}
+
+    - kind: SetVariable
+      id: setVariable_transcriptResponse
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY: \" & Global.formattedAnswer & Char(13) & Char(10) & \"SOURCES: \" & Global.formattedSources & Char(13) & Char(10) & \"CONFIDENCE: \" & Global.confidenceLabel & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: BeginDialog
+      id: qdK79w
+      dialog: copilots_header_3141e.topic.UserFeedback2
+
+inputType: {}
+outputType: {}

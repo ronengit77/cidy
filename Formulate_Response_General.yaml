@@ -1,0 +1,44 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: Zh1wp9
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: =Global.userQuestion
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. The user is asking a general CDPMO question that is not specific to DA or RPTC, topic area: {Global.topicArea}.
+
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source document title and link used
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.CDPMO_Knowledge_v2_rGM9q_ShUI77lXMUfzB1X
+
+    - kind: SetVariable
+      id: setVariable_confidence
+      variable: Global.confidenceScore
+      value: =Value(Left(Trim(Substitute(Last(Split(Global.draftResponse, "CONFIDENCE:")).Value, "*", "")), 1))
+
+    - kind: SetVariable
+      id: setVariable_label
+      variable: Global.confidenceLabel
+      value: =If(Global.confidenceScore >= 4, "High", If(Global.confidenceScore >= 2, "Medium", "Low"))
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

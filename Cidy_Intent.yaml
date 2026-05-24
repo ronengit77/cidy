@@ -1,0 +1,305 @@
+kind: AdaptiveDialog
+modelDescription: Classifies the user's question for the split Cidy intent flow. It does not ask clarifications, search knowledge sources, or route to Formulate Response topics. It sets intent variables and passes control to Intent Clarifier.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: setVariable_resetIntentJson
+      variable: Global.intentJson
+      value: "{}"
+
+    - kind: SetVariable
+      id: setVariable_resetIntentReason
+      variable: Global.intentReason
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetIntentStatus
+      variable: Global.intentStatus
+      value: needs_classification
+
+    - kind: SetVariable
+      id: setVariable_resetKnowledgeDomain
+      variable: Global.knowledgeDomain
+      value: unclear
+
+    - kind: SetVariable
+      id: setVariable_resetFundingStream
+      variable: Global.fundingStream
+      value: UNCLEAR
+
+    - kind: SetVariable
+      id: setVariable_resetTopicArea
+      variable: Global.topicArea
+      value: unclear
+
+    - kind: SetVariable
+      id: setVariable_resetRequiresClarification
+      variable: Global.requiresClarification
+      value: No
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationType
+      variable: Global.clarificationType
+      value: none
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationQuestion
+      variable: Global.clarificationQuestion
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationAnswer
+      variable: Global.clarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetNormalizedClarificationAnswer
+      variable: Global.normalizedClarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationAttempts
+      variable: Global.clarificationAttempts
+      value: 0
+
+    - kind: SetVariable
+      id: setVariable_maxClarificationAttempts
+      variable: Global.maxClarificationAttempts
+      value: 2
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_initialClassify
+      input:
+        binding:
+          UserQuestion: |
+            ="Classify the following user question for Cidy, a DESA capacity-development knowledge assistant." & Char(10) & Char(10) &
+            "Return ONLY valid JSON. Do not include markdown, prose, comments, or code fences." & Char(10) & Char(10) &
+            "Required JSON schema:" & Char(10) &
+            "{""knowledge_domain"":""..."",""funding_stream"":""..."",""topic_area"":""..."",""requires_clarification"":""..."",""clarification_type"":""..."",""clarification_question"":""..."",""reason"":""...""}" & Char(10) & Char(10) &
+            "Allowed knowledge_domain values:" & Char(10) &
+            "about_cidy, da, rptc, pdf, project_evaluation_evidence, programme_development, general_cd, out_of_scope, unclear" & Char(10) & Char(10) &
+            "Allowed funding_stream values:" & Char(10) &
+            "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
+            "Allowed topic_area values:" & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, evaluation_criteria, evaluation_design, evaluation_evidence, general, governance_roles, ipmr, lessons_learned, monitoring_reporting, policy_guidance_compliance, programme_design_standards, programme_management, project_planning_design, recommendations, reports, steering_committee, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "Allowed requires_clarification values: Yes, No" & Char(10) &
+            "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
+            "Critical routing rules:" & Char(10) &
+            "1. Do not infer DA, RPTC, or PDF only from artifact types such as concept note, project document, evaluation, report, template, annex, budget table, management response, drafting guidance, review checklist, results framework, theory of change, or logframe. These artifact types can exist under multiple funds." & Char(10) &
+            "2. Only classify funding_stream as DA, RPTC, or PDF if the user explicitly mentions the fund or gives a strong fund-specific signal such as Development Account, DA, Section 35, RPTC, Section 23, PDF, UNPDF, or Peace and Development Trust Fund." & Char(10) &
+            "3. If the fund is not explicit or strongly fund-specific, classify funding_stream as UNCLEAR." & Char(10) &
+            "4. Distinguish evaluation design guidance from evaluation evidence. Questions asking how to write, prepare, design, fill, create, or use an evaluation report/template/guidance are evaluation_design. Questions asking what evaluations found, said, recommended, concluded, or what lessons learned exist are project_evaluation_evidence/evaluation_evidence." & Char(10) &
+            "5. If the user asks how to write or prepare an evaluation report and no fund is specified, set knowledge_domain=unclear, funding_stream=UNCLEAR, topic_area=evaluation_design, requires_clarification=Yes, clarification_type=fund, clarification_question=Which funding stream is this question about?" & Char(10) &
+            "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=project_evaluation_evidence and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
+            "7. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "8. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "9. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "User question:" & Char(10) &
+            Global.userQuestion
+
+      output:
+        binding:
+          predictionOutput: Topic.promptResult
+
+      aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+    - kind: SetVariable
+      id: setVariable_extractText_initial
+      variable: Topic.classificationText
+      value: =Text(Topic.promptResult.text)
+
+    - kind: SendActivity
+      id: sendActivity_debug_initial
+      activity: "DEBUG — Raw classification: {Topic.classificationText}"
+
+    - kind: SetVariable
+      id: setVariable_storeIntentJson
+      variable: Global.intentJson
+      value: =Topic.classificationText
+
+    - kind: SetVariable
+      id: setVariable_parseJSON_initial
+      variable: Topic.parsedResult
+      value: =ParseJSON(Topic.classificationText)
+
+    - kind: SetVariable
+      id: setVariable_knowledgeDomain_initial
+      variable: Global.knowledgeDomain
+      value: =Text(Topic.parsedResult.knowledge_domain)
+
+    - kind: SetVariable
+      id: setVariable_fundingStream_initial
+      variable: Global.fundingStream
+      value: =Text(Topic.parsedResult.funding_stream)
+
+    - kind: SetVariable
+      id: setVariable_topicArea_initial
+      variable: Global.topicArea
+      value: =Text(Topic.parsedResult.topic_area)
+
+    - kind: SetVariable
+      id: setVariable_requiresClarification_initial
+      variable: Global.requiresClarification
+      value: =Text(Topic.parsedResult.requires_clarification)
+
+    - kind: SetVariable
+      id: setVariable_clarificationType_initial
+      variable: Global.clarificationType
+      value: =Text(Topic.parsedResult.clarification_type)
+
+    - kind: SetVariable
+      id: setVariable_clarificationQuestion_initial
+      variable: Global.clarificationQuestion
+      value: =Text(Topic.parsedResult.clarification_question)
+
+    - kind: SetVariable
+      id: setVariable_intentReason_initial
+      variable: Global.intentReason
+      value: =Text(Topic.parsedResult.reason)
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeKnowledgeDomain
+      conditions:
+        - id: conditionItem_knowledgeDomainBlank
+          condition: =IsBlank(Global.knowledgeDomain) || Global.knowledgeDomain = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_knowledgeDomainUnclear
+              variable: Global.knowledgeDomain
+              value: unclear
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeFundingStream
+      conditions:
+        - id: conditionItem_fundingStreamBlank
+          condition: =IsBlank(Global.fundingStream) || Global.fundingStream = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_fundingStreamUnclear
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeTopicArea
+      conditions:
+        - id: conditionItem_topicAreaBlankOrLegacyOther
+          condition: =IsBlank(Global.topicArea) || Global.topicArea = "" || Global.topicArea = "other_unclear"
+          actions:
+            - kind: SetVariable
+              id: normalize_topicAreaUnclear
+              variable: Global.topicArea
+              value: unclear
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeRequiresClarification
+      conditions:
+        - id: conditionItem_requiresClarificationTrue
+          condition: =Lower(Text(Global.requiresClarification)) = "true" || Lower(Text(Global.requiresClarification)) = "yes"
+          actions:
+            - kind: SetVariable
+              id: normalize_requiresClarificationYes
+              variable: Global.requiresClarification
+              value: Yes
+
+        - id: conditionItem_requiresClarificationFalse
+          condition: =Lower(Text(Global.requiresClarification)) = "false" || Lower(Text(Global.requiresClarification)) = "no"
+          actions:
+            - kind: SetVariable
+              id: normalize_requiresClarificationNo
+              variable: Global.requiresClarification
+              value: No
+
+      elseActions:
+        - kind: SetVariable
+          id: normalize_requiresClarificationDefaultNo
+          variable: Global.requiresClarification
+          value: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeClarificationType
+      conditions:
+        - id: conditionItem_clarificationTypeBlank
+          condition: =IsBlank(Global.clarificationType) || Global.clarificationType = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_clarificationTypeNone
+              variable: Global.clarificationType
+              value: none
+
+    - kind: ConditionGroup
+      id: conditionGroup_legacyEvaluationReportFallback
+      conditions:
+        - id: conditionItem_legacyEvaluationReportNeedsFund
+          condition: =Global.knowledgeDomain = "unclear" && Global.fundingStream = "UNCLEAR" && (Global.topicArea = "unclear" || Global.topicArea = "other_unclear") && Find("evaluation report", Lower(Global.userQuestion)) > 0
+          actions:
+            - kind: SetVariable
+              id: fallback_setTopicEvaluationDesign
+              variable: Global.topicArea
+              value: evaluation_design
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationYes
+              variable: Global.requiresClarification
+              value: Yes
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeFund
+              variable: Global.clarificationType
+              value: fund
+
+            - kind: SetVariable
+              id: fallback_setClarificationQuestionFund
+              variable: Global.clarificationQuestion
+              value: Which funding stream is this question about?
+
+    - kind: ConditionGroup
+      id: conditionGroup_setIntentStatus
+      conditions:
+        - id: conditionItem_statusOutOfScope
+          condition: =Global.knowledgeDomain = "out_of_scope"
+          actions:
+            - kind: SetVariable
+              id: setStatus_outOfScope
+              variable: Global.intentStatus
+              value: out_of_scope
+
+            - kind: SetVariable
+              id: setRequiresNo_outOfScope
+              variable: Global.requiresClarification
+              value: No
+
+        - id: conditionItem_statusNeedsClarification
+          condition: =Global.requiresClarification = "Yes"
+          actions:
+            - kind: SetVariable
+              id: setStatus_needsClarification
+              variable: Global.intentStatus
+              value: needs_clarification
+
+        - id: conditionItem_statusReadyToRoute
+          condition: =Global.requiresClarification = "No"
+          actions:
+            - kind: SetVariable
+              id: setStatus_readyToRoute
+              variable: Global.intentStatus
+              value: ready_to_route
+
+      elseActions:
+        - kind: SetVariable
+          id: setStatus_deadEnd
+          variable: Global.intentStatus
+          value: dead_end
+
+    - kind: SendActivity
+      id: sendActivity_debug_classifierFinal
+      activity: "DEBUG — Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+    - kind: BeginDialog
+      id: goToClarifier
+      dialog: copilots_header_3141e.topic.Intent-Clarifier
+
+inputType: {}
+outputType: {}

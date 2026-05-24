@@ -1,0 +1,175 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_rsyEfm
+      conditions:
+        - id: conditionItem_mMA5gI
+          condition: =Global.topicArea = "project_planning_design"
+          actions:
+            - kind: SetTextVariable
+              id: uajO8c
+              variable: Global.sourceUseInstructions
+              value: The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.
+
+            - kind: SearchAndSummarizeContent
+              id: iWuL74
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
+
+        - id: conditionItem_O9CKVo
+          condition: =Global.topicArea = "evaluation_design"
+          actions:
+            - kind: SetTextVariable
+              id: 7XENFr
+              variable: Global.sourceUseInstructions
+              value: |-
+                Use the Evaluation knowledge folder.
+
+                When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche.
+
+                Use non-tranche general evaluation documents where they apply across tranches.
+
+                Use guidance notes and annotated templates as primary sources for substantive answers.
+
+                Do not use unannotated templates unless the user specifically asks for a blank template or template structure.
+
+                The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward.
+
+                The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward.
+
+            - kind: SearchAndSummarizeContent
+              id: NWnG1Y
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo
+
+        - id: conditionItem_PGrWf8
+          condition: =Global.topicArea = "general"
+          actions:
+            - kind: SetVariable
+              id: setVariable_fypWUT
+              variable: Global.sourceUseInstructions
+              value: The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.
+
+            - kind: SearchAndSummarizeContent
+              id: 8dFb9P
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
+
+      elseActions:
+        - kind: SearchAndSummarizeContent
+          id: J7vEWX
+          autoSend: false
+          variable: Global.draftResponse
+          userInput: =Global.userQuestion
+          additionalInstructions: |-
+            You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+            Answer the question using ONLY the provided DA knowledge sources.
+            Format your response as follows:
+            ANSWER: Your detailed answer
+            SOURCES: List each source document title and link used
+            CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+          fileSearchDataSource:
+            searchFilesMode:
+              kind: DoNotSearchFiles
+
+          knowledgeSources:
+            kind: SearchSpecificKnowledgeSources
+            knowledgeSources:
+              - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+
+    - kind: ConditionGroup
+      id: conditionGroup_fallback
+      conditions:
+        - id: conditionItem_noResult
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_DA_fallback
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                The specific knowledge folder did not contain a relevant answer. Search the general DA knowledge base.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,659 @@
+kind: AdaptiveDialog
+modelDescription: Resolves incomplete Cidy intent classifications. It asks targeted clarifications, validates clicked or typed answers, updates routing variables, and passes finalized intent state to Intent Router. It does not search knowledge sources or call Formulate Response topics.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_intentClarificationController
+      conditions:
+        - id: conditionItem_alreadyReadyToRoute
+          condition: =Global.intentStatus = "ready_to_route" || Global.intentStatus = "out_of_scope" || Global.intentStatus = "dead_end"
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_clarifierBypass
+              activity: "DEBUG — Intent Clarifier bypass: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
+
+            - kind: BeginDialog
+              id: xXOWoi
+              dialog: copilots_header_3141e.topic.Intent-Router
+
+            - kind: EndDialog
+              id: endClarifier_bypass
+
+        - id: conditionItem_maxClarificationAttemptsReached
+          condition: =Value(Global.clarificationAttempts) >= Value(Global.maxClarificationAttempts)
+          actions:
+            - kind: SetVariable
+              id: setStatus_deadEnd_maxClarifications
+              variable: Global.intentStatus
+              value: dead_end
+
+            - kind: SetVariable
+              id: setRequiresNo_maxClarifications
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: setWarning_maxClarifications
+              variable: Global.warningMessage
+              value: Cidy could not confidently classify the question after two clarification attempts.
+
+            - kind: SetVariable
+              id: setIssueSummary_maxClarifications
+              variable: Global.issueSummary
+              value: |
+                ="Clarification dead end. User question: " & Global.userQuestion & " Last clarification answer: " & Global.clarificationAnswer
+
+            - kind: SendActivity
+              id: sendActivity_debug_maxClarifications
+              activity: "DEBUG — Intent Clarifier max attempts reached: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea}"
+
+            - kind: BeginDialog
+              id: sZxn78
+              dialog: copilots_header_3141e.topic.Intent-Router
+
+            - kind: EndDialog
+              id: endClarifier_maxClarifications
+
+        - id: conditionItem_clarifyFund
+          condition: =Global.intentStatus = "needs_clarification" && Global.requiresClarification = "Yes" && Global.clarificationType = "fund"
+          actions:
+            - kind: SetVariable
+              id: incrementClarificationAttempts_fund
+              variable: Global.clarificationAttempts
+              value: =Value(Global.clarificationAttempts) + 1
+
+            - kind: Question
+              id: question_fundClarification
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: Topic.fundChoice
+              prompt: Which funding stream do you mean?
+              entity:
+                kind: EmbeddedEntity
+                sensitivityLevel: None
+                definition:
+                  kind: ClosedListEntity
+                  items:
+                    - id: DA
+                      displayName: Development Account (DA)
+
+                    - id: RPTC
+                      displayName: Regular Programme of Technical Cooperation (RPTC)
+
+                    - id: PDF
+                      displayName: Peace and Development Trust Fund / UNPDF (PDF)
+
+                    - id: Not sure
+                      displayName: Not sure
+
+            - kind: SetVariable
+              id: setClarificationAnswer_fund
+              variable: Global.clarificationAnswer
+              value: =Text(Topic.fundChoice)
+
+            - kind: SetVariable
+              id: log_fundClarificationPrompt
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: Which funding stream do you mean?" & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: log_fundClarificationAnswer
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "USER: " & Text(Topic.fundChoice) & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: append_fundClarificationToQuestion
+              variable: Global.userQuestion
+              value: |
+                =Global.userQuestion & Char(10) & "User clarification - funding stream: " & Text(Topic.fundChoice)
+
+            - kind: ConditionGroup
+              id: conditionGroup_applyFundChoice
+              conditions:
+                - id: conditionItem_applyDA
+                  condition: =Or(Text(Topic.fundChoice) = "DA", Text(Topic.fundChoice) = "Development Account (DA)", Lower(Text(Topic.fundChoice)) = "development account", EndsWith(Text(Topic.fundChoice), "(DA)"))
+                  actions:
+                    - kind: SetVariable
+                      id: setFund_DA
+                      variable: Global.fundingStream
+                      value: DA
+
+                    - kind: SetVariable
+                      id: setDomain_DA
+                      variable: Global.knowledgeDomain
+                      value: da
+
+                - id: conditionItem_applyRPTC
+                  condition: =Or(Text(Topic.fundChoice) = "RPTC", StartsWith(Text(Topic.fundChoice), "Regular Programme"), Lower(Text(Topic.fundChoice)) = "regular programme of technical cooperation")
+                  actions:
+                    - kind: SetVariable
+                      id: setFund_RPTC
+                      variable: Global.fundingStream
+                      value: RPTC
+
+                    - kind: SetVariable
+                      id: setDomain_RPTC
+                      variable: Global.knowledgeDomain
+                      value: rptc
+
+                - id: conditionItem_applyPDF
+                  condition: =Or(Text(Topic.fundChoice) = "PDF", Text(Topic.fundChoice) = "UNPDF", StartsWith(Text(Topic.fundChoice), "Peace and Development"), EndsWith(Text(Topic.fundChoice), "(PDF)"))
+                  actions:
+                    - kind: SetVariable
+                      id: setFund_PDF
+                      variable: Global.fundingStream
+                      value: PDF
+
+                    - kind: SetVariable
+                      id: setDomain_PDF
+                      variable: Global.knowledgeDomain
+                      value: pdf
+
+              elseActions:
+                - kind: SetVariable
+                  id: setFund_NotSure
+                  variable: Global.fundingStream
+                  value: UNCLEAR
+
+                - kind: SetVariable
+                  id: setDomain_NotSureGeneral
+                  variable: Global.knowledgeDomain
+                  value: general_cd
+
+            - kind: ConditionGroup
+              id: conditionGroup_fundClarificationTopicFallback
+              conditions:
+                - id: conditionItem_fundClarificationEvaluationDesignFallback
+                  condition: =Or(IsBlank(Global.topicArea), Global.topicArea = "", Global.topicArea = "unclear", Global.topicArea = "other_unclear", Global.topicArea = "general") && Find("evaluation", Lower(Global.userQuestion)) > 0 && Or(Find("write", Lower(Global.userQuestion)) > 0, Find("prepare", Lower(Global.userQuestion)) > 0, Find("design", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("create", Lower(Global.userQuestion)) > 0)
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_fundClarificationEvaluationDesignFallback
+                      variable: Global.topicArea
+                      value: general
+
+                - id: conditionItem_fundClarificationGenericTopicFallback
+                  condition: =IsBlank(Global.topicArea) || Global.topicArea = "" || Global.topicArea = "unclear" || Global.topicArea = "other_unclear"
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_fundClarificationGenericFallback
+                      variable: Global.topicArea
+                      value: general
+
+            - kind: SetVariable
+              id: setClarificationDone_fund
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: setClarificationTypeDone_fund
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: setIntentStatus_ready_fund
+              variable: Global.intentStatus
+              value: ready_to_route
+
+            - kind: SendActivity
+              id: sendActivity_debug_afterFundClarification
+              activity: "DEBUG — After fund clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: OaUzJ3
+              dialog: copilots_header_3141e.topic.Intent-Router
+
+            - kind: EndDialog
+              id: endClarifier_afterFundClarification
+
+        - id: conditionItem_clarifyDomain
+          condition: =Global.intentStatus = "needs_clarification" && Global.requiresClarification = "Yes" && Global.clarificationType = "domain"
+          actions:
+            - kind: SetVariable
+              id: incrementClarificationAttempts_domain
+              variable: Global.clarificationAttempts
+              value: =Value(Global.clarificationAttempts) + 1
+
+            - kind: Question
+              id: question_domainClarification
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: Topic.domainChoice
+              prompt: Which area should Cidy use for this question?
+              entity:
+                kind: EmbeddedEntity
+                sensitivityLevel: None
+                definition:
+                  kind: ClosedListEntity
+                  items:
+                    - id: about_cidy
+                      displayName: About Cidy
+
+                    - id: programme_development
+                      displayName: Programme Development
+
+                    - id: project_evaluation_evidence
+                      displayName: Project evaluations, recommendations, and lessons learned
+
+                    - id: da
+                      displayName: Development Account (DA)
+
+                    - id: rptc
+                      displayName: Regular Programme of Technical Cooperation (RPTC)
+
+                    - id: pdf
+                      displayName: Peace and Development Trust Fund / UNPDF (PDF)
+
+                    - id: not_sure
+                      displayName: Not sure
+
+            - kind: SetVariable
+              id: setClarificationAnswer_domain
+              variable: Global.clarificationAnswer
+              value: =Text(Topic.domainChoice)
+
+            - kind: SetVariable
+              id: log_domainClarificationPrompt
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: Which area should Cidy use for this question?" & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: log_domainClarificationAnswer
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "USER: " & Text(Topic.domainChoice) & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: append_domainClarificationToQuestion
+              variable: Global.userQuestion
+              value: |
+                =Global.userQuestion & Char(10) & "User clarification - knowledge area: " & Text(Topic.domainChoice)
+
+            - kind: ConditionGroup
+              id: conditionGroup_applyDomainChoice
+              conditions:
+                - id: conditionItem_domainAboutCidy
+                  condition: =Or(Text(Topic.domainChoice) = "about_cidy", Text(Topic.domainChoice) = "About Cidy", Lower(Text(Topic.domainChoice)) = "cidy")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_aboutCidy
+                      variable: Global.knowledgeDomain
+                      value: about_cidy
+
+                    - kind: SetVariable
+                      id: setTopic_aboutCidy
+                      variable: Global.topicArea
+                      value: about_cidy
+
+                    - kind: SetVariable
+                      id: setFund_aboutCidy
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
+                - id: conditionItem_domainProgrammeDevelopment
+                  condition: =Or(Text(Topic.domainChoice) = "programme_development", Text(Topic.domainChoice) = "Programme Development", Lower(Text(Topic.domainChoice)) = "pd")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_programmeDevelopment
+                      variable: Global.knowledgeDomain
+                      value: programme_development
+
+                    - kind: SetVariable
+                      id: setTopic_programmeDevelopmentGeneral
+                      variable: Global.topicArea
+                      value: general
+
+                    - kind: SetVariable
+                      id: setFund_programmeDevelopment
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
+                - id: conditionItem_domainProjectEvaluationEvidence
+                  condition: =Or(Text(Topic.domainChoice) = "project_evaluation_evidence", Text(Topic.domainChoice) = "Project evaluations, recommendations, and lessons learned", StartsWith(Text(Topic.domainChoice), "Project evaluations"), Lower(Text(Topic.domainChoice)) = "lessons learned")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_projectEvaluationEvidence
+                      variable: Global.knowledgeDomain
+                      value: project_evaluation_evidence
+
+                    - kind: SetVariable
+                      id: setTopic_projectEvaluationEvidence
+                      variable: Global.topicArea
+                      value: evaluation_evidence
+
+                    - kind: SetVariable
+                      id: setFund_projectEvaluationEvidence
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
+                - id: conditionItem_domainDA
+                  condition: =Or(Text(Topic.domainChoice) = "da", Text(Topic.domainChoice) = "DA", Text(Topic.domainChoice) = "Development Account (DA)", Lower(Text(Topic.domainChoice)) = "development account", EndsWith(Text(Topic.domainChoice), "(DA)"))
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_da
+                      variable: Global.knowledgeDomain
+                      value: da
+
+                    - kind: SetVariable
+                      id: setFund_da
+                      variable: Global.fundingStream
+                      value: DA
+
+                - id: conditionItem_domainRPTC
+                  condition: =Or(Text(Topic.domainChoice) = "rptc", Text(Topic.domainChoice) = "RPTC", StartsWith(Text(Topic.domainChoice), "Regular Programme"))
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_rptc
+                      variable: Global.knowledgeDomain
+                      value: rptc
+
+                    - kind: SetVariable
+                      id: setFund_rptc
+                      variable: Global.fundingStream
+                      value: RPTC
+
+                - id: conditionItem_domainPDF
+                  condition: =Or(Text(Topic.domainChoice) = "pdf", Text(Topic.domainChoice) = "PDF", Text(Topic.domainChoice) = "UNPDF", StartsWith(Text(Topic.domainChoice), "Peace and Development"), EndsWith(Text(Topic.domainChoice), "(PDF)"))
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_pdf
+                      variable: Global.knowledgeDomain
+                      value: pdf
+
+                    - kind: SetVariable
+                      id: setFund_pdf
+                      variable: Global.fundingStream
+                      value: PDF
+
+              elseActions:
+                - kind: SetVariable
+                  id: setDomain_notSureGeneral
+                  variable: Global.knowledgeDomain
+                  value: general_cd
+
+                - kind: SetVariable
+                  id: setTopic_notSureGeneral
+                  variable: Global.topicArea
+                  value: general
+
+                - kind: SetVariable
+                  id: setFund_notSureGeneral
+                  variable: Global.fundingStream
+                  value: UNCLEAR
+
+            - kind: ConditionGroup
+              id: conditionGroup_domainClarificationTopicFallback
+              conditions:
+                - id: conditionItem_domainClarificationGenericTopicFallback
+                  condition: =IsBlank(Global.topicArea) || Global.topicArea = "" || Global.topicArea = "unclear" || Global.topicArea = "other_unclear"
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_domainClarificationGenericFallback
+                      variable: Global.topicArea
+                      value: general
+
+            - kind: SetVariable
+              id: setClarificationDone_domain
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: setClarificationTypeDone_domain
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: setIntentStatus_ready_domain
+              variable: Global.intentStatus
+              value: ready_to_route
+
+            - kind: SendActivity
+              id: sendActivity_debug_afterDomainClarification
+              activity: "DEBUG — After domain clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: yfOLOU
+              dialog: copilots_header_3141e.topic.Intent-Router
+
+            - kind: EndDialog
+              id: endClarifier_afterDomainClarification
+
+        - id: conditionItem_clarifyArtifact
+          condition: =Global.intentStatus = "needs_clarification" && Global.requiresClarification = "Yes" && Global.clarificationType = "artifact"
+          actions:
+            - kind: SetVariable
+              id: incrementClarificationAttempts_artifact
+              variable: Global.clarificationAttempts
+              value: =Value(Global.clarificationAttempts) + 1
+
+            - kind: Question
+              id: question_artifactClarification
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: Topic.artifactChoice
+              prompt: Which type of document are you asking about?
+              entity:
+                kind: EmbeddedEntity
+                sensitivityLevel: None
+                definition:
+                  kind: ClosedListEntity
+                  items:
+                    - id: concept_note
+                      displayName: Concept note
+
+                    - id: project_document
+                      displayName: Project document
+
+                    - id: progress_report
+                      displayName: Progress report
+
+                    - id: evaluation_design
+                      displayName: Evaluation design guidance or template
+
+                    - id: actual_evaluation
+                      displayName: Actual evaluation report, recommendations, or lessons learned
+
+                    - id: management_response
+                      displayName: Management response
+
+                    - id: other_template
+                      displayName: Other template or form
+
+                    - id: not_sure
+                      displayName: Not sure
+
+            - kind: SetVariable
+              id: setClarificationAnswer_artifact
+              variable: Global.clarificationAnswer
+              value: =Text(Topic.artifactChoice)
+
+            - kind: SetVariable
+              id: log_artifactClarificationPrompt
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: Which type of document are you asking about?" & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: log_artifactClarificationAnswer
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "USER: " & Text(Topic.artifactChoice) & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SetVariable
+              id: append_artifactClarificationToQuestion
+              variable: Global.userQuestion
+              value: |
+                =Global.userQuestion & Char(10) & "User clarification - document type: " & Text(Topic.artifactChoice)
+
+            - kind: ConditionGroup
+              id: conditionGroup_applyArtifactChoice
+              conditions:
+                - id: conditionItem_artifactConceptNote
+                  condition: =Or(Text(Topic.artifactChoice) = "concept_note", Text(Topic.artifactChoice) = "Concept note")
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_conceptNote
+                      variable: Global.topicArea
+                      value: project_planning_design
+
+                - id: conditionItem_artifactProjectDocument
+                  condition: =Or(Text(Topic.artifactChoice) = "project_document", Text(Topic.artifactChoice) = "Project document")
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_projectDocument
+                      variable: Global.topicArea
+                      value: project_planning_design
+
+                - id: conditionItem_artifactProgressReport
+                  condition: =Or(Text(Topic.artifactChoice) = "progress_report", Text(Topic.artifactChoice) = "Progress report")
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_progressReport
+                      variable: Global.topicArea
+                      value: monitoring_reporting
+
+                - id: conditionItem_artifactEvaluationDesign
+                  condition: =Or(Text(Topic.artifactChoice) = "evaluation_design", Text(Topic.artifactChoice) = "Evaluation design guidance or template")
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_evaluationDesign
+                      variable: Global.topicArea
+                      value: evaluation_design
+
+                - id: conditionItem_artifactActualEvaluation
+                  condition: =Or(Text(Topic.artifactChoice) = "actual_evaluation", StartsWith(Text(Topic.artifactChoice), "Actual evaluation"))
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_actualEvaluationEvidence
+                      variable: Global.knowledgeDomain
+                      value: project_evaluation_evidence
+
+                    - kind: SetVariable
+                      id: setTopic_actualEvaluationEvidence
+                      variable: Global.topicArea
+                      value: evaluation_evidence
+
+                - id: conditionItem_artifactManagementResponse
+                  condition: =Or(Text(Topic.artifactChoice) = "management_response", Text(Topic.artifactChoice) = "Management response")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_managementResponseEvidence
+                      variable: Global.knowledgeDomain
+                      value: project_evaluation_evidence
+
+                    - kind: SetVariable
+                      id: setTopic_managementResponseEvidence
+                      variable: Global.topicArea
+                      value: evaluation_evidence
+
+                - id: conditionItem_artifactOtherTemplate
+                  condition: =Or(Text(Topic.artifactChoice) = "other_template", Text(Topic.artifactChoice) = "Other template or form")
+                  actions:
+                    - kind: SetVariable
+                      id: setTopic_otherTemplate
+                      variable: Global.topicArea
+                      value: templates
+
+              elseActions:
+                - kind: SetVariable
+                  id: setTopic_artifactNotSure
+                  variable: Global.topicArea
+                  value: general
+
+            - kind: ConditionGroup
+              id: conditionGroup_artifactDefaultDomain
+              conditions:
+                - id: conditionItem_artifactFundDA
+                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "DA"
+                  actions:
+                    - kind: SetVariable
+                      id: setArtifactDomain_DA
+                      variable: Global.knowledgeDomain
+                      value: da
+
+                - id: conditionItem_artifactFundRPTC
+                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "RPTC"
+                  actions:
+                    - kind: SetVariable
+                      id: setArtifactDomain_RPTC
+                      variable: Global.knowledgeDomain
+                      value: rptc
+
+                - id: conditionItem_artifactFundPDF
+                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "PDF"
+                  actions:
+                    - kind: SetVariable
+                      id: setArtifactDomain_PDF
+                      variable: Global.knowledgeDomain
+                      value: pdf
+
+              elseActions:
+                - kind: SetVariable
+                  id: setArtifactDomain_ProgrammeDevelopment
+                  variable: Global.knowledgeDomain
+                  value: programme_development
+
+            - kind: SetVariable
+              id: setClarificationDone_artifact
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: setClarificationTypeDone_artifact
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: setIntentStatus_ready_artifact
+              variable: Global.intentStatus
+              value: ready_to_route
+
+            - kind: SendActivity
+              id: sendActivity_debug_afterArtifactClarification
+              activity: "DEBUG — After artifact clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: sIHko1
+              dialog: copilots_header_3141e.topic.Intent-Router
+
+            - kind: EndDialog
+              id: endClarifier_afterArtifactClarification
+
+      elseActions:
+        - kind: SetVariable
+          id: setStatus_deadEnd_noClarificationBranch
+          variable: Global.intentStatus
+          value: dead_end
+
+        - kind: SetVariable
+          id: setWarning_noClarificationBranch
+          variable: Global.warningMessage
+          value: Cidy could not determine the clarification needed for this question.
+
+        - kind: SetVariable
+          id: setIssueSummary_noClarificationBranch
+          variable: Global.issueSummary
+          value: |
+            ="Clarification dead end. User question: " & Global.userQuestion & " Clarification type: " & Global.clarificationType
+
+        - kind: SendActivity
+          id: sendActivity_debug_noClarificationBranch
+          activity: "DEBUG — Intent Clarifier dead end: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
+
+        - kind: BeginDialog
+          id: H2EMSf
+          dialog: copilots_header_3141e.topic.Intent-Router
+
+        - kind: EndDialog
+          id: endClarifier_noClarificationBranch
+
+inputType: {}
+outputType: {}
