@@ -124,6 +124,10 @@
       margin-top: 28px;
     }
 
+    .layout > * {
+      min-width: 0;
+    }
+
     .metric,
     .panel,
     .case-card,
@@ -154,6 +158,7 @@
 
     .panel {
       padding: 18px;
+      min-width: 0;
     }
 
     input,
@@ -291,7 +296,7 @@
     }
 
     .detail-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
 
     .detail-card {
@@ -299,6 +304,9 @@
       border-radius: 8px;
       padding: 14px;
       background: #fbfdff;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .detail-card.full {
@@ -306,7 +314,7 @@
     }
 
     .kv-grid {
-      grid-template-columns: 150px 1fr;
+      grid-template-columns: 120px minmax(0, 1fr);
       gap: 8px 12px;
       align-items: start;
     }
@@ -319,6 +327,7 @@
     .value {
       min-width: 0;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .stack {
@@ -331,6 +340,9 @@
       display: grid;
       gap: 10px;
       border-left: 5px solid var(--cyan);
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .trace-top {
@@ -352,18 +364,22 @@
       margin: 0;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
+      word-break: break-word;
       background: #eef3f7;
       color: #24364a;
       padding: 10px;
       border-radius: 7px;
       font-family: Consolas, "Courier New", monospace;
-      font-size: 13px;
+      font-size: .7em;
     }
 
     .failure-card {
       padding: 14px;
       border-left: 5px solid var(--red);
       box-shadow: none;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .failure-card strong {
@@ -379,6 +395,37 @@
       border-radius: 8px;
       background: #fff8e8;
       color: #684500;
+    }
+
+    #detailPanel {
+      font-size: 70%;
+    }
+
+    #detailPanel h2 {
+      font-size: 18px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    #detailPanel h3 {
+      font-size: 14px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    #detailPanel .chip {
+      font-size: 11px;
+      min-height: 23px;
+      padding: 2px 8px;
+    }
+
+    #detailPanel .route-path {
+      font-size: 11px;
+      white-space: normal;
+    }
+
+    #detailPanel .trace-top {
+      display: block;
     }
 
     @media (max-width: 960px) {
