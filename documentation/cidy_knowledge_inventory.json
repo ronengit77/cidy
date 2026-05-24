@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "1.0",
+  "generatedFrom": [
+    "Cidy_Intent_Router.yaml",
+    "Formulate_Response_DA.yaml",
+    "Formulate_Response_RPTC.yaml",
+    "Formulate_Response_General.yaml",
+    "Formulate_Response_Programme_Development.yaml"
+  ],
+  "lastReviewed": "2026-05-24",
+  "domains": [
+    {
+      "id": "da",
+      "label": "Development Account",
+      "fundingStream": "DA",
+      "routerStatus": "wired",
+      "routerDialog": "copilots_header_3141e.topic.DA",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general."
+    },
+    {
+      "id": "rptc",
+      "label": "Regular Programme of Technical Cooperation",
+      "fundingStream": "RPTC",
+      "routerStatus": "wired",
+      "routerDialog": "copilots_header_3141e.topic.FormulateResponseCopy",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "notes": "Developed route, but topic-area names in the response YAML do not fully match classifier output values."
+    },
+    {
+      "id": "pdf",
+      "label": "Peace and Development Trust Fund / UNPDF",
+      "fundingStream": "PDF",
+      "routerStatus": "missing_yaml",
+      "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
+      "yamlFile": "Formulate_Response_PDF.yaml",
+      "notes": "Router calls FormulateResponse, but no clear PDF response YAML exists yet."
+    },
+    {
+      "id": "programme_development",
+      "label": "Programme Development",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "not_wired",
+      "routerDialog": "",
+      "yamlFile": "Formulate_Response_Programme_Development.yaml",
+      "notes": "YAML exists, but router currently sends a temporary not-developed message and ends. Existing YAML should be reviewed because source IDs and prompt text look DA-oriented."
+    },
+    {
+      "id": "general_cd",
+      "label": "General CDPMO",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "not_wired",
+      "routerDialog": "",
+      "yamlFile": "Formulate_Response_General.yaml",
+      "notes": "YAML exists, but router currently sends a temporary not-developed message and ends."
+    },
+    {
+      "id": "project_evaluation_evidence",
+      "label": "Project Evaluation Evidence",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "missing_yaml",
+      "routerDialog": "",
+      "yamlFile": "Formulate_Response_Project_Evaluation_Evidence.yaml",
+      "notes": "Classifier/router recognize this domain, but no response YAML is present."
+    },
+    {
+      "id": "about_cidy",
+      "label": "About Cidy",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "missing_yaml",
+      "routerDialog": "",
+      "yamlFile": "Formulate_Response_About_Cidy.yaml",
+      "notes": "Classifier/router recognize this domain, but router currently sends a temporary not-developed message."
+    }
+  ],
+  "folders": [
+    {
+      "id": "da_project_planning_design",
+      "domain": "da",
+      "topicArea": "project_planning_design",
+      "folderName": "Project Planning and Design",
+      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "mappingStatus": "mapped",
+      "ownerUnit": "TBD",
+      "instructions": "The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions."
+    },
+    {
+      "id": "da_evaluation_design",
+      "domain": "da",
+      "topicArea": "evaluation_design",
+      "folderName": "Evaluations",
+      "knowledgeSourceId": "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "mappingStatus": "mapped",
+      "ownerUnit": "TBD",
+      "instructions": "Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward."
+    },
+    {
+      "id": "da_general",
+      "domain": "da",
+      "topicArea": "general",
+      "folderName": "DA General",
+      "knowledgeSourceId": "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "mappingStatus": "fallback",
+      "ownerUnit": "TBD",
+      "instructions": "General DA fallback knowledge source used when no specific DA branch applies or when the draft response is blank."
+    },
+    {
+      "id": "rptc_policy_compliance",
+      "domain": "rptc",
+      "topicArea": "policy_compliance",
+      "folderName": "Policy Guidance / Compliance Requirements RPTC",
+      "knowledgeSourceId": "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped_needs_topic_area_alignment",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_reporting_documentation",
+      "domain": "rptc",
+      "topicArea": "reporting_documentation",
+      "folderName": "Reporting Documentation RPTC",
+      "knowledgeSourceId": "copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped_needs_topic_area_alignment",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_process_governance",
+      "domain": "rptc",
+      "topicArea": "process_governance",
+      "folderName": "Process / Governance / Project Management Roles RPTC",
+      "knowledgeSourceId": "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped_needs_topic_area_alignment",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_budget_finance",
+      "domain": "rptc",
+      "topicArea": "budget_finance",
+      "folderName": "Definitions RPTC",
+      "knowledgeSourceId": "copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_design_evaluation",
+      "domain": "rptc",
+      "topicArea": "design_evaluation",
+      "folderName": "Programme Design Standards / Evaluation Criteria RPTC",
+      "knowledgeSourceId": "copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped_needs_topic_area_alignment",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_definition",
+      "domain": "rptc",
+      "topicArea": "definition",
+      "folderName": "Definitions / RPTC General",
+      "knowledgeSourceId": "copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO; copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "mapped_needs_topic_area_alignment",
+      "ownerUnit": "TBD",
+      "instructions": "No separate source-use instruction variable is currently set in the RPTC YAML branch."
+    },
+    {
+      "id": "rptc_general",
+      "domain": "rptc",
+      "topicArea": "general",
+      "folderName": "RPTC General",
+      "knowledgeSourceId": "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+      "yamlFile": "Formulate_Response_RPTC.yaml",
+      "mappingStatus": "fallback",
+      "ownerUnit": "TBD",
+      "instructions": "Generic RPTC fallback knowledge source."
+    },
+    {
+      "id": "general_cd_knowledge",
+      "domain": "general_cd",
+      "topicArea": "general",
+      "folderName": "CDPMO Knowledge v2",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CDPMO_Knowledge_v2_rGM9q_ShUI77lXMUfzB1X",
+      "yamlFile": "Formulate_Response_General.yaml",
+      "mappingStatus": "yaml_exists_not_wired",
+      "ownerUnit": "TBD",
+      "instructions": "General CDPMO knowledge source. Router is not currently wired to this YAML."
+    },
+    {
+      "id": "programme_development_steering_committee",
+      "domain": "programme_development",
+      "topicArea": "steering_committee",
+      "folderName": "Capacity Development Steering Committee",
+      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+      "yamlFile": "Formulate_Response_Programme_Development.yaml",
+      "mappingStatus": "review_required",
+      "ownerUnit": "TBD",
+      "instructions": "This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like what was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings. Source ID currently points to DA Project Planning and Design and should be verified."
+    },
+    {
+      "id": "programme_development_tag",
+      "domain": "programme_development",
+      "topicArea": "tag",
+      "folderName": "Capacity Development Tag Team",
+      "knowledgeSourceId": "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
+      "yamlFile": "Formulate_Response_Programme_Development.yaml",
+      "mappingStatus": "review_required",
+      "ownerUnit": "TBD",
+      "instructions": "This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like what was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings. Source ID currently points to DA Evaluations and should be verified."
+    }
+  ],
+  "knownGaps": [
+    {
+      "id": "missing_pdf_yaml",
+      "severity": "high",
+      "title": "Create PDF response YAML",
+      "yamlFile": "Formulate_Response_PDF.yaml",
+      "description": "Router has a PDF branch calling FormulateResponse, but no clear PDF response YAML exists."
+    },
+    {
+      "id": "programme_development_not_wired",
+      "severity": "high",
+      "title": "Wire Programme Development route",
+      "yamlFile": "Cidy_Intent_Router.yaml",
+      "description": "Programme Development is recognized but currently ends with a not-developed message."
+    },
+    {
+      "id": "general_cd_not_wired",
+      "severity": "medium",
+      "title": "Wire General CD route",
+      "yamlFile": "Cidy_Intent_Router.yaml",
+      "description": "General CD response YAML exists but is not called by the router."
+    },
+    {
+      "id": "rptc_topic_area_alignment",
+      "severity": "high",
+      "title": "Align RPTC topic-area values",
+      "yamlFile": "Cidy_Intent.yaml; Cidy_Intent_Clarifier.yaml; Formulate_Response_RPTC.yaml",
+      "description": "Classifier values such as monitoring_reporting and policy_guidance_compliance do not match RPTC response conditions such as reporting_documentation and policy_compliance."
+    },
+    {
+      "id": "programme_development_sources_review",
+      "severity": "medium",
+      "title": "Review Programme Development source IDs",
+      "yamlFile": "Formulate_Response_Programme_Development.yaml",
+      "description": "Programme Development YAML contains source IDs and prompt text that appear DA-oriented."
+    }
+  ],
+  "managerUpdates": []
+}

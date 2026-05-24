@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cidy Knowledge Control Center</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6673;
+      --page: #f5f7fa;
+      --panel: #ffffff;
+      --line: #dce4ec;
+      --blue: #2454a6;
+      --cyan: #087b8f;
+      --green: #2f7d4c;
+      --amber: #a86d00;
+      --red: #b23b3b;
+      --violet: #6550a6;
+      --shadow: 0 14px 32px rgba(23, 32, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(9, 35, 63, 0.82), rgba(9, 35, 63, 0.66)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='720' viewBox='0 0 1600 720'%3E%3Crect width='1600' height='720' fill='%230f3559'/%3E%3Cg fill='none' stroke='%239bd5dd' stroke-opacity='.34' stroke-width='2'%3E%3Cpath d='M162 154h260v92H162zM548 112h270v92H548zM974 154h286v92H974zM248 420h278v98H248zM702 384h298v104H702zM1130 444h278v98h-278z'/%3E%3Cpath d='M422 200h126M818 158h156M526 420l176-210M1000 436l130-190M1000 436h130'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.72' font-family='Segoe UI, Arial' font-size='28'%3E%3Ctext x='214' y='211'>Intake</text%3E%3Ctext x='607' y='169'>Inventory</text%3E%3Ctext x='1042' y='211'>YAML</text%3E%3Ctext x='307' y='480'>Folders</text%3E%3Ctext x='754' y='447'>Actions</text%3E%3Ctext x='1190' y='505'>Review</text%3E%3C/g%3E%3C/svg%3E") center/cover;
+      color: #fff;
+    }
+
+    .wrap {
+      width: min(1240px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 42px 0 34px;
+    }
+
+    .top-link {
+      color: #d5eef5;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .top-link:hover { text-decoration: underline; }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 860px;
+      color: #e8f3f6;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p { margin: 0; }
+
+    code {
+      background: #eef3f7;
+      color: #24364a;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    .toolbar,
+    .grid,
+    .two-col,
+    .metrics {
+      display: grid;
+      gap: 14px;
+    }
+
+    .toolbar {
+      grid-template-columns: 1fr auto auto auto;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .two-col {
+      grid-template-columns: .86fr 1.14fr;
+      align-items: start;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric,
+    .panel,
+    .todo,
+    .domain-card,
+    .folder-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 116px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+      margin-bottom: 9px;
+    }
+
+    .metric span,
+    .muted {
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: #293745;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #cbd5df;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button,
+    .button-like {
+      border: 0;
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 8px 12px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button.secondary,
+    .button-like.secondary {
+      background: #eef3f7;
+      color: #24364a;
+      border: 1px solid #cbd5df;
+    }
+
+    button.danger {
+      background: var(--red);
+    }
+
+    button:hover,
+    .button-like:hover {
+      filter: brightness(.96);
+    }
+
+    .search {
+      max-width: 460px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .domain-card,
+    .folder-card,
+    .todo {
+      padding: 15px;
+    }
+
+    .domain-card {
+      border-left: 6px solid var(--green);
+    }
+
+    .domain-card.not_wired { border-left-color: var(--amber); }
+    .domain-card.missing_yaml { border-left-color: var(--red); }
+
+    .folder-card {
+      border-left: 6px solid var(--blue);
+    }
+
+    .folder-card.fallback { border-left-color: var(--violet); }
+    .folder-card.review_required,
+    .folder-card.mapped_needs_topic_area_alignment,
+    .folder-card.yaml_exists_not_wired { border-left-color: var(--amber); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      margin: 0 6px 6px 0;
+    }
+
+    .badge.high,
+    .badge.new_folder,
+    .badge.create_yaml { background: var(--red); }
+    .badge.medium,
+    .badge.changed_folder,
+    .badge.update_instructions,
+    .badge.wiring { background: var(--amber); }
+    .badge.low,
+    .badge.mapped { background: var(--green); }
+    .badge.review_required,
+    .badge.yaml_exists_not_wired,
+    .badge.mapped_needs_topic_area_alignment { background: var(--amber); }
+    .badge.fallback { background: var(--violet); }
+
+    .todo {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .todo input {
+      width: 18px;
+      min-height: 18px;
+      margin-top: 4px;
+    }
+
+    .todo.done {
+      opacity: .55;
+    }
+
+    .todo.done h3,
+    .todo.done p {
+      text-decoration: line-through;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid #edf1f5;
+      font-size: 14px;
+    }
+
+    th {
+      background: #eef3f7;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #293745;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .hidden { display: none !important; }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .toolbar,
+      .two-col,
+      .metrics,
+      .card-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <a class="top-link" href="cidy_topic_flow.html">Back to topic architecture</a>
+      <h1>Cidy Knowledge Control Center</h1>
+      <p>Track knowledge folders, source-use instructions, manager updates, route coverage, and the YAML work needed to keep Cidy's response topics aligned with its knowledge base.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="toolbar" aria-label="Control center tools">
+      <input class="search" id="searchBox" type="search" placeholder="Search domains, folders, YAML files, source IDs, updates">
+      <button type="button" class="secondary" id="exportButton">Export JSON</button>
+      <label class="button-like secondary" for="importFile">Import JSON</label>
+      <input class="hidden" id="importFile" type="file" accept="application/json,.json">
+      <button type="button" class="secondary" id="resetLocalButton">Reset Local Data</button>
+    </section>
+
+    <section aria-labelledby="snapshotTitle">
+      <h2 id="snapshotTitle">Operational Snapshot</h2>
+      <div class="metrics" id="metrics"></div>
+    </section>
+
+    <section class="two-col" aria-labelledby="intakeTitle">
+      <div class="panel">
+        <h2 id="intakeTitle">Update Intake</h2>
+        <p class="muted">Use this when a knowledge manager reports a new folder, changed source, deprecated folder, updated instructions, or routing need.</p>
+        <form id="updateForm">
+          <div class="form-grid">
+            <div>
+              <label for="updateDate">Date</label>
+              <input id="updateDate" name="date" type="date" required>
+            </div>
+            <div>
+              <label for="ownerUnit">Owner unit</label>
+              <input id="ownerUnit" name="ownerUnit" placeholder="e.g. CDPMO, DA team, RPTC focal point">
+            </div>
+            <div>
+              <label for="domain">Domain</label>
+              <select id="domain" name="domain" required></select>
+            </div>
+            <div>
+              <label for="topicArea">Topic area</label>
+              <input id="topicArea" name="topicArea" placeholder="e.g. evaluation_design">
+            </div>
+            <div>
+              <label for="changeType">Change type</label>
+              <select id="changeType" name="changeType" required>
+                <option value="new_folder">New folder/source</option>
+                <option value="changed_folder">Changed folder/source</option>
+                <option value="update_instructions">Instruction update</option>
+                <option value="deprecated_folder">Deprecated folder/source</option>
+                <option value="create_yaml">Create response YAML</option>
+                <option value="wiring">Router/wiring change</option>
+                <option value="review">Review needed</option>
+              </select>
+            </div>
+            <div>
+              <label for="yamlFile">Affected YAML</label>
+              <input id="yamlFile" name="yamlFile" placeholder="e.g. Formulate_Response_PDF.yaml">
+            </div>
+            <div class="full">
+              <label for="folderName">Folder/source name</label>
+              <input id="folderName" name="folderName" placeholder="Knowledge folder or source name">
+            </div>
+            <div class="full">
+              <label for="knowledgeSourceId">Knowledge source ID</label>
+              <input id="knowledgeSourceId" name="knowledgeSourceId" placeholder="copilots_header_3141e.topic...">
+            </div>
+            <div class="full">
+              <label for="instructions">Source-use instructions</label>
+              <textarea id="instructions" name="instructions" placeholder="Binding instructions, recency rules, source preferences, exclusions"></textarea>
+            </div>
+            <div class="full">
+              <label for="notes">Notes from knowledge manager</label>
+              <textarea id="notes" name="notes" placeholder="What changed, why it matters, target timeline, dependencies"></textarea>
+            </div>
+          </div>
+          <div class="button-row">
+            <button type="submit">Add Update</button>
+            <button type="button" class="secondary" id="clearFormButton">Clear Form</button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h2>Generated To-Do List</h2>
+        <div class="grid" id="todoList"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="domainsTitle">
+      <h2 id="domainsTitle">Route Coverage</h2>
+      <div class="card-grid" id="domainCards"></div>
+    </section>
+
+    <section aria-labelledby="foldersTitle">
+      <h2 id="foldersTitle">Knowledge Folder Map</h2>
+      <div class="card-grid" id="folderCards"></div>
+    </section>
+
+    <section aria-labelledby="updatesTitle">
+      <h2 id="updatesTitle">Knowledge Manager Updates</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Domain</th>
+            <th>Change</th>
+            <th>Folder / YAML</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="updatesTable"></tbody>
+      </table>
+      <p class="small">Updates are saved in this browser's localStorage. Use Export JSON to produce a file that can be committed back to GitHub.</p>
+    </section>
+  </main>
+
+  <script id="embeddedInventory" type="application/json">
+{
+  "schemaVersion": "1.0",
+  "generatedFrom": ["Cidy_Intent_Router.yaml", "Formulate_Response_DA.yaml", "Formulate_Response_RPTC.yaml", "Formulate_Response_General.yaml", "Formulate_Response_Programme_Development.yaml"],
+  "lastReviewed": "2026-05-24",
+  "domains": [
+    {"id":"da","label":"Development Account","fundingStream":"DA","routerStatus":"wired","routerDialog":"copilots_header_3141e.topic.DA","yamlFile":"Formulate_Response_DA.yaml","notes":"Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general."},
+    {"id":"rptc","label":"Regular Programme of Technical Cooperation","fundingStream":"RPTC","routerStatus":"wired","routerDialog":"copilots_header_3141e.topic.FormulateResponseCopy","yamlFile":"Formulate_Response_RPTC.yaml","notes":"Developed route, but topic-area names in the response YAML do not fully match classifier output values."},
+    {"id":"pdf","label":"Peace and Development Trust Fund / UNPDF","fundingStream":"PDF","routerStatus":"missing_yaml","routerDialog":"copilots_header_3141e.topic.FormulateResponse","yamlFile":"Formulate_Response_PDF.yaml","notes":"Router calls FormulateResponse, but no clear PDF response YAML exists yet."},
+    {"id":"programme_development","label":"Programme Development","fundingStream":"UNCLEAR","routerStatus":"not_wired","routerDialog":"","yamlFile":"Formulate_Response_Programme_Development.yaml","notes":"YAML exists, but router currently sends a temporary not-developed message and ends. Existing YAML should be reviewed because source IDs and prompt text look DA-oriented."},
+    {"id":"general_cd","label":"General CDPMO","fundingStream":"UNCLEAR","routerStatus":"not_wired","routerDialog":"","yamlFile":"Formulate_Response_General.yaml","notes":"YAML exists, but router currently sends a temporary not-developed message and ends."},
+    {"id":"project_evaluation_evidence","label":"Project Evaluation Evidence","fundingStream":"UNCLEAR","routerStatus":"missing_yaml","routerDialog":"","yamlFile":"Formulate_Response_Project_Evaluation_Evidence.yaml","notes":"Classifier/router recognize this domain, but no response YAML is present."},
+    {"id":"about_cidy","label":"About Cidy","fundingStream":"UNCLEAR","routerStatus":"missing_yaml","routerDialog":"","yamlFile":"Formulate_Response_About_Cidy.yaml","notes":"Classifier/router recognize this domain, but router currently sends a temporary not-developed message."}
+  ],
+  "folders": [
+    {"id":"da_project_planning_design","domain":"da","topicArea":"project_planning_design","folderName":"Project Planning and Design","knowledgeSourceId":"copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2","yamlFile":"Formulate_Response_DA.yaml","mappingStatus":"mapped","ownerUnit":"TBD","instructions":"The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions."},
+    {"id":"da_evaluation_design","domain":"da","topicArea":"evaluation_design","folderName":"Evaluations","knowledgeSourceId":"copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo","yamlFile":"Formulate_Response_DA.yaml","mappingStatus":"mapped","ownerUnit":"TBD","instructions":"Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward."},
+    {"id":"da_general","domain":"da","topicArea":"general","folderName":"DA General","knowledgeSourceId":"copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF","yamlFile":"Formulate_Response_DA.yaml","mappingStatus":"fallback","ownerUnit":"TBD","instructions":"General DA fallback knowledge source used when no specific DA branch applies or when the draft response is blank."},
+    {"id":"rptc_policy_compliance","domain":"rptc","topicArea":"policy_compliance","folderName":"Policy Guidance / Compliance Requirements RPTC","knowledgeSourceId":"copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped_needs_topic_area_alignment","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_reporting_documentation","domain":"rptc","topicArea":"reporting_documentation","folderName":"Reporting Documentation RPTC","knowledgeSourceId":"copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped_needs_topic_area_alignment","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_process_governance","domain":"rptc","topicArea":"process_governance","folderName":"Process / Governance / Project Management Roles RPTC","knowledgeSourceId":"copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped_needs_topic_area_alignment","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_budget_finance","domain":"rptc","topicArea":"budget_finance","folderName":"Definitions RPTC","knowledgeSourceId":"copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_design_evaluation","domain":"rptc","topicArea":"design_evaluation","folderName":"Programme Design Standards / Evaluation Criteria RPTC","knowledgeSourceId":"copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped_needs_topic_area_alignment","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_definition","domain":"rptc","topicArea":"definition","folderName":"Definitions / RPTC General","knowledgeSourceId":"copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO; copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"mapped_needs_topic_area_alignment","ownerUnit":"TBD","instructions":"No separate source-use instruction variable is currently set in the RPTC YAML branch."},
+    {"id":"rptc_general","domain":"rptc","topicArea":"general","folderName":"RPTC General","knowledgeSourceId":"copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf","yamlFile":"Formulate_Response_RPTC.yaml","mappingStatus":"fallback","ownerUnit":"TBD","instructions":"Generic RPTC fallback knowledge source."},
+    {"id":"general_cd_knowledge","domain":"general_cd","topicArea":"general","folderName":"CDPMO Knowledge v2","knowledgeSourceId":"copilots_header_3141e.topic.CDPMO_Knowledge_v2_rGM9q_ShUI77lXMUfzB1X","yamlFile":"Formulate_Response_General.yaml","mappingStatus":"yaml_exists_not_wired","ownerUnit":"TBD","instructions":"General CDPMO knowledge source. Router is not currently wired to this YAML."},
+    {"id":"programme_development_steering_committee","domain":"programme_development","topicArea":"steering_committee","folderName":"Capacity Development Steering Committee","knowledgeSourceId":"copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2","yamlFile":"Formulate_Response_Programme_Development.yaml","mappingStatus":"review_required","ownerUnit":"TBD","instructions":"This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like what was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings. Source ID currently points to DA Project Planning and Design and should be verified."},
+    {"id":"programme_development_tag","domain":"programme_development","topicArea":"tag","folderName":"Capacity Development Tag Team","knowledgeSourceId":"copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo","yamlFile":"Formulate_Response_Programme_Development.yaml","mappingStatus":"review_required","ownerUnit":"TBD","instructions":"This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like what was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings. Source ID currently points to DA Evaluations and should be verified."}
+  ],
+  "knownGaps": [
+    {"id":"missing_pdf_yaml","severity":"high","title":"Create PDF response YAML","yamlFile":"Formulate_Response_PDF.yaml","description":"Router has a PDF branch calling FormulateResponse, but no clear PDF response YAML exists."},
+    {"id":"programme_development_not_wired","severity":"high","title":"Wire Programme Development route","yamlFile":"Cidy_Intent_Router.yaml","description":"Programme Development is recognized but currently ends with a not-developed message."},
+    {"id":"general_cd_not_wired","severity":"medium","title":"Wire General CD route","yamlFile":"Cidy_Intent_Router.yaml","description":"General CD response YAML exists but is not called by the router."},
+    {"id":"rptc_topic_area_alignment","severity":"high","title":"Align RPTC topic-area values","yamlFile":"Cidy_Intent.yaml; Cidy_Intent_Clarifier.yaml; Formulate_Response_RPTC.yaml","description":"Classifier values such as monitoring_reporting and policy_guidance_compliance do not match RPTC response conditions such as reporting_documentation and policy_compliance."},
+    {"id":"programme_development_sources_review","severity":"medium","title":"Review Programme Development source IDs","yamlFile":"Formulate_Response_Programme_Development.yaml","description":"Programme Development YAML contains source IDs and prompt text that appear DA-oriented."}
+  ],
+  "managerUpdates": []
+}
+  </script>
+
+  <script>
+    const STORAGE_KEY = "cidyKnowledgeControlCenter.v1";
+    let inventory = null;
+    let completedTodos = new Set(JSON.parse(localStorage.getItem("cidyTodoDone.v1") || "[]"));
+
+    const $ = (id) => document.getElementById(id);
+
+    function today() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function embeddedInventory() {
+      return JSON.parse($("embeddedInventory").textContent);
+    }
+
+    async function loadInventory() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        inventory = JSON.parse(saved);
+      } else {
+        try {
+          const response = await fetch("cidy_knowledge_inventory.json", { cache: "no-store" });
+          if (!response.ok) throw new Error("Inventory fetch failed");
+          inventory = await response.json();
+        } catch (error) {
+          inventory = embeddedInventory();
+        }
+        saveInventory();
+      }
+      ensureArrays();
+      render();
+    }
+
+    function ensureArrays() {
+      inventory.domains = inventory.domains || [];
+      inventory.folders = inventory.folders || [];
+      inventory.knownGaps = inventory.knownGaps || [];
+      inventory.managerUpdates = inventory.managerUpdates || [];
+    }
+
+    function saveInventory() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(inventory));
+    }
+
+    function domainLabel(id) {
+      const domain = inventory.domains.find((item) => item.id === id);
+      return domain ? domain.label : id || "Unassigned";
+    }
+
+    function escapeHtml(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function matchesSearch(item, term) {
+      if (!term) return true;
+      return JSON.stringify(item).toLowerCase().includes(term.toLowerCase());
+    }
+
+    function statusClass(value) {
+      return String(value || "").replace(/[^a-z0-9_]+/gi, "_");
+    }
+
+    function deriveTodos() {
+      const todos = [];
+
+      inventory.knownGaps.forEach((gap) => {
+        todos.push({
+          id: `gap:${gap.id}`,
+          severity: gap.severity || "medium",
+          title: gap.title,
+          yamlFile: gap.yamlFile,
+          detail: gap.description,
+          source: "Known gap"
+        });
+      });
+
+      inventory.domains.forEach((domain) => {
+        if (domain.routerStatus === "missing_yaml") {
+          todos.push({
+            id: `domain:${domain.id}:missing_yaml`,
+            severity: "high",
+            title: `Create or map ${domain.label} response YAML`,
+            yamlFile: domain.yamlFile,
+            detail: domain.notes,
+            source: "Route coverage"
+          });
+        }
+        if (domain.routerStatus === "not_wired") {
+          todos.push({
+            id: `domain:${domain.id}:not_wired`,
+            severity: "medium",
+            title: `Wire ${domain.label} in Cidy_Intent_Router.yaml`,
+            yamlFile: "Cidy_Intent_Router.yaml",
+            detail: `Existing target YAML: ${domain.yamlFile}. ${domain.notes}`,
+            source: "Route coverage"
+          });
+        }
+      });
+
+      inventory.folders.forEach((folder) => {
+        if (["review_required", "mapped_needs_topic_area_alignment", "yaml_exists_not_wired"].includes(folder.mappingStatus)) {
+          todos.push({
+            id: `folder:${folder.id}:${folder.mappingStatus}`,
+            severity: folder.mappingStatus === "mapped_needs_topic_area_alignment" ? "high" : "medium",
+            title: `Review ${folder.folderName}`,
+            yamlFile: folder.yamlFile,
+            detail: `${folder.topicArea}: ${folder.instructions}`,
+            source: "Folder map"
+          });
+        }
+      });
+
+      inventory.managerUpdates.forEach((update) => {
+        const severity = ["new_folder", "create_yaml"].includes(update.changeType) ? "high" : "medium";
+        const yaml = update.yamlFile || suggestedYaml(update.domain);
+        todos.push({
+          id: `update:${update.id}`,
+          severity,
+          title: titleForUpdate(update),
+          yamlFile: yaml,
+          detail: update.notes || update.instructions || "Review manager update and decide YAML changes.",
+          source: "Manager update"
+        });
+      });
+
+      const seen = new Set();
+      return todos.filter((todo) => {
+        const key = `${todo.title}|${todo.yamlFile}|${todo.detail}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function titleForUpdate(update) {
+      const folder = update.folderName ? `: ${update.folderName}` : "";
+      const domain = domainLabel(update.domain);
+      const labels = {
+        new_folder: "Map new knowledge folder",
+        changed_folder: "Review changed knowledge folder",
+        update_instructions: "Update source-use instructions",
+        deprecated_folder: "Remove or replace deprecated source",
+        create_yaml: "Create response YAML",
+        wiring: "Update router wiring",
+        review: "Review knowledge manager note"
+      };
+      return `${labels[update.changeType] || "Review update"} for ${domain}${folder}`;
+    }
+
+    function suggestedYaml(domainId) {
+      const domain = inventory.domains.find((item) => item.id === domainId);
+      return domain ? domain.yamlFile : "";
+    }
+
+    function render() {
+      renderDomainOptions();
+      renderMetrics();
+      renderTodos();
+      renderDomains();
+      renderFolders();
+      renderUpdates();
+    }
+
+    function renderDomainOptions() {
+      const domainSelect = $("domain");
+      const current = domainSelect.value;
+      domainSelect.innerHTML = inventory.domains.map((domain) =>
+        `<option value="${escapeHtml(domain.id)}">${escapeHtml(domain.label)}</option>`
+      ).join("");
+      if (current) domainSelect.value = current;
+    }
+
+    function renderMetrics() {
+      const folders = inventory.folders.length;
+      const mapped = inventory.folders.filter((folder) => folder.mappingStatus === "mapped" || folder.mappingStatus === "fallback").length;
+      const missing = inventory.domains.filter((domain) => domain.routerStatus === "missing_yaml").length;
+      const updates = inventory.managerUpdates.length;
+      $("metrics").innerHTML = [
+        metric("Domains", inventory.domains.length, "Known Cidy route domains"),
+        metric("Mapped folders", `${mapped}/${folders}`, "Mapped or fallback knowledge sources"),
+        metric("Missing YAMLs", missing, "Domains needing response topic files"),
+        metric("Manager updates", updates, "Saved intake records in this browser")
+      ].join("");
+    }
+
+    function metric(label, value, note) {
+      return `<div class="metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}<br>${escapeHtml(note)}</span></div>`;
+    }
+
+    function renderTodos() {
+      const term = $("searchBox").value;
+      const todos = deriveTodos().filter((todo) => matchesSearch(todo, term));
+      $("todoList").innerHTML = todos.length ? todos.map((todo) => {
+        const done = completedTodos.has(todo.id);
+        return `
+          <article class="todo ${done ? "done" : ""}">
+            <input type="checkbox" ${done ? "checked" : ""} data-todo-id="${escapeHtml(todo.id)}" aria-label="Mark todo done">
+            <div>
+              <span class="badge ${escapeHtml(todo.severity)}">${escapeHtml(todo.severity)}</span>
+              <span class="badge">${escapeHtml(todo.source)}</span>
+              <h3>${escapeHtml(todo.title)}</h3>
+              <p><code>${escapeHtml(todo.yamlFile || "TBD")}</code></p>
+              <p class="muted">${escapeHtml(todo.detail)}</p>
+            </div>
+          </article>`;
+      }).join("") : `<div class="panel"><p class="muted">No to-do items match the current search.</p></div>`;
+    }
+
+    function renderDomains() {
+      const term = $("searchBox").value;
+      const domains = inventory.domains.filter((domain) => matchesSearch(domain, term));
+      $("domainCards").innerHTML = domains.map((domain) => `
+        <article class="domain-card ${escapeHtml(statusClass(domain.routerStatus))}">
+          <span class="badge ${escapeHtml(statusClass(domain.routerStatus))}">${escapeHtml(domain.routerStatus)}</span>
+          <h3>${escapeHtml(domain.label)}</h3>
+          <p><code>${escapeHtml(domain.yamlFile)}</code></p>
+          <p class="muted">${escapeHtml(domain.notes)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderFolders() {
+      const term = $("searchBox").value;
+      const folders = inventory.folders.filter((folder) => matchesSearch(folder, term));
+      $("folderCards").innerHTML = folders.map((folder) => `
+        <article class="folder-card ${escapeHtml(statusClass(folder.mappingStatus))}">
+          <span class="badge ${escapeHtml(statusClass(folder.mappingStatus))}">${escapeHtml(folder.mappingStatus)}</span>
+          <span class="badge">${escapeHtml(domainLabel(folder.domain))}</span>
+          <h3>${escapeHtml(folder.folderName)}</h3>
+          <p><code>${escapeHtml(folder.topicArea)}</code> -> <code>${escapeHtml(folder.yamlFile)}</code></p>
+          <p class="muted">${escapeHtml(folder.instructions)}</p>
+          <p class="small">Source: ${escapeHtml(folder.knowledgeSourceId)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderUpdates() {
+      const term = $("searchBox").value;
+      const updates = inventory.managerUpdates.filter((update) => matchesSearch(update, term));
+      $("updatesTable").innerHTML = updates.length ? updates.map((update) => `
+        <tr>
+          <td>${escapeHtml(update.date)}</td>
+          <td>${escapeHtml(domainLabel(update.domain))}<br><span class="small">${escapeHtml(update.topicArea)}</span></td>
+          <td><span class="badge ${escapeHtml(statusClass(update.changeType))}">${escapeHtml(update.changeType)}</span></td>
+          <td>${escapeHtml(update.folderName || "")}<br><code>${escapeHtml(update.yamlFile || suggestedYaml(update.domain) || "TBD")}</code></td>
+          <td>${escapeHtml(update.notes || update.instructions || "")}</td>
+          <td><button type="button" class="danger" data-delete-update="${escapeHtml(update.id)}">Delete</button></td>
+        </tr>
+      `).join("") : `<tr><td colspan="6" class="muted">No manager updates yet.</td></tr>`;
+    }
+
+    function formDataToObject(form) {
+      const data = new FormData(form);
+      return Object.fromEntries(data.entries());
+    }
+
+    function addUpdate(event) {
+      event.preventDefault();
+      const update = formDataToObject(event.currentTarget);
+      update.id = `update_${Date.now()}`;
+      update.yamlFile = update.yamlFile || suggestedYaml(update.domain);
+      inventory.managerUpdates.unshift(update);
+      saveInventory();
+      event.currentTarget.reset();
+      $("updateDate").value = today();
+      render();
+    }
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify(inventory, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "cidy_knowledge_inventory.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        inventory = JSON.parse(reader.result);
+        ensureArrays();
+        saveInventory();
+        render();
+      };
+      reader.readAsText(file);
+    }
+
+    document.addEventListener("click", (event) => {
+      const todoId = event.target.getAttribute("data-todo-id");
+      if (todoId) {
+        if (event.target.checked) completedTodos.add(todoId);
+        else completedTodos.delete(todoId);
+        localStorage.setItem("cidyTodoDone.v1", JSON.stringify([...completedTodos]));
+        renderTodos();
+      }
+
+      const updateId = event.target.getAttribute("data-delete-update");
+      if (updateId) {
+        inventory.managerUpdates = inventory.managerUpdates.filter((update) => update.id !== updateId);
+        saveInventory();
+        render();
+      }
+    });
+
+    $("updateForm").addEventListener("submit", addUpdate);
+    $("clearFormButton").addEventListener("click", () => {
+      $("updateForm").reset();
+      $("updateDate").value = today();
+    });
+    $("exportButton").addEventListener("click", exportJson);
+    $("importFile").addEventListener("change", (event) => {
+      if (event.target.files[0]) importJson(event.target.files[0]);
+    });
+    $("resetLocalButton").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("cidyTodoDone.v1");
+      completedTodos = new Set();
+      inventory = embeddedInventory();
+      saveInventory();
+      render();
+    });
+    $("searchBox").addEventListener("input", render);
+
+    $("updateDate").value = today();
+    loadInventory();
+  </script>
+</body>
+</html>
