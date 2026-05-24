@@ -241,6 +241,18 @@
       color: #293745;
     }
 
+    .route-path {
+      color: #314253;
+      background: #f4f8fb;
+      border: 1px solid #dce4ec;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
     .chips {
       display: flex;
       flex-wrap: wrap;
@@ -527,6 +539,8 @@
           route.finalTopic,
           route.routingTarget,
           route.routerStatus,
+          item.routePathText,
+          ...(item.routePath || []),
           classification.knowledgeDomain,
           classification.fundingStream,
           ...(classification.topicAreas || []),
@@ -555,6 +569,7 @@
         const route = item.finalRoute || {};
         const classification = item.finalClassification || {};
         const firstFailure = (item.failures || [])[0];
+        const routePathText = getRoutePathText(item);
         return `
           <button type="button" class="case-card ${escapeHtml(item.status)} ${item.id === state.selectedId ? "selected" : ""}" data-id="${escapeHtml(item.id)}">
             <div class="case-head">
@@ -564,6 +579,7 @@
               </div>
               <span class="chip ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span>
             </div>
+            <div class="route-path">${escapeHtml(routePathText)}</div>
             <div class="chips">
               ${chip(classification.knowledgeDomain || "domain unknown")}
               ${chip(classification.fundingStream || "fund unknown")}
@@ -586,6 +602,18 @@
       return `<span class="chip ${escapeHtml(type)}">${escapeHtml(text)}</span>`;
     }
 
+    function getRoutePathText(item) {
+      if (item.routePathText) return item.routePathText;
+      if (Array.isArray(item.routePath) && item.routePath.length) return item.routePath.join(" > ");
+      if (Array.isArray(item.routeTrace) && item.routeTrace.length) {
+        return item.routeTrace.map(step => step.topic).filter(Boolean).join(" > ");
+      }
+      const route = item.finalRoute || {};
+      return ["Cidy_Intent.yaml", "Cidy_Intent_Clarifier.yaml", "Cidy_Intent_Router.yaml", route.yamlFile || route.finalTopic]
+        .filter(Boolean)
+        .join(" > ");
+    }
+
     function renderDetail() {
       const selected = state.results.find(item => item.id === state.selectedId);
       if (!selected) {
@@ -597,6 +625,7 @@
       const route = selected.finalRoute || {};
       const failures = selected.failures || [];
       const trace = selected.routeTrace || [];
+      const routePathText = getRoutePathText(selected);
 
       els.detailPanel.innerHTML = `
         <div class="case-head">
@@ -608,6 +637,7 @@
         </div>
 
         <div class="detail-grid" style="margin-top: 16px;">
+          ${detailCard("Route Path", routePathText, true)}
           ${detailCard("Expected Behavior", selected.expectedBehavior, true)}
           ${detailCard("Clarification Input", selected.clarification || "No clarification", false)}
           ${detailCard("Final Classification", "", false, [

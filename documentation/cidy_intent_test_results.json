@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-24T16:53:01-04:00",
+                    "generatedAt":  "2026-05-24T17:10:19-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
@@ -29,6 +29,14 @@
                                                                        "project_planning_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -113,6 +121,14 @@
                                                                        "project_planning_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -197,6 +213,14 @@
                                                                        "monitoring_reporting"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -286,6 +310,14 @@
                                                                        "eligibility_budget"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -377,6 +409,14 @@
                                                                        "project_planning_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -462,6 +502,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -549,6 +597,14 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -636,6 +692,14 @@
                                                                        "general"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -723,6 +787,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -808,6 +880,14 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -894,6 +974,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -982,6 +1070,14 @@
                                                                        "recommendations"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1070,6 +1166,14 @@
                                                                        "lessons_learned"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1158,6 +1262,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1246,6 +1358,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1336,6 +1456,14 @@
                                                                        "reports"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1428,6 +1556,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1516,6 +1652,14 @@
                                                                        "recommendations"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1604,6 +1748,14 @@
                                                                        "cd_strategy"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1692,6 +1844,14 @@
                                                                        "steering_committee"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1780,6 +1940,14 @@
                                                                        "tag_meetings"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1868,6 +2036,14 @@
                                                                        "general"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1957,6 +2133,14 @@
                                                                        "policy_guidance_compliance"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2043,6 +2227,14 @@
                                                                        "governance_roles"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2131,6 +2323,14 @@
                                                                        "governance_roles"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2219,6 +2419,14 @@
                                                                        "programme_design_standards"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2307,6 +2515,14 @@
                                                                        "evaluation_criteria"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2395,6 +2611,14 @@
                                                                        "reports"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2483,6 +2707,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_PDF.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2571,6 +2803,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_About_Cidy.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2659,6 +2899,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_About_Cidy.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2747,6 +2995,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_About_Cidy.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2835,6 +3091,14 @@
                                                                        "evaluation_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2919,6 +3183,14 @@
                                                                        "reports"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3007,6 +3279,14 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_PDF.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3095,6 +3375,14 @@
                                                                        "general"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_General.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_General.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3185,6 +3473,14 @@
                                                                        "project_planning_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3272,6 +3568,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3360,6 +3664,14 @@
                                                                        "evaluation_evidence"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3448,6 +3760,14 @@
                                                                        "about_cidy"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_About_Cidy.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3536,6 +3856,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3620,6 +3948,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3704,6 +4040,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3788,6 +4132,14 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_PDF.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3876,6 +4228,14 @@
                                                                        "project_planning_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3966,6 +4326,13 @@
                                                                        "evaluation_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4011,7 +4378,7 @@
                                        ],
                         "failures":  [
                                          {
-                                             "type":  "topic_not_found",
+                                             "type":  "topic_not_found_=_evaluation_design",
                                              "point":  "Intent Router",
                                              "message":  "No domain route found for unclear / UNCLEAR."
                                          }
@@ -4038,6 +4405,13 @@
                                                                        "monitoring_reporting"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4083,7 +4457,7 @@
                                        ],
                         "failures":  [
                                          {
-                                             "type":  "topic_not_found",
+                                             "type":  "topic_not_found_=_monitoring_reporting",
                                              "point":  "Intent Router",
                                              "message":  "No domain route found for unclear / UNCLEAR."
                                          }
@@ -4110,6 +4484,14 @@
                                                                        "evaluation_design"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4194,6 +4576,14 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4282,6 +4672,13 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4350,6 +4747,13 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4418,6 +4822,13 @@
                                                                        "templates"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4486,6 +4897,13 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4554,6 +4972,13 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4622,6 +5047,13 @@
                                                                        "unclear"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4690,6 +5122,13 @@
                                                                        "out_of_scope"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4758,6 +5197,13 @@
                                                                        "out_of_scope"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4826,6 +5272,13 @@
                                                                        "out_of_scope"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4894,6 +5347,13 @@
                                                                        "out_of_scope"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4962,6 +5422,13 @@
                                                                        "out_of_scope"
                                                                    ]
                                                 },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Cidy_Intent_Router.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",

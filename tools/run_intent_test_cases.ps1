@@ -34,6 +34,12 @@ function Add-Failure {
     })
 }
 
+function Get-RoutePathText {
+    param([object[]]$Trace)
+    $topics = @($Trace | ForEach-Object { $_.topic } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    return ($topics -join " > ")
+}
+
 function First-Match {
     param(
         [string]$Text,
@@ -344,7 +350,19 @@ foreach ($case in $testData.testCases) {
         $route = Get-Route -Domain $finalDomain -FundingStream $finalFunding -Domains $domains
     }
     if ($route.routerStatus -eq "topic_not_found") {
-        Add-Failure $caseFailures "topic_not_found" "Intent Router" "No domain route found for $finalDomain / $finalFunding."
+        $missingTopicParts = New-Object System.Collections.Generic.List[string]
+        if ($finalDomain -and $finalDomain -ne "unclear") { $missingTopicParts.Add($finalDomain) }
+        if ($finalFunding -and $finalFunding -ne "UNCLEAR") { $missingTopicParts.Add($finalFunding) }
+        foreach ($area in @($finalAreas)) {
+            if ($area -and $area -notin @("unclear", "out_of_scope")) { $missingTopicParts.Add($area) }
+        }
+        $missingTopicSource = ($missingTopicParts.ToArray() -join " ")
+        if ([string]::IsNullOrWhiteSpace($missingTopicSource)) {
+            $missingTopicSource = ($scenario -replace "^(Happy path|Clarification path|Vague path|Out of scope)\s*-\s*", "")
+        }
+        $missingTopic = ConvertTo-Slug $missingTopicSource
+        if ([string]::IsNullOrWhiteSpace($missingTopic)) { $missingTopic = "unknown_topic" }
+        Add-Failure $caseFailures "topic_not_found_=_$missingTopic" "Intent Router" "No domain route found for $finalDomain / $finalFunding."
     }
     if ($route.routerStatus -eq "missing_yaml") {
         Add-Failure $caseFailures "Formulate_Response_YAML_not_found" "Intent Router" "Expected YAML not found: $($route.yamlFile)."
@@ -414,6 +432,8 @@ foreach ($case in $testData.testCases) {
             decision = if ($yamlExists -and $topicAreaStatus.mapped) { "Begin assess_confidence.yaml" } elseif ($yamlExists) { "Use fallback or update topic-area mapping" } else { "Stop: YAML not found" }
         }
     }
+    $routePath = @($trace | ForEach-Object { $_.topic })
+    $routePathText = Get-RoutePathText -Trace $trace
 
     $status = if ($caseFailures.Count -eq 0) { "pass" } else { "fail" }
     $result = [ordered]@{
@@ -429,6 +449,8 @@ foreach ($case in $testData.testCases) {
             fundingStream   = $finalFunding
             topicAreas      = @($finalAreas)
         }
+        routePath           = @($routePath)
+        routePathText       = $routePathText
         routeTrace          = $trace
         failures            = @($caseFailures.ToArray())
     }
@@ -439,6 +461,8 @@ foreach ($case in $testData.testCases) {
             scenario         = $scenario
             question         = $question
             finalRoute       = $route
+            routePath        = @($routePath)
+            routePathText    = $routePathText
             failures         = @($caseFailures.ToArray())
             routeTraceSummary = @($trace | ForEach-Object { [ordered]@{ topic = $_.topic; decision = $_.decision } })
         })

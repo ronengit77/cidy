@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-24T16:53:01-04:00",
+                    "generatedAt":  "2026-05-24T17:10:19-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
@@ -19,6 +19,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_DA.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -60,6 +68,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_DA.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -101,6 +117,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -142,6 +166,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -183,6 +215,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -224,6 +264,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -265,6 +313,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -306,6 +362,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -347,6 +411,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -388,6 +460,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -429,6 +509,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -470,6 +558,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -511,6 +607,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -552,6 +656,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -593,6 +705,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -634,6 +754,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -675,6 +803,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -716,6 +852,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -757,6 +901,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -798,6 +950,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_PDF.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_PDF.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -839,6 +999,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_About_Cidy.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_About_Cidy.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -880,6 +1048,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_About_Cidy.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_About_Cidy.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -921,6 +1097,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_About_Cidy.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_About_Cidy.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -962,6 +1146,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_RPTC.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_RPTC.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -1003,6 +1195,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_PDF.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_PDF.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -1044,6 +1244,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_General.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_General.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_General.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -1085,6 +1293,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -1126,6 +1342,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_Project_Evaluation_Evidence.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Project_Evaluation_Evidence.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Project_Evaluation_Evidence.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -1167,6 +1391,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_About_Cidy.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_About_Cidy.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -1208,6 +1440,14 @@
                                             "routerStatus":  "missing_yaml",
                                             "finalTopic":  "Formulate_Response_PDF.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_PDF.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -1249,6 +1489,14 @@
                                             "routerStatus":  "not_wired",
                                             "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_Programme_Development.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "Topic_not_developed",
@@ -1290,9 +1538,16 @@
                                             "routerStatus":  "topic_not_found",
                                             "finalTopic":  ""
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                          "failures":  [
                                           {
-                                              "type":  "topic_not_found",
+                                              "type":  "topic_not_found_=_evaluation_design",
                                               "point":  "Intent Router",
                                               "message":  "No domain route found for unclear / UNCLEAR."
                                           }
@@ -1327,9 +1582,16 @@
                                             "routerStatus":  "topic_not_found",
                                             "finalTopic":  ""
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
                          "failures":  [
                                           {
-                                              "type":  "topic_not_found",
+                                              "type":  "topic_not_found_=_monitoring_reporting",
                                               "point":  "Intent Router",
                                               "message":  "No domain route found for unclear / UNCLEAR."
                                           }
@@ -1364,6 +1626,14 @@
                                             "routerStatus":  "wired",
                                             "finalTopic":  "Formulate_Response_DA.yaml"
                                         },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
