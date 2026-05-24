@@ -239,6 +239,10 @@
       justify-content: stretch;
       justify-items: stretch;
       align-items: stretch;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      min-width: 0;
     }
 
     .case-card.pass { border-left-color: var(--green); }
@@ -250,17 +254,26 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
+      min-width: 0;
+    }
+
+    .case-head > div {
+      min-width: 0;
     }
 
     .case-title {
       font-weight: 900;
       color: #17202a;
       line-height: 1.25;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .case-question {
       color: #293745;
       line-height: 1.35;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .route-path {
@@ -272,13 +285,20 @@
       font-family: Consolas, "Courier New", monospace;
       font-size: 10px;
       line-height: 1.3;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      white-space: normal;
       overflow-wrap: anywhere;
+      word-break: break-word;
+      overflow: visible;
     }
 
     .chips {
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
+      min-width: 0;
     }
 
     .chip {
@@ -292,6 +312,10 @@
       background: #eef3f7;
       color: #24364a;
       border: 1px solid #d8e1ea;
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .chip.pass {
