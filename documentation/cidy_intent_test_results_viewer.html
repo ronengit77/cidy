@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cidy Intent Test Results</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6673;
+      --page: #f5f7fa;
+      --panel: #ffffff;
+      --line: #dce4ec;
+      --blue: #2454a6;
+      --cyan: #087b8f;
+      --green: #2f7d4c;
+      --amber: #a86d00;
+      --red: #b23b3b;
+      --shadow: 0 14px 32px rgba(23, 32, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(9, 35, 63, 0.84), rgba(9, 35, 63, 0.68)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='720' viewBox='0 0 1600 720'%3E%3Crect width='1600' height='720' fill='%230f3559'/%3E%3Cg fill='none' stroke='%239bd5dd' stroke-opacity='.34' stroke-width='2'%3E%3Cpath d='M170 142h270v86H170zM560 112h280v86H560zM970 150h300v86H970zM244 420h300v100H244zM696 382h310v106H696zM1132 438h286v104h-286z'/%3E%3Cpath d='M440 185h120M840 155h130M544 420l152-226M1006 434l126-198M1006 434h126'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.74' font-family='Segoe UI, Arial' font-size='28'%3E%3Ctext x='231' y='197'>Question</text%3E%3Ctext x='620' y='167'>Intent</text%3E%3Ctext x='1044' y='203'>Route</text%3E%3Ctext x='320' y='480'>YAML</text%3E%3Ctext x='754' y='446'>Result</text%3E%3Ctext x='1198' y='500'>Fix</text%3E%3C/g%3E%3C/svg%3E") center/cover;
+      color: #fff;
+    }
+
+    .wrap {
+      width: min(1240px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 42px 0 34px;
+    }
+
+    .top-link {
+      color: #d5eef5;
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 16px;
+    }
+
+    .top-link:hover { text-decoration: underline; }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 900px;
+      color: #e8f3f6;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p { margin: 0; }
+
+    code {
+      background: #eef3f7;
+      color: #24364a;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    .toolbar,
+    .metrics,
+    .layout,
+    .detail-grid,
+    .kv-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .toolbar {
+      grid-template-columns: 1fr auto auto auto auto;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 28px;
+    }
+
+    .layout {
+      grid-template-columns: .9fr 1.1fr;
+      align-items: start;
+      margin-top: 28px;
+    }
+
+    .metric,
+    .panel,
+    .case-card,
+    .trace-step,
+    .failure-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 116px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+      margin-bottom: 9px;
+    }
+
+    .metric span,
+    .muted {
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #cbd5df;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    button,
+    .button-like {
+      border: 0;
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 8px 12px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button.secondary,
+    .button-like.secondary {
+      background: #eef3f7;
+      color: #24364a;
+      border: 1px solid #cbd5df;
+    }
+
+    button.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .hidden { display: none; }
+
+    .case-list {
+      display: grid;
+      gap: 10px;
+      max-height: 880px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .case-card {
+      width: 100%;
+      padding: 14px;
+      text-align: left;
+      color: var(--ink);
+      background: #fff;
+      border-left: 6px solid #cbd5df;
+      display: grid;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .case-card.pass { border-left-color: var(--green); }
+    .case-card.fail { border-left-color: var(--red); }
+    .case-card.selected { outline: 3px solid rgba(36, 84, 166, .18); }
+
+    .case-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .case-title {
+      font-weight: 900;
+      color: #17202a;
+    }
+
+    .case-question {
+      color: #293745;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #eef3f7;
+      color: #24364a;
+      border: 1px solid #d8e1ea;
+    }
+
+    .chip.pass {
+      background: #e9f5ee;
+      color: #245d39;
+      border-color: #c6e4d1;
+    }
+
+    .chip.fail {
+      background: #faecec;
+      color: #8d2b2b;
+      border-color: #efcaca;
+    }
+
+    .chip.warn {
+      background: #fff5df;
+      color: #7c5000;
+      border-color: #ead7a9;
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .detail-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+    }
+
+    .detail-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .kv-grid {
+      grid-template-columns: 150px 1fr;
+      gap: 8px 12px;
+      align-items: start;
+    }
+
+    .key {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .value {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .trace-step {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      border-left: 5px solid var(--cyan);
+    }
+
+    .trace-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .trace-topic {
+      font-weight: 900;
+    }
+
+    .trace-decision {
+      color: var(--muted);
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #eef3f7;
+      color: #24364a;
+      padding: 10px;
+      border-radius: 7px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+    }
+
+    .failure-card {
+      padding: 14px;
+      border-left: 5px solid var(--red);
+      box-shadow: none;
+    }
+
+    .failure-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #8d2b2b;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid #ead7a9;
+      border-radius: 8px;
+      background: #fff8e8;
+      color: #684500;
+    }
+
+    @media (max-width: 960px) {
+      .toolbar,
+      .metrics,
+      .layout,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-list {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <a class="top-link" href="cidy_knowledge_control_center.html">Back to control center</a>
+      <a class="top-link" href="cidy_topic_flow.html">Topic architecture</a>
+      <h1>Cidy Intent Test Results</h1>
+      <p>Review every intent test case, compare the expected behavior with the simulated route, and inspect exactly where failed cases need YAML or topic work.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="toolbar" aria-label="Test result tools">
+      <input id="searchBox" type="search" placeholder="Search ID, scenario, question, YAML, failure type">
+      <button type="button" class="secondary active" data-status="all">All</button>
+      <button type="button" class="secondary" data-status="fail">Fails</button>
+      <button type="button" class="secondary" data-status="pass">Successes</button>
+      <select id="failureFilter" aria-label="Filter by failure type">
+        <option value="all">All failure types</option>
+      </select>
+      <label class="button-like secondary" for="importFile">Import Results JSON</label>
+      <input class="hidden" id="importFile" type="file" accept="application/json,.json">
+    </section>
+
+    <section id="loadNotice" class="notice hidden"></section>
+
+    <section class="metrics" id="metrics" aria-label="Test summary"></section>
+
+    <section class="layout" aria-label="Test case browser">
+      <div class="panel">
+        <h2>Test Cases</h2>
+        <div class="case-list" id="caseList"></div>
+      </div>
+
+      <div class="panel" id="detailPanel">
+        <h2>Selected Test</h2>
+        <p class="muted">Select a test case to inspect the route and decision trail.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      summary: {},
+      results: [],
+      selectedId: null,
+      statusFilter: "all",
+      failureFilter: "all",
+      query: ""
+    };
+
+    const els = {
+      metrics: document.getElementById("metrics"),
+      caseList: document.getElementById("caseList"),
+      detailPanel: document.getElementById("detailPanel"),
+      searchBox: document.getElementById("searchBox"),
+      failureFilter: document.getElementById("failureFilter"),
+      importFile: document.getElementById("importFile"),
+      loadNotice: document.getElementById("loadNotice")
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatValue(value) {
+      if (Array.isArray(value)) {
+        return value.length ? value.map(escapeHtml).join(", ") : "<span class=\"muted\">None</span>";
+      }
+      if (value && typeof value === "object") {
+        return `<pre>${escapeHtml(JSON.stringify(value, null, 2))}</pre>`;
+      }
+      return value === "" || value == null ? "<span class=\"muted\">Not specified</span>" : escapeHtml(value);
+    }
+
+    function normalize(data) {
+      const results = Array.isArray(data?.results) ? data.results : [];
+      state.summary = data?.summary || {
+        total: results.length,
+        passed: results.filter(item => item.status === "pass").length,
+        failed: results.filter(item => item.status === "fail").length
+      };
+      state.results = results;
+      state.selectedId = results.find(item => item.status === "fail")?.id || results[0]?.id || null;
+      populateFailureFilter();
+      render();
+    }
+
+    function populateFailureFilter() {
+      const current = state.failureFilter;
+      const types = [...new Set(state.results.flatMap(item => (item.failures || []).map(failure => failure.type)).filter(Boolean))].sort();
+      els.failureFilter.innerHTML = `<option value="all">All failure types</option>${types.map(type => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`).join("")}`;
+      state.failureFilter = types.includes(current) ? current : "all";
+      els.failureFilter.value = state.failureFilter;
+    }
+
+    function render() {
+      renderMetrics();
+      renderList();
+      renderDetail();
+    }
+
+    function renderMetrics() {
+      const total = state.summary.total ?? state.results.length;
+      const passed = state.summary.passed ?? state.results.filter(item => item.status === "pass").length;
+      const failed = state.summary.failed ?? state.results.filter(item => item.status === "fail").length;
+      const failureTypes = new Set(state.results.flatMap(item => (item.failures || []).map(failure => failure.type)).filter(Boolean)).size;
+      const generated = state.summary.generatedAt ? new Date(state.summary.generatedAt).toLocaleString() : "Not loaded";
+
+      els.metrics.innerHTML = [
+        metric("Total", total, "Test cases in current result file"),
+        metric("Passed", passed, "Cases with no structural route failures"),
+        metric("Failed", failed, "Cases that need YAML, mapping, or topic work"),
+        metric("Failure Types", failureTypes, `Generated ${escapeHtml(generated)}`)
+      ].join("");
+    }
+
+    function metric(label, value, detail) {
+      return `<article class="metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span><p class="muted">${detail}</p></article>`;
+    }
+
+    function getFilteredResults() {
+      const query = state.query.trim().toLowerCase();
+      return state.results.filter(item => {
+        const failures = item.failures || [];
+        const route = item.finalRoute || {};
+        const classification = item.finalClassification || {};
+        const haystack = [
+          item.id,
+          item.scenario,
+          item.question,
+          item.expectedBehavior,
+          item.clarification,
+          item.status,
+          route.yamlFile,
+          route.finalTopic,
+          route.routingTarget,
+          route.routerStatus,
+          classification.knowledgeDomain,
+          classification.fundingStream,
+          ...(classification.topicAreas || []),
+          ...failures.flatMap(failure => [failure.type, failure.point, failure.message])
+        ].join(" ").toLowerCase();
+
+        const statusOk = state.statusFilter === "all" || item.status === state.statusFilter;
+        const failureOk = state.failureFilter === "all" || failures.some(failure => failure.type === state.failureFilter);
+        const queryOk = !query || haystack.includes(query);
+        return statusOk && failureOk && queryOk;
+      });
+    }
+
+    function renderList() {
+      const results = getFilteredResults();
+      if (!results.length) {
+        els.caseList.innerHTML = `<p class="muted">No test cases match the current filters.</p>`;
+        return;
+      }
+
+      if (!results.some(item => item.id === state.selectedId)) {
+        state.selectedId = results[0].id;
+      }
+
+      els.caseList.innerHTML = results.map(item => {
+        const route = item.finalRoute || {};
+        const classification = item.finalClassification || {};
+        const firstFailure = (item.failures || [])[0];
+        return `
+          <button type="button" class="case-card ${escapeHtml(item.status)} ${item.id === state.selectedId ? "selected" : ""}" data-id="${escapeHtml(item.id)}">
+            <div class="case-head">
+              <div>
+                <div class="case-title">${escapeHtml(item.id)} - ${escapeHtml(item.scenario)}</div>
+                <div class="case-question">${escapeHtml(item.question)}</div>
+              </div>
+              <span class="chip ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span>
+            </div>
+            <div class="chips">
+              ${chip(classification.knowledgeDomain || "domain unknown")}
+              ${chip(classification.fundingStream || "fund unknown")}
+              ${chip(route.yamlFile || route.finalTopic || "topic unknown")}
+              ${firstFailure ? chip(firstFailure.type, "fail") : chip("route supported", "pass")}
+            </div>
+          </button>
+        `;
+      }).join("");
+
+      els.caseList.querySelectorAll(".case-card").forEach(card => {
+        card.addEventListener("click", () => {
+          state.selectedId = card.dataset.id;
+          render();
+        });
+      });
+    }
+
+    function chip(text, type = "") {
+      return `<span class="chip ${escapeHtml(type)}">${escapeHtml(text)}</span>`;
+    }
+
+    function renderDetail() {
+      const selected = state.results.find(item => item.id === state.selectedId);
+      if (!selected) {
+        els.detailPanel.innerHTML = `<h2>Selected Test</h2><p class="muted">No result is selected.</p>`;
+        return;
+      }
+
+      const classification = selected.finalClassification || {};
+      const route = selected.finalRoute || {};
+      const failures = selected.failures || [];
+      const trace = selected.routeTrace || [];
+
+      els.detailPanel.innerHTML = `
+        <div class="case-head">
+          <div>
+            <h2>${escapeHtml(selected.id)} - ${escapeHtml(selected.scenario)}</h2>
+            <p class="muted">${escapeHtml(selected.question)}</p>
+          </div>
+          <span class="chip ${escapeHtml(selected.status)}">${escapeHtml(selected.status)}</span>
+        </div>
+
+        <div class="detail-grid" style="margin-top: 16px;">
+          ${detailCard("Expected Behavior", selected.expectedBehavior, true)}
+          ${detailCard("Clarification Input", selected.clarification || "No clarification", false)}
+          ${detailCard("Final Classification", "", false, [
+            ["Knowledge domain", classification.knowledgeDomain],
+            ["Funding stream", classification.fundingStream],
+            ["Topic area(s)", classification.topicAreas || []]
+          ])}
+          ${detailCard("Final Route", "", false, [
+            ["Routing target", route.routingTarget],
+            ["Router dialog", route.routerDialog],
+            ["Router status", route.routerStatus],
+            ["YAML file", route.yamlFile],
+            ["Final topic", route.finalTopic]
+          ])}
+        </div>
+
+        <section style="margin-top: 18px;">
+          <h3>Failure Analysis</h3>
+          <div class="stack">
+            ${failures.length ? failures.map(renderFailure).join("") : `<div class="detail-card"><strong>No failures detected.</strong><p class="muted">The expected route is structurally supported by the current YAML inventory.</p></div>`}
+          </div>
+        </section>
+
+        <section style="margin-top: 18px;">
+          <h3>Route Trace</h3>
+          <div class="stack">
+            ${trace.length ? trace.map((step, index) => renderTraceStep(step, index)).join("") : `<p class="muted">No route trace was provided for this result.</p>`}
+          </div>
+        </section>
+      `;
+    }
+
+    function detailCard(title, body, full = false, rows = null) {
+      const content = rows
+        ? `<div class="kv-grid">${rows.map(([key, value]) => `<div class="key">${escapeHtml(key)}</div><div class="value">${formatValue(value)}</div>`).join("")}</div>`
+        : `<p>${formatValue(body)}</p>`;
+      return `<article class="detail-card ${full ? "full" : ""}"><h3>${escapeHtml(title)}</h3>${content}</article>`;
+    }
+
+    function renderFailure(failure) {
+      return `
+        <article class="failure-card">
+          <strong>${escapeHtml(failure.type || "failure")}</strong>
+          <div class="kv-grid">
+            <div class="key">Point</div>
+            <div class="value">${formatValue(failure.point)}</div>
+            <div class="key">Message</div>
+            <div class="value">${formatValue(failure.message)}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderTraceStep(step, index) {
+      return `
+        <article class="trace-step">
+          <div class="trace-top">
+            <div>
+              <div class="trace-topic">${index + 1}. ${escapeHtml(step.topic || "Unknown topic")}</div>
+              <div class="trace-decision">${escapeHtml(step.decision || "No decision recorded")}</div>
+            </div>
+          </div>
+          <div>${formatValue(step.output)}</div>
+        </article>
+      `;
+    }
+
+    function setNotice(message) {
+      els.loadNotice.textContent = message;
+      els.loadNotice.classList.toggle("hidden", !message);
+    }
+
+    async function loadResults() {
+      try {
+        const response = await fetch("cidy_intent_test_results.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        normalize(data);
+      } catch (error) {
+        setNotice("Could not load cidy_intent_test_results.json automatically. If you opened this from a local file, import the JSON manually with the button above. On GitHub Pages it should load directly.");
+        normalize({ summary: {}, results: [] });
+      }
+    }
+
+    document.querySelectorAll("[data-status]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.statusFilter = button.dataset.status;
+        document.querySelectorAll("[data-status]").forEach(item => item.classList.toggle("active", item === button));
+        render();
+      });
+    });
+
+    els.searchBox.addEventListener("input", event => {
+      state.query = event.target.value;
+      render();
+    });
+
+    els.failureFilter.addEventListener("change", event => {
+      state.failureFilter = event.target.value;
+      render();
+    });
+
+    els.importFile.addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          normalize(JSON.parse(reader.result));
+          setNotice("");
+        } catch (error) {
+          setNotice("The selected file could not be parsed as a Cidy intent test results JSON file.");
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = "";
+    });
+
+    loadResults();
+  </script>
+</body>
+</html>

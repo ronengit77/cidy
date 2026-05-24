@@ -51,4 +51,6 @@ The runner reads `documentation/Cidy_Intent_Test_Cases_60.json` and writes:
 - `documentation/cidy_intent_test_results.json` for every test case and route trace,
 - `documentation/cidy_intent_test_failures.json` for failed cases only.
 
+Open `cidy_intent_test_results_viewer.html` from the control center to review the results in a human-readable browser view with filters, failure details, expected behavior, final classification, final route, and the topic-by-topic trace.
+
 The runner does not execute Copilot Studio's AI classifier. It simulates the expected route from the test-case expectation text and validates whether the current YAML inventory can support that route.
