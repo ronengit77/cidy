@@ -428,6 +428,29 @@
       display: block;
     }
 
+    #detailPanel .detail-card .kv-grid {
+      grid-template-columns: 1fr;
+      gap: 3px;
+    }
+
+    #detailPanel .detail-card .key {
+      margin-top: 8px;
+    }
+
+    #detailPanel .detail-card .key:first-child {
+      margin-top: 0;
+    }
+
+    #detailPanel .detail-card .value {
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e6edf3;
+    }
+
+    #detailPanel .detail-card .value:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
     @media (max-width: 960px) {
       .toolbar,
       .metrics,
