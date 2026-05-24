@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vague Path</title>
+  <style>
+    :root{--ink:#17202a;--muted:#5b6673;--page:#f5f7fa;--panel:#fff;--blue:#2454a6;--cyan:#087b8f;--violet:#6550a6;--green:#2f7d4c;--shadow:0 14px 32px rgba(23,32,42,.08)}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;line-height:1.5}header{background:#0f3559;color:#fff}.wrap{width:min(1160px,calc(100% - 36px));margin:0 auto}.hero{padding:34px 0 30px}a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration:underline}.back{color:#d5eef5}h1{margin:14px 0 10px;font-size:clamp(34px,5vw,58px);line-height:1.04}h2{margin:0 0 14px;font-size:24px}h3{margin:0 0 8px;font-size:17px}p{margin:0}main{padding:28px 0 48px}section{margin-top:26px}.summary,.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.step,.decision{background:var(--panel);border:1px solid #dde4ec;border-radius:8px;padding:16px;box-shadow:var(--shadow)}.card strong{display:block;margin-bottom:6px}.muted{color:var(--muted)}code{background:#eef3f7;color:#24364a;padding:2px 5px;border-radius:5px;font-family:Consolas,"Courier New",monospace}.diagram{display:grid;grid-template-columns:repeat(6,minmax(155px,1fr));gap:10px;overflow-x:auto;padding-bottom:4px}.step{min-width:155px;border-left:6px solid var(--blue);position:relative}.step.intent{border-left-color:var(--cyan)}.step.domain{border-left-color:var(--violet)}.step.answer{border-left-color:var(--green)}.step:not(:last-child)::after{content:"->";position:absolute;right:-18px;top:42%;color:var(--muted);font-weight:800}.label{display:inline-block;margin-bottom:8px;padding:3px 9px;border-radius:999px;background:var(--violet);color:#fff;font-size:12px;font-weight:800}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #dde4ec;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #edf1f5;font-size:14px}th{background:#eef3f7;text-transform:uppercase;font-size:12px}tr:last-child td{border-bottom:0}@media(max-width:900px){.summary,.decision-grid{grid-template-columns:1fr}.diagram{grid-template-columns:1fr}.step:not(:last-child)::after{display:none}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Vague Path</h1><p>Test question: "I need help with a project. Where do I start?"</p></div></header>
+  <main class="wrap">
+    <section class="summary">
+      <div class="card"><strong>Expected classification</strong><p><code>requiresClarification=Yes</code><br><code>clarificationType=domain</code></p></div>
+      <div class="card"><strong>Important behavior</strong><p>Do not force DA/RPTC/PDF as the first clarification.</p></div>
+      <div class="card"><strong>Possible follow-up</strong><p>Only after domain clarification should DA be selected if the user chooses it.</p></div>
+    </section>
+    <section>
+      <h2>Topic Flow Diagram</h2>
+      <div class="diagram">
+        <div class="step"><h3>1. Inquiry</h3><p><code>user_inquiry.yaml</code></p><p class="muted">Captures vague project question.</p></div>
+        <div class="step intent"><h3>2. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">Recognizes plausible Cidy scope but unclear domain.</p></div>
+        <div class="step domain"><h3>3. Domain Prompt</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Asks which area Cidy should use.</p></div>
+        <div class="step domain"><h3>4. User Choice</h3><p><code>Topic.domainChoice</code></p><p class="muted">Domain selection sets route variables.</p></div>
+        <div class="step intent"><h3>5. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">Routes by selected domain.</p></div>
+        <div class="step answer"><h3>6. Next Topic</h3><p>DA, RPTC, PDF, General, or not-developed</p><p class="muted">Depends on domain choice.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Topic Outputs And Decisions</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>Output</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cidy_Intent.yaml</code></td><td>Should set <code>clarificationType=domain</code> and avoid fund-specific assumptions.</td><td>Begin clarifier.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>Shows closed-list area choices: About Cidy, Programme Development, evaluations, DA, RPTC, PDF, Not sure.</td><td>User choice sets domain variables.</td></tr>
+          <tr><td>If DA is chosen</td><td><code>knowledgeDomain=da</code>, <code>fundingStream=DA</code>.</td><td>Route to DA response topic.</td></tr>
+          <tr><td>If Not sure is chosen</td><td><code>knowledgeDomain=general_cd</code>, <code>topicArea=general</code>.</td><td>Current router shows general CD not developed.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="decision-grid">
+      <div class="decision"><span class="label">Pass condition</span><p>The first clarification is domain-oriented.</p></div>
+      <div class="decision"><span class="label">Failure signal</span><p>The bot immediately asks DA/RPTC/PDF before domain clarification.</p></div>
+      <div class="decision"><span class="label">Next decision</span><p>User's domain choice determines whether the flow can answer or shows a not-developed message.</p></div>
+    </section>
+  </main>
+</body>
+</html>

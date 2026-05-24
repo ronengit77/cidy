@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Path Developed Topic</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5b6673; --page:#f5f7fa; --panel:#fff; --line:#c9d3df; --blue:#2454a6; --cyan:#087b8f; --green:#2f7d4c; --amber:#a86d00; --shadow:0 14px 32px rgba(23,32,42,.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:"Segoe UI",Arial,sans-serif; line-height:1.5; }
+    header { background:#0f3559; color:#fff; }
+    .wrap { width:min(1160px, calc(100% - 36px)); margin:0 auto; }
+    .hero { padding:34px 0 30px; }
+    a { color:var(--blue); font-weight:700; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .back { color:#d5eef5; }
+    h1 { margin:14px 0 10px; font-size:clamp(34px,5vw,58px); line-height:1.04; letter-spacing:0; }
+    h2 { margin:0 0 14px; font-size:24px; }
+    h3 { margin:0 0 8px; font-size:17px; }
+    p { margin:0; }
+    main { padding:28px 0 48px; }
+    section { margin-top:26px; }
+    .summary { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+    .card, .step, .decision { background:var(--panel); border:1px solid #dde4ec; border-radius:8px; padding:16px; box-shadow:var(--shadow); }
+    .card strong { display:block; margin-bottom:6px; }
+    .muted { color:var(--muted); }
+    code { background:#eef3f7; color:#24364a; padding:2px 5px; border-radius:5px; font-family:Consolas,"Courier New",monospace; }
+    .diagram { display:grid; grid-template-columns:repeat(6,minmax(150px,1fr)); gap:10px; align-items:stretch; overflow-x:auto; padding-bottom:4px; }
+    .step { min-width:150px; border-left:6px solid var(--blue); position:relative; }
+    .step.intent { border-left-color:var(--cyan); }
+    .step.answer { border-left-color:var(--green); }
+    .step.feedback { border-left-color:var(--amber); }
+    .step:not(:last-child)::after { content:"->"; position:absolute; right:-18px; top:42%; color:var(--muted); font-weight:800; }
+    .decision-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .label { display:inline-block; margin-bottom:8px; padding:3px 9px; border-radius:999px; background:var(--green); color:#fff; font-size:12px; font-weight:800; }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #dde4ec; border-radius:8px; overflow:hidden; box-shadow:var(--shadow); }
+    th, td { text-align:left; vertical-align:top; padding:12px 14px; border-bottom:1px solid #edf1f5; font-size:14px; }
+    th { background:#eef3f7; text-transform:uppercase; font-size:12px; }
+    tr:last-child td { border-bottom:0; }
+    @media (max-width:900px){ .summary,.decision-grid{ grid-template-columns:1fr; } .diagram{ grid-template-columns:1fr; } .step:not(:last-child)::after{ display:none; } }
+  </style>
+</head>
+<body>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Happy Path -> Developed Topic</h1><p>Test question: "What is required in a DA concept note?"</p></div></header>
+  <main class="wrap">
+    <section class="summary">
+      <div class="card"><strong>Expected classification</strong><p><code>knowledgeDomain=da</code><br><code>fundingStream=DA</code><br><code>topicArea=project_planning_design</code></p></div>
+      <div class="card"><strong>Clarification</strong><p class="muted">None. The question includes a strong DA signal and a concept-note artifact.</p></div>
+      <div class="card"><strong>Target route</strong><p><code>Formulate_Response_DA.yaml</code></p></div>
+    </section>
+
+    <section>
+      <h2>Topic Flow Diagram</h2>
+      <div class="diagram">
+        <div class="step"><h3>1. Start</h3><p><code>conversation_start.yaml</code></p><p class="muted">Sends welcome and begins inquiry.</p></div>
+        <div class="step"><h3>2. Inquiry</h3><p><code>user_inquiry.yaml</code></p><p class="muted">Stores the user question in <code>Global.userQuestion</code>.</p></div>
+        <div class="step intent"><h3>3. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">Classifies DA concept note as ready to route.</p></div>
+        <div class="step intent"><h3>4. Clarifier</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Bypasses because <code>requiresClarification=No</code>.</p></div>
+        <div class="step intent"><h3>5. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">Matches DA route.</p></div>
+        <div class="step answer"><h3>6. Answer</h3><p><code>Formulate_Response_DA.yaml</code></p><p class="muted">Uses project planning/design DA knowledge sources.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Topic Outputs And Decisions</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>Output</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cidy_Intent.yaml</code></td><td>Sets intent variables and <code>Global.intentStatus=ready_to_route</code>.</td><td>Proceed to clarifier for bypass check.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>No question shown to user.</td><td>Begin <code>Intent-Router</code>.</td></tr>
+          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=Formulate Response DA</code>.</td><td>Begin DA response topic.</td></tr>
+          <tr><td><code>Formulate_Response_DA.yaml</code></td><td>Writes <code>Global.draftResponse</code> with answer, sources, confidence.</td><td>Begin <code>AssessConfidence</code>.</td></tr>
+          <tr><td><code>assess_confidence.yaml</code></td><td>Sets formatted answer, sources, score, label.</td><td>High confidence -> share response. Medium/low -> warning first.</td></tr>
+          <tr><td><code>share_response.yaml</code></td><td>Displays answer and confidence to the user.</td><td>Begin feedback topic.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="decision-grid">
+      <div class="decision"><span class="label">Pass condition</span><p>Direct route to DA with no clarification prompt.</p></div>
+      <div class="decision"><span class="label">Watch item</span><p>The DA topic should use <code>project_planning_design</code>, not generic DA fallback.</p></div>
+      <div class="decision"><span class="label">Next step</span><p>Confidence path determines whether the user sees a warning before the answer.</p></div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Out Of Scope Path</title>
+  <style>
+    :root{--ink:#17202a;--muted:#5b6673;--page:#f5f7fa;--panel:#fff;--blue:#2454a6;--cyan:#087b8f;--red:#b23b3b;--amber:#a86d00;--shadow:0 14px 32px rgba(23,32,42,.08)}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;line-height:1.5}header{background:#0f3559;color:#fff}.wrap{width:min(1160px,calc(100% - 36px));margin:0 auto}.hero{padding:34px 0 30px}a{color:var(--blue);font-weight:700;text-decoration:none}a:hover{text-decoration:underline}.back{color:#d5eef5}h1{margin:14px 0 10px;font-size:clamp(34px,5vw,58px);line-height:1.04}h2{margin:0 0 14px;font-size:24px}h3{margin:0 0 8px;font-size:17px}p{margin:0}main{padding:28px 0 48px}section{margin-top:26px}.summary,.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.step,.decision{background:var(--panel);border:1px solid #dde4ec;border-radius:8px;padding:16px;box-shadow:var(--shadow)}.card strong{display:block;margin-bottom:6px}.muted{color:var(--muted)}code{background:#eef3f7;color:#24364a;padding:2px 5px;border-radius:5px;font-family:Consolas,"Courier New",monospace}.diagram{display:grid;grid-template-columns:repeat(6,minmax(155px,1fr));gap:10px;overflow-x:auto;padding-bottom:4px}.step{min-width:155px;border-left:6px solid var(--blue);position:relative}.step.intent{border-left-color:var(--cyan)}.step.scope{border-left-color:var(--red)}.step.feedback{border-left-color:var(--amber)}.step:not(:last-child)::after{content:"->";position:absolute;right:-18px;top:42%;color:var(--muted);font-weight:800}.label{display:inline-block;margin-bottom:8px;padding:3px 9px;border-radius:999px;background:var(--red);color:#fff;font-size:12px;font-weight:800}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #dde4ec;border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #edf1f5;font-size:14px}th{background:#eef3f7;text-transform:uppercase;font-size:12px}tr:last-child td{border-bottom:0}@media(max-width:900px){.summary,.decision-grid{grid-template-columns:1fr}.diagram{grid-template-columns:1fr}.step:not(:last-child)::after{display:none}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Out Of Scope</h1><p>Test question: "What is the weather in New York today?"</p></div></header>
+  <main class="wrap">
+    <section class="summary">
+      <div class="card"><strong>Expected classification</strong><p><code>knowledgeDomain=out_of_scope</code><br><code>intentStatus=out_of_scope</code></p></div>
+      <div class="card"><strong>Clarification</strong><p>None. The bot should not ask follow-up questions.</p></div>
+      <div class="card"><strong>Target route</strong><p>Scope message -> <code>UserFeedback2</code> -> optional escalation.</p></div>
+    </section>
+    <section>
+      <h2>Topic Flow Diagram</h2>
+      <div class="diagram">
+        <div class="step"><h3>1. Inquiry</h3><p><code>user_inquiry.yaml</code></p><p class="muted">Captures weather question.</p></div>
+        <div class="step intent"><h3>2. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">Detects out-of-scope domain.</p></div>
+        <div class="step intent"><h3>3. Clarifier</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Bypasses because status is terminal.</p></div>
+        <div class="step scope"><h3>4. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">Shows configured scope message.</p></div>
+        <div class="step feedback"><h3>5. Feedback</h3><p><code>user_feedback.yaml</code></p><p class="muted">Asks whether answer helped and next action.</p></div>
+        <div class="step feedback"><h3>6. Escalate</h3><p><code>escalate.yaml</code></p><p class="muted">Only if user requests human follow-up.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Topic Outputs And Decisions</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>Output</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cidy_Intent.yaml</code></td><td>Sets <code>intentStatus=out_of_scope</code> and <code>requiresClarification=No</code>.</td><td>Proceed to router through clarifier bypass.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>No clarification prompt.</td><td>Begin router.</td></tr>
+          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=User Feedback</code>, <code>Global.draftResponse</code>, <code>Global.warningMessage</code>, and <code>Global.issueSummary</code>.</td><td>Begin feedback topic.</td></tr>
+          <tr><td><code>user_feedback.yaml</code></td><td>Collects feedback and next action.</td><td>Ask another question, escalate, or close.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="decision-grid">
+      <div class="decision"><span class="label">Pass condition</span><p>No clarification is asked for weather.</p></div>
+      <div class="decision"><span class="label">Expected message</span><p>Cidy explains its DESA capacity-development scope.</p></div>
+      <div class="decision"><span class="label">Next decision</span><p>User decides whether to escalate or ask a new question.</p></div>
+    </section>
+  </main>
+</body>
+</html>

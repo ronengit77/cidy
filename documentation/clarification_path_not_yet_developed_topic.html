@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clarification Path Not Yet Developed Topic</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5b6673; --page:#f5f7fa; --panel:#fff; --blue:#2454a6; --cyan:#087b8f; --green:#2f7d4c; --amber:#a86d00; --red:#b23b3b; --shadow:0 14px 32px rgba(23,32,42,.08); }
+    *{box-sizing:border-box;} body{margin:0;background:var(--page);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;line-height:1.5;} header{background:#0f3559;color:#fff;} .wrap{width:min(1160px,calc(100% - 36px));margin:0 auto;} .hero{padding:34px 0 30px;} a{color:var(--blue);font-weight:700;text-decoration:none;} a:hover{text-decoration:underline;} .back{color:#d5eef5;} h1{margin:14px 0 10px;font-size:clamp(34px,5vw,58px);line-height:1.04;} h2{margin:0 0 14px;font-size:24px;} h3{margin:0 0 8px;font-size:17px;} p{margin:0;} main{padding:28px 0 48px;} section{margin-top:26px;}
+    .summary,.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;} .card,.step,.decision{background:var(--panel);border:1px solid #dde4ec;border-radius:8px;padding:16px;box-shadow:var(--shadow);} .card strong{display:block;margin-bottom:6px;} .muted{color:var(--muted);} code{background:#eef3f7;color:#24364a;padding:2px 5px;border-radius:5px;font-family:Consolas,"Courier New",monospace;}
+    .diagram{display:grid;grid-template-columns:repeat(7,minmax(148px,1fr));gap:10px;overflow-x:auto;padding-bottom:4px;} .step{min-width:148px;border-left:6px solid var(--blue);position:relative;} .step.intent{border-left-color:var(--cyan);} .step.answer{border-left-color:var(--green);} .step.warn{border-left-color:var(--amber);} .step.feedback{border-left-color:var(--red);} .step:not(:last-child)::after{content:"->";position:absolute;right:-18px;top:42%;color:var(--muted);font-weight:800;}
+    .label{display:inline-block;margin-bottom:8px;padding:3px 9px;border-radius:999px;background:var(--amber);color:#fff;font-size:12px;font-weight:800;} table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #dde4ec;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);} th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #edf1f5;font-size:14px;} th{background:#eef3f7;text-transform:uppercase;font-size:12px;} tr:last-child td{border-bottom:0;} @media(max-width:900px){.summary,.decision-grid{grid-template-columns:1fr}.diagram{grid-template-columns:1fr}.step:not(:last-child)::after{display:none}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Clarification Path -> Not-Yet-Developed Topic</h1><p>Test question: "What are the reporting requirements?" Clarification: choose RPTC.</p></div></header>
+  <main class="wrap">
+    <section class="summary">
+      <div class="card"><strong>Initial classification</strong><p>Likely <code>requiresClarification=Yes</code> because the fund is unclear.</p></div>
+      <div class="card"><strong>User clarification</strong><p>Choose <code>RPTC</code>.</p></div>
+      <div class="card"><strong>Expected route</strong><p>RPTC branch, or a temporary not-developed response if topic-area alignment blocks a specific response.</p></div>
+    </section>
+    <section>
+      <h2>Topic Flow Diagram</h2>
+      <div class="diagram">
+        <div class="step"><h3>1. Inquiry</h3><p><code>user_inquiry.yaml</code></p><p class="muted">Captures reporting question.</p></div>
+        <div class="step intent"><h3>2. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">May detect reporting but fund remains unclear.</p></div>
+        <div class="step intent"><h3>3. Clarifier</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Asks fund clarification.</p></div>
+        <div class="step intent"><h3>4. RPTC Choice</h3><p><code>Topic.fundChoice</code></p><p class="muted">Sets <code>knowledgeDomain=rptc</code>.</p></div>
+        <div class="step intent"><h3>5. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">Matches RPTC route.</p></div>
+        <div class="step answer"><h3>6. RPTC Topic</h3><p><code>Formulate_Response_RPTC.yaml</code></p><p class="muted">Uses branch if topic-area value matches.</p></div>
+        <div class="step warn"><h3>7. Fallback</h3><p>Generic or temporary handling</p><p class="muted">If topic-area mismatch occurs.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Topic Outputs And Decisions</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>Output</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cidy_Intent.yaml</code></td><td>Should set <code>clarificationType=fund</code> if no fund signal is present.</td><td>Ask clarification.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>RPTC choice sets <code>Global.knowledgeDomain=rptc</code> and <code>Global.fundingStream=RPTC</code>.</td><td>Ready to route.</td></tr>
+          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=Formulate Response RPTC</code>.</td><td>Begin <code>FormulateResponseCopy</code>.</td></tr>
+          <tr><td><code>Formulate_Response_RPTC.yaml</code></td><td>May use a specific reporting branch or generic RPTC search.</td><td>Begin confidence assessment if answer is generated.</td></tr>
+          <tr><td>Temporary handling</td><td>If this branch is not yet aligned, user may see a not-developed message.</td><td>Feedback/escalation path should remain available.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="decision-grid">
+      <div class="decision"><span class="label">Pass condition</span><p>Fund clarification is asked before RPTC routing.</p></div>
+      <div class="decision"><span class="label">Risk</span><p>Classifier topic-area values and RPTC condition values currently differ.</p></div>
+      <div class="decision"><span class="label">Next step</span><p>Align <code>monitoring_reporting</code> with RPTC reporting branch names.</p></div>
+    </section>
+  </main>
+</body>
+</html>

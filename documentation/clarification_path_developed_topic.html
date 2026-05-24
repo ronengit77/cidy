@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clarification Path Developed Topic</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5b6673; --page:#f5f7fa; --panel:#fff; --line:#c9d3df; --blue:#2454a6; --cyan:#087b8f; --green:#2f7d4c; --amber:#a86d00; --shadow:0 14px 32px rgba(23,32,42,.08); }
+    * { box-sizing:border-box; } body { margin:0; background:var(--page); color:var(--ink); font-family:"Segoe UI",Arial,sans-serif; line-height:1.5; }
+    header { background:#0f3559; color:#fff; } .wrap { width:min(1160px, calc(100% - 36px)); margin:0 auto; } .hero { padding:34px 0 30px; }
+    a { color:var(--blue); font-weight:700; text-decoration:none; } a:hover { text-decoration:underline; } .back { color:#d5eef5; }
+    h1 { margin:14px 0 10px; font-size:clamp(34px,5vw,58px); line-height:1.04; } h2 { margin:0 0 14px; font-size:24px; } h3 { margin:0 0 8px; font-size:17px; } p { margin:0; }
+    main { padding:28px 0 48px; } section { margin-top:26px; } .summary,.decision-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card,.step,.decision { background:var(--panel); border:1px solid #dde4ec; border-radius:8px; padding:16px; box-shadow:var(--shadow); } .card strong { display:block; margin-bottom:6px; }
+    .muted { color:var(--muted); } code { background:#eef3f7; color:#24364a; padding:2px 5px; border-radius:5px; font-family:Consolas,"Courier New",monospace; }
+    .diagram { display:grid; grid-template-columns:repeat(7,minmax(148px,1fr)); gap:10px; overflow-x:auto; padding-bottom:4px; }
+    .step { min-width:148px; border-left:6px solid var(--blue); position:relative; } .step.intent { border-left-color:var(--cyan); } .step.answer { border-left-color:var(--green); } .step.feedback { border-left-color:var(--amber); }
+    .step:not(:last-child)::after { content:"->"; position:absolute; right:-18px; top:42%; color:var(--muted); font-weight:800; }
+    .label { display:inline-block; margin-bottom:8px; padding:3px 9px; border-radius:999px; background:var(--cyan); color:#fff; font-size:12px; font-weight:800; }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #dde4ec; border-radius:8px; overflow:hidden; box-shadow:var(--shadow); } th,td { text-align:left; vertical-align:top; padding:12px 14px; border-bottom:1px solid #edf1f5; font-size:14px; } th { background:#eef3f7; text-transform:uppercase; font-size:12px; } tr:last-child td { border-bottom:0; }
+    @media (max-width:900px){ .summary,.decision-grid{ grid-template-columns:1fr; } .diagram{ grid-template-columns:1fr; } .step:not(:last-child)::after{ display:none; } }
+  </style>
+</head>
+<body>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Clarification Path -> Developed Topic</h1><p>Test question: "How do I write an evaluation report?" Clarification: choose Development Account (DA).</p></div></header>
+  <main class="wrap">
+    <section class="summary">
+      <div class="card"><strong>Initial classification</strong><p><code>fundingStream=UNCLEAR</code><br><code>topicArea=evaluation_design</code><br><code>requiresClarification=Yes</code></p></div>
+      <div class="card"><strong>User clarification</strong><p>Choose <code>Development Account (DA)</code>.</p></div>
+      <div class="card"><strong>Target route</strong><p><code>Formulate_Response_DA.yaml</code> with <code>topicArea=evaluation_design</code>.</p></div>
+    </section>
+
+    <section>
+      <h2>Topic Flow Diagram</h2>
+      <div class="diagram">
+        <div class="step"><h3>1. Inquiry</h3><p><code>user_inquiry.yaml</code></p><p class="muted">Captures the evaluation-report question.</p></div>
+        <div class="step intent"><h3>2. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">Detects evaluation design but no fund.</p></div>
+        <div class="step intent"><h3>3. Clarifier</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Asks "Which funding stream do you mean?"</p></div>
+        <div class="step intent"><h3>4. Apply Choice</h3><p><code>Topic.fundChoice</code></p><p class="muted">DA sets domain and funding stream.</p></div>
+        <div class="step intent"><h3>5. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">DA branch wins.</p></div>
+        <div class="step answer"><h3>6. Answer</h3><p><code>Formulate_Response_DA.yaml</code></p><p class="muted">Uses evaluation knowledge folder.</p></div>
+        <div class="step feedback"><h3>7. Feedback</h3><p><code>user_feedback.yaml</code></p><p class="muted">After confidence/share path.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Topic Outputs And Decisions</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>Output</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cidy_Intent.yaml</code></td><td>Sets <code>requiresClarification=Yes</code>, <code>clarificationType=fund</code>, <code>topicArea=evaluation_design</code>.</td><td>Begin clarifier.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>Prompts for funding stream and records <code>Global.clarificationAnswer</code>.</td><td>DA choice sets <code>knowledgeDomain=da</code> and <code>fundingStream=DA</code>.</td></tr>
+          <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>Sets <code>requiresClarification=No</code>, <code>clarificationType=none</code>, <code>intentStatus=ready_to_route</code>.</td><td>Begin router.</td></tr>
+          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=Formulate Response DA</code>.</td><td>Begin DA response topic.</td></tr>
+          <tr><td><code>Formulate_Response_DA.yaml</code></td><td>Writes an evaluation-design answer into <code>Global.draftResponse</code>.</td><td>Begin confidence assessment.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="decision-grid">
+      <div class="decision"><span class="label">Pass condition</span><p>The bot asks exactly one fund clarification before answering.</p></div>
+      <div class="decision"><span class="label">Expected answer source</span><p>DA evaluation guidance or annotated templates, not generic project planning.</p></div>
+      <div class="decision"><span class="label">Next decision</span><p>Confidence score decides whether <code>warn.yaml</code> appears before sharing.</p></div>
+    </section>
+  </main>
+</body>
+</html>

@@ -326,6 +326,16 @@
       width: 250px;
     }
 
+    .scenario-link {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .scenario-link:hover {
+      text-decoration: underline;
+    }
+
     .footer-note {
       color: var(--muted);
       font-size: 13px;
@@ -538,37 +548,37 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="badge ok">Happy path</span><br>Developed topic</td>
+            <td><a class="scenario-link" href="happy_path_developed_topic.html"><span class="badge ok">Happy path</span><br>Developed topic</a></td>
             <td>What is required in a DA concept note?</td>
             <td>None</td>
             <td>Routes directly to <code>Formulate Response DA</code>. Expected: <code>knowledgeDomain=da</code>, <code>fundingStream=DA</code>, <code>topicArea=project_planning_design</code>, <code>requiresClarification=No</code>.</td>
           </tr>
           <tr>
-            <td><span class="badge intent">Clarification</span><br>Developed topic</td>
+            <td><a class="scenario-link" href="clarification_path_developed_topic.html"><span class="badge intent">Clarification</span><br>Developed topic</a></td>
             <td>How do I write an evaluation report?</td>
             <td>Choose Development Account (DA)</td>
             <td>First asks fund clarification. After DA selection, routes to <code>Formulate Response DA</code> with <code>topicArea=evaluation_design</code>.</td>
           </tr>
           <tr>
-            <td><span class="badge warn">Clarification</span><br>Not-yet-developed topic</td>
+            <td><a class="scenario-link" href="clarification_path_not_yet_developed_topic.html"><span class="badge warn">Clarification</span><br>Not-yet-developed topic</a></td>
             <td>What are the reporting requirements?</td>
             <td>Choose RPTC</td>
             <td>First asks fund clarification. After RPTC selection, routes to the RPTC branch or the temporary "not developed yet" message, depending on current router/response-topic alignment.</td>
           </tr>
           <tr>
-            <td><span class="badge scope">Vague path</span></td>
+            <td><a class="scenario-link" href="vague_path.html"><span class="badge scope">Vague path</span></a></td>
             <td>I need help with a project. Where do I start?</td>
             <td>Choose Development Account (DA) only if asked after domain clarification</td>
             <td>Should ask domain clarification, not force DA/RPTC/PDF immediately. Expected clarification type: <code>domain</code>.</td>
           </tr>
           <tr>
-            <td><span class="badge risk">Out of scope</span></td>
+            <td><a class="scenario-link" href="out_of_scope.html"><span class="badge risk">Out of scope</span></a></td>
             <td>What is the weather in New York today?</td>
             <td>None</td>
             <td>Should classify as <code>out_of_scope</code>, show the scope message, then go to the feedback/escalation path. No clarification.</td>
           </tr>
           <tr>
-            <td><span class="badge warn">Happy path</span><br>Undeveloped topic</td>
+            <td><a class="scenario-link" href="happy_path_undeveloped_topic.html"><span class="badge warn">Happy path</span><br>Undeveloped topic</a></td>
             <td>How does Cidy work?</td>
             <td>None</td>
             <td>Should route to <code>about_cidy</code> or the temporary "About Cidy is not yet developed" message. No clarification.</td>
