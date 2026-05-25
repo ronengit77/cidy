@@ -20,6 +20,14 @@ When a `Formulate_Response_*.yaml` file or `Cidy_Intent_Router.yaml` changes, re
 .\tools\generate_knowledge_inventory.ps1
 ```
 
+For normal response-topic work, prefer the full refresh workflow:
+
+```powershell
+.\tools\refresh_after_response_topic_change.ps1
+```
+
+That workflow creates rotating backups, syncs topic-area allowed values into intent/default config files, regenerates the inventory, runs the structural tests, and writes a timestamped `documentation/test_case_yyyy_mm_dd_hh_mm_ss.md` report. See `CIDY_RESPONSE_TOPIC_UPDATE_WORKFLOW.md`.
+
 The script:
 
 - scrapes `Cidy_Intent_Router.yaml`,

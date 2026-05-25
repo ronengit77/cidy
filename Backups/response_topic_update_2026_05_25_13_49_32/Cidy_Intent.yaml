@@ -84,7 +84,7 @@ beginDialog:
             "Allowed funding_stream values:" & Char(10) &
             "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
             "Allowed topic_area values:" & Char(10) &
-            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, evaluation_evidence, general, governance_roles, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, evaluation_criteria, evaluation_design, evaluation_evidence, general, governance_roles, ipmr, lessons_learned, monitoring_reporting, policy_guidance_compliance, programme_design_standards, programme_management, project_planning_design, recommendations, reports, steering_committee, tag_meetings, templates, unclear" & Char(10) & Char(10) &
             "Allowed requires_clarification values: Yes, No" & Char(10) &
             "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
             "Critical routing rules:" & Char(10) &

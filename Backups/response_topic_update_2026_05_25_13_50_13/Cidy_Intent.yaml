@@ -84,7 +84,7 @@ beginDialog:
             "Allowed funding_stream values:" & Char(10) &
             "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
             "Allowed topic_area values:" & Char(10) &
-            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, evaluation_evidence, general, governance_roles, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "budget_finance, definition, design_evaluation, evaluation_design, general, policy_compliance, process_governance, project_planning_design, projects_evaluations, reporting_documentation, steering_committee, tag, unclear" & Char(10) & Char(10) &
             "Allowed requires_clarification values: Yes, No" & Char(10) &
             "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
             "Critical routing rules:" & Char(10) &
@@ -113,7 +113,7 @@ beginDialog:
 
     - kind: SendActivity
       id: sendActivity_debug_initial
-      activity: "DEBUG — Raw classification: {Topic.classificationText}"
+      activity: "DEBUG â€” Raw classification: {Topic.classificationText}"
 
     - kind: SetVariable
       id: setVariable_storeIntentJson
@@ -295,7 +295,7 @@ beginDialog:
 
     - kind: SendActivity
       id: sendActivity_debug_classifierFinal
-      activity: "DEBUG — Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+      activity: "DEBUG â€” Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
     - kind: BeginDialog
       id: goToClarifier

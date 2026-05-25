@@ -1,0 +1,243 @@
+kind: AdaptiveDialog
+modelDescription: Routes finalized Cidy intent variables to the correct Formulate Response topic or User Feedback. It does not classify and does not ask clarification questions.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SendActivity
+      id: sendActivity_debug_routerEntry
+      activity: "DEBUG — Intent Router entry: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_routeByIntentStatus
+      conditions:
+        - id: conditionItem_routeOutOfScope
+          condition: =Global.intentStatus = "out_of_scope" || Global.knowledgeDomain = "out_of_scope"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_outOfScope
+              variable: Global.routingTarget
+              value: User Feedback
+
+            - kind: SendActivity
+              id: sendActivity_outOfScope
+              activity: Cidy is designed to support DESA capacity-development knowledge, including DA, RPTC, UNPDF/PDF, Programme Development, Project Evaluation evidence, and Cidy-related guidance. This question appears outside that scope.
+
+            - kind: SetVariable
+              id: setDraftResponse_outOfScope
+              variable: Global.draftResponse
+              value: Cidy could not answer because the question appears outside its configured knowledge scope.
+
+            - kind: SetVariable
+              id: setWarningMessage_outOfScope
+              variable: Global.warningMessage
+              value: The user question appears outside Cidy's configured knowledge scope.
+
+            - kind: SetVariable
+              id: setIssueSummary_outOfScope
+              variable: Global.issueSummary
+              value: |
+                ="Out-of-scope question: " & Global.userQuestion
+
+            - kind: SendActivity
+              id: sendActivity_debug_outOfScopeRoute
+              activity: "DEBUG — Router out-of-scope route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
+
+            - kind: BeginDialog
+              id: fYdVTl
+              dialog: copilots_header_3141e.topic.UserFeedback2
+
+            - kind: EndDialog
+              id: end_outOfScope_afterUserFeedback
+
+        - id: conditionItem_routeDeadEnd
+          condition: =Global.intentStatus = "dead_end"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_deadEnd
+              variable: Global.routingTarget
+              value: User Feedback
+
+            - kind: SendActivity
+              id: sendActivity_deadEnd
+              activity: I could not reliably classify this question after clarification. You can leave feedback or ask to escalate this to a human.
+
+            - kind: SetVariable
+              id: setDraftResponse_deadEnd
+              variable: Global.draftResponse
+              value: Cidy could not answer because the question could not be reliably classified.
+
+            - kind: SetVariable
+              id: setWarningMessage_deadEnd
+              variable: Global.warningMessage
+              value: Cidy could not confidently classify the question after the allowed clarification attempts.
+
+            - kind: SetVariable
+              id: setIssueSummary_deadEnd
+              variable: Global.issueSummary
+              value: |
+                ="Clarification dead end. User question: " & Global.userQuestion & " Last clarification answer: " & Global.clarificationAnswer
+
+            - kind: SendActivity
+              id: sendActivity_debug_deadEndRoute
+              activity: "DEBUG — Router dead-end route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
+
+            - kind: BeginDialog
+              id: 0ZXYOl
+              dialog: copilots_header_3141e.topic.UserFeedback2
+
+            - kind: EndDialog
+              id: end_deadEnd_afterUserFeedback
+
+    - kind: ConditionGroup
+      id: conditionGroup_routeByKnowledgeDomain
+      conditions:
+        - id: conditionItem_routeAboutCidy
+          condition: =Global.knowledgeDomain = "about_cidy"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_aboutCidy
+              variable: Global.routingTarget
+              value: Formulate Response About Cidy
+
+            - kind: SendActivity
+              id: sendActivity_aboutCidyNotDeveloped
+              activity: Cidy Is under development this topic is not yet developed (about cidy)
+
+            - kind: EndDialog
+              id: end_aboutCidyNotDeveloped
+
+        - id: conditionItem_routeProjectEvaluationEvidence
+          condition: =Global.knowledgeDomain = "project_evaluation_evidence"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_projectEvaluationEvidence
+              variable: Global.routingTarget
+              value: Formulate Response Project Evaluation Evidence
+
+            - kind: SendActivity
+              id: sendActivity_projectEvaluationEvidenceNotDeveloped
+              activity: Cidy Is under development this topic is not yet developed (Project Evaluation Evidence)
+
+            - kind: EndDialog
+              id: end_projectEvaluationEvidenceNotDeveloped
+
+        - id: conditionItem_routeProgrammeDevelopment
+          condition: =Global.knowledgeDomain = "programme_development"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_programmeDevelopment
+              variable: Global.routingTarget
+              value: Formulate Response Programme Development
+
+            - kind: SendActivity
+              id: sendActivity_programmeDevelopmentNotDeveloped
+              activity: Cidy Is under development this topic is not yet developed (Programme Development)
+
+            - kind: EndDialog
+              id: end_programmeDevelopmentNotDeveloped
+
+        - id: conditionItem_routeDA
+          condition: =Global.knowledgeDomain = "da" || Global.fundingStream = "DA"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_DA
+              variable: Global.routingTarget
+              value: Formulate Response DA
+
+            - kind: SendActivity
+              id: sendActivity_debug_routeDA
+              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: goToDA
+              dialog: copilots_header_3141e.topic.DA
+
+            - kind: EndDialog
+              id: end_afterDA
+
+        - id: conditionItem_routeRPTC
+          condition: =Global.knowledgeDomain = "rptc" || Global.fundingStream = "RPTC"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_RPTC
+              variable: Global.routingTarget
+              value: Formulate Response RPTC
+
+            - kind: SendActivity
+              id: sendActivity_debug_routeRPTC
+              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: goToRPTC
+              dialog: copilots_header_3141e.topic.FormulateResponseCopy
+
+            - kind: EndDialog
+              id: end_afterRPTC
+
+        - id: conditionItem_routePDF
+          condition: =Global.knowledgeDomain = "pdf" || Global.fundingStream = "PDF"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_PDF
+              variable: Global.routingTarget
+              value: Formulate Response PDF
+
+            - kind: SendActivity
+              id: sendActivity_debug_routePDF
+              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: goToPDF
+              dialog: copilots_header_3141e.topic.FormulateResponse
+
+            - kind: EndDialog
+              id: end_afterPDF
+
+        - id: conditionItem_routeGeneralCD
+          condition: =Global.knowledgeDomain = "general_cd"
+          actions:
+            - kind: SetVariable
+              id: setRoutingTarget_generalCD
+              variable: Global.routingTarget
+              value: Formulate Response General
+
+            - kind: SendActivity
+              id: sendActivity_generalCDNotDeveloped
+              activity: Cidy Is under development this topic is not yet developed (General CD)
+
+            - kind: EndDialog
+              id: end_generalCDNotDeveloped
+
+      elseActions:
+        - kind: SetVariable
+          id: setRoutingTarget_unableToRoute
+          variable: Global.routingTarget
+          value: User Feedback
+
+        - kind: SendActivity
+          id: msg_unableToRoute
+          activity: I could not reliably route this question. Please restate it and include whether you mean Programme Development, project evaluations, DA, RPTC, or PDF/UNPDF.
+
+        - kind: SetVariable
+          id: log_unableToRoute
+          variable: Global.transcript
+          value: |
+            =Global.transcript & "CIDY: I could not reliably route this question. Please restate it and include whether you mean Programme Development, project evaluations, DA, RPTC, or PDF/UNPDF." & Char(13) & Char(10) & Char(13) & Char(10)
+
+        - kind: SetVariable
+          id: setIssueSummary_unableToRoute
+          variable: Global.issueSummary
+          value: |
+            ="Unable to route question. User question: " & Global.userQuestion & " Domain: " & Global.knowledgeDomain & " Funding stream: " & Global.fundingStream & " Topic area: " & Global.topicArea
+
+        - kind: BeginDialog
+          id: V4JHSE
+          dialog: copilots_header_3141e.topic.UserFeedback2
+
+        - kind: EndDialog
+          id: end_unableToRoute
+
+inputType: {}
+outputType: {}
