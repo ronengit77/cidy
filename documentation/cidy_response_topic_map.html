@@ -213,12 +213,39 @@
       min-width: 0;
     }
 
+    .yaml-card summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .yaml-card summary::-webkit-details-marker {
+      display: none;
+    }
+
     .yaml-head {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
       align-items: start;
       margin-bottom: 14px;
+    }
+
+    .yaml-head h2::before {
+      content: "▸";
+      display: inline-block;
+      width: 18px;
+      color: var(--blue);
+      font-size: 18px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    .yaml-card[open] .yaml-head h2::before {
+      content: "▾";
+    }
+
+    .yaml-card:not([open]) .yaml-head {
+      margin-bottom: 0;
     }
 
     .chips {
@@ -607,25 +634,28 @@
         const domain = row.domain || {};
         const hasNewTopic = row.folders.some(folder => folder.isNewTopic);
         const isNewYaml = Boolean(domain.isNewYaml);
+        const shouldOpen = Boolean(state.query.trim()) || isNewYaml || hasNewTopic;
         return `
-          <article class="yaml-card ${isNewYaml || hasNewTopic ? "new" : ""}">
-            <div class="yaml-head">
-              <div>
-                <h2><code>${escapeHtml(row.yamlFile)}</code></h2>
-                <p class="muted">${escapeHtml(domain.label || "No domain metadata found")} ${domain.id ? `(${escapeHtml(domain.id)})` : ""}</p>
+          <details class="yaml-card ${isNewYaml || hasNewTopic ? "new" : ""}" ${shouldOpen ? "open" : ""}>
+            <summary>
+              <div class="yaml-head">
+                <div>
+                  <h2><code>${escapeHtml(row.yamlFile)}</code></h2>
+                  <p class="muted">${escapeHtml(domain.label || "No domain metadata found")} ${domain.id ? `(${escapeHtml(domain.id)})` : ""}</p>
+                </div>
+                <div class="chips">
+                  ${isNewYaml ? chip("new yaml", "new") : ""}
+                  ${hasNewTopic ? chip("new topic", "new") : ""}
+                  ${chip(domain.routerStatus || "yaml exists", statusClass(domain.routerStatus))}
+                  ${chip(domain.fundingStream || "fund unclear")}
+                  ${chip(`${row.folders.length} folder mapping${row.folders.length === 1 ? "" : "s"}`)}
+                </div>
               </div>
-              <div class="chips">
-                ${isNewYaml ? chip("new yaml", "new") : ""}
-                ${hasNewTopic ? chip("new topic", "new") : ""}
-                ${chip(domain.routerStatus || "yaml exists", statusClass(domain.routerStatus))}
-                ${chip(domain.fundingStream || "fund unclear")}
-                ${chip(`${row.folders.length} folder mapping${row.folders.length === 1 ? "" : "s"}`)}
-              </div>
-            </div>
+            </summary>
             <div class="topic-list">
               ${row.folders.length ? row.folders.map(renderFolder).join("") : `<p class="muted">No folder/topic mappings are recorded for this YAML yet.</p>`}
             </div>
-          </article>
+          </details>
         `;
       }).join("");
       bindRenderedActions();
