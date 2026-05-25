@@ -1,6 +1,6 @@
 {
     "schemaVersion":  "1.1",
-    "generatedAt":  "2026-05-24T16:37:23-04:00",
+    "generatedAt":  "2026-05-25T13:04:58-04:00",
     "generatedFrom":  [
                           "Cidy_Intent_Router.yaml",
                           "Formulate_Response_DA.yaml",
@@ -78,9 +78,20 @@
                         "id":  "da_project_planning_design",
                         "domain":  "da",
                         "topicArea":  "project_planning_design",
+                        "topicName":  "Project Planning Design",
                         "folderName":  "Project Planning and Design",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_mMA5gI",
                         "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "mapped",
                         "ownerUnit":  "TBD",
                         "instructions":  "The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions."
@@ -89,9 +100,20 @@
                         "id":  "da_evaluation_design",
                         "domain":  "da",
                         "topicArea":  "evaluation_design",
+                        "topicName":  "Evaluation Design",
                         "folderName":  "Evaluations",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo"
+                                      ],
+                        "sourceLabels":  [
+                                             "Evaluations"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_O9CKVo",
                         "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "mapped",
                         "ownerUnit":  "TBD",
                         "instructions":  "Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward."
@@ -100,9 +122,20 @@
                         "id":  "da_general",
                         "domain":  "da",
                         "topicArea":  "general",
+                        "topicName":  "General",
                         "folderName":  "General",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_PGrWf8",
                         "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "mapped",
                         "ownerUnit":  "TBD",
                         "instructions":  "The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions."
@@ -111,9 +144,20 @@
                         "id":  "da_fallback",
                         "domain":  "da",
                         "topicArea":  "general",
+                        "topicName":  "General",
                         "folderName":  "Da Fallback",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF"
+                                      ],
+                        "sourceLabels":  [
+                                             "DA"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
                         "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "fallback",
                         "ownerUnit":  "TBD",
                         "instructions":  "Fallback knowledge source used when no specific branch applies or when the draft response is blank."
@@ -122,9 +166,20 @@
                         "id":  "general_cd_general",
                         "domain":  "general_cd",
                         "topicArea":  "general",
+                        "topicName":  "General",
                         "folderName":  "CDPMO Knowledge v2",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.CDPMO_Knowledge_v2_rGM9q_ShUI77lXMUfzB1X",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CDPMO_Knowledge_v2_rGM9q_ShUI77lXMUfzB1X"
+                                      ],
+                        "sourceLabels":  [
+                                             "Knowledge V 2 R 9 Q"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "",
                         "yamlFile":  "Formulate_Response_General.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "yaml_exists_not_wired",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML."
@@ -133,9 +188,20 @@
                         "id":  "programme_development_steering_committee",
                         "domain":  "programme_development",
                         "topicArea":  "steering_committee",
+                        "topicName":  "Steering Committee",
                         "folderName":  "Capacity Development Steering Committee",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_mMA5gI",
                         "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "review_required",
                         "ownerUnit":  "TBD",
                         "instructions":  "This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like What was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings."
@@ -144,9 +210,20 @@
                         "id":  "programme_development_tag",
                         "domain":  "programme_development",
                         "topicArea":  "tag",
+                        "topicName":  "Tag",
                         "folderName":  "Capacity Development Tag Team",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF"
+                                      ],
+                        "sourceLabels":  [
+                                             "TAG Meetings"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_O9CKVo",
                         "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "review_required",
                         "ownerUnit":  "TBD",
                         "instructions":  "This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like What was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings."
@@ -155,9 +232,20 @@
                         "id":  "programme_development_fallback",
                         "domain":  "programme_development",
                         "topicArea":  "general",
+                        "topicName":  "General",
                         "folderName":  "Programme Development Fallback",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF"
+                                      ],
+                        "sourceLabels":  [
+                                             "DA"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
                         "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "fallback",
                         "ownerUnit":  "TBD",
                         "instructions":  "Fallback knowledge source used when no specific branch applies or when the draft response is blank."
@@ -166,9 +254,22 @@
                         "id":  "rptc_policy_compliance",
                         "domain":  "rptc",
                         "topicArea":  "policy_compliance",
+                        "topicName":  "Policy Compliance",
                         "folderName":  "Policy Compliance",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz",
+                                          "copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ"
+                                      ],
+                        "sourceLabels":  [
+                                             "UNDESACDPMORPTCT Policy Guidance Reference Compliance Requirements Qos Cz",
+                                             "Policy Guidance Reference Compliance Requirements RPTC"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_cGKijT",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped_needs_topic_area_alignment",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -177,9 +278,20 @@
                         "id":  "rptc_reporting_documentation",
                         "domain":  "rptc",
                         "topicArea":  "reporting_documentation",
+                        "topicName":  "Reporting Documentation",
                         "folderName":  "Reporting Documentation",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu"
+                                      ],
+                        "sourceLabels":  [
+                                             "Reporting Documentation R Gn 0"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_a98AD7",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped_needs_topic_area_alignment",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -188,9 +300,22 @@
                         "id":  "rptc_process_governance",
                         "domain":  "rptc",
                         "topicArea":  "process_governance",
+                        "topicName":  "Process Governance",
                         "folderName":  "Process Governance",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz",
+                                          "copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg"
+                                      ],
+                        "sourceLabels":  [
+                                             "UNDESACDPMORPTCT Policy Guidance Reference Compliance Requirements Qos Cz",
+                                             "Process Governance Project Management Roles RPTC"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_AZI6Jl",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped_needs_topic_area_alignment",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -199,9 +324,20 @@
                         "id":  "rptc_budget_finance",
                         "domain":  "rptc",
                         "topicArea":  "budget_finance",
+                        "topicName":  "Budget Finance",
                         "folderName":  "Budget Finance",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX"
+                                      ],
+                        "sourceLabels":  [
+                                             "Definitions RPTC"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_2cplcy",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -210,9 +346,20 @@
                         "id":  "rptc_design_evaluation",
                         "domain":  "rptc",
                         "topicArea":  "design_evaluation",
+                        "topicName":  "Design Evaluation",
                         "folderName":  "Design Evaluation",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA"
+                                      ],
+                        "sourceLabels":  [
+                                             "Programme Design St Andards Evaluation Criteria RPTC"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_GWUkJW",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped_needs_topic_area_alignment",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -221,9 +368,24 @@
                         "id":  "rptc_definition",
                         "domain":  "rptc",
                         "topicArea":  "definition",
+                        "topicName":  "Definition",
                         "folderName":  "Definition",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO; copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO",
+                                          "copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Definitions RPTC",
+                                             "UNDESACDPMORPTCT Policy Guidance Reference Compliance Requirements Qos Cz",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  3,
+                        "yamlConditionId":  "conditionItem_wZNiqD",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "mapped_needs_topic_area_alignment",
                         "ownerUnit":  "TBD",
                         "instructions":  "No separate source-use instruction variable is currently set in this YAML branch."
@@ -232,9 +394,20 @@
                         "id":  "rptc_fallback",
                         "domain":  "rptc",
                         "topicArea":  "general",
+                        "topicName":  "General",
                         "folderName":  "Rptc Fallback",
                         "knowledgeSourceId":  "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
                         "mappingStatus":  "fallback",
                         "ownerUnit":  "TBD",
                         "instructions":  "Fallback knowledge source used when no specific branch applies or when the draft response is blank."

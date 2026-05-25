@@ -70,7 +70,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo
+                  - copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF
 
       elseActions:
         - kind: SearchAndSummarizeContent

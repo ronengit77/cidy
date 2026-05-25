@@ -116,6 +116,20 @@ function Get-KnowledgeSources {
     return @($sources)
 }
 
+function Get-SourceLabels {
+    param([string[]]$Sources)
+    return @($Sources | ForEach-Object {
+        $last = ($_ -split "\.")[-1]
+        $label = $last -replace "_[A-Za-z0-9-]{8,}$", ""
+        $label = $label -replace '(?<=[a-z])and(?=[A-Z])', 'And'
+        $chunks = [regex]::Matches($label, '[A-Z]+(?=[A-Z][a-z]|$)|[A-Z]?[a-z]+|[0-9]+') | ForEach-Object {
+            $chunk = $_.Value
+            if ($chunk -cmatch '^[A-Z0-9]+$') { $chunk } else { $_.Value.Substring(0, 1).ToUpperInvariant() + $_.Value.Substring(1) }
+        }
+        if ($chunks.Count -gt 0) { ($chunks -join " ") } else { $label }
+    })
+}
+
 function Get-FoldersFromResponseYaml {
     param(
         [string]$Path,
@@ -140,13 +154,21 @@ function Get-FoldersFromResponseYaml {
             $status = "mapped_needs_topic_area_alignment"
         }
         $folderName = ConvertTo-Title $topicArea
+        $sourceLabels = Get-SourceLabels $sources
         $folders.Add([ordered]@{
             id                = "$(ConvertTo-Slug $DomainId)_$(ConvertTo-Slug $topicArea)"
             domain            = $DomainId
             topicArea         = $topicArea
+            topicName         = ConvertTo-Title $topicArea
             folderName        = $folderName
             knowledgeSourceId = ($sources -join "; ")
+            sourceIds         = @($sources)
+            sourceLabels      = @($sourceLabels)
+            sourceCount       = $sources.Count
+            yamlConditionId   = $match.Groups["id"].Value
             yamlFile          = $fileName
+            generatedFromYaml = $true
+            sourceUseInstructionSource = if ($instructions) { "Global.sourceUseInstructions" } else { "" }
             mappingStatus     = $status
             ownerUnit         = "TBD"
             instructions      = if ($instructions) { $instructions } else { "No separate source-use instruction variable is currently set in this YAML branch." }
@@ -156,13 +178,21 @@ function Get-FoldersFromResponseYaml {
     if ($conditionMatches.Count -eq 0) {
         $sources = Get-KnowledgeSources $text
         if ($sources.Count -gt 0) {
+            $sourceLabels = Get-SourceLabels $sources
             $folders.Add([ordered]@{
                 id                = "$(ConvertTo-Slug $DomainId)_general"
                 domain            = $DomainId
                 topicArea         = "general"
+                topicName         = "General"
                 folderName        = "$(ConvertTo-Title $DomainId) General"
                 knowledgeSourceId = ($sources -join "; ")
+                sourceIds         = @($sources)
+                sourceLabels      = @($sourceLabels)
+                sourceCount       = $sources.Count
+                yamlConditionId   = ""
                 yamlFile          = $fileName
+                generatedFromYaml = $true
+                sourceUseInstructionSource = ""
                 mappingStatus     = if ($RouterStatus -eq "not_wired") { "yaml_exists_not_wired" } else { "mapped" }
                 ownerUnit         = "TBD"
                 instructions      = "No separate source-use instruction variable is currently set in this YAML."
@@ -177,13 +207,21 @@ function Get-FoldersFromResponseYaml {
     if ($fallbackSources.Count -gt 0) {
         $fallbackId = "$(ConvertTo-Slug $DomainId)_fallback"
         if (-not ($folders | Where-Object { $_.knowledgeSourceId -eq ($fallbackSources -join "; ") -and $_.topicArea -eq "general" })) {
+            $sourceLabels = Get-SourceLabels $fallbackSources
             $folders.Add([ordered]@{
                 id                = $fallbackId
                 domain            = $DomainId
                 topicArea         = "general"
+                topicName         = "General"
                 folderName        = "$(ConvertTo-Title $DomainId) Fallback"
                 knowledgeSourceId = ($fallbackSources -join "; ")
+                sourceIds         = @($fallbackSources)
+                sourceLabels      = @($sourceLabels)
+                sourceCount       = $fallbackSources.Count
+                yamlConditionId   = "elseActions"
                 yamlFile          = $fileName
+                generatedFromYaml = $true
+                sourceUseInstructionSource = ""
                 mappingStatus     = "fallback"
                 ownerUnit         = "TBD"
                 instructions      = "Fallback knowledge source used when no specific branch applies or when the draft response is blank."

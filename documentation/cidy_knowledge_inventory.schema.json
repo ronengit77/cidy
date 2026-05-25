@@ -118,13 +118,40 @@
         "topicArea": {
           "type": "string"
         },
+        "topicName": {
+          "type": "string"
+        },
         "folderName": {
           "type": "string"
         },
         "knowledgeSourceId": {
           "type": "string"
         },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceCount": {
+          "type": "integer"
+        },
+        "yamlConditionId": {
+          "type": "string"
+        },
         "yamlFile": {
+          "type": "string"
+        },
+        "generatedFromYaml": {
+          "type": "boolean"
+        },
+        "sourceUseInstructionSource": {
           "type": "string"
         },
         "mappingStatus": {

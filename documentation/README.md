@@ -8,6 +8,8 @@ Browser-entered updates are saved in localStorage. Use **Export JSON** to downlo
 
 Use **Response Map** from the control center to open `cidy_response_topic_map.html`, which lists existing `Formulate_Response_*.yaml` files and the topic areas, folders, source IDs, mapping status, and instructions under each one. The page supports local CRUD drafts, including moving a topic/folder mapping from one response YAML to another. Drafts persist in browser localStorage and can be exported/imported as JSON for review before updating the source YAML/inventory.
 
+The response YAML files are the source of truth for generated response-map facts. Regenerate `cidy_knowledge_inventory.json` after YAML changes so the HTML reflects the latest topic tags, YAML branch IDs, source IDs, source labels, and source-use instructions. Keep owner units and other manually curated metadata in `cidy_knowledge_overrides.json`.
+
 ## Regenerating Inventory From YAML
 
 When a `Formulate_Response_*.yaml` file or `Cidy_Intent_Router.yaml` changes, regenerate the control-center inventory:

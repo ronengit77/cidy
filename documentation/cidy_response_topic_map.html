@@ -567,8 +567,12 @@
         domain.routerDialog,
         domain.notes,
         folder?.topicArea,
+        folder?.topicName,
         folder?.folderName,
         folder?.knowledgeSourceId,
+        ...(folder?.sourceIds || []),
+        ...(folder?.sourceLabels || []),
+        folder?.yamlConditionId,
         folder?.mappingStatus,
         folder?.instructions,
         folder?.ownerUnit
@@ -627,8 +631,20 @@
           <div class="folder-grid">
             <div class="key">Folder ID</div>
             <div class="value"><code>${escapeHtml(folder.id)}</code></div>
+            <div class="key">Topic Name</div>
+            <div class="value">${escapeHtml(folder.topicName || folder.folderName || folder.topicArea || "Not recorded")}</div>
+            <div class="key">YAML Branch ID</div>
+            <div class="value"><code>${escapeHtml(folder.yamlConditionId || "Not recorded")}</code></div>
             <div class="key">Source ID</div>
             <div class="value"><code>${escapeHtml(folder.knowledgeSourceId || "Not recorded")}</code></div>
+            <div class="key">Source Name(s)</div>
+            <div class="value">${formatList(folder.sourceLabels)}</div>
+            <div class="key">Source Count</div>
+            <div class="value">${escapeHtml(folder.sourceCount ?? ((folder.sourceIds || []).length || "Not recorded"))}</div>
+            <div class="key">YAML Source</div>
+            <div class="value">${folder.generatedFromYaml ? "Generated from response YAML" : "Manual/draft mapping"}</div>
+            <div class="key">Instruction Field</div>
+            <div class="value"><code>${escapeHtml(folder.sourceUseInstructionSource || "Not recorded")}</code></div>
             <div class="key">Owner Unit</div>
             <div class="value">${escapeHtml(folder.ownerUnit || "TBD")}</div>
             <div class="key">Instructions</div>
@@ -636,6 +652,12 @@
           </div>
         </article>
       `;
+    }
+
+    function formatList(values) {
+      const list = Array.isArray(values) ? values.filter(Boolean) : [];
+      if (!list.length) return `<span class="muted">Not recorded</span>`;
+      return list.map(value => `<span class="chip">${escapeHtml(value)}</span>`).join(" ");
     }
 
     function bindRenderedActions() {
