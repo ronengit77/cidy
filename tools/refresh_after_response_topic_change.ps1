@@ -1,6 +1,7 @@
 param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
-    [int]$KeepBackups = 3
+    [int]$KeepBackups = 3,
+    [switch]$SkipGitSync
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,6 +26,34 @@ function ConvertTo-PlainArray {
 
 function Get-Timestamp {
     return (Get-Date).ToString("yyyy_MM_dd_HH_mm_ss")
+}
+
+function Sync-GitUpstream {
+    param([string]$Root)
+
+    $insideWorkTree = (& git -C $Root rev-parse --is-inside-work-tree 2>$null)
+    if ($LASTEXITCODE -ne 0 -or $insideWorkTree -ne "true") {
+        Write-Host "Skipping git sync because $Root is not a git worktree."
+        return
+    }
+
+    $branch = (& git -C $Root branch --show-current 2>$null)
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($branch)) {
+        Write-Host "Skipping git sync because the repository is not on a named branch."
+        return
+    }
+
+    $upstream = (& git -C $Root rev-parse --abbrev-ref --symbolic-full-name "@{u}" 2>$null)
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($upstream)) {
+        Write-Host "Skipping git sync because branch '$branch' has no upstream."
+        return
+    }
+
+    Write-Host "Syncing branch '$branch' with upstream '$upstream' before regenerating documentation..."
+    & git -C $Root pull --rebase --autostash
+    if ($LASTEXITCODE -ne 0) {
+        throw "git pull --rebase --autostash failed. Resolve the rebase, then rerun this script."
+    }
 }
 
 function New-CidyBackup {
@@ -208,6 +237,12 @@ function New-RefreshReport {
 
     Set-Utf8NoBom -Path $reportPath -Value (($lines.ToArray() -join [Environment]::NewLine) + [Environment]::NewLine)
     return $reportPath
+}
+
+if (-not $SkipGitSync) {
+    Sync-GitUpstream -Root $Root
+} else {
+    Write-Host "Skipping upfront git sync because -SkipGitSync was supplied."
 }
 
 $timestamp = Get-Timestamp
