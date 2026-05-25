@@ -63,7 +63,7 @@ function Infer-Domain {
     if ($explicit) { return $explicit }
 
     if ($text -match "out_of_scope|out of scope|weather|world cup|poem|laptop|stock") { return "out_of_scope" }
-    if ($text -match "project evaluation evidence|routes? to project evaluation evidence|routes? directly to formulate response project evaluation evidence|evaluations say|evaluations said|evaluation reports say|lessons learned|recommendations from project evaluations|past project evaluations") { return "programme_development" }
+    if ($text -match "project evaluation evidence|routes? to project evaluation evidence|routes? directly to formulate response project evaluation evidence|evaluations say|evaluations said|evaluation reports say|reports on evaluations|lessons learned|recommendations from project evaluations|past project evaluations|find( me)? evaluations|list evaluations|need evaluations|how many evaluation") { return "programme_development" }
     if ($text -match "formulate response da|routes? (directly )?to da|routes? (directly )?to formulate response da") { return "da" }
     if ($text -match "formulate response rptc|routes? (directly )?to rptc") { return "rptc" }
     if ($text -match "formulate response pdf|routes? (directly )?to pdf") { return "pdf" }
@@ -112,7 +112,7 @@ function Infer-TopicAreas {
     if ($text -match "templates|template") { $areas.Add("templates") }
     if ($text -match "recommendations") { $areas.Add("recommendations") }
     if ($text -match "lessons_learned|lessons learned") { $areas.Add("lessons_learned") }
-    if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|partnerships|project evaluation evidence|project evaluations|lessons learned") { $areas.Add("projects_evaluations") }
+    if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|reports on evaluations|partnerships|project evaluation evidence|project evaluations|find( me)? evaluations|list evaluations|need evaluations|how many evaluation|evaluations about|evaluations by|evaluations in|evaluations that include|lessons learned") { $areas.Add("projects_evaluations") }
     if ($text -match "cd_strategy|capacity development strategy") { $areas.Add("cd_strategy") }
     if ($text -match "steering_committee|steering committee") { $areas.Add("steering_committee") }
     if ($text -match "tag_meetings|tag meeting|tag materials") { $areas.Add("tag_meetings") }

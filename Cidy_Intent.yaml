@@ -94,9 +94,10 @@ beginDialog:
             "4. Distinguish evaluation design guidance from evaluation evidence. Questions asking how to write, prepare, design, fill, create, or use an evaluation report/template/guidance are evaluation_design. Questions asking what evaluations found, said, recommended, concluded, or what lessons learned exist are programme_development/projects_evaluations." & Char(10) &
             "5. If the user asks how to write or prepare an evaluation report and no fund is specified, set knowledge_domain=unclear, funding_stream=UNCLEAR, topic_area=evaluation_design, requires_clarification=Yes, clarification_type=fund, clarification_question=Which funding stream is this question about?" & Char(10) &
             "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=programme_development, topic_area=projects_evaluations, and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
-            "7. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
-            "8. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
-            "9. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X." & Char(10) &
+            "8. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "9. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "10. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
             "User question:" & Char(10) &
             Global.userQuestion
 
@@ -228,6 +229,37 @@ beginDialog:
               id: normalize_clarificationTypeNone
               variable: Global.clarificationType
               value: none
+
+    - kind: ConditionGroup
+      id: conditionGroup_projectEvaluationDiscoveryFallback
+      conditions:
+        - id: conditionItem_projectEvaluationDiscovery
+          condition: =Or(Find("project evaluation", Lower(Global.userQuestion)) > 0, Find("project evaluations", Lower(Global.userQuestion)) > 0, Find("evaluation reports", Lower(Global.userQuestion)) > 0, Find("evaluation report", Lower(Global.userQuestion)) > 0, Find("reports on evaluations", Lower(Global.userQuestion)) > 0, Find("evaluations about", Lower(Global.userQuestion)) > 0, Find("evaluations by", Lower(Global.userQuestion)) > 0, Find("evaluations in", Lower(Global.userQuestion)) > 0, Find("evaluations that include", Lower(Global.userQuestion)) > 0, Find("evaluations include", Lower(Global.userQuestion)) > 0, Find("find evaluations", Lower(Global.userQuestion)) > 0, Find("find me evaluations", Lower(Global.userQuestion)) > 0, Find("list evaluations", Lower(Global.userQuestion)) > 0, Find("need evaluations", Lower(Global.userQuestion)) > 0, Find("how many evaluations", Lower(Global.userQuestion)) > 0, Find("how many evaluation", Lower(Global.userQuestion)) > 0) && !Or(Find("write", Lower(Global.userQuestion)) > 0, Find("prepare", Lower(Global.userQuestion)) > 0, Find("design", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("fill", Lower(Global.userQuestion)) > 0, Find("create", Lower(Global.userQuestion)) > 0, Find("use an evaluation", Lower(Global.userQuestion)) > 0, Find("form should", Lower(Global.userQuestion)) > 0, Find("management response", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainProjectEvaluations
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicProjectEvaluations
+              variable: Global.topicArea
+              value: projects_evaluations
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoProjectEvaluations
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneProjectEvaluations
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionProjectEvaluations
+              variable: Global.clarificationQuestion
+              value:
 
     - kind: ConditionGroup
       id: conditionGroup_legacyEvaluationReportFallback

@@ -54,7 +54,6 @@
                                                                            "da",
                                                                            "rptc",
                                                                            "pdf",
-                                                                           "project_evaluation_evidence",
                                                                            "programme_development",
                                                                            "general_cd",
                                                                            "out_of_scope",
@@ -86,7 +85,6 @@
                                                                      "design_evaluation",
                                                                      "evaluation_criteria",
                                                                      "evaluation_design",
-                                                                     "evaluation_evidence",
                                                                      "general",
                                                                      "governance_roles",
                                                                      "ipmr",
@@ -172,7 +170,6 @@
                                                                          "Formulate Response DA",
                                                                          "Formulate Response RPTC",
                                                                          "Formulate Response PDF",
-                                                                         "Formulate Response Project Evaluation Evidence",
                                                                          "Formulate Response Programme Development",
                                                                          "Formulate Response General",
                                                                          "User Feedback"
@@ -217,11 +214,17 @@
                                                   "description":  "User satisfaction or feedback response."
                                               },
                       "Global.askAnother":  {
+                                                 "type":  "String",
+                                                 "default":  "",
+                                                 "ownerTopic":  "User Feedback",
+                                                 "description":  "Whether the user wants to ask another question."
+                                             },
+                      "Global.retryMode":  {
                                                 "type":  "String",
                                                 "default":  "",
-                                                "ownerTopic":  "User Feedback",
-                                                "description":  "Whether the user wants to ask another question."
-                                            }
+                                                "ownerTopic":  "User Feedback / Formulate Response General",
+                                                "description":  "Optional answer-recovery mode, such as wide_knowledge for retrying the same question against the top-level Knowledge source."
+                                             }
                   },
     "initialization":  {
                            "onNewUserQuestion":  {
@@ -243,11 +246,12 @@
                                                      "Global.confidenceScore":  "",
                                                      "Global.confidenceLabel":  "",
                                                      "Global.warningMessage":  "",
-                                                     "Global.issueSummary":  "",
-                                                     "Global.userFeedback":  "",
-                                                     "Global.askAnother":  ""
-                                                 }
-                       },
+                                                      "Global.issueSummary":  "",
+                                                      "Global.userFeedback":  "",
+                                                      "Global.askAnother":  "",
+                                                      "Global.retryMode":  ""
+                                                  }
+                        },
     "statusRules":  {
                         "afterInitialClassification":  [
                                                            {
@@ -378,15 +382,18 @@
                                                                      "Global.fundingStream":  "UNCLEAR"
                                                                  },
                                                           "Project Evaluations / Lessons Learned":  {
-                                                                                                        "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                                        "Global.knowledgeDomain":  "programme_development",
+                                                                                                        "Global.topicArea":  "projects_evaluations",
                                                                                                         "Global.fundingStream":  "UNCLEAR"
                                                                                                     },
                                                           "Project Evaluations":  {
-                                                                                      "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                      "Global.knowledgeDomain":  "programme_development",
+                                                                                      "Global.topicArea":  "projects_evaluations",
                                                                                       "Global.fundingStream":  "UNCLEAR"
                                                                                   },
                                                           "Lessons Learned":  {
-                                                                                  "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                  "Global.knowledgeDomain":  "programme_development",
+                                                                                  "Global.topicArea":  "projects_evaluations",
                                                                                   "Global.fundingStream":  "UNCLEAR"
                                                                               },
                                                           "Development Account (DA)":  {

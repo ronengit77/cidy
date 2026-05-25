@@ -78,7 +78,7 @@ beginDialog:
             - kind: SetVariable
               id: setVariable_VPj1m5
               variable: Global.sourceUseInstructions
-              value: "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title	Division(s)	EvaluationYear	Countries	RecommendationsList	LessonsLearnedList	FileName	ShortPath	FullPath. Questions related to specific evaluations should be answered from this folder."
+              value: "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title	Division(s)	EvaluationYear	Countries	RecommendationsList	LessonsLearnedList	FileName	ShortPath	FullPath. Use this folder for questions about specific evaluations or evaluation reports, including finding, listing, counting, filtering, or retrieving evaluations by topic, title, country, countries, region, division, year, recommendation, lesson learned, project attribute, FileName, ShortPath, or FullPath. When the user asks how many reports or evaluations match criteria, count matching records from the evaluation file if possible and cite the file. When the user asks to find evaluations about a subject or country, return the most relevant matching evaluation titles with the fields that support the match."
 
             - kind: SearchAndSummarizeContent
               id: GEdPMK

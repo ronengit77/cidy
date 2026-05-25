@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T16:31:22-04:00",
+                    "generatedAt":  "2026-05-25T16:44:32-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
