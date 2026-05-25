@@ -238,7 +238,7 @@ beginDialog:
                     - id: programme_development
                       displayName: Programme Development
 
-                    - id: project_evaluation_evidence
+                    - id: projects_evaluations
                       displayName: Project evaluations, recommendations, and lessons learned
 
                     - id: da
@@ -315,21 +315,21 @@ beginDialog:
                       variable: Global.fundingStream
                       value: UNCLEAR
 
-                - id: conditionItem_domainProjectEvaluationEvidence
-                  condition: =Or(Text(Topic.domainChoice) = "project_evaluation_evidence", Text(Topic.domainChoice) = "Project evaluations, recommendations, and lessons learned", StartsWith(Text(Topic.domainChoice), "Project evaluations"), Lower(Text(Topic.domainChoice)) = "lessons learned")
+                - id: conditionItem_domainProjectsEvaluations
+                  condition: =Or(Text(Topic.domainChoice) = "projects_evaluations", Text(Topic.domainChoice) = "project_evaluation_evidence", Text(Topic.domainChoice) = "Project evaluations, recommendations, and lessons learned", StartsWith(Text(Topic.domainChoice), "Project evaluations"), Lower(Text(Topic.domainChoice)) = "lessons learned")
                   actions:
                     - kind: SetVariable
-                      id: setDomain_projectEvaluationEvidence
+                      id: setDomain_projectsEvaluations
                       variable: Global.knowledgeDomain
-                      value: project_evaluation_evidence
+                      value: programme_development
 
                     - kind: SetVariable
-                      id: setTopic_projectEvaluationEvidence
+                      id: setTopic_projectsEvaluations
                       variable: Global.topicArea
-                      value: evaluation_evidence
+                      value: projects_evaluations
 
                     - kind: SetVariable
-                      id: setFund_projectEvaluationEvidence
+                      id: setFund_projectsEvaluations
                       variable: Global.fundingStream
                       value: UNCLEAR
 
@@ -534,12 +534,12 @@ beginDialog:
                     - kind: SetVariable
                       id: setDomain_actualEvaluationEvidence
                       variable: Global.knowledgeDomain
-                      value: project_evaluation_evidence
+                      value: programme_development
 
                     - kind: SetVariable
                       id: setTopic_actualEvaluationEvidence
                       variable: Global.topicArea
-                      value: evaluation_evidence
+                      value: projects_evaluations
 
                 - id: conditionItem_artifactManagementResponse
                   condition: =Or(Text(Topic.artifactChoice) = "management_response", Text(Topic.artifactChoice) = "Management response")
@@ -547,12 +547,12 @@ beginDialog:
                     - kind: SetVariable
                       id: setDomain_managementResponseEvidence
                       variable: Global.knowledgeDomain
-                      value: project_evaluation_evidence
+                      value: programme_development
 
                     - kind: SetVariable
                       id: setTopic_managementResponseEvidence
                       variable: Global.topicArea
-                      value: evaluation_evidence
+                      value: projects_evaluations
 
                 - id: conditionItem_artifactOtherTemplate
                   condition: =Or(Text(Topic.artifactChoice) = "other_template", Text(Topic.artifactChoice) = "Other template or form")
@@ -572,7 +572,7 @@ beginDialog:
               id: conditionGroup_artifactDefaultDomain
               conditions:
                 - id: conditionItem_artifactFundDA
-                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "DA"
+                  condition: =Global.topicArea <> "projects_evaluations" && Global.fundingStream = "DA"
                   actions:
                     - kind: SetVariable
                       id: setArtifactDomain_DA
@@ -580,7 +580,7 @@ beginDialog:
                       value: da
 
                 - id: conditionItem_artifactFundRPTC
-                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "RPTC"
+                  condition: =Global.topicArea <> "projects_evaluations" && Global.fundingStream = "RPTC"
                   actions:
                     - kind: SetVariable
                       id: setArtifactDomain_RPTC
@@ -588,7 +588,7 @@ beginDialog:
                       value: rptc
 
                 - id: conditionItem_artifactFundPDF
-                  condition: =Global.knowledgeDomain <> "project_evaluation_evidence" && Global.fundingStream = "PDF"
+                  condition: =Global.topicArea <> "projects_evaluations" && Global.fundingStream = "PDF"
                   actions:
                     - kind: SetVariable
                       id: setArtifactDomain_PDF

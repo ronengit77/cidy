@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T14:23:52-04:00",
+                    "generatedAt":  "2026-05-25T16:29:36-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
-                    "passed":  38,
-                    "failed":  22
+                    "passed":  39,
+                    "failed":  21
                 },
     "results":  [
                     {
@@ -3330,12 +3330,12 @@
                         "question":  "Are travel costs eligible?",
                         "clarification":  "Not sure",
                         "expectedBehavior":  "Classifier asks fund clarification. Clarifier maps Not sure to general_cd or programme_development depending configured default. Router should avoid unsafe fund-specific answer and likely route to User Feedback or general guidance.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response General CDPMO",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponse",
                                            "yamlFile":  "Formulate_Response_General.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_General.yaml"
                                        },
                         "finalClassification":  {
@@ -3390,8 +3390,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response General CDPMO",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponse",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_General.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_General.yaml"
@@ -3414,11 +3414,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_General.yaml."
-                                         }
+
                                      ]
                     },
                     {

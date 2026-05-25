@@ -141,7 +141,7 @@ beginDialog:
               dialog: copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment
 
             - kind: EndDialog
-              id: end_afterProgrammeDevelopment
+              id: end_programmeDevelopmentNotDeveloped
 
         - id: conditionItem_routeDA
           condition: =Global.knowledgeDomain = "da" || Global.fundingStream = "DA"
@@ -209,8 +209,12 @@ beginDialog:
               value: Formulate Response General
 
             - kind: SendActivity
-              id: sendActivity_generalCDNotDeveloped
-              activity: Cidy Is under development this topic is not yet developed (General CD)
+              id: sendActivity_Fjbd95
+              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: KveG2l
+              dialog: copilots_header_3141e.topic.FormulateResponse
 
             - kind: EndDialog
               id: end_generalCDNotDeveloped

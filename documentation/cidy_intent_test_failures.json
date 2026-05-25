@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T14:23:52-04:00",
+                    "generatedAt":  "2026-05-25T16:29:36-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
-                    "passed":  38,
-                    "failed":  22
+                    "passed":  39,
+                    "failed":  21
                 },
     "failures":  [
                      {
@@ -740,55 +740,6 @@
                                                    {
                                                        "topic":  "Formulate_Response_PDF.yaml",
                                                        "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC36",
-                         "scenario":  "Clarification path - fund not sure",
-                         "question":  "Are travel costs eligible?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response General CDPMO",
-                                            "routerDialog":  "",
-                                            "yamlFile":  "Formulate_Response_General.yaml",
-                                            "routerStatus":  "not_wired",
-                                            "finalTopic":  "Formulate_Response_General.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_General.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_General.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "Topic_not_developed",
-                                              "point":  "Intent Router",
-                                              "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_General.yaml."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Clarifier.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_General.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_General.yaml",
-                                                       "decision":  "Begin assess_confidence.yaml"
                                                    }
                                                ]
                      },

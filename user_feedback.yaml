@@ -63,6 +63,9 @@ beginDialog:
             - id: Ask another question
               displayName: Ask another question
 
+            - id: Try again (with wider knowledgebase)
+              displayName: Try again (with wider knowledgebase)
+
             - id: Escalate to a human
               displayName: Escalate to a human
 
@@ -88,6 +91,7 @@ beginDialog:
         =Switch(
           Text(Topic.nextActionChoice),
           "Ask another question", "yes",
+          "Try again (with wider knowledgebase)", "retry_wide",
           "Escalate to a human", "escalate",
           "Close the session", "no",
           "unknown"
@@ -150,6 +154,54 @@ beginDialog:
             - kind: BeginDialog
               id: goToIntentDirect
               dialog: copilots_header_3141e.topic.Intent_c8W
+
+        - id: condition_try_again_wide
+          condition: =Global.askAnother = "retry_wide"
+          actions:
+            - kind: SetVariable
+              id: set_retryMode_wideKnowledge
+              variable: Global.retryMode
+              value: wide_knowledge
+
+            - kind: SetVariable
+              id: clear_draftResponse_retry
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedAnswer_retry
+              variable: Global.formattedAnswer
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedSources_retry
+              variable: Global.formattedSources
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceScore_retry
+              variable: Global.confidenceScore
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceLabel_retry
+              variable: Global.confidenceLabel
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_warningMessage_retry
+              variable: Global.warningMessage
+              value: =Blank()
+
+            - kind: SetVariable
+              id: log_retry_wide
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: " & "Trying again with the wider Knowledge base." & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: BeginDialog
+              id: goToWideKnowledgeRetry
+              dialog: copilots_header_3141e.topic.FormulateResponse
 
         - id: condition_escalate
           condition: =Global.askAnother = "escalate"
