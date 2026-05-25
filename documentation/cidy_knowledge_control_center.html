@@ -487,7 +487,7 @@
   <script id="embeddedInventory" type="application/json">
 {
     "schemaVersion":  "1.1",
-    "generatedAt":  "2026-05-25T13:51:33-04:00",
+    "generatedAt":  "2026-05-25T14:12:40-04:00",
     "generatedFrom":  [
                           "Cidy_Intent_Router.yaml",
                           "Formulate_Response_DA.yaml",
@@ -530,28 +530,6 @@
                         "firstSeenAt":  ""
                     },
                     {
-                        "id":  "programme_development",
-                        "label":  "Programme Development",
-                        "fundingStream":  "UNCLEAR",
-                        "routerStatus":  "not_wired",
-                        "routerDialog":  "",
-                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                        "notes":  "Router currently sends a temporary not-developed message or ends without a response YAML.",
-                        "isNewYaml":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
-                        "id":  "project_evaluation_evidence",
-                        "label":  "Project Evaluation Evidence",
-                        "fundingStream":  "UNCLEAR",
-                        "routerStatus":  "missing_yaml",
-                        "routerDialog":  "",
-                        "yamlFile":  "Formulate_Response_Project_Evaluation_Evidence.yaml",
-                        "notes":  "Router recognizes this domain, but no response YAML was discovered.",
-                        "isNewYaml":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
                         "id":  "pdf",
                         "label":  "Peace and Development Trust Fund / UNPDF",
                         "fundingStream":  "PDF",
@@ -570,6 +548,17 @@
                         "routerDialog":  "",
                         "yamlFile":  "Formulate_Response_About_Cidy.yaml",
                         "notes":  "Router recognizes this domain, but no response YAML was discovered.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development",
+                        "label":  "Programme Development",
+                        "fundingStream":  "UNCLEAR",
+                        "routerStatus":  "not_wired",
+                        "routerDialog":  "",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "notes":  "Router currently sends a temporary not-developed message or ends without a response YAML.",
                         "isNewYaml":  false,
                         "firstSeenAt":  ""
                     }
@@ -970,11 +959,11 @@
                 ],
     "knownGaps":  [
                       {
-                          "id":  "missing_about_cidy_yaml",
-                          "severity":  "high",
-                          "title":  "Create About Cidy response YAML",
-                          "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                          "description":  "Router recognizes this domain, but no response YAML was discovered."
+                          "id":  "programme_development_not_wired",
+                          "severity":  "medium",
+                          "title":  "Wire Programme Development route",
+                          "yamlFile":  "Cidy_Intent_Router.yaml",
+                          "description":  "Response YAML exists or is expected, but the router does not currently call it."
                       },
                       {
                           "id":  "rptc_topic_area_alignment",
@@ -991,13 +980,6 @@
                           "description":  "Programme Development YAML has folders/sources that require human validation."
                       },
                       {
-                          "id":  "missing_pdf_yaml",
-                          "severity":  "high",
-                          "title":  "Create PDF response YAML",
-                          "yamlFile":  "Formulate_Response_PDF.yaml",
-                          "description":  "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
-                      },
-                      {
                           "id":  "general_cd_not_wired",
                           "severity":  "medium",
                           "title":  "Wire General route",
@@ -1005,17 +987,17 @@
                           "description":  "Response YAML exists or is expected, but the router does not currently call it."
                       },
                       {
-                          "id":  "programme_development_not_wired",
-                          "severity":  "medium",
-                          "title":  "Wire Programme Development route",
-                          "yamlFile":  "Cidy_Intent_Router.yaml",
-                          "description":  "Response YAML exists or is expected, but the router does not currently call it."
+                          "id":  "missing_pdf_yaml",
+                          "severity":  "high",
+                          "title":  "Create PDF response YAML",
+                          "yamlFile":  "Formulate_Response_PDF.yaml",
+                          "description":  "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
                       },
                       {
-                          "id":  "missing_project_evaluation_evidence_yaml",
+                          "id":  "missing_about_cidy_yaml",
                           "severity":  "high",
-                          "title":  "Create Project Evaluation Evidence response YAML",
-                          "yamlFile":  "Formulate_Response_Project_Evaluation_Evidence.yaml",
+                          "title":  "Create About Cidy response YAML",
+                          "yamlFile":  "Formulate_Response_About_Cidy.yaml",
                           "description":  "Router recognizes this domain, but no response YAML was discovered."
                       }
                   ],

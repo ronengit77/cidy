@@ -63,7 +63,7 @@ function Infer-Domain {
     if ($explicit) { return $explicit }
 
     if ($text -match "out_of_scope|out of scope|weather|world cup|poem|laptop|stock") { return "out_of_scope" }
-    if ($text -match "project evaluation evidence|routes? to project evaluation evidence|routes? directly to formulate response project evaluation evidence|evaluations say|evaluations said|evaluation reports say|lessons learned|recommendations from project evaluations|past project evaluations") { return "project_evaluation_evidence" }
+    if ($text -match "project evaluation evidence|routes? to project evaluation evidence|routes? directly to formulate response project evaluation evidence|evaluations say|evaluations said|evaluation reports say|lessons learned|recommendations from project evaluations|past project evaluations") { return "programme_development" }
     if ($text -match "formulate response da|routes? (directly )?to da|routes? (directly )?to formulate response da") { return "da" }
     if ($text -match "formulate response rptc|routes? (directly )?to rptc") { return "rptc" }
     if ($text -match "formulate response pdf|routes? (directly )?to pdf") { return "pdf" }
@@ -112,7 +112,7 @@ function Infer-TopicAreas {
     if ($text -match "templates|template") { $areas.Add("templates") }
     if ($text -match "recommendations") { $areas.Add("recommendations") }
     if ($text -match "lessons_learned|lessons learned") { $areas.Add("lessons_learned") }
-    if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|partnerships") { $areas.Add("evaluation_evidence") }
+    if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|partnerships|project evaluation evidence|project evaluations|lessons learned") { $areas.Add("projects_evaluations") }
     if ($text -match "cd_strategy|capacity development strategy") { $areas.Add("cd_strategy") }
     if ($text -match "steering_committee|steering committee") { $areas.Add("steering_committee") }
     if ($text -match "tag_meetings|tag meeting|tag materials") { $areas.Add("tag_meetings") }
@@ -192,9 +192,9 @@ function Apply-Clarification {
         $result.domain = "programme_development"
         $result.fundingStream = "UNCLEAR"
     } elseif ($clar -match "project evaluations|lessons learned") {
-        $result.domain = "project_evaluation_evidence"
+        $result.domain = "programme_development"
         $result.fundingStream = "UNCLEAR"
-        $result.topicAreas = @("evaluation_evidence")
+        $result.topicAreas = @("projects_evaluations")
     } elseif ($clar -match "about cidy") {
         $result.domain = "about_cidy"
         $result.fundingStream = "UNCLEAR"
@@ -265,7 +265,7 @@ function Test-TopicAreaMapped {
         [string[]]$TopicAreas,
         [object[]]$Folders
     )
-    if ($Domain -in @("out_of_scope", "dead_end", "about_cidy", "pdf", "project_evaluation_evidence")) {
+    if ($Domain -in @("out_of_scope", "dead_end", "about_cidy", "pdf")) {
         return [ordered]@{ mapped = $true; matched = @(); unmapped = @() }
     }
     $domainFolders = @($Folders | Where-Object { $_.domain -eq $Domain })

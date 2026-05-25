@@ -70,49 +70,49 @@
       "Scenario": "Happy path - project evaluation evidence",
       "Test question": "What do project evaluations say about sustainability?",
       "Clarification": "",
-      "Expected behavior": "Routes directly to Formulate Response Project Evaluation Evidence. This is actual evaluation evidence, not evaluation design guidance."
+      "Expected behavior": "Routes directly to Programme Development with topic_area=projects_evaluations. This is actual evaluation evidence, not evaluation design guidance."
     },
     {
       "Scenario": "Happy path - evaluation recommendations",
       "Test question": "Summarize recommendations from project evaluations related to stakeholder engagement.",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=recommendations."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - lessons learned",
       "Test question": "What lessons learned are available from past capacity development projects?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=lessons_learned."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - DA evaluation evidence distinction",
       "Test question": "What have evaluations said about DA projects?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence, using DA as context if available. It should not route to DA evaluation design guidance."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations, using DA as context if available. It should not route to DA evaluation design guidance."
     },
     {
       "Scenario": "Happy path - recurring evaluation findings",
       "Test question": "Are there recurring findings from past project evaluations?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=evaluation_evidence."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - evaluation weaknesses",
       "Test question": "What do evaluation reports say about project design weaknesses?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - partnerships in evaluations",
       "Test question": "What have previous evaluations found about partnerships?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - sustainability recommendations",
       "Test question": "What do evaluations recommend about sustainability?",
       "Clarification": "",
-      "Expected behavior": "Routes to Project Evaluation Evidence with topic_area=recommendations."
+      "Expected behavior": "Routes to Programme Development with topic_area=projects_evaluations."
     },
     {
       "Scenario": "Happy path - Programme Development CD Strategy",
@@ -238,7 +238,7 @@
       "Scenario": "Clarification path - domain to Evaluation Evidence",
       "Test question": "I need help understanding project performance. Where should I look?",
       "Clarification": "Project Evaluations / Lessons Learned",
-      "Expected behavior": "Clarifier maps to knowledge_domain=project_evaluation_evidence and routes to Project Evaluation Evidence."
+      "Expected behavior": "Clarifier maps to knowledge_domain=programme_development, topic_area=projects_evaluations and routes to Programme Development."
     },
     {
       "Scenario": "Clarification path - domain to About Cidy",

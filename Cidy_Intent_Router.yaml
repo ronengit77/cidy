@@ -91,6 +91,22 @@ beginDialog:
               id: end_deadEnd_afterUserFeedback
 
     - kind: ConditionGroup
+      id: conditionGroup_normalizeProjectEvaluationsRoute
+      conditions:
+        - id: conditionItem_normalizeLegacyProjectEvaluationEvidence
+          condition: =Global.knowledgeDomain = "project_evaluation_evidence" || Global.topicArea = "evaluation_evidence"
+          actions:
+            - kind: SetVariable
+              id: normalizeProjectEvaluationsDomain
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: normalizeProjectEvaluationsTopic
+              variable: Global.topicArea
+              value: projects_evaluations
+
+    - kind: ConditionGroup
       id: conditionGroup_routeByKnowledgeDomain
       conditions:
         - id: conditionItem_routeAboutCidy
@@ -108,23 +124,8 @@ beginDialog:
             - kind: EndDialog
               id: end_aboutCidyNotDeveloped
 
-        - id: conditionItem_routeProjectEvaluationEvidence
-          condition: =Global.knowledgeDomain = "project_evaluation_evidence"
-          actions:
-            - kind: SetVariable
-              id: setRoutingTarget_projectEvaluationEvidence
-              variable: Global.routingTarget
-              value: Formulate Response Project Evaluation Evidence
-
-            - kind: SendActivity
-              id: sendActivity_projectEvaluationEvidenceNotDeveloped
-              activity: Cidy Is under development this topic is not yet developed (Project Evaluation Evidence)
-
-            - kind: EndDialog
-              id: end_projectEvaluationEvidenceNotDeveloped
-
         - id: conditionItem_routeProgrammeDevelopment
-          condition: =Global.knowledgeDomain = "programme_development"
+          condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations"
           actions:
             - kind: SetVariable
               id: setRoutingTarget_programmeDevelopment

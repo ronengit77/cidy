@@ -99,7 +99,6 @@ function Get-InventoryTopicAreas {
         "design_evaluation",
         "evaluation_criteria",
         "evaluation_design",
-        "evaluation_evidence",
         "general",
         "governance_roles",
         "ipmr",

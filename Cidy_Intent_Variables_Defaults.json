@@ -54,7 +54,6 @@
                                                                            "da",
                                                                            "rptc",
                                                                            "pdf",
-                                                                           "project_evaluation_evidence",
                                                                            "programme_development",
                                                                            "general_cd",
                                                                            "out_of_scope",
@@ -86,7 +85,6 @@
                                                                      "design_evaluation",
                                                                      "evaluation_criteria",
                                                                      "evaluation_design",
-                                                                     "evaluation_evidence",
                                                                      "general",
                                                                      "governance_roles",
                                                                      "ipmr",
@@ -172,7 +170,6 @@
                                                                          "Formulate Response DA",
                                                                          "Formulate Response RPTC",
                                                                          "Formulate Response PDF",
-                                                                         "Formulate Response Project Evaluation Evidence",
                                                                          "Formulate Response Programme Development",
                                                                          "Formulate Response General",
                                                                          "User Feedback"
@@ -378,15 +375,18 @@
                                                                      "Global.fundingStream":  "UNCLEAR"
                                                                  },
                                                           "Project Evaluations / Lessons Learned":  {
-                                                                                                        "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                                        "Global.knowledgeDomain":  "programme_development",
+                                                                                                        "Global.topicArea":  "projects_evaluations",
                                                                                                         "Global.fundingStream":  "UNCLEAR"
                                                                                                     },
                                                           "Project Evaluations":  {
-                                                                                      "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                      "Global.knowledgeDomain":  "programme_development",
+                                                                                      "Global.topicArea":  "projects_evaluations",
                                                                                       "Global.fundingStream":  "UNCLEAR"
                                                                                   },
                                                           "Lessons Learned":  {
-                                                                                  "Global.knowledgeDomain":  "project_evaluation_evidence",
+                                                                                  "Global.knowledgeDomain":  "programme_development",
+                                                                                  "Global.topicArea":  "projects_evaluations",
                                                                                   "Global.fundingStream":  "UNCLEAR"
                                                                               },
                                                           "Development Account (DA)":  {
