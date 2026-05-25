@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "generatedAt": "2026-05-25T21:57:19+00:00",
+  "generatedAt": "2026-05-25T22:15:13+00:00",
   "generatedFrom": [
     "Cidy_Intent_Router.yaml",
     "Formulate_Response_DA.yaml",
@@ -10,6 +10,17 @@
   ],
   "domains": [
     {
+      "id": "da",
+      "label": "Development Account",
+      "fundingStream": "DA",
+      "routerStatus": "wired",
+      "routerDialog": "copilots_header_3141e.topic.DA",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
+      "isNewYaml": false,
+      "firstSeenAt": ""
+    },
+    {
       "id": "general_cd",
       "label": "General CDPMO",
       "fundingStream": "UNCLEAR",
@@ -17,6 +28,17 @@
       "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
       "yamlFile": "Formulate_Response_General.yaml",
       "notes": "Discovered from Cidy_Intent_Router.yaml.",
+      "isNewYaml": false,
+      "firstSeenAt": ""
+    },
+    {
+      "id": "about_cidy",
+      "label": "About Cidy",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "missing_yaml",
+      "routerDialog": "",
+      "yamlFile": "Formulate_Response_About_Cidy.yaml",
+      "notes": "Router recognizes this domain, but no response YAML was discovered.",
       "isNewYaml": false,
       "firstSeenAt": ""
     },
@@ -50,28 +72,6 @@
       "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
       "yamlFile": "Formulate_Response_PDF.yaml",
       "notes": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "da",
-      "label": "Development Account",
-      "fundingStream": "DA",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.DA",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "about_cidy",
-      "label": "About Cidy",
-      "fundingStream": "UNCLEAR",
-      "routerStatus": "missing_yaml",
-      "routerDialog": "",
-      "yamlFile": "Formulate_Response_About_Cidy.yaml",
-      "notes": "Router recognizes this domain, but no response YAML was discovered.",
       "isNewYaml": false,
       "firstSeenAt": ""
     }
@@ -242,8 +242,8 @@
       "mappingStatus": "review_required",
       "ownerUnit": "TBD",
       "instructions": "This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like What was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings.",
-      "isNewTopic": true,
-      "firstSeenAt": "2026-05-25T21:57:19+00:00"
+      "isNewTopic": false,
+      "firstSeenAt": ""
     },
     {
       "id": "programme_development_projects_evaluations",
@@ -472,18 +472,18 @@
   ],
   "knownGaps": [
     {
-      "id": "missing_pdf_yaml",
-      "severity": "high",
-      "title": "Create PDF response YAML",
-      "yamlFile": "Formulate_Response_PDF.yaml",
-      "description": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
-    },
-    {
       "id": "missing_about_cidy_yaml",
       "severity": "high",
       "title": "Create About Cidy response YAML",
       "yamlFile": "Formulate_Response_About_Cidy.yaml",
       "description": "Router recognizes this domain, but no response YAML was discovered."
+    },
+    {
+      "id": "missing_pdf_yaml",
+      "severity": "high",
+      "title": "Create PDF response YAML",
+      "yamlFile": "Formulate_Response_PDF.yaml",
+      "description": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
     },
     {
       "id": "rptc_topic_area_alignment",
