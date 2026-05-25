@@ -254,6 +254,12 @@
       border-color: #ead7a9;
     }
 
+    .chip.new {
+      background: #fff1a8;
+      color: #684500;
+      border-color: #e8cd48;
+    }
+
     .chip.gap {
       background: #faecec;
       color: #8d2b2b;
@@ -270,6 +276,16 @@
       border-left: 5px solid var(--blue);
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+
+    .yaml-card.new,
+    .topic-card.new {
+      background: #fffbea;
+      border-color: #e8cd48;
+    }
+
+    .topic-card.new {
+      border-left-color: #d6a700;
     }
 
     .topic-top {
@@ -531,12 +547,14 @@
       const topicCount = new Set(rows.flatMap(row => row.folders.map(folder => `${row.yamlFile}:${folder.topicArea}`))).size;
       const fallbackCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus === "fallback").length;
       const reviewCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus !== "mapped").length;
+      const newYamlCount = rows.filter(row => row.domain?.isNewYaml).length;
+      const newTopicCount = rows.flatMap(row => row.folders).filter(folder => folder.isNewTopic).length;
       const draftLabel = hasLocalDraft() ? "Local draft active" : "Inventory baseline";
       els.metrics.innerHTML = [
         metric("Existing Response YAMLs", rows.length, "Only discovered Formulate_Response_*.yaml files are shown"),
         metric("Mapped Topic Areas", topicCount, "Unique topic-area mappings under existing YAMLs"),
         metric("Knowledge Folders", folderCount, "Folder/source mappings currently recorded"),
-        metric("Needs Review", reviewCount, `${fallbackCount} fallback mapping(s) included`),
+        metric("New This Refresh", newYamlCount + newTopicCount, `${newYamlCount} YAML(s), ${newTopicCount} topic mapping(s)`),
         metric("Draft State", draftLabel, "CRUD edits persist in this browser until reset")
       ].join("");
     }
@@ -587,14 +605,18 @@
 
       els.yamlList.innerHTML = rows.map(row => {
         const domain = row.domain || {};
+        const hasNewTopic = row.folders.some(folder => folder.isNewTopic);
+        const isNewYaml = Boolean(domain.isNewYaml);
         return `
-          <article class="yaml-card">
+          <article class="yaml-card ${isNewYaml || hasNewTopic ? "new" : ""}">
             <div class="yaml-head">
               <div>
                 <h2><code>${escapeHtml(row.yamlFile)}</code></h2>
                 <p class="muted">${escapeHtml(domain.label || "No domain metadata found")} ${domain.id ? `(${escapeHtml(domain.id)})` : ""}</p>
               </div>
               <div class="chips">
+                ${isNewYaml ? chip("new yaml", "new") : ""}
+                ${hasNewTopic ? chip("new topic", "new") : ""}
                 ${chip(domain.routerStatus || "yaml exists", statusClass(domain.routerStatus))}
                 ${chip(domain.fundingStream || "fund unclear")}
                 ${chip(`${row.folders.length} folder mapping${row.folders.length === 1 ? "" : "s"}`)}
@@ -615,13 +637,14 @@
 
     function renderFolder(folder) {
       return `
-        <article class="topic-card" data-folder-id="${escapeHtml(folder.id)}">
+        <article class="topic-card ${folder.isNewTopic ? "new" : ""}" data-folder-id="${escapeHtml(folder.id)}">
           <div class="topic-top">
             <div>
               <h3>${escapeHtml(folder.topicArea || "unknown topic area")}</h3>
               <p class="muted">${escapeHtml(folder.folderName || "Unnamed folder")}</p>
             </div>
             <div class="topic-actions">
+              ${folder.isNewTopic ? chip("new", "new") : ""}
               ${chip(folder.mappingStatus || "unknown", statusClass(folder.mappingStatus))}
               <button type="button" data-action="edit" data-id="${escapeHtml(folder.id)}">Edit</button>
               <button type="button" data-action="move" data-id="${escapeHtml(folder.id)}">Move</button>
@@ -643,6 +666,8 @@
             <div class="value">${escapeHtml(folder.sourceCount ?? ((folder.sourceIds || []).length || "Not recorded"))}</div>
             <div class="key">YAML Source</div>
             <div class="value">${folder.generatedFromYaml ? "Generated from response YAML" : "Manual/draft mapping"}</div>
+            <div class="key">First Seen</div>
+            <div class="value">${escapeHtml(folder.firstSeenAt || "Not new in latest refresh")}</div>
             <div class="key">Instruction Field</div>
             <div class="value"><code>${escapeHtml(folder.sourceUseInstructionSource || "Not recorded")}</code></div>
             <div class="key">Owner Unit</div>

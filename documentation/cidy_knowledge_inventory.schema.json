@@ -87,6 +87,12 @@
         "yamlFile": {
           "type": "string"
         },
+        "isNewYaml": {
+          "type": "boolean"
+        },
+        "firstSeenAt": {
+          "type": "string"
+        },
         "notes": {
           "type": "string"
         },
@@ -152,6 +158,12 @@
           "type": "boolean"
         },
         "sourceUseInstructionSource": {
+          "type": "string"
+        },
+        "isNewTopic": {
+          "type": "boolean"
+        },
+        "firstSeenAt": {
           "type": "string"
         },
         "mappingStatus": {

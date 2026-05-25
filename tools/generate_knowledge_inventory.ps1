@@ -1,5 +1,6 @@
 param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+    [string]$CompareWithGitRef = "",
     [switch]$NoHtmlEmbed
 )
 
@@ -263,6 +264,41 @@ function Set-Utf8NoBom {
     [System.IO.File]::WriteAllText($Path, $Value, $encoding)
 }
 
+function Add-NewMarkers {
+    param(
+        [array]$Domains,
+        [array]$Folders,
+        [object]$Previous,
+        [string]$Timestamp,
+        [string[]]$ResponseYamlFiles
+    )
+    $previousGeneratedFrom = @()
+    $previousTopicKeys = @{}
+    if ($Previous) {
+        $previousGeneratedFrom = @($Previous.generatedFrom)
+        foreach ($folder in @($Previous.folders)) {
+            $key = "$($folder.yamlFile)|$($folder.topicArea)"
+            if (-not $previousTopicKeys.ContainsKey($key)) {
+                $previousTopicKeys[$key] = $folder
+            }
+        }
+    }
+
+    foreach ($domain in $Domains) {
+        $isResponseYaml = $domain.yamlFile -match '^Formulate_Response_.*\.yaml$' -and $domain.yamlFile -in $ResponseYamlFiles
+        $isNewYaml = $isResponseYaml -and $domain.yamlFile -notin $previousGeneratedFrom
+        $domain["isNewYaml"] = [bool]$isNewYaml
+        $domain["firstSeenAt"] = if ($isNewYaml) { $Timestamp } else { "" }
+    }
+
+    foreach ($folder in $Folders) {
+        $key = "$($folder.yamlFile)|$($folder.topicArea)"
+        $isNewTopic = -not $previousTopicKeys.ContainsKey($key)
+        $folder["isNewTopic"] = [bool]$isNewTopic
+        $folder["firstSeenAt"] = if ($isNewTopic) { $Timestamp } else { "" }
+    }
+}
+
 $documentationDir = Join-Path $Root "documentation"
 $inventoryPath = Join-Path $documentationDir "cidy_knowledge_inventory.json"
 $overridesPath = Join-Path $documentationDir "cidy_knowledge_overrides.json"
@@ -270,7 +306,14 @@ $htmlPath = Join-Path $documentationDir "cidy_knowledge_control_center.html"
 $routerPath = Join-Path $Root "Cidy_Intent_Router.yaml"
 
 $previous = $null
-if (Test-Path $inventoryPath) {
+if (-not [string]::IsNullOrWhiteSpace($CompareWithGitRef)) {
+    $inventoryRef = "${CompareWithGitRef}:documentation/cidy_knowledge_inventory.json"
+    $previousJson = & git -C $Root show $inventoryRef 2>$null
+    if ($LASTEXITCODE -eq 0 -and $previousJson) {
+        $previous = ($previousJson -join [Environment]::NewLine) | ConvertFrom-Json
+    }
+}
+if (-not $previous -and (Test-Path $inventoryPath)) {
     $previous = Get-Content -Raw $inventoryPath | ConvertFrom-Json
 }
 $overrides = $null
@@ -391,10 +434,12 @@ $domainOverrides = if ($overrides) { @($overrides.domainOverrides) } else { @() 
 $folderOverrides = if ($overrides) { @($overrides.folderOverrides) } else { @() }
 $domains = Merge-ById -Generated $domains -Overrides $domainOverrides -Fields @("label", "fundingStream", "notes", "ownerUnit")
 $folderArray = Merge-ById -Generated @($folders.ToArray()) -Overrides $folderOverrides -Fields @("folderName", "ownerUnit", "instructions", "mappingStatus", "notes")
+$generatedAt = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssK")
+Add-NewMarkers -Domains $domains -Folders $folderArray -Previous $previous -Timestamp $generatedAt -ResponseYamlFiles @($responseFiles.Name)
 
 $inventory = [ordered]@{
     schemaVersion  = "1.1"
-    generatedAt    = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssK")
+    generatedAt    = $generatedAt
     generatedFrom  = @("Cidy_Intent_Router.yaml") + @($responseFiles.Name)
     domains        = $domains
     folders        = $folderArray

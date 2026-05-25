@@ -72,6 +72,29 @@ beginDialog:
                 knowledgeSources:
                   - copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF
 
+        - id: conditionItem_QD3pfU
+          condition: =Global.topicArea = "projects_evaluations"
+          actions:
+            - kind: SetVariable
+              id: setVariable_VPj1m5
+              variable: Global.sourceUseInstructions
+              value: "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title	Division(s)	EvaluationYear	Countries	RecommendationsList	LessonsLearnedList	FileName	ShortPath	FullPath. Questions related to specific evaluations should be answered from this folder."
+
+            - kind: SearchAndSummarizeContent
+              id: GEdPMK
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se
+
       elseActions:
         - kind: SearchAndSummarizeContent
           id: J7vEWX

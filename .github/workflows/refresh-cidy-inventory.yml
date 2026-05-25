@@ -1,0 +1,43 @@
+name: Refresh Cidy Inventory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Formulate_Response_*.yaml"
+      - "Cidy_Intent_Router.yaml"
+      - "documentation/cidy_knowledge_overrides.json"
+      - "tools/generate_knowledge_inventory.ps1"
+      - ".github/workflows/refresh-cidy-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-inventory:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Regenerate Cidy knowledge inventory
+        shell: pwsh
+        run: ./tools/generate_knowledge_inventory.ps1 -CompareWithGitRef HEAD^
+
+      - name: Commit regenerated inventory
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add documentation/cidy_knowledge_inventory.json documentation/cidy_knowledge_control_center.html
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "Refresh generated Cidy inventory"
+            git push
+          } else {
+            Write-Host "Inventory is already current."
+          }

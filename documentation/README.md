@@ -10,6 +10,8 @@ Use **Response Map** from the control center to open `cidy_response_topic_map.ht
 
 The response YAML files are the source of truth for generated response-map facts. Regenerate `cidy_knowledge_inventory.json` after YAML changes so the HTML reflects the latest topic tags, YAML branch IDs, source IDs, source labels, and source-use instructions. Keep owner units and other manually curated metadata in `cidy_knowledge_overrides.json`.
 
+On GitHub, `.github/workflows/refresh-cidy-inventory.yml` regenerates the inventory after relevant YAML pushes and commits the refreshed generated files. Newly discovered response YAMLs or topic mappings are marked in the inventory and highlighted in yellow on the Response Map.
+
 ## Regenerating Inventory From YAML
 
 When a `Formulate_Response_*.yaml` file or `Cidy_Intent_Router.yaml` changes, regenerate the control-center inventory:
