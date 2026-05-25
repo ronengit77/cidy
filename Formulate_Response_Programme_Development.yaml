@@ -82,10 +82,20 @@ beginDialog:
 
             - kind: SearchAndSummarizeContent
               id: GEdPMK
+              autoSend: false
+              variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
                 "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
                 "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about project evaluations, evaluation reports, recommendations, or lessons learned, topic area: {Global.topicArea}.
+                Answer using ONLY the provided Project Evaluations knowledge source.
+                For count questions, count matching records from the evaluation log where possible. If the source only supports an approximate count, state that limitation clearly.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
               fileSearchDataSource:
                 searchFilesMode:
                   kind: DoNotSearchFiles
