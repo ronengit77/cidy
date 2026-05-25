@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T17:56:35-04:00",
+                    "generatedAt":  "2026-05-25T19:05:00-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
@@ -23,10 +23,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_DA.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -45,6 +46,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -72,10 +77,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_DA.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -94,6 +100,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -121,10 +131,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_Programme_Development.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -143,6 +154,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -170,10 +185,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -192,6 +208,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -219,10 +239,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -241,6 +262,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -268,10 +293,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -290,6 +316,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -317,10 +347,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -339,6 +370,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -366,10 +401,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -388,6 +424,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -415,10 +455,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_PDF.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -437,6 +478,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -464,10 +509,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_About_Cidy.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -486,6 +532,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -513,10 +563,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_About_Cidy.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -535,6 +586,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -562,10 +617,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_About_Cidy.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -584,6 +640,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -611,10 +671,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_RPTC.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -633,6 +694,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -660,10 +725,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_PDF.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -682,6 +748,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -709,10 +779,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_About_Cidy.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -731,6 +802,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -758,10 +833,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_PDF.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                          "failures":  [
                                           {
                                               "type":  "Formulate_Response_YAML_not_found",
@@ -780,6 +856,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -807,10 +887,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_Programme_Development.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -829,6 +910,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -856,9 +941,10 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_not_found_=_evaluation_design",
@@ -877,6 +963,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -900,9 +990,10 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_not_found_=_monitoring_reporting",
@@ -921,6 +1012,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {
@@ -944,10 +1039,11 @@
                                            "user_inquiry.yaml",
                                            "Cidy_Intent.yaml",
                                            "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
                                            "Cidy_Intent_Router.yaml",
                                            "Formulate_Response_DA.yaml"
                                        ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                          "failures":  [
                                           {
                                               "type":  "topic_area_not_mapped",
@@ -966,6 +1062,10 @@
                                                    },
                                                    {
                                                        "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
                                                        "decision":  "Begin Cidy_Intent_Router.yaml"
                                                    },
                                                    {

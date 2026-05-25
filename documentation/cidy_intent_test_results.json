@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T17:56:35-04:00",
+                    "generatedAt":  "2026-05-25T19:05:00-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
@@ -33,10 +33,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -66,6 +67,15 @@
                                                               "topicAreas":  [
                                                                                  "project_planning_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -125,10 +135,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -158,6 +169,15 @@
                                                               "topicAreas":  [
                                                                                  "project_planning_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -217,10 +237,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -250,6 +271,15 @@
                                                               "topicAreas":  [
                                                                                  "monitoring_reporting"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -314,10 +344,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -349,6 +380,15 @@
                                                                                  "budget_finance",
                                                                                  "eligibility_budget"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -413,10 +453,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -446,6 +487,15 @@
                                                               "topicAreas":  [
                                                                                  "project_planning_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -506,10 +556,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -541,6 +592,15 @@
                                                                                  "evaluation_design",
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -601,10 +661,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -636,6 +697,15 @@
                                                                                  "evaluation_design",
                                                                                  "templates"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -696,10 +766,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -731,6 +802,15 @@
                                                                                  "project_planning_design",
                                                                                  "general"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -791,10 +871,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -824,6 +905,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -884,10 +974,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -919,6 +1010,15 @@
                                                                                  "project_planning_design",
                                                                                  "templates"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -978,10 +1078,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1011,6 +1112,15 @@
                                                               "topicAreas":  [
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1071,10 +1181,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1106,6 +1217,15 @@
                                                                                  "projects_evaluations",
                                                                                  "recommendations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1166,10 +1286,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1201,6 +1322,15 @@
                                                                                  "projects_evaluations",
                                                                                  "lessons_learned"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1260,10 +1390,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1293,6 +1424,15 @@
                                                               "topicAreas":  [
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1352,10 +1492,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1385,6 +1526,15 @@
                                                               "topicAreas":  [
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1446,10 +1596,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1483,6 +1634,15 @@
                                                                                  "project_planning_design",
                                                                                  "reports"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1543,10 +1703,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1576,6 +1737,15 @@
                                                               "topicAreas":  [
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1636,10 +1806,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1671,6 +1842,15 @@
                                                                                  "projects_evaluations",
                                                                                  "recommendations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1730,10 +1910,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1763,6 +1944,15 @@
                                                               "topicAreas":  [
                                                                                  "cd_strategy"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1826,10 +2016,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1859,6 +2050,15 @@
                                                               "topicAreas":  [
                                                                                  "steering_committee"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -1918,10 +2118,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -1951,6 +2152,15 @@
                                                               "topicAreas":  [
                                                                                  "tag_meetings"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2010,10 +2220,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2043,6 +2254,15 @@
                                                               "topicAreas":  [
                                                                                  "general"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2103,10 +2323,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2138,6 +2359,15 @@
                                                                                  "budget_finance",
                                                                                  "policy_guidance_compliance"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2197,10 +2427,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2230,6 +2461,15 @@
                                                               "topicAreas":  [
                                                                                  "governance_roles"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2293,10 +2533,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2326,6 +2567,15 @@
                                                               "topicAreas":  [
                                                                                  "governance_roles"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2389,10 +2639,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2422,6 +2673,15 @@
                                                               "topicAreas":  [
                                                                                  "programme_design_standards"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2485,10 +2745,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2518,6 +2779,15 @@
                                                               "topicAreas":  [
                                                                                  "evaluation_criteria"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2581,10 +2851,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2614,6 +2885,15 @@
                                                               "topicAreas":  [
                                                                                  "reports"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2677,10 +2957,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_PDF.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2710,6 +2991,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2773,10 +3063,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_About_Cidy.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2806,6 +3097,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2869,10 +3169,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_About_Cidy.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2902,6 +3203,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -2965,10 +3275,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_About_Cidy.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -2998,6 +3309,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3061,10 +3381,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3094,6 +3415,15 @@
                                                               "topicAreas":  [
                                                                                  "evaluation_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3153,10 +3483,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3186,6 +3517,15 @@
                                                               "topicAreas":  [
                                                                                  "reports"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3249,10 +3589,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_PDF.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3282,6 +3623,15 @@
                                                               "topicAreas":  [
                                                                                  "templates"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3345,10 +3695,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_General.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_General.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_General.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3379,6 +3730,15 @@
                                                               "topicAreas":  [
                                                                                  "general"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3439,10 +3799,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3474,6 +3835,15 @@
                                                                                  "general",
                                                                                  "project_planning_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3534,10 +3904,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3567,6 +3938,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3626,10 +4006,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3659,6 +4040,15 @@
                                                               "topicAreas":  [
                                                                                  "projects_evaluations"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3718,10 +4108,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_About_Cidy.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3751,6 +4142,15 @@
                                                               "topicAreas":  [
                                                                                  "about_cidy"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3814,10 +4214,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_RPTC.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3847,6 +4248,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3906,10 +4316,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3939,6 +4350,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -3998,10 +4418,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4031,6 +4452,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4090,10 +4520,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_PDF.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_PDF.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4123,6 +4554,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4186,10 +4626,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_Programme_Development.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4221,6 +4662,15 @@
                                                               "topicAreas":  [
                                                                                  "project_planning_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4284,9 +4734,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4316,6 +4767,15 @@
                                                               "topicAreas":  [
                                                                                  "evaluation_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4363,9 +4823,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4395,6 +4856,15 @@
                                                               "topicAreas":  [
                                                                                  "monitoring_reporting"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4442,10 +4912,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4475,6 +4946,15 @@
                                                               "topicAreas":  [
                                                                                  "evaluation_design"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4534,10 +5014,11 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
                                           "Formulate_Response_DA.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4567,6 +5048,15 @@
                                                               "topicAreas":  [
                                                                                  "templates"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4630,9 +5120,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4663,7 +5154,16 @@
                                                                                  "templates"
                                                                              ]
                                                           },
-                                               "decision":  "Route to User Feedback"
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
                                            {
                                                "topic":  "Cidy_Intent_Router.yaml",
@@ -4705,9 +5205,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4737,6 +5238,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4780,9 +5290,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4812,6 +5323,15 @@
                                                               "topicAreas":  [
                                                                                  "templates"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4855,9 +5375,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4887,6 +5408,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -4930,9 +5460,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4962,6 +5493,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5005,9 +5545,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5037,6 +5578,15 @@
                                                               "topicAreas":  [
                                                                                  "unclear"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5080,9 +5630,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5112,6 +5663,15 @@
                                                               "topicAreas":  [
                                                                                  "out_of_scope"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5155,9 +5715,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5187,6 +5748,15 @@
                                                               "topicAreas":  [
                                                                                  "out_of_scope"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5230,9 +5800,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5262,6 +5833,15 @@
                                                               "topicAreas":  [
                                                                                  "out_of_scope"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5305,9 +5885,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5337,6 +5918,15 @@
                                                               "topicAreas":  [
                                                                                  "out_of_scope"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },
@@ -5380,9 +5970,10 @@
                                           "user_inquiry.yaml",
                                           "Cidy_Intent.yaml",
                                           "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Cidy_Intent_Router.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -5412,6 +6003,15 @@
                                                               "topicAreas":  [
                                                                                  "out_of_scope"
                                                                              ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
                                                           },
                                                "decision":  "Begin Cidy_Intent_Router.yaml"
                                            },

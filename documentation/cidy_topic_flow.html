@@ -135,9 +135,9 @@
     }
 
     .flow {
-      min-width: 1060px;
+      min-width: 1280px;
       display: grid;
-      grid-template-columns: 180px 34px 190px 34px 190px 34px 190px 34px 220px;
+      grid-template-columns: 180px 34px 190px 34px 190px 34px 190px 34px 190px 34px 220px;
       gap: 0;
       align-items: center;
     }
@@ -369,7 +369,7 @@
     <div class="hero-inner">
       <p class="eyebrow">Copilot Studio Topic Map</p>
       <h1>Cidy Application Design</h1>
-      <p class="hero-copy">A visual guide to how the YAML topics collaborate: capture the question, classify intent, clarify ambiguity, route to knowledge sources, assess confidence, collect feedback, and escalate when needed.</p>
+      <p class="hero-copy">A visual guide to how the YAML topics collaborate: capture the question, classify intent, clarify ambiguity, enrich search context, route to knowledge sources, assess confidence, collect feedback, and escalate when needed.</p>
       <p class="hero-copy"><a class="scenario-link" href="cidy_knowledge_control_center.html">Open Cidy Knowledge Control Center</a></p>
     </div>
   </header>
@@ -379,7 +379,7 @@
       <h2 id="overview-title">System Snapshot</h2>
       <div class="overview-grid">
         <div class="metric">
-          <strong>18</strong>
+          <strong>19</strong>
           <span>YAML files in the current topic export set.</span>
         </div>
         <div class="metric">
@@ -387,8 +387,8 @@
           <span>Empty but called file: <code>reset_conversation.yaml</code>.</span>
         </div>
         <div class="metric">
-          <strong>2</strong>
-          <span>Response topics present but not wired from the router.</span>
+          <strong>1</strong>
+          <span>Question enhancement topic between clarification and routing.</span>
         </div>
         <div class="metric">
           <strong>3</strong>
@@ -399,7 +399,7 @@
 
     <section aria-labelledby="flow-title">
       <h2 id="flow-title">Primary Topic Flow</h2>
-      <div class="flow-wrap" role="img" aria-label="Cidy topic flow from conversation start to feedback and escalation">
+      <div class="flow-wrap" role="img" aria-label="Cidy topic flow from conversation start through question enhancement to feedback and escalation">
         <div class="flow">
           <div class="node start">
             <h3>Start</h3>
@@ -423,6 +423,12 @@
             <h3>Clarifier</h3>
             <p><code>Cidy_Intent_Clarifier.yaml</code></p>
             <small>Asks fund, domain, or artifact follow-up.</small>
+          </div>
+          <div class="arrow"></div>
+          <div class="node intent">
+            <h3>Enhancer</h3>
+            <p><code>Question_Enhancer.yaml</code></p>
+            <small>Adds non-routing search hints to <code>Global.executiveQuestionEnhancements</code>.</small>
           </div>
           <div class="arrow"></div>
           <div class="node router">
@@ -489,19 +495,26 @@
           <div class="step">
             <div class="num">4</div>
             <div>
-              <h3>Route</h3>
-              <p>The router sends DA and RPTC requests to response topics, routes out-of-scope or dead-end states to feedback, and currently stops some recognized domains as not developed.</p>
+              <h3>Enhance</h3>
+              <p><code>Question_Enhancer.yaml</code> adds search metadata such as dates, acronyms, filters, synonyms, recency intent, and confidence cautions. It does not modify routing variables.</p>
             </div>
           </div>
           <div class="step">
             <div class="num">5</div>
             <div>
-              <h3>Answer</h3>
-              <p>Response topics search selected knowledge sources and write <code>Global.draftResponse</code> with answer, sources, and confidence.</p>
+              <h3>Route</h3>
+              <p>The router sends finalized DA, RPTC, Programme Development, and general retry requests to response topics, and routes out-of-scope or dead-end states to feedback.</p>
             </div>
           </div>
           <div class="step">
             <div class="num">6</div>
+            <div>
+              <h3>Answer</h3>
+              <p>Response topics search selected knowledge sources, include <code>Global.executiveQuestionEnhancements</code> as additional context, and write <code>Global.draftResponse</code> with answer, sources, and confidence.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">7</div>
             <div>
               <h3>Close the loop</h3>
               <p>Confidence formatting, warning, sharing, feedback, escalation, restart, and end-of-conversation topics complete the interaction lifecycle.</p>
@@ -519,10 +532,11 @@
             </ul>
           </div>
           <div class="finding">
-            <span class="badge warn">Not wired</span>
+            <span class="badge ok">Search context</span>
             <ul>
-              <li><code>Formulate_Response_General.yaml</code> is present but not called by the router.</li>
-              <li><code>Formulate_Response_Programme_Development.yaml</code> is present but not called by the router.</li>
+              <li><code>Question_Enhancer.yaml</code> runs after clarification and before routing.</li>
+              <li>It writes <code>Global.executiveQuestionEnhancements</code> for response topics to consider during search.</li>
+              <li>It must not change <code>Global.knowledgeDomain</code>, <code>Global.fundingStream</code>, <code>Global.topicArea</code>, or routing status.</li>
             </ul>
           </div>
           <div class="finding">
@@ -607,13 +621,13 @@
           </tr>
           <tr>
             <td>Intent</td>
-            <td><code>Cidy_Intent.yaml</code>, <code>Cidy_Intent_Clarifier.yaml</code>, <code>Cidy_Intent_Router.yaml</code></td>
-            <td>Classifies, clarifies, and routes user requests using global intent variables.</td>
+            <td><code>Cidy_Intent.yaml</code>, <code>Cidy_Intent_Clarifier.yaml</code>, <code>Question_Enhancer.yaml</code>, <code>Cidy_Intent_Router.yaml</code></td>
+            <td>Classifies, clarifies, enriches search context, and routes user requests using global intent variables.</td>
           </tr>
           <tr>
             <td>Response</td>
             <td><code>Formulate_Response_DA.yaml</code>, <code>Formulate_Response_RPTC.yaml</code>, <code>Formulate_Response_General.yaml</code>, <code>Formulate_Response_Programme_Development.yaml</code></td>
-            <td>Searches knowledge sources and prepares draft answers. General and Programme Development are not currently reached from the router.</td>
+            <td>Searches knowledge sources and prepares draft answers using the finalized user question and question-enhancement context.</td>
           </tr>
           <tr>
             <td>Confidence</td>

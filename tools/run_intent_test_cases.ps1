@@ -408,7 +408,16 @@ foreach ($case in $testData.testCases) {
                 fundingStream      = $finalFunding
                 topicAreas         = @($finalAreas)
             }
-            decision = if ($finalDomain -eq "dead_end") { "Route to User Feedback" } else { "Begin Cidy_Intent_Router.yaml" }
+            decision = "Begin Question_Enhancer.yaml"
+        },
+        [ordered]@{
+            topic    = "Question_Enhancer.yaml"
+            output   = [ordered]@{
+                writesVariable = "Global.executiveQuestionEnhancements"
+                affectsRouting = $false
+                enhancerRuns   = if ($afterClarification.outcome -eq "ready_to_route") { "Yes" } else { "No" }
+            }
+            decision = "Begin Cidy_Intent_Router.yaml"
         },
         [ordered]@{
             topic    = "Cidy_Intent_Router.yaml"

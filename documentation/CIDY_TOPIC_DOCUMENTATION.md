@@ -1,6 +1,6 @@
 # Cidy Copilot Studio Topic Documentation
 
-This folder contains Copilot Studio topic YAML exports for Cidy, the UN DESA Capacity Development Assistant. The topics implement a user-inquiry, classification, clarification, routing, response-generation, confidence, feedback, escalation, restart, and conversation-ending flow.
+This folder contains Copilot Studio topic YAML exports for Cidy, the UN DESA Capacity Development Assistant. The topics implement a user-inquiry, classification, clarification, question-enhancement, routing, response-generation, confidence, feedback, escalation, restart, and conversation-ending flow.
 
 ## Main Conversation Flow
 
@@ -120,22 +120,21 @@ Resolved since the previous scan:
 | File | Why it may be unused or risky | Recommendation |
 | --- | --- | --- |
 | `reset_conversation.yaml` | The file exists but is empty, while `start_over.yaml` calls `ResetConversation`. | Re-export or recreate the reset topic before relying on start-over behavior. |
-| `Formulate_Response_Programme_Development.yaml` | The router's `programme_development` branch currently sends "not yet developed" and ends the dialog instead of calling this topic. | Either wire `Cidy_Intent_Router.yaml` to call this topic, or remove it if programme-development answers are intentionally not supported yet. Review its DA-oriented prompt/source IDs first. |
-| `Formulate_Response_General.yaml` | The router's `general_cd` branch currently sends "not yet developed" and ends the dialog instead of calling this topic. | Either wire `Cidy_Intent_Router.yaml` to call this topic for `general_cd`, or remove it if general CD answers are intentionally not supported yet. |
+| `Formulate_Response_Programme_Development.yaml` | The topic is now wired for programme-development topic areas, but some branch prompt text/source labels still need human validation. | Review programme-development source IDs and wording as knowledge coverage matures. |
+| `Formulate_Response_General.yaml` | The topic is now used for broad/general retry behavior. | Keep it aligned with the top-level `Knowledge` source and wide-retry feedback path. |
 | `Goodbye.yaml` | Not called by other custom topics, but it has its own goodbye trigger phrases. | Keep if the bot should support standalone goodbye intent. |
 | `start_over.yaml` | Not called by other custom topics, but it has its own start-over trigger phrases. | Keep if the bot should support standalone restart intent after `reset_conversation.yaml` is populated. |
 
 ## Routing Gaps And Consistency Notes
 
-1. `programme_development`, `project_evaluation_evidence`, `about_cidy`, and `general_cd` are recognized by the classifier and clarifier, but the router currently responds that these areas are not developed and ends the dialog.
-2. `Formulate_Response_Programme_Development.yaml` appears available but is not used by the router. Its prompt text still says the user is asking about the Development Account, and its knowledge-source IDs look DA-oriented, so it should be reviewed before wiring it in.
-3. `Formulate_Response_General.yaml` appears available but is not used by the router. It looks more aligned with `general_cd` than the current "not developed" router branch.
-4. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
-5. RPTC topic-area values in `Formulate_Response_RPTC.yaml` do not fully match the classifier's allowed `topic_area` list. For example, the RPTC file checks `policy_compliance`, `reporting_documentation`, `process_governance`, `design_evaluation`, and `definition`, while the classifier uses values such as `policy_guidance_compliance`, `monitoring_reporting`, `governance_roles`, `evaluation_design`, and `general`. This means many RPTC questions will fall through to the generic RPTC search.
-6. Several user-facing/debug strings contain mojibake such as `DEBUG â€”`. These should likely be corrected to plain ASCII hyphens or proper UTF-8 em dashes in Copilot Studio exports.
-7. `share_response.yaml` sends `**DEBUG :Answer:**` to the user. If this is production-facing, remove `DEBUG :`.
-8. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
-9. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
+1. `about_cidy` is recognized by the classifier and clarifier, but no matching response YAML exists yet.
+2. `Formulate_Response_Programme_Development.yaml` is wired, but some branch prompt text still says the user is asking about the Development Account and its knowledge-source IDs should be reviewed.
+3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
+4. RPTC topic-area values in `Formulate_Response_RPTC.yaml` do not fully match the classifier's allowed `topic_area` list. For example, the RPTC file checks `policy_compliance`, `reporting_documentation`, `process_governance`, `design_evaluation`, and `definition`, while the classifier uses values such as `policy_guidance_compliance`, `monitoring_reporting`, `governance_roles`, `evaluation_design`, and `general`. This means many RPTC questions will fall through to the generic RPTC search.
+5. Several user-facing/debug strings contain mojibake such as `DEBUG â€”`. These should likely be corrected to plain ASCII hyphens or proper UTF-8 em dashes in Copilot Studio exports.
+6. `share_response.yaml` sends `**DEBUG :Answer:**` to the user. If this is production-facing, remove `DEBUG :`.
+7. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
+8. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
 ## Response Pipeline Notes
 
@@ -148,6 +147,5 @@ All `SearchAndSummarizeContent` actions in Formulate Response topics that are fo
 1. Re-export or rebuild `reset_conversation.yaml`, because the file exists but is empty.
 2. Decide whether `FormulateResponse` is an exported PDF topic that is missing from this folder. If so, add it. If not, update the router to the correct topic name.
 3. Confirm whether `Fallback` is a built-in/system topic. If it is custom, export it into this folder.
-4. Decide whether to enable `Formulate_Response_General.yaml` and `Formulate_Response_Programme_Development.yaml`; if yes, update `Cidy_Intent_Router.yaml` to call them.
-5. Align classifier `topic_area` values with the condition checks inside each response topic, especially RPTC.
-6. Rename typoed files only if Copilot Studio export/import tooling and any external references will tolerate the filename changes.
+4. Align classifier `topic_area` values with the condition checks inside each response topic, especially RPTC.
+5. Rename typoed files only if Copilot Studio export/import tooling and any external references will tolerate the filename changes.
