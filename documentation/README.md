@@ -6,6 +6,8 @@ Open `cidy_knowledge_control_center.html` locally or through GitHub Pages. It re
 
 Browser-entered updates are saved in localStorage. Use **Export JSON** to download an updated inventory file when you want to commit those updates.
 
+Use **Response Map** from the control center to open `cidy_response_topic_map.html`, which lists existing `Formulate_Response_*.yaml` files and the topic areas, folders, source IDs, mapping status, and instructions under each one.
+
 ## Regenerating Inventory From YAML
 
 When a `Formulate_Response_*.yaml` file or `Cidy_Intent_Router.yaml` changes, regenerate the control-center inventory:

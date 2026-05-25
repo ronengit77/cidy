@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cidy Response Topic Map</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6673;
+      --page: #f5f7fa;
+      --panel: #ffffff;
+      --line: #dce4ec;
+      --blue: #2454a6;
+      --green: #2f7d4c;
+      --amber: #a86d00;
+      --red: #b23b3b;
+      --shadow: 0 14px 32px rgba(23, 32, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(9, 35, 63, 0.84), rgba(9, 35, 63, 0.66)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='720' viewBox='0 0 1600 720'%3E%3Crect width='1600' height='720' fill='%230f3559'/%3E%3Cg fill='none' stroke='%239bd5dd' stroke-opacity='.34' stroke-width='2'%3E%3Cpath d='M150 142h315v90H150zM608 112h315v90H608zM1068 142h315v90h-315zM260 430h315v104H260zM710 392h315v104H710zM1128 430h315v104h-315z'/%3E%3Cpath d='M465 187h143M923 157h145M575 430l135-228M1025 444l103-212M1025 444h103'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.74' font-family='Segoe UI, Arial' font-size='28'%3E%3Ctext x='226' y='199'>YAML</text%3E%3Ctext x='664' y='169'>Domain</text%3E%3Ctext x='1128' y='199'>Topic</text%3E%3Ctext x='334' y='490'>Folder</text%3E%3Ctext x='768' y='456'>Source</text%3E%3Ctext x='1192' y='490'>Status</text%3E%3C/g%3E%3C/svg%3E") center/cover;
+      color: #fff;
+    }
+
+    .wrap {
+      width: min(1240px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 42px 0 34px;
+    }
+
+    .top-link {
+      color: #d5eef5;
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 16px;
+    }
+
+    .top-link:hover { text-decoration: underline; }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 920px;
+      color: #e8f3f6;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    p { margin: 0; }
+
+    code {
+      background: #eef3f7;
+      color: #24364a;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    .toolbar,
+    .metrics,
+    .yaml-list,
+    .topic-list,
+    .folder-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .toolbar {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    input {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #cbd5df;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .button-like {
+      border: 1px solid #cbd5df;
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 8px 12px;
+      background: #eef3f7;
+      color: #24364a;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 28px;
+    }
+
+    .metric,
+    .yaml-card,
+    .topic-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 112px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+      margin-bottom: 9px;
+    }
+
+    .muted,
+    .metric span {
+      color: var(--muted);
+    }
+
+    .yaml-list {
+      margin-top: 28px;
+    }
+
+    .yaml-card {
+      padding: 18px;
+      min-width: 0;
+    }
+
+    .yaml-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #eef3f7;
+      color: #24364a;
+      border: 1px solid #d8e1ea;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .chip.wired {
+      background: #e9f5ee;
+      color: #245d39;
+      border-color: #c6e4d1;
+    }
+
+    .chip.review {
+      background: #fff5df;
+      color: #7c5000;
+      border-color: #ead7a9;
+    }
+
+    .chip.gap {
+      background: #faecec;
+      color: #8d2b2b;
+      border-color: #efcaca;
+    }
+
+    .topic-list {
+      gap: 10px;
+    }
+
+    .topic-card {
+      padding: 12px;
+      box-shadow: none;
+      border-left: 5px solid var(--blue);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .topic-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .folder-grid {
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 6px 12px;
+      font-size: 14px;
+    }
+
+    .key {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .value {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid #ead7a9;
+      border-radius: 8px;
+      background: #fff8e8;
+      color: #684500;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 860px) {
+      .toolbar,
+      .metrics,
+      .yaml-head,
+      .topic-top,
+      .folder-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <a class="top-link" href="cidy_knowledge_control_center.html">Back to control center</a>
+      <a class="top-link" href="cidy_topic_flow.html">Topic architecture</a>
+      <h1>Cidy Response Topic Map</h1>
+      <p>Map existing Formulate Response YAML files to their current domains, topic areas, knowledge folders, source IDs, mapping status, and source-use instructions.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="toolbar" aria-label="Response topic map tools">
+      <input id="searchBox" type="search" placeholder="Search YAML, domain, topic area, folder, source ID, status">
+      <a class="button-like" href="cidy_knowledge_inventory.json">Open Inventory JSON</a>
+    </section>
+
+    <section id="loadNotice" class="notice hidden"></section>
+    <section class="metrics" id="metrics" aria-label="Response topic summary"></section>
+    <section class="yaml-list" id="yamlList" aria-label="Existing response YAML map"></section>
+  </main>
+
+  <script>
+    const state = {
+      inventory: null,
+      query: ""
+    };
+
+    const els = {
+      searchBox: document.getElementById("searchBox"),
+      metrics: document.getElementById("metrics"),
+      yamlList: document.getElementById("yamlList"),
+      loadNotice: document.getElementById("loadNotice")
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function responseYamlFiles(inventory) {
+      return [...new Set((inventory.generatedFrom || [])
+        .filter(file => /^Formulate_Response_.*\.yaml$/i.test(file)))]
+        .sort();
+    }
+
+    function domainForYaml(inventory, yamlFile) {
+      return (inventory.domains || []).find(domain => domain.yamlFile === yamlFile) || {};
+    }
+
+    function foldersForYaml(inventory, yamlFile) {
+      return (inventory.folders || [])
+        .filter(folder => folder.yamlFile === yamlFile)
+        .sort((a, b) => `${a.topicArea} ${a.folderName}`.localeCompare(`${b.topicArea} ${b.folderName}`));
+    }
+
+    function statusClass(status) {
+      if (status === "mapped" || status === "wired") return "wired";
+      if (status === "fallback" || status === "review_required" || String(status).includes("alignment")) return "review";
+      return "gap";
+    }
+
+    function render() {
+      const inventory = state.inventory || {};
+      const files = responseYamlFiles(inventory);
+      const rows = files.map(file => ({
+        yamlFile: file,
+        domain: domainForYaml(inventory, file),
+        folders: foldersForYaml(inventory, file)
+      }));
+      const filtered = filterRows(rows);
+      renderMetrics(rows);
+      renderRows(filtered);
+    }
+
+    function renderMetrics(rows) {
+      const folderCount = rows.reduce((total, row) => total + row.folders.length, 0);
+      const topicCount = new Set(rows.flatMap(row => row.folders.map(folder => `${row.yamlFile}:${folder.topicArea}`))).size;
+      const fallbackCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus === "fallback").length;
+      const reviewCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus !== "mapped").length;
+      els.metrics.innerHTML = [
+        metric("Existing Response YAMLs", rows.length, "Only discovered Formulate_Response_*.yaml files are shown"),
+        metric("Mapped Topic Areas", topicCount, "Unique topic-area mappings under existing YAMLs"),
+        metric("Knowledge Folders", folderCount, "Folder/source mappings currently recorded"),
+        metric("Needs Review", reviewCount, `${fallbackCount} fallback mapping(s) included`)
+      ].join("");
+    }
+
+    function metric(label, value, detail) {
+      return `<article class="metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span><p class="muted">${escapeHtml(detail)}</p></article>`;
+    }
+
+    function filterRows(rows) {
+      const query = state.query.trim().toLowerCase();
+      if (!query) return rows;
+      return rows
+        .map(row => ({
+          ...row,
+          folders: row.folders.filter(folder => searchText(row, folder).includes(query))
+        }))
+        .filter(row => row.folders.length || searchText(row, null).includes(query));
+    }
+
+    function searchText(row, folder) {
+      const domain = row.domain || {};
+      return [
+        row.yamlFile,
+        domain.id,
+        domain.label,
+        domain.fundingStream,
+        domain.routerStatus,
+        domain.routerDialog,
+        domain.notes,
+        folder?.topicArea,
+        folder?.folderName,
+        folder?.knowledgeSourceId,
+        folder?.mappingStatus,
+        folder?.instructions,
+        folder?.ownerUnit
+      ].join(" ").toLowerCase();
+    }
+
+    function renderRows(rows) {
+      if (!rows.length) {
+        els.yamlList.innerHTML = `<article class="yaml-card"><p class="muted">No existing response YAMLs match the current search.</p></article>`;
+        return;
+      }
+
+      els.yamlList.innerHTML = rows.map(row => {
+        const domain = row.domain || {};
+        return `
+          <article class="yaml-card">
+            <div class="yaml-head">
+              <div>
+                <h2><code>${escapeHtml(row.yamlFile)}</code></h2>
+                <p class="muted">${escapeHtml(domain.label || "No domain metadata found")} ${domain.id ? `(${escapeHtml(domain.id)})` : ""}</p>
+              </div>
+              <div class="chips">
+                ${chip(domain.routerStatus || "yaml exists", statusClass(domain.routerStatus))}
+                ${chip(domain.fundingStream || "fund unclear")}
+                ${chip(`${row.folders.length} folder mapping${row.folders.length === 1 ? "" : "s"}`)}
+              </div>
+            </div>
+            <div class="topic-list">
+              ${row.folders.length ? row.folders.map(renderFolder).join("") : `<p class="muted">No folder/topic mappings are recorded for this YAML yet.</p>`}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function chip(text, type = "") {
+      return `<span class="chip ${escapeHtml(type)}">${escapeHtml(text)}</span>`;
+    }
+
+    function renderFolder(folder) {
+      return `
+        <article class="topic-card">
+          <div class="topic-top">
+            <div>
+              <h3>${escapeHtml(folder.topicArea || "unknown topic area")}</h3>
+              <p class="muted">${escapeHtml(folder.folderName || "Unnamed folder")}</p>
+            </div>
+            ${chip(folder.mappingStatus || "unknown", statusClass(folder.mappingStatus))}
+          </div>
+          <div class="folder-grid">
+            <div class="key">Folder ID</div>
+            <div class="value"><code>${escapeHtml(folder.id)}</code></div>
+            <div class="key">Source ID</div>
+            <div class="value"><code>${escapeHtml(folder.knowledgeSourceId || "Not recorded")}</code></div>
+            <div class="key">Owner Unit</div>
+            <div class="value">${escapeHtml(folder.ownerUnit || "TBD")}</div>
+            <div class="key">Instructions</div>
+            <div class="value">${escapeHtml(folder.instructions || "No instructions recorded.")}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function setNotice(message) {
+      els.loadNotice.textContent = message;
+      els.loadNotice.classList.toggle("hidden", !message);
+    }
+
+    async function loadInventory() {
+      try {
+        const response = await fetch("cidy_knowledge_inventory.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        state.inventory = await response.json();
+        render();
+      } catch (error) {
+        setNotice("Could not load cidy_knowledge_inventory.json automatically. This page works best through GitHub Pages or a local web server.");
+        state.inventory = { generatedFrom: [], domains: [], folders: [] };
+        render();
+      }
+    }
+
+    els.searchBox.addEventListener("input", event => {
+      state.query = event.target.value;
+      render();
+    });
+
+    loadInventory();
+  </script>
+</body>
+</html>
