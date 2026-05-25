@@ -10,11 +10,13 @@ conversation_start.yaml
       captures Global.userQuestion
       -> Cidy_Intent.yaml                 [Intent_c8W]
           -> Cidy_Intent_Clarifier.yaml   [Intent-Clarifier]
-              -> Cidy_Intent_Router.yaml  [Intent-Router]
-                  -> Formulate_Response_DA.yaml
-                  -> Formulate_Response_RPTC.yaml
-                  -> FormulateResponse    [missing or ambiguous PDF topic]
-                  -> user_feedback.yaml
+              -> Question_Enhancer.yaml   [QuestionEnhancer]
+                  writes Global.executiveQuestionEnhancements
+                  -> Cidy_Intent_Router.yaml  [Intent-Router]
+                      -> Formulate_Response_DA.yaml
+                      -> Formulate_Response_RPTC.yaml
+                      -> FormulateResponse    [missing or ambiguous PDF topic]
+                      -> user_feedback.yaml
 
 Response topics
   -> assess_confidence.yaml               [AssessConfidence]
@@ -57,7 +59,8 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `conversation_start.yaml` | Sends the welcome message and stores `Topic.conversationID`. | `OnConversationStart` | `UserInquiry2` |
 | `user_inquiry.yaml` | Captures the user's first or looped follow-up question into `Global.userQuestion` and initializes/appends transcript text. | `OnRecognizedIntent` | `Intent_c8W` |
 | `Cidy_Intent.yaml` | Classifies the user's question into intent variables such as `Global.knowledgeDomain`, `Global.fundingStream`, `Global.topicArea`, and clarification state. | `OnRecognizedIntent` | `Intent-Clarifier` |
-| `Cidy_Intent_Clarifier.yaml` | Resolves unclear fund, domain, or artifact classifications through targeted questions. | `OnRecognizedIntent` | `Intent-Router` |
+| `Cidy_Intent_Clarifier.yaml` | Resolves unclear fund, domain, or artifact classifications through targeted questions. | `OnRecognizedIntent` | `QuestionEnhancer` |
+| `Question_Enhancer.yaml` | Adds non-routing search intelligence to `Global.executiveQuestionEnhancements` after clarification and before routing. It expands useful acronyms, dates, recency cues, filters, and source-selection hints without changing finalized intent variables. | `OnRecognizedIntent` | `Intent-Router` |
 | `Cidy_Intent_Router.yaml` | Routes finalized intent variables to response, feedback, or not-yet-developed handling. | `OnRecognizedIntent` | `UserFeedback2`, `DA`, `FormulateResponseCopy`, `FormulateResponse` |
 | `Formulate_Response_DA.yaml` | Searches DA knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_RPTC.yaml` | Searches RPTC knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
@@ -83,6 +86,7 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `UserInquiry2` | `user_inquiry.yaml` |
 | `Intent_c8W` | `Cidy_Intent.yaml` |
 | `Intent-Clarifier` | `Cidy_Intent_Clarifier.yaml` |
+| `QuestionEnhancer` | `Question_Enhancer.yaml` |
 | `Intent-Router` | `Cidy_Intent_Router.yaml` |
 | `UserFeedback2` | `user_feedback.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |
@@ -136,6 +140,8 @@ Resolved since the previous scan:
 ## Response Pipeline Notes
 
 All `SearchAndSummarizeContent` actions in Formulate Response topics that are followed by `AssessConfidence` must set `autoSend: false` and write to `Global.draftResponse`. If a search action sends directly to chat and leaves `Global.draftResponse` blank, the user can see a valid answer followed by the fallback/no-results warning because the confidence/share pipeline has no draft response to assess.
+
+`Question_Enhancer.yaml` runs between clarification and routing. It may write search hints to `Global.executiveQuestionEnhancements`, but it must not change `Global.knowledgeDomain`, `Global.fundingStream`, `Global.topicArea`, `Global.intentStatus`, or other routing variables. Formulate Response topics include the enhancement text in `SearchAndSummarizeContent.userInput` so retrieval can consider expanded acronyms, dates, recency cues, filters, and source-selection hints while the router remains the only topic that selects the response path.
 
 ## Suggested Next Cleanup Pass
 

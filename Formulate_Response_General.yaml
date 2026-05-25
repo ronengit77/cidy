@@ -16,6 +16,7 @@ beginDialog:
       variable: Global.draftResponse
       userInput: |-
         ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+        "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
         "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
         "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
       additionalInstructions: |-

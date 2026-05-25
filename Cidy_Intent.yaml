@@ -16,6 +16,11 @@ beginDialog:
       value:
 
     - kind: SetVariable
+      id: setVariable_resetQuestionEnhancements
+      variable: Global.executiveQuestionEnhancements
+      value:
+
+    - kind: SetVariable
       id: setVariable_resetIntentStatus
       variable: Global.intentStatus
       value: needs_classification

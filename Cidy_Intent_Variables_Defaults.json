@@ -32,6 +32,12 @@
                                                   "ownerTopic":  "Intent Classifier",
                                                   "description":  "Brief classifier reason for debugging only."
                                               },
+                      "Global.executiveQuestionEnhancements":  {
+                                                                   "type":  "String",
+                                                                   "default":  "",
+                                                                   "ownerTopic":  "Question Enhancer",
+                                                                   "description":  "Non-routing search hints generated after clarification and before routing. Formulate Response topics may use this as additional search context, but it must not override the finalized intent variables."
+                                                               },
                       "Global.intentStatus":  {
                                                   "type":  "String",
                                                   "default":  "needs_classification",
@@ -230,6 +236,7 @@
                            "onNewUserQuestion":  {
                                                      "Global.intentJson":  "{}",
                                                      "Global.intentReason":  "",
+                                                     "Global.executiveQuestionEnhancements":  "",
                                                      "Global.intentStatus":  "needs_classification",
                                                      "Global.knowledgeDomain":  "unclear",
                                                      "Global.fundingStream":  "UNCLEAR",

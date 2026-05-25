@@ -15,7 +15,10 @@ beginDialog:
               id: VteyUC
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -40,7 +43,10 @@ beginDialog:
               id: vWkDD5
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -64,7 +70,10 @@ beginDialog:
               id: YgRjBH
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -89,7 +98,10 @@ beginDialog:
               id: bTSDcR
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -113,7 +125,10 @@ beginDialog:
               id: GK2LPh
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -137,7 +152,10 @@ beginDialog:
               id: SUtjCV
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -161,7 +179,10 @@ beginDialog:
           id: SdPeJr
           autoSend: false
           variable: Global.draftResponse
-          userInput: =Global.userQuestion
+          userInput: |-
+            ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+            "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+            "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided RPTC knowledge sources.
@@ -186,7 +207,12 @@ beginDialog:
           actions:
             - kind: SearchAndSummarizeContent
               id: oQLadz
-              userInput: =Global.userQuestion
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided RPTC knowledge sources.

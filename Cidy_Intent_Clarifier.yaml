@@ -17,7 +17,7 @@ beginDialog:
 
             - kind: BeginDialog
               id: xXOWoi
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_bypass
@@ -52,7 +52,7 @@ beginDialog:
 
             - kind: BeginDialog
               id: sZxn78
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_maxClarifications
@@ -219,7 +219,7 @@ beginDialog:
 
             - kind: BeginDialog
               id: OaUzJ3
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterFundClarification
@@ -433,7 +433,7 @@ beginDialog:
 
             - kind: BeginDialog
               id: yfOLOU
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterDomainClarification
@@ -635,7 +635,7 @@ beginDialog:
 
             - kind: BeginDialog
               id: sIHko1
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterArtifactClarification
@@ -663,7 +663,7 @@ beginDialog:
 
         - kind: BeginDialog
           id: H2EMSf
-          dialog: copilots_header_3141e.topic.Intent-Router
+          dialog: copilots_header_3141e.topic.QuestionEnhancer
 
         - kind: EndDialog
           id: endClarifier_noClarificationBranch

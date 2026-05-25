@@ -22,6 +22,7 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
                 "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
                 "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
@@ -56,6 +57,7 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
                 "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
                 "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
@@ -90,6 +92,7 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
                 "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
                 "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
@@ -116,7 +119,10 @@ beginDialog:
           id: J7vEWX
           autoSend: false
           variable: Global.draftResponse
-          userInput: =Global.userQuestion
+          userInput: |-
+            ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+            "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+            "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided DA knowledge sources.
@@ -145,7 +151,10 @@ beginDialog:
               id: search_DA_fallback
               autoSend: false
               variable: Global.draftResponse
-              userInput: =Global.userQuestion
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 The specific knowledge folder did not contain a relevant answer. Search the general DA knowledge base.

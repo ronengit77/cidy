@@ -1,0 +1,71 @@
+kind: AdaptiveDialog
+modelDescription: Enhances a finalized user question with search hints before routing. It does not classify, clarify, route, search knowledge sources, or answer the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_enhanceOnlyReadyQuestions
+      conditions:
+        - id: conditionItem_readyToRoute
+          condition: =Global.intentStatus = "ready_to_route"
+          actions:
+            - kind: InvokeAIBuilderModelAction
+              id: invokeAIBuilderModelAction_questionEnhancer
+              input:
+                binding:
+                  UserQuestion: |
+                    ="You are the Cidy Question Enhancer. Add search intelligence for a finalized user question before routing." & Char(10) & Char(10) &
+                    "Important constraints:" & Char(10) &
+                    "- Do not answer the user." & Char(10) &
+                    "- Do not classify, route, or change the intended route." & Char(10) &
+                    "- Do not override the existing intent variables." & Char(10) &
+                    "- Return ONLY compact JSON. Do not include markdown, prose, comments, or code fences." & Char(10) & Char(10) &
+                    "Required JSON schema:" & Char(10) &
+                    "{""detected_dates"":""..."",""recency_intent"":""..."",""expanded_acronyms"":""..."",""synonyms_and_search_terms"":""..."",""filters"":""..."",""source_selection_hints"":""..."",""confidence_cautions"":""...""}" & Char(10) & Char(10) &
+                    "Enhancement guidance:" & Char(10) &
+                    "- Detect explicit years, date ranges, tranches, versions, meeting dates, countries, regions, divisions, report types, and requested counts or lists." & Char(10) &
+                    "- Treat words such as latest, most recent, current, newest, updated, recent, previous, historical, in YEAR, since YEAR, before YEAR, and after YEAR as important search constraints." & Char(10) &
+                    "- Expand acronyms only when helpful, such as DA=Development Account, RPTC=Regular Programme of Technical Cooperation, PDF/UNPDF=Peace and Development Trust Fund, TAG=Capacity Development Tag Team." & Char(10) &
+                    "- Add synonyms and search terms that help retrieval, such as evaluation report, project evaluation, lessons learned, recommendations, TAG meeting, Tag Team, steering committee, concept note, project document, progress report, management response." & Char(10) &
+                    "- Add source-selection hints, for example prefer the highest tranche for latest DA guidance, prefer the most recent dated TAG meeting for latest TAG decisions, or count matching evaluation-log records for count questions." & Char(10) &
+                    "- Add confidence cautions when the question depends on recency, current policy, counts, dates, or complete coverage." & Char(10) & Char(10) &
+                    "Existing finalized intent variables:" & Char(10) &
+                    "knowledge_domain: " & Global.knowledgeDomain & Char(10) &
+                    "funding_stream: " & Global.fundingStream & Char(10) &
+                    "topic_area: " & Global.topicArea & Char(10) &
+                    "clarification_answer: " & Global.clarificationAnswer & Char(10) & Char(10) &
+                    "User question:" & Char(10) &
+                    Global.userQuestion
+
+              output:
+                binding:
+                  predictionOutput: Topic.enhancerResult
+
+              aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+            - kind: SetVariable
+              id: setQuestionEnhancements
+              variable: Global.executiveQuestionEnhancements
+              value: =Text(Topic.enhancerResult.text)
+
+            - kind: SendActivity
+              id: sendActivity_debug_questionEnhancer
+              activity: "DEBUG - Question Enhancer: {Global.executiveQuestionEnhancements}"
+
+      elseActions:
+        - kind: SetVariable
+          id: clearQuestionEnhancementsNotReady
+          variable: Global.executiveQuestionEnhancements
+          value:
+
+    - kind: BeginDialog
+      id: goToRouter
+      dialog: copilots_header_3141e.topic.Intent-Router
+
+    - kind: EndDialog
+      id: endQuestionEnhancer
+
+inputType: {}
+outputType: {}
