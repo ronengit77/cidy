@@ -726,12 +726,24 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return clone(baseInventory);
         const draft = JSON.parse(raw);
-        setNotice(`Local draft loaded from ${draft.savedAt || "this browser"}. Export or reset it when ready.`);
-        return draft.inventory || clone(baseInventory);
+        setNotice(`Fresh YAML inventory loaded and merged with your local draft from ${draft.savedAt || "this browser"}. Export or reset it when ready.`);
+        return mergeDraftWithBaseline(baseInventory, draft.inventory || {});
       } catch (error) {
         setNotice("A saved local draft could not be loaded, so the inventory baseline is shown.");
         return clone(baseInventory);
       }
+    }
+
+    function mergeDraftWithBaseline(baseInventory, draftInventory) {
+      const merged = clone(baseInventory);
+      const baseFolders = new Map((merged.folders || []).map(folder => [folder.id, folder]));
+      (draftInventory.folders || []).forEach(folder => {
+        const isManualDraft = Boolean(folder.draftEditedAt) || !baseFolders.has(folder.id);
+        if (isManualDraft) baseFolders.set(folder.id, folder);
+      });
+      merged.folders = [...baseFolders.values()];
+      if (draftInventory.managerUpdates) merged.managerUpdates = draftInventory.managerUpdates;
+      return merged;
     }
 
     function findFolder(id) {
@@ -753,7 +765,8 @@
         yamlFile,
         mappingStatus: els.editMappingStatus.value,
         ownerUnit: els.editOwnerUnit.value.trim() || "TBD",
-        instructions: els.editInstructions.value.trim()
+        instructions: els.editInstructions.value.trim(),
+        draftEditedAt: new Date().toISOString()
       };
     }
 
