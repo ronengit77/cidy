@@ -133,6 +133,10 @@ Resolved since the previous scan:
 8. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
 9. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
+## Response Pipeline Notes
+
+All `SearchAndSummarizeContent` actions in Formulate Response topics that are followed by `AssessConfidence` must set `autoSend: false` and write to `Global.draftResponse`. If a search action sends directly to chat and leaves `Global.draftResponse` blank, the user can see a valid answer followed by the fallback/no-results warning because the confidence/share pipeline has no draft response to assess.
+
 ## Suggested Next Cleanup Pass
 
 1. Re-export or rebuild `reset_conversation.yaml`, because the file exists but is empty.

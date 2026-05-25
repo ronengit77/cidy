@@ -95,9 +95,10 @@ beginDialog:
             "5. If the user asks how to write or prepare an evaluation report and no fund is specified, set knowledge_domain=unclear, funding_stream=UNCLEAR, topic_area=evaluation_design, requires_clarification=Yes, clarification_type=fund, clarification_question=Which funding stream is this question about?" & Char(10) &
             "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=programme_development, topic_area=projects_evaluations, and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
             "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X." & Char(10) &
-            "8. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
-            "9. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
-            "10. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "8. If the user asks about TAG meetings, Tag Team meetings, steering committee meetings, meeting materials, decisions, minutes, actions, or conclusions, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=tag_meetings or steering_committee as appropriate, requires_clarification=No. These are Programme Development knowledge areas, not DA/RPTC/PDF fund-specific questions." & Char(10) &
+            "9. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "10. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "11. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
             "User question:" & Char(10) &
             Global.userQuestion
 
@@ -258,6 +259,65 @@ beginDialog:
 
             - kind: SetVariable
               id: fallback_clearClarificationQuestionProjectEvaluations
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_programmeDevelopmentMeetingFallback
+      conditions:
+        - id: conditionItem_tagMeetingFallback
+          condition: =Or(Find("tag meeting", Lower(Global.userQuestion)) > 0, Find("tag meetings", Lower(Global.userQuestion)) > 0, Find("tag team", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainTagMeetings
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicTagMeetings
+              variable: Global.topicArea
+              value: tag_meetings
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoTagMeetings
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneTagMeetings
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionTagMeetings
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_steeringCommitteeFallback
+          condition: =Find("steering committee", Lower(Global.userQuestion)) > 0 && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainSteeringCommittee
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicSteeringCommittee
+              variable: Global.topicArea
+              value: steering_committee
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoSteeringCommittee
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneSteeringCommittee
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionSteeringCommittee
               variable: Global.clarificationQuestion
               value:
 

@@ -41,7 +41,7 @@ beginDialog:
                   - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
 
         - id: conditionItem_O9CKVo
-          condition: =Global.topicArea = "tag"
+          condition: =Global.topicArea = "tag_meetings"
           actions:
             - kind: SetTextVariable
               id: 7XENFr

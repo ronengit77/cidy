@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T16:50:58-04:00",
+                    "generatedAt":  "2026-05-25T17:56:35-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
-                    "passed":  39,
-                    "failed":  21
+                    "passed":  40,
+                    "failed":  20
                 },
     "results":  [
                     {
@@ -1899,7 +1899,7 @@
                         "question":  "What are the TAG meeting materials about?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=tag_meetings.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
@@ -1969,24 +1969,20 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "tag_meetings"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "tag_meetings"
+
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: tag_meetings."
-                                         }
+
                                      ]
                     },
                     {

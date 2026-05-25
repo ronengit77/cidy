@@ -169,6 +169,19 @@ beginDialog:
             - kind: ConditionGroup
               id: conditionGroup_fundClarificationTopicFallback
               conditions:
+                - id: conditionItem_fundClarificationTagMeetingsProgrammeDevelopment
+                  condition: =Global.topicArea = "tag_meetings" || Global.topicArea = "tag" || Global.topicArea = "steering_committee"
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_fundClarificationProgrammeDevelopmentFallback
+                      variable: Global.knowledgeDomain
+                      value: programme_development
+
+                    - kind: SetVariable
+                      id: setFund_fundClarificationProgrammeDevelopmentFallback
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
                 - id: conditionItem_fundClarificationEvaluationDesignFallback
                   condition: =Or(IsBlank(Global.topicArea), Global.topicArea = "", Global.topicArea = "unclear", Global.topicArea = "other_unclear", Global.topicArea = "general") && Find("evaluation", Lower(Global.userQuestion)) > 0 && Or(Find("write", Lower(Global.userQuestion)) > 0, Find("prepare", Lower(Global.userQuestion)) > 0, Find("design", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("create", Lower(Global.userQuestion)) > 0)
                   actions:
