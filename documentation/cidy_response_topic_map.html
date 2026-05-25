@@ -98,13 +98,14 @@
     .metrics,
     .yaml-list,
     .topic-list,
-    .folder-grid {
+    .folder-grid,
+    .editor-grid {
       display: grid;
       gap: 14px;
     }
 
     .toolbar {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr auto auto auto auto auto;
       align-items: center;
       background: #fff;
       border: 1px solid var(--line);
@@ -113,7 +114,9 @@
       box-shadow: var(--shadow);
     }
 
-    input {
+    input,
+    select,
+    textarea {
       width: 100%;
       min-height: 38px;
       border: 1px solid #cbd5df;
@@ -124,6 +127,20 @@
       color: var(--ink);
     }
 
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #293745;
+    }
+
+    button,
     .button-like {
       border: 1px solid #cbd5df;
       border-radius: 7px;
@@ -137,16 +154,33 @@
       align-items: center;
       justify-content: center;
       white-space: nowrap;
+      cursor: pointer;
+      font: inherit;
     }
 
+    button.primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    button.danger {
+      background: #faecec;
+      color: #8d2b2b;
+      border-color: #efcaca;
+    }
+
+    .hidden { display: none; }
+
     .metrics {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       margin-top: 28px;
     }
 
     .metric,
     .yaml-card,
-    .topic-card {
+    .topic-card,
+    .editor-panel {
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -246,6 +280,40 @@
       margin-bottom: 10px;
     }
 
+    .topic-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .topic-actions button {
+      min-height: 30px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    .editor-panel {
+      margin-top: 18px;
+      padding: 16px;
+    }
+
+    .editor-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
     .folder-grid {
       grid-template-columns: 130px minmax(0, 1fr);
       gap: 6px 12px;
@@ -272,14 +340,13 @@
       color: #684500;
     }
 
-    .hidden { display: none; }
-
     @media (max-width: 860px) {
       .toolbar,
       .metrics,
       .yaml-head,
       .topic-top,
-      .folder-grid {
+      .folder-grid,
+      .editor-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -298,17 +365,76 @@
   <main class="wrap">
     <section class="toolbar" aria-label="Response topic map tools">
       <input id="searchBox" type="search" placeholder="Search YAML, domain, topic area, folder, source ID, status">
+      <button type="button" class="primary" id="addButton">Add Mapping</button>
+      <button type="button" id="exportButton">Export Draft</button>
+      <label class="button-like" for="importFile">Import Draft</label>
+      <input class="hidden" id="importFile" type="file" accept="application/json,.json">
+      <button type="button" class="danger" id="resetButton">Reset Draft</button>
       <a class="button-like" href="cidy_knowledge_inventory.json">Open Inventory JSON</a>
     </section>
 
     <section id="loadNotice" class="notice hidden"></section>
+    <section id="editorPanel" class="editor-panel hidden" aria-label="Response mapping editor">
+      <h2 id="editorTitle">Add Mapping</h2>
+      <p class="muted" id="editorHelp">Changes are saved to this browser as a local draft until you export or reset them.</p>
+      <form id="mappingForm">
+        <input type="hidden" id="editOriginalId">
+        <div class="editor-grid">
+          <div>
+            <label for="editYamlFile">Response YAML</label>
+            <select id="editYamlFile" required></select>
+          </div>
+          <div>
+            <label for="editMappingStatus">Mapping Status</label>
+            <select id="editMappingStatus" required>
+              <option value="mapped">mapped</option>
+              <option value="fallback">fallback</option>
+              <option value="review_required">review_required</option>
+              <option value="mapped_needs_topic_area_alignment">mapped_needs_topic_area_alignment</option>
+              <option value="yaml_exists_not_wired">yaml_exists_not_wired</option>
+            </select>
+          </div>
+          <div>
+            <label for="editTopicArea">Topic Area Tag</label>
+            <input id="editTopicArea" required>
+          </div>
+          <div>
+            <label for="editFolderName">Folder Name</label>
+            <input id="editFolderName" required>
+          </div>
+          <div class="full">
+            <label for="editSourceId">Knowledge Source ID</label>
+            <input id="editSourceId">
+          </div>
+          <div>
+            <label for="editOwnerUnit">Owner Unit</label>
+            <input id="editOwnerUnit" placeholder="TBD">
+          </div>
+          <div>
+            <label for="editFolderId">Folder Mapping ID</label>
+            <input id="editFolderId" placeholder="Auto-generated if blank">
+          </div>
+          <div class="full">
+            <label for="editInstructions">Instructions</label>
+            <textarea id="editInstructions"></textarea>
+          </div>
+        </div>
+        <div class="button-row">
+          <button type="submit" class="primary">Save Mapping</button>
+          <button type="button" id="cancelEditButton">Cancel</button>
+        </div>
+      </form>
+    </section>
     <section class="metrics" id="metrics" aria-label="Response topic summary"></section>
     <section class="yaml-list" id="yamlList" aria-label="Existing response YAML map"></section>
   </main>
 
   <script>
+    const STORAGE_KEY = "cidy_response_topic_map_draft_v1";
+
     const state = {
       inventory: null,
+      baseInventory: null,
       query: ""
     };
 
@@ -316,7 +442,24 @@
       searchBox: document.getElementById("searchBox"),
       metrics: document.getElementById("metrics"),
       yamlList: document.getElementById("yamlList"),
-      loadNotice: document.getElementById("loadNotice")
+      loadNotice: document.getElementById("loadNotice"),
+      addButton: document.getElementById("addButton"),
+      exportButton: document.getElementById("exportButton"),
+      importFile: document.getElementById("importFile"),
+      resetButton: document.getElementById("resetButton"),
+      editorPanel: document.getElementById("editorPanel"),
+      editorTitle: document.getElementById("editorTitle"),
+      mappingForm: document.getElementById("mappingForm"),
+      cancelEditButton: document.getElementById("cancelEditButton"),
+      editOriginalId: document.getElementById("editOriginalId"),
+      editYamlFile: document.getElementById("editYamlFile"),
+      editMappingStatus: document.getElementById("editMappingStatus"),
+      editTopicArea: document.getElementById("editTopicArea"),
+      editFolderName: document.getElementById("editFolderName"),
+      editSourceId: document.getElementById("editSourceId"),
+      editOwnerUnit: document.getElementById("editOwnerUnit"),
+      editFolderId: document.getElementById("editFolderId"),
+      editInstructions: document.getElementById("editInstructions")
     };
 
     function escapeHtml(value) {
@@ -332,6 +475,19 @@
       return [...new Set((inventory.generatedFrom || [])
         .filter(file => /^Formulate_Response_.*\.yaml$/i.test(file)))]
         .sort();
+    }
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function slug(value) {
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replaceAll("&", " and ")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
     }
 
     function domainForYaml(inventory, yamlFile) {
@@ -353,6 +509,7 @@
     function render() {
       const inventory = state.inventory || {};
       const files = responseYamlFiles(inventory);
+      populateYamlOptions(files);
       const rows = files.map(file => ({
         yamlFile: file,
         domain: domainForYaml(inventory, file),
@@ -363,16 +520,24 @@
       renderRows(filtered);
     }
 
+    function populateYamlOptions(files) {
+      const selected = els.editYamlFile.value;
+      els.editYamlFile.innerHTML = files.map(file => `<option value="${escapeHtml(file)}">${escapeHtml(file)}</option>`).join("");
+      if (files.includes(selected)) els.editYamlFile.value = selected;
+    }
+
     function renderMetrics(rows) {
       const folderCount = rows.reduce((total, row) => total + row.folders.length, 0);
       const topicCount = new Set(rows.flatMap(row => row.folders.map(folder => `${row.yamlFile}:${folder.topicArea}`))).size;
       const fallbackCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus === "fallback").length;
       const reviewCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus !== "mapped").length;
+      const draftLabel = hasLocalDraft() ? "Local draft active" : "Inventory baseline";
       els.metrics.innerHTML = [
         metric("Existing Response YAMLs", rows.length, "Only discovered Formulate_Response_*.yaml files are shown"),
         metric("Mapped Topic Areas", topicCount, "Unique topic-area mappings under existing YAMLs"),
         metric("Knowledge Folders", folderCount, "Folder/source mappings currently recorded"),
-        metric("Needs Review", reviewCount, `${fallbackCount} fallback mapping(s) included`)
+        metric("Needs Review", reviewCount, `${fallbackCount} fallback mapping(s) included`),
+        metric("Draft State", draftLabel, "CRUD edits persist in this browser until reset")
       ].join("");
     }
 
@@ -437,6 +602,7 @@
           </article>
         `;
       }).join("");
+      bindRenderedActions();
     }
 
     function chip(text, type = "") {
@@ -445,13 +611,18 @@
 
     function renderFolder(folder) {
       return `
-        <article class="topic-card">
+        <article class="topic-card" data-folder-id="${escapeHtml(folder.id)}">
           <div class="topic-top">
             <div>
               <h3>${escapeHtml(folder.topicArea || "unknown topic area")}</h3>
               <p class="muted">${escapeHtml(folder.folderName || "Unnamed folder")}</p>
             </div>
-            ${chip(folder.mappingStatus || "unknown", statusClass(folder.mappingStatus))}
+            <div class="topic-actions">
+              ${chip(folder.mappingStatus || "unknown", statusClass(folder.mappingStatus))}
+              <button type="button" data-action="edit" data-id="${escapeHtml(folder.id)}">Edit</button>
+              <button type="button" data-action="move" data-id="${escapeHtml(folder.id)}">Move</button>
+              <button type="button" class="danger" data-action="delete" data-id="${escapeHtml(folder.id)}">Delete</button>
+            </div>
           </div>
           <div class="folder-grid">
             <div class="key">Folder ID</div>
@@ -467,20 +638,182 @@
       `;
     }
 
+    function bindRenderedActions() {
+      els.yamlList.querySelectorAll("[data-action]").forEach(button => {
+        button.addEventListener("click", () => {
+          const folder = findFolder(button.dataset.id);
+          if (!folder) return;
+          if (button.dataset.action === "delete") deleteFolder(folder.id);
+          if (button.dataset.action === "edit") openEditor(folder);
+          if (button.dataset.action === "move") openEditor(folder, true);
+        });
+      });
+    }
+
     function setNotice(message) {
       els.loadNotice.textContent = message;
       els.loadNotice.classList.toggle("hidden", !message);
+    }
+
+    function hasLocalDraft() {
+      try {
+        return Boolean(localStorage.getItem(STORAGE_KEY));
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function saveDraft(message = "Saved local draft in this browser.") {
+      const payload = {
+        savedAt: new Date().toISOString(),
+        note: "Local CRUD draft from cidy_response_topic_map.html. Export this file before updating YAML/source inventory.",
+        inventory: state.inventory
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      setNotice(message);
+      render();
+    }
+
+    function loadDraft(baseInventory) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return clone(baseInventory);
+        const draft = JSON.parse(raw);
+        setNotice(`Local draft loaded from ${draft.savedAt || "this browser"}. Export or reset it when ready.`);
+        return draft.inventory || clone(baseInventory);
+      } catch (error) {
+        setNotice("A saved local draft could not be loaded, so the inventory baseline is shown.");
+        return clone(baseInventory);
+      }
+    }
+
+    function findFolder(id) {
+      return (state.inventory?.folders || []).find(folder => folder.id === id);
+    }
+
+    function folderFromForm() {
+      const yamlFile = els.editYamlFile.value;
+      const domain = domainForYaml(state.inventory, yamlFile);
+      const topicArea = els.editTopicArea.value.trim();
+      const folderName = els.editFolderName.value.trim();
+      const id = els.editFolderId.value.trim() || `${domain.id || slug(yamlFile)}_${slug(topicArea || folderName)}`;
+      return {
+        id,
+        domain: domain.id || "",
+        topicArea,
+        folderName,
+        knowledgeSourceId: els.editSourceId.value.trim(),
+        yamlFile,
+        mappingStatus: els.editMappingStatus.value,
+        ownerUnit: els.editOwnerUnit.value.trim() || "TBD",
+        instructions: els.editInstructions.value.trim()
+      };
+    }
+
+    function openEditor(folder = null, moveMode = false) {
+      const files = responseYamlFiles(state.inventory || {});
+      populateYamlOptions(files);
+      els.editorPanel.classList.remove("hidden");
+      els.editorTitle.textContent = folder ? (moveMode ? "Move Mapping" : "Edit Mapping") : "Add Mapping";
+      els.editOriginalId.value = folder?.id || "";
+      els.editYamlFile.value = folder?.yamlFile || files[0] || "";
+      els.editMappingStatus.value = folder?.mappingStatus || "mapped";
+      els.editTopicArea.value = folder?.topicArea || "";
+      els.editFolderName.value = folder?.folderName || "";
+      els.editSourceId.value = folder?.knowledgeSourceId || "";
+      els.editOwnerUnit.value = folder?.ownerUnit || "TBD";
+      els.editFolderId.value = folder?.id || "";
+      els.editInstructions.value = folder?.instructions || "";
+      els.editorPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function closeEditor() {
+      els.mappingForm.reset();
+      els.editOriginalId.value = "";
+      els.editorPanel.classList.add("hidden");
+    }
+
+    function saveFolder(event) {
+      event.preventDefault();
+      const originalId = els.editOriginalId.value;
+      const folder = folderFromForm();
+      if (!folder.yamlFile || !folder.topicArea || !folder.folderName) return;
+      const folders = state.inventory.folders || [];
+      const duplicate = folders.find(item => item.id === folder.id && item.id !== originalId);
+      if (duplicate) {
+        setNotice(`A mapping with ID "${folder.id}" already exists. Use a different folder mapping ID.`);
+        return;
+      }
+      if (originalId) {
+        const index = folders.findIndex(item => item.id === originalId);
+        if (index >= 0) folders[index] = folder;
+      } else {
+        folders.push(folder);
+      }
+      state.inventory.folders = folders;
+      closeEditor();
+      saveDraft(`Saved ${folder.topicArea} under ${folder.yamlFile}.`);
+    }
+
+    function deleteFolder(id) {
+      const folder = findFolder(id);
+      if (!folder) return;
+      if (!confirm(`Delete mapping "${folder.topicArea}" from ${folder.yamlFile}?`)) return;
+      state.inventory.folders = (state.inventory.folders || []).filter(item => item.id !== id);
+      saveDraft(`Deleted mapping "${folder.topicArea}" from the local draft.`);
+    }
+
+    function exportDraft() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        note: "Cidy response topic map CRUD draft. Review before applying to YAML files.",
+        inventory: state.inventory
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "cidy_response_topic_map_draft.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function importDraft(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          state.inventory = data.inventory || data;
+          saveDraft("Imported draft and saved it in this browser.");
+        } catch (error) {
+          setNotice("The selected file could not be parsed as a response topic map draft.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetDraft() {
+      if (!confirm("Reset local response topic map draft and reload the inventory baseline?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state.inventory = clone(state.baseInventory || { generatedFrom: [], domains: [], folders: [] });
+      closeEditor();
+      setNotice("Local draft reset. Showing inventory baseline.");
+      render();
     }
 
     async function loadInventory() {
       try {
         const response = await fetch("cidy_knowledge_inventory.json", { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        state.inventory = await response.json();
+        state.baseInventory = await response.json();
+        state.inventory = loadDraft(state.baseInventory);
         render();
       } catch (error) {
         setNotice("Could not load cidy_knowledge_inventory.json automatically. This page works best through GitHub Pages or a local web server.");
-        state.inventory = { generatedFrom: [], domains: [], folders: [] };
+        state.baseInventory = { generatedFrom: [], domains: [], folders: [] };
+        state.inventory = loadDraft(state.baseInventory);
         render();
       }
     }
@@ -488,6 +821,17 @@
     els.searchBox.addEventListener("input", event => {
       state.query = event.target.value;
       render();
+    });
+
+    els.addButton.addEventListener("click", () => openEditor());
+    els.cancelEditButton.addEventListener("click", closeEditor);
+    els.mappingForm.addEventListener("submit", saveFolder);
+    els.exportButton.addEventListener("click", exportDraft);
+    els.resetButton.addEventListener("click", resetDraft);
+    els.importFile.addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (file) importDraft(file);
+      event.target.value = "";
     });
 
     loadInventory();
