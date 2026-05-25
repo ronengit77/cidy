@@ -31,7 +31,7 @@ beginDialog:
     - kind: SetVariable
       id: setVariable_confidence
       variable: Global.confidenceScore
-      value: =Value(Text(ParseJSON(Global.jsonResponse.text).confidence))
+      value: =IfError(Value(Text(ParseJSON(Global.jsonResponse.text).confidence)), 0)
 
     - kind: SetVariable
       id: setVariable_label

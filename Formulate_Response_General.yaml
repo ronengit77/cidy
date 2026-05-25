@@ -18,6 +18,13 @@ beginDialog:
         ="User question: " & Global.userQuestion & Char(10) & Char(10) &
         "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
         "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. This is a wider retry using the top-level Knowledge source because the user was not satisfied with the previous answer.
+        Search broadly across the provided Knowledge source. Do not limit the answer to the previously classified domain or topic. If the wider search changes or corrects the previous answer, say so clearly.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source document title and link used
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no labels, no words such as uncertain. Just the number.
       fileSearchDataSource:
         searchFilesMode:
           kind: DoNotSearchFiles
