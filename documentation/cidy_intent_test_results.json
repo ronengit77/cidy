@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T14:12:45-04:00",
+                    "generatedAt":  "2026-05-25T14:23:52-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  60,
-                    "passed":  26,
-                    "failed":  34
+                    "passed":  38,
+                    "failed":  22
                 },
     "results":  [
                     {
@@ -959,12 +959,12 @@
                         "question":  "What do project evaluations say about sustainability?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Programme Development with topic_area=projects_evaluations. This is actual evaluation evidence, not evaluation design guidance.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1018,8 +1018,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1042,11 +1042,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1055,12 +1051,12 @@
                         "question":  "Summarize recommendations from project evaluations related to stakeholder engagement.",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1117,8 +1113,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1141,11 +1137,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1154,12 +1146,12 @@
                         "question":  "What lessons learned are available from past capacity development projects?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1216,8 +1208,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1240,11 +1232,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1253,12 +1241,12 @@
                         "question":  "What have evaluations said about DA projects?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations, using DA as context if available. It should not route to DA evaluation design guidance.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1312,8 +1300,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1336,11 +1324,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1349,12 +1333,12 @@
                         "question":  "Are there recurring findings from past project evaluations?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1408,8 +1392,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1432,11 +1416,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1445,12 +1425,12 @@
                         "question":  "What do evaluation reports say about project design weaknesses?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1510,8 +1490,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1535,11 +1515,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1548,12 +1524,12 @@
                         "question":  "What have previous evaluations found about partnerships?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1607,8 +1583,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1631,11 +1607,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1644,12 +1616,12 @@
                         "question":  "What do evaluations recommend about sustainability?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=projects_evaluations.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1706,8 +1678,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1730,11 +1702,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1746,9 +1714,9 @@
                         "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1802,8 +1770,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1827,9 +1795,9 @@
                                        ],
                         "failures":  [
                                          {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: cd_strategy."
                                          }
                                      ]
                     },
@@ -1839,12 +1807,12 @@
                         "question":  "What has the Steering Committee discussed about programme development?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=steering_committee.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1898,8 +1866,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -1922,11 +1890,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -1938,9 +1902,9 @@
                         "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -1994,8 +1958,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -2019,9 +1983,9 @@
                                        ],
                         "failures":  [
                                          {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: tag_meetings."
                                          }
                                      ]
                     },
@@ -2031,12 +1995,12 @@
                         "question":  "What guidance exists on programme development in Cidy?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Programme Development with topic_area=general.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -2090,8 +2054,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -2114,11 +2078,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -3563,12 +3523,12 @@
                         "question":  "I need help with a project. Where do I start?",
                         "clarification":  "Programme Development",
                         "expectedBehavior":  "Clarifier maps to knowledge_domain=programme_development, funding_stream=UNCLEAR. Router routes to Programme Development.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -3622,8 +3582,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -3646,11 +3606,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -3659,12 +3615,12 @@
                         "question":  "I need help understanding project performance. Where should I look?",
                         "clarification":  "Project Evaluations / Lessons Learned",
                         "expectedBehavior":  "Clarifier maps to knowledge_domain=programme_development, topic_area=projects_evaluations and routes to Programme Development.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -3718,8 +3674,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -3742,11 +3698,7 @@
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -4226,9 +4178,9 @@
                         "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
-                                           "routerDialog":  "",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                           "routerStatus":  "not_wired",
+                                           "routerStatus":  "wired",
                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
                                        },
                         "finalClassification":  {
@@ -4284,8 +4236,8 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response Programme Development",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "not_wired",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
                                                               "yamlFile":  "Formulate_Response_Programme_Development.yaml"
                                                           },
                                                "decision":  "Begin Formulate_Response_Programme_Development.yaml"
@@ -4309,9 +4261,9 @@
                                        ],
                         "failures":  [
                                          {
-                                             "type":  "Topic_not_developed",
-                                             "point":  "Intent Router",
-                                             "message":  "Domain is recognized but router currently sends a not-developed message or does not call Formulate_Response_Programme_Development.yaml."
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: project_planning_design."
                                          }
                                      ]
                     },

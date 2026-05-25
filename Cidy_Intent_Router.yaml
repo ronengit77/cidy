@@ -133,11 +133,15 @@ beginDialog:
               value: Formulate Response Programme Development
 
             - kind: SendActivity
-              id: sendActivity_programmeDevelopmentNotDeveloped
-              activity: Cidy Is under development this topic is not yet developed (Programme Development)
+              id: sendActivity_M2shGu
+              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: EtEXZZ
+              dialog: copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment
 
             - kind: EndDialog
-              id: end_programmeDevelopmentNotDeveloped
+              id: end_afterProgrammeDevelopment
 
         - id: conditionItem_routeDA
           condition: =Global.knowledgeDomain = "da" || Global.fundingStream = "DA"
