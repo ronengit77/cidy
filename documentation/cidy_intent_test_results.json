@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T19:05:00-04:00",
+                    "generatedAt":  "2026-05-26T15:16:17-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  60,
-                    "passed":  40,
+                    "total":  66,
+                    "passed":  46,
                     "failed":  20
                 },
     "results":  [
@@ -2299,6 +2299,642 @@
                     },
                     {
                         "id":  "TC23",
+                        "scenario":  "Happy path - Programme Development annual progress report template",
+                        "question":  "What instructions apply to the 2025 annual progress report template?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=guidelines_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "guidelines_templates",
+                                                                       "monitoring_reporting",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "monitoring_reporting",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "monitoring_reporting",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "guidelines_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "monitoring_reporting",
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC24",
+                        "scenario":  "Happy path - Programme Development final report template",
+                        "question":  "What should be included in the final report template for a capacity development project?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=guidelines_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "guidelines_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "guidelines_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC25",
+                        "scenario":  "Happy path - Programme Development project document preparation",
+                        "question":  "What guidance is available for preparing a project document, including theory of change, risks, workplan, and budget justification?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=guidelines_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "guidelines_templates",
+                                                                       "project_planning_design",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "project_planning_design",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "guidelines_templates",
+                                                                                 "project_planning_design",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "guidelines_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "project_planning_design",
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC26",
+                        "scenario":  "Happy path - Programme Development implementing partner agreement",
+                        "question":  "When should DESA use an implementing partner agreement instead of procurement?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=implementing_partners_grants.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "implementing_partners_grants"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "implementing_partners_grants"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC27",
+                        "scenario":  "Happy path - Programme Development grants due diligence",
+                        "question":  "What due diligence is required before approving a grant to an implementing partner?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=implementing_partners_grants.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "implementing_partners_grants"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "implementing_partners_grants"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC28",
+                        "scenario":  "Happy path - Programme Development IPGC templates",
+                        "question":  "Where can I find the IPGC decision template and partner evaluation template for grants?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=implementing_partners_grants.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "implementing_partners_grants",
+                                                                       "evaluation_design",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants",
+                                                                                 "evaluation_design",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "implementing_partners_grants",
+                                                                                 "evaluation_design",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "implementing_partners_grants"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "evaluation_design",
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC29",
                         "scenario":  "Happy path - RPTC budget and finance",
                         "question":  "What are the RPTC budget and finance requirements?",
                         "clarification":  "",
@@ -2403,7 +3039,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC24",
+                        "id":  "TC30",
                         "scenario":  "Happy path - RPTC governance",
                         "question":  "What are the RPTC governance arrangements?",
                         "clarification":  "",
@@ -2509,7 +3145,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC25",
+                        "id":  "TC31",
                         "scenario":  "Happy path - RPTC roles",
                         "question":  "What are RPTC roles and responsibilities?",
                         "clarification":  "",
@@ -2615,7 +3251,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC26",
+                        "id":  "TC32",
                         "scenario":  "Happy path - RPTC programme design standards",
                         "question":  "What programme design standards apply to RPTC?",
                         "clarification":  "",
@@ -2721,7 +3357,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC27",
+                        "id":  "TC33",
                         "scenario":  "Happy path - RPTC evaluation criteria",
                         "question":  "What are the RPTC evaluation criteria?",
                         "clarification":  "",
@@ -2827,7 +3463,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC28",
+                        "id":  "TC34",
                         "scenario":  "Happy path - RPTC reports",
                         "question":  "Where can I find guidance on RPTC reports?",
                         "clarification":  "",
@@ -2933,7 +3569,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC29",
+                        "id":  "TC35",
                         "scenario":  "Happy path - PDF / UNPDF",
                         "question":  "What does the UNPDF guidance say about reporting?",
                         "clarification":  "",
@@ -3039,7 +3675,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC30",
+                        "id":  "TC36",
                         "scenario":  "Happy path - About Cidy undeveloped",
                         "question":  "How does Cidy work?",
                         "clarification":  "",
@@ -3145,7 +3781,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC31",
+                        "id":  "TC37",
                         "scenario":  "Happy path - About Cidy coverage",
                         "question":  "What knowledge sources does Cidy currently use?",
                         "clarification":  "",
@@ -3251,7 +3887,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC32",
+                        "id":  "TC38",
                         "scenario":  "Happy path - About Cidy maintenance",
                         "question":  "Who maintains Cidy\u0027s knowledge?",
                         "clarification":  "",
@@ -3357,7 +3993,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC33",
+                        "id":  "TC39",
                         "scenario":  "Clarification path - fund to DA",
                         "question":  "How do I write an evaluation report?",
                         "clarification":  "Development Account (DA)",
@@ -3459,7 +4095,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC34",
+                        "id":  "TC40",
                         "scenario":  "Clarification path - fund to RPTC",
                         "question":  "What are the reporting requirements?",
                         "clarification":  "RPTC",
@@ -3565,7 +4201,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC35",
+                        "id":  "TC41",
                         "scenario":  "Clarification path - fund to PDF",
                         "question":  "Which reporting template should I use?",
                         "clarification":  "UNPDF / PDF",
@@ -3671,7 +4307,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC36",
+                        "id":  "TC42",
                         "scenario":  "Clarification path - fund not sure",
                         "question":  "Are travel costs eligible?",
                         "clarification":  "Not sure",
@@ -3774,7 +4410,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC37",
+                        "id":  "TC43",
                         "scenario":  "Clarification path - domain to DA",
                         "question":  "I need help with a project. Where do I start?",
                         "clarification":  "Development Account (DA)",
@@ -3880,7 +4516,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC38",
+                        "id":  "TC44",
                         "scenario":  "Clarification path - domain to Programme Development",
                         "question":  "I need help with a project. Where do I start?",
                         "clarification":  "Programme Development",
@@ -3982,7 +4618,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC39",
+                        "id":  "TC45",
                         "scenario":  "Clarification path - domain to Evaluation Evidence",
                         "question":  "I need help understanding project performance. Where should I look?",
                         "clarification":  "Project Evaluations / Lessons Learned",
@@ -4084,7 +4720,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC40",
+                        "id":  "TC46",
                         "scenario":  "Clarification path - domain to About Cidy",
                         "question":  "I need help. What is this tool?",
                         "clarification":  "About Cidy",
@@ -4190,7 +4826,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC41",
+                        "id":  "TC47",
                         "scenario":  "Clarification path - domain to RPTC",
                         "question":  "Can you help me with a project report?",
                         "clarification":  "RPTC",
@@ -4292,7 +4928,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC42",
+                        "id":  "TC48",
                         "scenario":  "Clarification path - domain typed DA",
                         "question":  "Can you help me with a project?",
                         "clarification":  "DA",
@@ -4394,7 +5030,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC43",
+                        "id":  "TC49",
                         "scenario":  "Clarification path - domain typed Development Account",
                         "question":  "Can you help me with a project?",
                         "clarification":  "Development Account",
@@ -4496,7 +5132,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC44",
+                        "id":  "TC50",
                         "scenario":  "Clarification path - domain typed UNPDF",
                         "question":  "What guidance applies to this project?",
                         "clarification":  "UNPDF",
@@ -4602,7 +5238,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC45",
+                        "id":  "TC51",
                         "scenario":  "Clarification path - artifact concept note",
                         "question":  "Where is the template?",
                         "clarification":  "Concept note",
@@ -4710,7 +5346,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC46",
+                        "id":  "TC52",
                         "scenario":  "Clarification path - artifact evaluation report",
                         "question":  "How do I fill out the document?",
                         "clarification":  "Evaluation report",
@@ -4799,7 +5435,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC47",
+                        "id":  "TC53",
                         "scenario":  "Clarification path - artifact progress report",
                         "question":  "Can you help me write the report?",
                         "clarification":  "Progress report",
@@ -4888,7 +5524,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC48",
+                        "id":  "TC54",
                         "scenario":  "Clarification path - artifact management response",
                         "question":  "Which form should I use after an evaluation?",
                         "clarification":  "Management response",
@@ -4990,7 +5626,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC49",
+                        "id":  "TC55",
                         "scenario":  "Clarification path - second attempt succeeds",
                         "question":  "Which template should I use?",
                         "clarification":  "Attempt 1: something invalid. Attempt 2: Development Account (DA).",
@@ -5096,7 +5732,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC50",
+                        "id":  "TC56",
                         "scenario":  "Clarification path - max attempts dead end",
                         "question":  "Which template should I use?",
                         "clarification":  "Attempt 1: random text. Attempt 2: still random text.",
@@ -5181,7 +5817,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC51",
+                        "id":  "TC57",
                         "scenario":  "Vague path - domain clarification",
                         "question":  "Where do I start?",
                         "clarification":  "",
@@ -5266,7 +5902,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC52",
+                        "id":  "TC58",
                         "scenario":  "Vague path - template clarification",
                         "question":  "I need a template.",
                         "clarification":  "",
@@ -5351,7 +5987,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC53",
+                        "id":  "TC59",
                         "scenario":  "Vague path - report clarification",
                         "question":  "Can you help me write the report?",
                         "clarification":  "",
@@ -5436,7 +6072,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC54",
+                        "id":  "TC60",
                         "scenario":  "Vague path - guidance clarification",
                         "question":  "What guidance is available?",
                         "clarification":  "",
@@ -5521,7 +6157,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC55",
+                        "id":  "TC61",
                         "scenario":  "Vague path - project support clarification",
                         "question":  "Can Cidy help me with my project?",
                         "clarification":  "",
@@ -5606,7 +6242,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC56",
+                        "id":  "TC62",
                         "scenario":  "Out of scope - weather",
                         "question":  "What is the weather in New York today?",
                         "clarification":  "",
@@ -5691,7 +6327,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC57",
+                        "id":  "TC63",
                         "scenario":  "Out of scope - sports",
                         "question":  "Who won the last World Cup?",
                         "clarification":  "",
@@ -5776,7 +6412,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC58",
+                        "id":  "TC64",
                         "scenario":  "Out of scope - poem",
                         "question":  "Write me a poem about cats.",
                         "clarification":  "",
@@ -5861,7 +6497,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC59",
+                        "id":  "TC65",
                         "scenario":  "Out of scope - laptop help",
                         "question":  "How do I fix my laptop screen?",
                         "clarification":  "",
@@ -5946,7 +6582,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC60",
+                        "id":  "TC66",
                         "scenario":  "Out of scope - stock investment",
                         "question":  "What stock should I buy this week?",
                         "clarification":  "",

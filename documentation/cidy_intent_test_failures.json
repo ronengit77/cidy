@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-25T19:05:00-04:00",
+                    "generatedAt":  "2026-05-26T15:16:17-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  60,
-                    "passed":  40,
+                    "total":  66,
+                    "passed":  46,
                     "failed":  20
                 },
     "failures":  [
@@ -171,7 +171,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC24",
+                         "id":  "TC30",
                          "scenario":  "Happy path - RPTC governance",
                          "question":  "What are the RPTC governance arrangements?",
                          "finalRoute":  {
@@ -225,7 +225,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC25",
+                         "id":  "TC31",
                          "scenario":  "Happy path - RPTC roles",
                          "question":  "What are RPTC roles and responsibilities?",
                          "finalRoute":  {
@@ -279,7 +279,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC26",
+                         "id":  "TC32",
                          "scenario":  "Happy path - RPTC programme design standards",
                          "question":  "What programme design standards apply to RPTC?",
                          "finalRoute":  {
@@ -333,7 +333,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC27",
+                         "id":  "TC33",
                          "scenario":  "Happy path - RPTC evaluation criteria",
                          "question":  "What are the RPTC evaluation criteria?",
                          "finalRoute":  {
@@ -387,7 +387,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC28",
+                         "id":  "TC34",
                          "scenario":  "Happy path - RPTC reports",
                          "question":  "Where can I find guidance on RPTC reports?",
                          "finalRoute":  {
@@ -441,7 +441,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC29",
+                         "id":  "TC35",
                          "scenario":  "Happy path - PDF / UNPDF",
                          "question":  "What does the UNPDF guidance say about reporting?",
                          "finalRoute":  {
@@ -495,7 +495,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC30",
+                         "id":  "TC36",
                          "scenario":  "Happy path - About Cidy undeveloped",
                          "question":  "How does Cidy work?",
                          "finalRoute":  {
@@ -549,7 +549,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC31",
+                         "id":  "TC37",
                          "scenario":  "Happy path - About Cidy coverage",
                          "question":  "What knowledge sources does Cidy currently use?",
                          "finalRoute":  {
@@ -603,7 +603,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC32",
+                         "id":  "TC38",
                          "scenario":  "Happy path - About Cidy maintenance",
                          "question":  "Who maintains Cidy\u0027s knowledge?",
                          "finalRoute":  {
@@ -657,7 +657,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC34",
+                         "id":  "TC40",
                          "scenario":  "Clarification path - fund to RPTC",
                          "question":  "What are the reporting requirements?",
                          "finalRoute":  {
@@ -711,7 +711,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC35",
+                         "id":  "TC41",
                          "scenario":  "Clarification path - fund to PDF",
                          "question":  "Which reporting template should I use?",
                          "finalRoute":  {
@@ -765,7 +765,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC40",
+                         "id":  "TC46",
                          "scenario":  "Clarification path - domain to About Cidy",
                          "question":  "I need help. What is this tool?",
                          "finalRoute":  {
@@ -819,7 +819,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC44",
+                         "id":  "TC50",
                          "scenario":  "Clarification path - domain typed UNPDF",
                          "question":  "What guidance applies to this project?",
                          "finalRoute":  {
@@ -873,7 +873,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC45",
+                         "id":  "TC51",
                          "scenario":  "Clarification path - artifact concept note",
                          "question":  "Where is the template?",
                          "finalRoute":  {
@@ -927,7 +927,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC46",
+                         "id":  "TC52",
                          "scenario":  "Clarification path - artifact evaluation report",
                          "question":  "How do I fill out the document?",
                          "finalRoute":  {
@@ -976,7 +976,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC47",
+                         "id":  "TC53",
                          "scenario":  "Clarification path - artifact progress report",
                          "question":  "Can you help me write the report?",
                          "finalRoute":  {
@@ -1025,7 +1025,7 @@
                                                ]
                      },
                      {
-                         "id":  "TC49",
+                         "id":  "TC55",
                          "scenario":  "Clarification path - second attempt succeeds",
                          "question":  "Which template should I use?",
                          "finalRoute":  {

@@ -89,7 +89,7 @@ beginDialog:
             "Allowed funding_stream values:" & Char(10) &
             "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
             "Allowed topic_area values:" & Char(10) &
-            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
             "Allowed requires_clarification values: Yes, No" & Char(10) &
             "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
             "Critical routing rules:" & Char(10) &
@@ -101,9 +101,11 @@ beginDialog:
             "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=programme_development, topic_area=projects_evaluations, and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
             "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X." & Char(10) &
             "8. If the user asks about TAG meetings, Tag Team meetings, steering committee meetings, meeting materials, decisions, minutes, actions, or conclusions, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=tag_meetings or steering_committee as appropriate, requires_clarification=No. These are Programme Development knowledge areas, not DA/RPTC/PDF fund-specific questions." & Char(10) &
-            "9. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
-            "10. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
-            "11. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "9. If the user asks about Programme Development guidance, templates, project design, progress reports, annual progress reports, final report templates, project closure, project-document preparation, workplans, budgets, indicators, implementation rates, revisions, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, or country-specific action plans, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=guidelines_templates, requires_clarification=No." & Char(10) &
+            "10. If the user asks about implementing partners, grants, grantees, partner agreements, project cooperation agreements, due diligence, IPGC, routing slips to CDO, agreement clauses, partner evaluation, procurement versus grant or implementing partner modality, or procedures to identify, screen, select, approve, amend, monitor, close, or keep records for partners/grants, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=implementing_partners_grants, requires_clarification=No." & Char(10) &
+            "11. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "12. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "13. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
             "User question:" & Char(10) &
             Global.userQuestion
 
@@ -323,6 +325,65 @@ beginDialog:
 
             - kind: SetVariable
               id: fallback_clearClarificationQuestionSteeringCommittee
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_programmeDevelopmentGuidanceFallback
+      conditions:
+        - id: conditionItem_guidelinesTemplatesFallback
+          condition: =Or(Find("annual progress report", Lower(Global.userQuestion)) > 0, Find("progress report template", Lower(Global.userQuestion)) > 0, Find("final report template", Lower(Global.userQuestion)) > 0, Find("project document preparation", Lower(Global.userQuestion)) > 0, Find("project-document preparation", Lower(Global.userQuestion)) > 0, Find("project design", Lower(Global.userQuestion)) > 0, Find("implementation rate", Lower(Global.userQuestion)) > 0, Find("indicators of achievement", Lower(Global.userQuestion)) > 0, Find("output delivery", Lower(Global.userQuestion)) > 0, Find("resident coordinator", Lower(Global.userQuestion)) > 0, Find("country-specific action plan", Lower(Global.userQuestion)) > 0, Find("workplan", Lower(Global.userQuestion)) > 0, Find("budget justification", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainGuidelinesTemplates
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicGuidelinesTemplates
+              variable: Global.topicArea
+              value: guidelines_templates
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoGuidelinesTemplates
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneGuidelinesTemplates
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionGuidelinesTemplates
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_implementingPartnersGrantsFallback
+          condition: =Or(Find("implementing partner", Lower(Global.userQuestion)) > 0, Find("implementing partners", Lower(Global.userQuestion)) > 0, Find("partner agreement", Lower(Global.userQuestion)) > 0, Find("project cooperation agreement", Lower(Global.userQuestion)) > 0, Find("grantee", Lower(Global.userQuestion)) > 0, Find("grantees", Lower(Global.userQuestion)) > 0, Find("grant agreement", Lower(Global.userQuestion)) > 0, Find("due diligence", Lower(Global.userQuestion)) > 0, Find("ipgc", Lower(Global.userQuestion)) > 0, Find("routing slip", Lower(Global.userQuestion)) > 0, Find("partner evaluation", Lower(Global.userQuestion)) > 0, Find("procurement versus", Lower(Global.userQuestion)) > 0, Find("procurement vs", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainImplementingPartnersGrants
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicImplementingPartnersGrants
+              variable: Global.topicArea
+              value: implementing_partners_grants
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoImplementingPartnersGrants
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneImplementingPartnersGrants
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionImplementingPartnersGrants
               variable: Global.clarificationQuestion
               value:
 

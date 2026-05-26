@@ -113,6 +113,8 @@ function Infer-TopicAreas {
     if ($text -match "recommendations") { $areas.Add("recommendations") }
     if ($text -match "lessons_learned|lessons learned") { $areas.Add("lessons_learned") }
     if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|reports on evaluations|partnerships|project evaluation evidence|project evaluations|find( me)? evaluations|list evaluations|need evaluations|how many evaluation|evaluations about|evaluations by|evaluations in|evaluations that include|lessons learned") { $areas.Add("projects_evaluations") }
+    if ($text -match "guidelines_templates|annual progress report|final report template|project document preparation|project-document preparation|project design guidance|theory of change|budget justification|implementation rate|indicators of achievement|output delivery|country-specific action plan") { $areas.Add("guidelines_templates") }
+    if ($text -match "implementing_partners_grants|implementing partner|implementing partners|partner agreement|project cooperation agreement|grant|grants|grantee|grantees|due diligence|ipgc|routing slip|partner evaluation|procurement versus|procurement vs") { $areas.Add("implementing_partners_grants") }
     if ($text -match "cd_strategy|capacity development strategy") { $areas.Add("cd_strategy") }
     if ($text -match "steering_committee|steering committee") { $areas.Add("steering_committee") }
     if ($text -match "tag_meetings|tag meeting|tag materials") { $areas.Add("tag_meetings") }

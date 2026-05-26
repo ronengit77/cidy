@@ -125,7 +125,7 @@ beginDialog:
               id: end_aboutCidyNotDeveloped
 
         - id: conditionItem_routeProgrammeDevelopment
-          condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations" || Global.topicArea = "tag_meetings" || Global.topicArea = "steering_committee" || Global.topicArea = "cd_strategy"
+          condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations" || Global.topicArea = "tag_meetings" || Global.topicArea = "steering_committee" || Global.topicArea = "cd_strategy" || Global.topicArea = "guidelines_templates" || Global.topicArea = "implementing_partners_grants"
           actions:
             - kind: SetVariable
               id: setRoutingTarget_programmeDevelopment

@@ -114,6 +114,76 @@ beginDialog:
                 knowledgeSources:
                   - copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se
 
+        - id: conditionItem_guidelinesTemplates
+          condition: =Global.topicArea = "guidelines_templates"
+          actions:
+            - kind: SetVariable
+              id: setVariable_guidelinesTemplatesInstructions
+              variable: Global.sourceUseInstructions
+              value: These uploaded documents provide templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.
+
+            - kind: SearchAndSummarizeContent
+              id: search_guidelinesTemplates
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development guidelines, templates, project design, monitoring, reporting, budgeting, or closure, topic area: {Global.topicArea}.
+                Answer using the provided Programme Development knowledge sources and the binding source-use instructions.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
+
+        - id: conditionItem_implementingPartnersGrants
+          condition: =Global.topicArea = "implementing_partners_grants"
+          actions:
+            - kind: SetVariable
+              id: setVariable_implementingPartnersGrantsInstructions
+              variable: Global.sourceUseInstructions
+              value: This folder provides DESA's 25 September 2018 interim guidance and working templates for using grants and implementing partner agreements. Use this knowledge for questions about when to use a grant, implementing partner modality, or procurement; definitions of implementing partners, grants, and vendors; procedures for identifying, screening, selecting, approving, amending, monitoring, closing, and keeping records for grantees and implementing partners; and the roles of DESA divisions, CDO, OCSS/Procurement, IPGC, OLA, and the Controller's Office in due diligence and agreement approval. The annexes file supplies operational templates needed to apply those guidelines, including a routing slip to CDO, a project cooperation agreement template, required agreement clauses on funds, reporting, audits, anti-fraud/anti-corruption, termination, intellectual property, equipment, and privileges/immunities, plus a due-diligence questionnaire, IPGC decision template, partner evaluation template, and a reference table distinguishing activities that normally fit implementing-partner arrangements versus procurement.
+
+            - kind: SearchAndSummarizeContent
+              id: search_implementingPartnersGrants
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development implementing partners, grants, grantees, partner agreements, due diligence, or procurement versus partner/grant modalities, topic area: {Global.topicArea}.
+                Answer using the provided Programme Development knowledge sources and the binding source-use instructions.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source document title and link used
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
+
       elseActions:
         - kind: SearchAndSummarizeContent
           id: J7vEWX

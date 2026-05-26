@@ -139,6 +139,42 @@
       "Expected behavior": "Routes to Programme Development with topic_area=general."
     },
     {
+      "Scenario": "Happy path - Programme Development annual progress report template",
+      "Test question": "What instructions apply to the 2025 annual progress report template?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=guidelines_templates."
+    },
+    {
+      "Scenario": "Happy path - Programme Development final report template",
+      "Test question": "What should be included in the final report template for a capacity development project?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=guidelines_templates."
+    },
+    {
+      "Scenario": "Happy path - Programme Development project document preparation",
+      "Test question": "What guidance is available for preparing a project document, including theory of change, risks, workplan, and budget justification?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=guidelines_templates."
+    },
+    {
+      "Scenario": "Happy path - Programme Development implementing partner agreement",
+      "Test question": "When should DESA use an implementing partner agreement instead of procurement?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=implementing_partners_grants."
+    },
+    {
+      "Scenario": "Happy path - Programme Development grants due diligence",
+      "Test question": "What due diligence is required before approving a grant to an implementing partner?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=implementing_partners_grants."
+    },
+    {
+      "Scenario": "Happy path - Programme Development IPGC templates",
+      "Test question": "Where can I find the IPGC decision template and partner evaluation template for grants?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=implementing_partners_grants."
+    },
+    {
       "Scenario": "Happy path - RPTC budget and finance",
       "Test question": "What are the RPTC budget and finance requirements?",
       "Clarification": "",
