@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-26T16:59:19-04:00",
+                    "generatedAt":  "2026-05-26T17:09:05-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  76,
-                    "passed":  61,
-                    "failed":  15
+                    "passed":  62,
+                    "failed":  14
                 },
     "failures":  [
                      {
@@ -383,60 +383,6 @@
                                                    {
                                                        "topic":  "Formulate_Response_About_Cidy.yaml",
                                                        "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC40",
-                         "scenario":  "Clarification path - fund to RPTC",
-                         "question":  "What are the reporting requirements?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
-                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
-                                            "yamlFile":  "Formulate_Response_RPTC.yaml",
-                                            "routerStatus":  "wired",
-                                            "finalTopic":  "Formulate_Response_RPTC.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_RPTC.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "topic_area_not_mapped",
-                                              "point":  "Formulate Response",
-                                              "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: reports."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Clarifier.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_RPTC.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_RPTC.yaml",
-                                                       "decision":  "Use fallback or update topic-area mapping"
                                                    }
                                                ]
                      },

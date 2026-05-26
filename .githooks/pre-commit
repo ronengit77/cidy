@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+changed_files="$(git diff --cached --name-only)"
+case "$changed_files" in
+  *Formulate_Response_*.yaml*|*Cidy_Intent.yaml*|*Cidy_Intent_Router.yaml*|*Cidy_Intent_Variables_Defaults.json*|*documentation/Cidy_Intent_Test_Cases_*.json*|*tools/generate_knowledge_inventory.ps1*|*tools/run_intent_test_cases.ps1*)
+    echo "Refreshing Cidy generated documentation and structural test results..."
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/generate_knowledge_inventory.ps1
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/run_intent_test_cases.ps1 -SkipInventoryRefresh
+    git add documentation/cidy_knowledge_inventory.json \
+      documentation/cidy_knowledge_control_center.html \
+      documentation/cidy_intent_test_results.json \
+      documentation/cidy_intent_test_failures.json
+    ;;
+esac

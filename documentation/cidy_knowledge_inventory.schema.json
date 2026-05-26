@@ -170,6 +170,7 @@
           "type": "string",
           "enum": [
             "mapped",
+            "alias",
             "fallback",
             "mapped_needs_topic_area_alignment",
             "yaml_exists_not_wired",

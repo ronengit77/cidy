@@ -431,6 +431,7 @@
             <label for="editMappingStatus">Mapping Status</label>
             <select id="editMappingStatus" required>
               <option value="mapped">mapped</option>
+              <option value="alias">alias</option>
               <option value="fallback">fallback</option>
               <option value="review_required">review_required</option>
               <option value="mapped_needs_topic_area_alignment">mapped_needs_topic_area_alignment</option>
@@ -544,7 +545,7 @@
     }
 
     function statusClass(status) {
-      if (status === "mapped" || status === "wired") return "wired";
+      if (status === "mapped" || status === "alias" || status === "wired") return "wired";
       if (status === "fallback" || status === "review_required" || String(status).includes("alignment")) return "review";
       return "gap";
     }
@@ -573,7 +574,7 @@
       const folderCount = rows.reduce((total, row) => total + row.folders.length, 0);
       const topicCount = new Set(rows.flatMap(row => row.folders.map(folder => `${row.yamlFile}:${folder.topicArea}`))).size;
       const fallbackCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus === "fallback").length;
-      const reviewCount = rows.flatMap(row => row.folders).filter(folder => folder.mappingStatus !== "mapped").length;
+      const reviewCount = rows.flatMap(row => row.folders).filter(folder => !["mapped", "alias"].includes(folder.mappingStatus)).length;
       const newYamlCount = rows.filter(row => row.domain?.isNewYaml).length;
       const newTopicCount = rows.flatMap(row => row.folders).filter(folder => folder.isNewTopic).length;
       const draftLabel = hasLocalDraft() ? "Local draft active" : "Inventory baseline";
@@ -768,8 +769,15 @@
       const merged = clone(baseInventory);
       const baseFolders = new Map((merged.folders || []).map(folder => [folder.id, folder]));
       (draftInventory.folders || []).forEach(folder => {
-        const isManualDraft = Boolean(folder.draftEditedAt) || !baseFolders.has(folder.id);
-        if (isManualDraft) baseFolders.set(folder.id, folder);
+        if (!baseFolders.has(folder.id)) {
+          baseFolders.set(folder.id, folder);
+          return;
+        }
+
+        const baseFolder = baseFolders.get(folder.id);
+        ["ownerUnit", "notes"].forEach(field => {
+          if (folder[field]) baseFolder[field] = folder[field];
+        });
       });
       merged.folders = [...baseFolders.values()];
       if (draftInventory.managerUpdates) merged.managerUpdates = draftInventory.managerUpdates;

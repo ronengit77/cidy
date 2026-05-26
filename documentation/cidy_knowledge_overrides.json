@@ -9,7 +9,7 @@
     {
       "id": "rptc",
       "label": "Regular Programme of Technical Cooperation",
-      "notes": "Developed route, but topic-area names in the response YAML do not fully match classifier output values."
+      "notes": "Developed route. Uses specific branches for RPTC guidance/templates and progress reports, with a broad RPTC fallback branch for other RPTC questions."
     },
     {
       "id": "pdf",

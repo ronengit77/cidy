@@ -117,6 +117,11 @@ function Get-KnowledgeSources {
     return @($sources)
 }
 
+function Get-TopicAreasFromCondition {
+    param([string]$Condition)
+    return @([regex]::Matches($Condition, 'Global\.topicArea\s*=\s*"([^"]+)"') | ForEach-Object { $_.Groups[1].Value } | Select-Object -Unique)
+}
+
 function Get-SourceLabels {
     param([string[]]$Sources)
     return @($Sources | ForEach-Object {
@@ -140,10 +145,12 @@ function Get-FoldersFromResponseYaml {
     $fileName = Split-Path $Path -Leaf
     $text = Get-Content -Raw $Path
     $folders = New-Object System.Collections.Generic.List[object]
-    $conditionMatches = [regex]::Matches($text, '(?ms)- id: (?<id>[A-Za-z0-9_]+).*?condition:\s*=Global\.topicArea\s*=\s*"(?<topicArea>[^"]+)".*?(?=(?:\r?\n\s*- id: conditionItem_)|(?:\r?\n\s*elseActions:)|\z)')
+    $conditionMatches = [regex]::Matches($text, '(?ms)^\s*- id:\s*(?<id>conditionItem_[A-Za-z0-9_]+)\s*\r?\n\s*condition:\s*(?<condition>[^\r\n]+)(?<block>.*?)(?=(?:\r?\n\s*- id:\s*conditionItem_)|(?:\r?\n\s*elseActions:)|(?:\r?\n\s*- kind:\s*ConditionGroup)|\z)')
 
     foreach ($match in $conditionMatches) {
-        $topicArea = $match.Groups["topicArea"].Value
+        $condition = $match.Groups["condition"].Value
+        $topicAreas = @(Get-TopicAreasFromCondition $condition)
+        if ($topicAreas.Count -eq 0) { continue }
         $block = $match.Value
         $sources = Get-KnowledgeSources $block
         if ($sources.Count -eq 0) { continue }
@@ -151,26 +158,29 @@ function Get-FoldersFromResponseYaml {
         $status = "mapped"
         if ($RouterStatus -eq "not_wired") { $status = "yaml_exists_not_wired" }
         if ($DomainId -eq "programme_development") { $status = "review_required" }
-        $folderName = ConvertTo-Title $topicArea
         $sourceLabels = Get-SourceLabels $sources
-        $folders.Add([ordered]@{
-            id                = "$(ConvertTo-Slug $DomainId)_$(ConvertTo-Slug $topicArea)"
-            domain            = $DomainId
-            topicArea         = $topicArea
-            topicName         = ConvertTo-Title $topicArea
-            folderName        = $folderName
-            knowledgeSourceId = ($sources -join "; ")
-            sourceIds         = @($sources)
-            sourceLabels      = @($sourceLabels)
-            sourceCount       = $sources.Count
-            yamlConditionId   = $match.Groups["id"].Value
-            yamlFile          = $fileName
-            generatedFromYaml = $true
-            sourceUseInstructionSource = if ($instructions) { "Global.sourceUseInstructions" } else { "" }
-            mappingStatus     = $status
-            ownerUnit         = "TBD"
-            instructions      = if ($instructions) { $instructions } else { "No separate source-use instruction variable is currently set in this YAML branch." }
-        })
+        $primaryTopicArea = $topicAreas[0]
+        foreach ($topicArea in $topicAreas) {
+            $folderName = ConvertTo-Title $topicArea
+            $folders.Add([ordered]@{
+                id                = "$(ConvertTo-Slug $DomainId)_$(ConvertTo-Slug $topicArea)"
+                domain            = $DomainId
+                topicArea         = $topicArea
+                topicName         = ConvertTo-Title $topicArea
+                folderName        = $folderName
+                knowledgeSourceId = ($sources -join "; ")
+                sourceIds         = @($sources)
+                sourceLabels      = @($sourceLabels)
+                sourceCount       = $sources.Count
+                yamlConditionId   = $match.Groups["id"].Value
+                yamlFile          = $fileName
+                generatedFromYaml = $true
+                sourceUseInstructionSource = if ($instructions) { "Global.sourceUseInstructions" } else { "" }
+                mappingStatus     = if ($topicArea -eq $primaryTopicArea) { $status } else { "alias" }
+                ownerUnit         = "TBD"
+                instructions      = if ($instructions) { $instructions } else { "No separate source-use instruction variable is currently set in this YAML branch." }
+            })
+        }
     }
 
     if ($conditionMatches.Count -eq 0) {
@@ -199,8 +209,11 @@ function Get-FoldersFromResponseYaml {
     }
 
     $fallbackSources = @()
-    if ($text -match '(?ms)elseActions:.*?knowledgeSources:\s*\r?\n\s+kind: SearchSpecificKnowledgeSources\s*\r?\n\s+knowledgeSources:\s*\r?\n(?<sources>(?:\s+- copilots_header_3141e\.topic\.[A-Za-z0-9_]+\s*\r?\n?)+)') {
-        $fallbackSources = Get-KnowledgeSources $Matches["sources"]
+    $fallbackInstructions = ""
+    if ($text -match '(?ms)^\s*elseActions:\s*\r?\n(?<block>.*?)(?=(?:\r?\n\s*- kind:\s*ConditionGroup)|\z)') {
+        $fallbackBlock = $Matches["block"]
+        $fallbackSources = Get-KnowledgeSources $fallbackBlock
+        $fallbackInstructions = Get-SourceUseInstruction $fallbackBlock
     }
     if ($fallbackSources.Count -gt 0) {
         $fallbackId = "$(ConvertTo-Slug $DomainId)_fallback"
@@ -219,10 +232,10 @@ function Get-FoldersFromResponseYaml {
                 yamlConditionId   = "elseActions"
                 yamlFile          = $fileName
                 generatedFromYaml = $true
-                sourceUseInstructionSource = ""
+                sourceUseInstructionSource = if ($fallbackInstructions) { "Global.sourceUseInstructions" } else { "" }
                 mappingStatus     = "fallback"
                 ownerUnit         = "TBD"
-                instructions      = "Fallback knowledge source used when no specific branch applies or when the draft response is blank."
+                instructions      = if ($fallbackInstructions) { $fallbackInstructions } else { "Fallback knowledge source used when no specific branch applies or when the draft response is blank." }
             })
         }
     }

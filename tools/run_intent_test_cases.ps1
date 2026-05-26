@@ -3,7 +3,8 @@ param(
     [string]$TestCasesPath = "documentation/Cidy_Intent_Test_Cases_76.json",
     [string]$InventoryPath = "documentation/cidy_knowledge_inventory.json",
     [string]$ResultsPath = "documentation/cidy_intent_test_results.json",
-    [string]$FailuresPath = "documentation/cidy_intent_test_failures.json"
+    [string]$FailuresPath = "documentation/cidy_intent_test_failures.json",
+    [switch]$SkipInventoryRefresh
 )
 
 $ErrorActionPreference = "Stop"
@@ -299,6 +300,14 @@ $testPath = Join-Path $Root $TestCasesPath
 $inventoryFile = Join-Path $Root $InventoryPath
 $resultsFile = Join-Path $Root $ResultsPath
 $failuresFile = Join-Path $Root $FailuresPath
+
+if (-not $SkipInventoryRefresh) {
+    $inventoryGenerator = Join-Path $Root "tools/generate_knowledge_inventory.ps1"
+    if (Test-Path $inventoryGenerator) {
+        & $inventoryGenerator
+        if (-not $?) { throw "generate_knowledge_inventory.ps1 failed." }
+    }
+}
 
 $testData = Get-Content -Raw $testPath | ConvertFrom-Json
 $inventory = Get-Content -Raw $inventoryFile | ConvertFrom-Json

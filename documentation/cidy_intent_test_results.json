@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-26T16:59:19-04:00",
+                    "generatedAt":  "2026-05-26T17:09:05-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  76,
-                    "passed":  61,
-                    "failed":  15
+                    "passed":  62,
+                    "failed":  14
                 },
     "results":  [
                     {
@@ -3027,11 +3027,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "budget_finance",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "budget_finance",
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3136,11 +3137,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates",
+                                                                                                      "governance_roles"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates",
-                                                                                                       "governance_roles"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3245,11 +3247,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates",
+                                                                                                      "governance_roles"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates",
-                                                                                                       "governance_roles"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3354,11 +3357,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates",
+                                                                                                      "programme_design_standards"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates",
-                                                                                                       "programme_design_standards"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3463,11 +3467,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates",
+                                                                                                      "evaluation_criteria"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates",
-                                                                                                       "evaluation_criteria"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3572,11 +3577,12 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates",
+                                                                                                      "reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates",
-                                                                                                       "reports"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -4119,7 +4125,7 @@
                         "question":  "What are the reporting requirements?",
                         "clarification":  "RPTC",
                         "expectedBehavior":  "Classifier asks fund clarification. Clarifier maps to knowledge_domain=rptc, funding_stream=RPTC. Router routes to RPTC or temporary not-yet-developed RPTC message.",
-                        "status":  "fail",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -4199,24 +4205,20 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "reports"
+
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: reports."
-                                         }
+
                                      ]
                     },
                     {
@@ -6776,10 +6778,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -6881,10 +6884,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -6986,10 +6990,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7091,10 +7096,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7196,10 +7202,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_guidance_templates"
+                                                                                                      "rptc_guidance_templates",
+                                                                                                      "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "templates"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7712,10 +7719,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "rptc_progress_reports"
+                                                                                                      "rptc_progress_reports",
+                                                                                                      "monitoring_reporting"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "monitoring_reporting",
                                                                                                        "recommendations"
                                                                                                    ]
                                                                                   }

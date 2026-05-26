@@ -28,6 +28,12 @@ For normal response-topic work, prefer the full refresh workflow:
 
 That workflow creates rotating backups, syncs topic-area allowed values into intent/default config files, regenerates the inventory, runs the structural tests, and writes a timestamped `documentation/test_case_yyyy_mm_dd_hh_mm_ss.md` report. See `CIDY_RESPONSE_TOPIC_UPDATE_WORKFLOW.md`.
 
+The structural test runner also refreshes the inventory before reading it, and this repository includes `.githooks/pre-commit` to regenerate the inventory/control-center docs and test-result JSON whenever intent or Formulate Response YAML files are staged. Enable the hook in a clone with:
+
+```powershell
+git config core.hooksPath .githooks
+```
+
 The script:
 
 - scrapes `Cidy_Intent_Router.yaml`,

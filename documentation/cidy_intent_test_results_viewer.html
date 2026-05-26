@@ -120,7 +120,7 @@
 
     .layout {
       grid-template-columns: .9fr 1.1fr;
-      align-items: start;
+      align-items: stretch;
       margin-top: 28px;
     }
 
@@ -163,6 +163,9 @@
 
     .layout > .panel:first-child {
       padding: 12px;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 280px);
     }
 
     .layout > .panel:first-child h2 {
@@ -218,7 +221,8 @@
     .case-list {
       display: grid;
       gap: 6px;
-      max-height: 880px;
+      flex: 1;
+      max-height: none;
       overflow: auto;
       padding-right: 4px;
       font-size: 65%;
