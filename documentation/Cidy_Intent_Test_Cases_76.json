@@ -178,37 +178,37 @@
       "Scenario": "Happy path - RPTC budget and finance",
       "Test question": "What are the RPTC budget and finance requirements?",
       "Clarification": "",
-      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=budget_finance or policy_guidance_compliance."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - RPTC governance",
       "Test question": "What are the RPTC governance arrangements?",
       "Clarification": "",
-      "Expected behavior": "Routes to RPTC or the temporary not-yet-developed RPTC message if that response topic is not configured."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - RPTC roles",
       "Test question": "What are RPTC roles and responsibilities?",
       "Clarification": "",
-      "Expected behavior": "Routes to RPTC with topic_area=governance_roles or temporary not-yet-developed message."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - RPTC programme design standards",
       "Test question": "What programme design standards apply to RPTC?",
       "Clarification": "",
-      "Expected behavior": "Routes to RPTC with topic_area=programme_design_standards."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - RPTC evaluation criteria",
       "Test question": "What are the RPTC evaluation criteria?",
       "Clarification": "",
-      "Expected behavior": "Routes to RPTC with topic_area=evaluation_criteria."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - RPTC reports",
       "Test question": "Where can I find guidance on RPTC reports?",
       "Clarification": "",
-      "Expected behavior": "Routes to RPTC with topic_area=reports."
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates."
     },
     {
       "Scenario": "Happy path - PDF / UNPDF",
@@ -401,6 +401,76 @@
       "Test question": "What stock should I buy this week?",
       "Clarification": "",
       "Expected behavior": "Routes to User Feedback as out_of_scope."
+    },
+    {
+      "Scenario": "Happy path - RPTC activity proposal template",
+      "Test question": "What information is required in an RPTC activity proposal template?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC common reporting standards",
+      "Test question": "What are the common reporting standards and minimum data points for RPTC activities?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC IRA guidance",
+      "Test question": "What guidance applies to Inter-Regional Adviser recruitment, renewal, reporting lines, and administration?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC activity report template",
+      "Test question": "What should be captured in an RPTC activity report template after an activity?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC planning and approval process",
+      "Test question": "How are RPTC activities planned, approved, revised, and reported after completion?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC 2024 achievements",
+      "Test question": "What were the main achievements of the Regular Programme of Technical Cooperation in 2024?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC 2024 countries requests interventions",
+      "Test question": "How many countries, requests, interventions, and people were supported through RPTC in 2024?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC implementing entities",
+      "Test question": "Which UN implementing entities delivered RPTC activities, and how did their results differ?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC SIDS LDC LLDC support",
+      "Test question": "How did RPTC support least developed countries, landlocked developing countries, and small island developing States?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+      "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - RPTC future recommendations",
+      "Test question": "What challenges and recommendations does the RPTC progress report identify for strengthening future years?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+      "date-created": "2026-05-26"
     }
   ]
 }

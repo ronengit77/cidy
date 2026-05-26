@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-26T15:16:17-04:00",
+                    "generatedAt":  "2026-05-26T16:34:08-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  66,
-                    "passed":  46,
-                    "failed":  20
+                    "total":  76,
+                    "passed":  61,
+                    "failed":  15
                 },
     "results":  [
                     {
@@ -2938,7 +2938,7 @@
                         "scenario":  "Happy path - RPTC budget and finance",
                         "question":  "What are the RPTC budget and finance requirements?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=budget_finance or policy_guidance_compliance.",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
                         "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
@@ -2951,8 +2951,9 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
                                                                        "budget_finance",
-                                                                       "policy_guidance_compliance"
+                                                                       "templates"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -2976,8 +2977,9 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
                                                                                  "budget_finance",
-                                                                                 "policy_guidance_compliance"
+                                                                                 "templates"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -2992,8 +2994,9 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
                                                                                  "budget_finance",
-                                                                                 "policy_guidance_compliance"
+                                                                                 "templates"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -3024,10 +3027,11 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "budget_finance"
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "policy_guidance_compliance"
+                                                                                                       "budget_finance",
+                                                                                                       "templates"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3043,8 +3047,8 @@
                         "scenario":  "Happy path - RPTC governance",
                         "question":  "What are the RPTC governance arrangements?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to RPTC or the temporary not-yet-developed RPTC message if that response topic is not configured.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -3056,6 +3060,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates",
                                                                        "governance_roles"
                                                                    ]
                                                 },
@@ -3080,6 +3086,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "governance_roles"
                                                                              ],
                                                               "requiresClarification":  "No",
@@ -3095,6 +3103,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "governance_roles"
                                                                              ]
                                                           },
@@ -3124,24 +3134,21 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "templates",
                                                                                                        "governance_roles"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: governance_roles."
-                                         }
+
                                      ]
                     },
                     {
@@ -3149,8 +3156,8 @@
                         "scenario":  "Happy path - RPTC roles",
                         "question":  "What are RPTC roles and responsibilities?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to RPTC with topic_area=governance_roles or temporary not-yet-developed message.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -3162,6 +3169,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates",
                                                                        "governance_roles"
                                                                    ]
                                                 },
@@ -3186,6 +3195,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "governance_roles"
                                                                              ],
                                                               "requiresClarification":  "No",
@@ -3201,6 +3212,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "governance_roles"
                                                                              ]
                                                           },
@@ -3230,24 +3243,21 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "templates",
                                                                                                        "governance_roles"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: governance_roles."
-                                         }
+
                                      ]
                     },
                     {
@@ -3255,8 +3265,8 @@
                         "scenario":  "Happy path - RPTC programme design standards",
                         "question":  "What programme design standards apply to RPTC?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to RPTC with topic_area=programme_design_standards.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -3268,6 +3278,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates",
                                                                        "programme_design_standards"
                                                                    ]
                                                 },
@@ -3292,6 +3304,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "programme_design_standards"
                                                                              ],
                                                               "requiresClarification":  "No",
@@ -3307,6 +3321,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "programme_design_standards"
                                                                              ]
                                                           },
@@ -3336,24 +3352,21 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "templates",
                                                                                                        "programme_design_standards"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: programme_design_standards."
-                                         }
+
                                      ]
                     },
                     {
@@ -3361,8 +3374,8 @@
                         "scenario":  "Happy path - RPTC evaluation criteria",
                         "question":  "What are the RPTC evaluation criteria?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to RPTC with topic_area=evaluation_criteria.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -3374,6 +3387,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates",
                                                                        "evaluation_criteria"
                                                                    ]
                                                 },
@@ -3398,6 +3413,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "evaluation_criteria"
                                                                              ],
                                                               "requiresClarification":  "No",
@@ -3413,6 +3430,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "evaluation_criteria"
                                                                              ]
                                                           },
@@ -3442,24 +3461,21 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "templates",
                                                                                                        "evaluation_criteria"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: evaluation_criteria."
-                                         }
+
                                      ]
                     },
                     {
@@ -3467,8 +3483,8 @@
                         "scenario":  "Happy path - RPTC reports",
                         "question":  "Where can I find guidance on RPTC reports?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to RPTC with topic_area=reports.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
@@ -3480,6 +3496,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates",
                                                                        "reports"
                                                                    ]
                                                 },
@@ -3504,6 +3522,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "reports"
                                                                              ],
                                                               "requiresClarification":  "No",
@@ -3519,6 +3539,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates",
                                                                                  "reports"
                                                                              ]
                                                           },
@@ -3548,24 +3570,21 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  false,
+                                                                                      "mapped":  true,
                                                                                       "matched":  [
-
+                                                                                                      "rptc_guidance_templates"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "templates",
                                                                                                        "reports"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Use fallback or update topic-area mapping"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "topic_area_not_mapped",
-                                             "point":  "Formulate Response",
-                                             "message":  "Topic area(s) not mapped in Formulate_Response_RPTC.yaml: reports."
-                                         }
+
                                      ]
                     },
                     {
@@ -6660,6 +6679,1048 @@
                                                               "yamlFile":  ""
                                                           },
                                                "decision":  "Begin user_feedback.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC67",
+                        "scenario":  "Happy path - RPTC activity proposal template",
+                        "question":  "What information is required in an RPTC activity proposal template?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_guidance_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC68",
+                        "scenario":  "Happy path - RPTC common reporting standards",
+                        "question":  "What are the common reporting standards and minimum data points for RPTC activities?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_guidance_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC69",
+                        "scenario":  "Happy path - RPTC IRA guidance",
+                        "question":  "What guidance applies to Inter-Regional Adviser recruitment, renewal, reporting lines, and administration?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_guidance_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC70",
+                        "scenario":  "Happy path - RPTC activity report template",
+                        "question":  "What should be captured in an RPTC activity report template after an activity?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_guidance_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC71",
+                        "scenario":  "Happy path - RPTC planning and approval process",
+                        "question":  "How are RPTC activities planned, approved, revised, and reported after completion?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_guidance_templates.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_guidance_templates",
+                                                                       "templates"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_guidance_templates",
+                                                                                 "templates"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_guidance_templates"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "templates"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC72",
+                        "scenario":  "Happy path - RPTC 2024 achievements",
+                        "question":  "What were the main achievements of the Regular Programme of Technical Cooperation in 2024?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_progress_reports"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_progress_reports"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC73",
+                        "scenario":  "Happy path - RPTC 2024 countries requests interventions",
+                        "question":  "How many countries, requests, interventions, and people were supported through RPTC in 2024?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_progress_reports"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_progress_reports"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC74",
+                        "scenario":  "Happy path - RPTC implementing entities",
+                        "question":  "Which UN implementing entities delivered RPTC activities, and how did their results differ?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_progress_reports"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_progress_reports"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC75",
+                        "scenario":  "Happy path - RPTC SIDS LDC LLDC support",
+                        "question":  "How did RPTC support least developed countries, landlocked developing countries, and small island developing States?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_progress_reports"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_progress_reports"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC76",
+                        "scenario":  "Happy path - RPTC future recommendations",
+                        "question":  "What challenges and recommendations does the RPTC progress report identify for strengthening future years?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                           "yamlFile":  "Formulate_Response_RPTC.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_RPTC.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "rptc",
+                                                    "fundingStream":  "RPTC",
+                                                    "topicAreas":  [
+                                                                       "rptc_progress_reports",
+                                                                       "monitoring_reporting",
+                                                                       "recommendations"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_RPTC.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_RPTC.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports",
+                                                                                 "monitoring_reporting",
+                                                                                 "recommendations"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "rptc",
+                                                              "fundingStream":  "RPTC",
+                                                              "topicAreas":  [
+                                                                                 "rptc_progress_reports",
+                                                                                 "monitoring_reporting",
+                                                                                 "recommendations"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Regular Programme of Technical Cooperation",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_RPTC.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_RPTC.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_RPTC.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "rptc_progress_reports"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "monitoring_reporting",
+                                                                                                       "recommendations"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [

@@ -163,7 +163,7 @@ beginDialog:
               id: end_afterDA
 
         - id: conditionItem_routeRPTC
-          condition: =Global.knowledgeDomain = "rptc" || Global.fundingStream = "RPTC"
+          condition: =Global.knowledgeDomain = "rptc" || Global.fundingStream = "RPTC" || Global.topicArea = "rptc_guidance_templates" || Global.topicArea = "rptc_progress_reports"
           actions:
             - kind: SetVariable
               id: setRoutingTarget_RPTC

@@ -130,7 +130,7 @@ Resolved since the previous scan:
 1. `about_cidy` is recognized by the classifier and clarifier, but no matching response YAML exists yet.
 2. `Formulate_Response_Programme_Development.yaml` is wired, but some branch prompt text still says the user is asking about the Development Account and its knowledge-source IDs should be reviewed.
 3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
-4. RPTC topic-area values in `Formulate_Response_RPTC.yaml` do not fully match the classifier's allowed `topic_area` list. For example, the RPTC file checks `policy_compliance`, `reporting_documentation`, `process_governance`, `design_evaluation`, and `definition`, while the classifier uses values such as `policy_guidance_compliance`, `monitoring_reporting`, `governance_roles`, `evaluation_design`, and `general`. This means many RPTC questions will fall through to the generic RPTC search.
+4. RPTC has been consolidated around two current knowledge areas: `rptc_guidance_templates` for planning, approval, implementation, activity proposals, IRA guidance, reporting standards, activity report templates, and post-activity reporting; and `rptc_progress_reports` for achievements, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, and recommendations.
 5. Several user-facing/debug strings contain mojibake such as `DEBUG â€”`. These should likely be corrected to plain ASCII hyphens or proper UTF-8 em dashes in Copilot Studio exports.
 6. `share_response.yaml` sends `**DEBUG :Answer:**` to the user. If this is production-facing, remove `DEBUG :`.
 7. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.

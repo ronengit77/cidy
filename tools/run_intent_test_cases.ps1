@@ -1,6 +1,6 @@
 param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
-    [string]$TestCasesPath = "documentation/Cidy_Intent_Test_Cases_60.json",
+    [string]$TestCasesPath = "documentation/Cidy_Intent_Test_Cases_76.json",
     [string]$InventoryPath = "documentation/cidy_knowledge_inventory.json",
     [string]$ResultsPath = "documentation/cidy_intent_test_results.json",
     [string]$FailuresPath = "documentation/cidy_intent_test_failures.json"
@@ -115,6 +115,8 @@ function Infer-TopicAreas {
     if ($text -match "evaluation_evidence|actual evaluation evidence|recurring findings|evaluations said|evaluations say|evaluation reports say|reports on evaluations|partnerships|project evaluation evidence|project evaluations|find( me)? evaluations|list evaluations|need evaluations|how many evaluation|evaluations about|evaluations by|evaluations in|evaluations that include|lessons learned") { $areas.Add("projects_evaluations") }
     if ($text -match "guidelines_templates|annual progress report|final report template|project document preparation|project-document preparation|project design guidance|theory of change|budget justification|implementation rate|indicators of achievement|output delivery|country-specific action plan") { $areas.Add("guidelines_templates") }
     if ($text -match "implementing_partners_grants|implementing partner|implementing partners|partner agreement|project cooperation agreement|grant|grants|grantee|grantees|due diligence|ipgc|routing slip|partner evaluation|procurement versus|procurement vs") { $areas.Add("implementing_partners_grants") }
+    if ($text -match "rptc_guidance_templates|rptc activity proposal|rptc proposal template|rptc guidance|rptc guidelines|rptc reporting standards|common reporting standards|inter-regional adviser|inter regional adviser|ira recruitment|ira administration|rptc activity report template|rptc activity report|programme monitoring tool|rptc planning|rptc approval|rptc implementation|proposal revisions|post-activity reporting") { $areas.Add("rptc_guidance_templates") }
+    if ($text -match "rptc_progress_reports|rptc progress report|rptc progress reports|main achievements of the regular programme|rptc in 2024|countries, requests, interventions|people were supported through rptc|implementing entities delivered rptc|ldc|lldc|sids|small island developing states|landlocked developing countries|least developed countries|future years") { $areas.Add("rptc_progress_reports") }
     if ($text -match "cd_strategy|capacity development strategy") { $areas.Add("cd_strategy") }
     if ($text -match "steering_committee|steering committee") { $areas.Add("steering_committee") }
     if ($text -match "tag_meetings|tag meeting|tag materials") { $areas.Add("tag_meetings") }

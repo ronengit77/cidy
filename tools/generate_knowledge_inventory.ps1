@@ -151,9 +151,6 @@ function Get-FoldersFromResponseYaml {
         $status = "mapped"
         if ($RouterStatus -eq "not_wired") { $status = "yaml_exists_not_wired" }
         if ($DomainId -eq "programme_development") { $status = "review_required" }
-        if ($DomainId -eq "rptc" -and @("policy_compliance", "reporting_documentation", "process_governance", "design_evaluation", "definition") -contains $topicArea) {
-            $status = "mapped_needs_topic_area_alignment"
-        }
         $folderName = ConvertTo-Title $topicArea
         $sourceLabels = Get-SourceLabels $sources
         $folders.Add([ordered]@{
@@ -403,15 +400,6 @@ foreach ($domain in $domains) {
             description = "Response YAML exists or is expected, but the router does not currently call it."
         })
     }
-}
-if ($folders | Where-Object { $_.mappingStatus -eq "mapped_needs_topic_area_alignment" }) {
-    $knownGaps.Add([ordered]@{
-        id          = "rptc_topic_area_alignment"
-        severity    = "high"
-        title       = "Align RPTC topic-area values"
-        yamlFile    = "Cidy_Intent.yaml; Cidy_Intent_Clarifier.yaml; Formulate_Response_RPTC.yaml"
-        description = "RPTC response topic-area conditions differ from classifier/clarifier topic-area values."
-    })
 }
 if ($folders | Where-Object { $_.mappingStatus -eq "review_required" }) {
     $knownGaps.Add([ordered]@{

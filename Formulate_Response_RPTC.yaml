@@ -1,27 +1,36 @@
 kind: AdaptiveDialog
-modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+modelDescription: This topic searches the RPTC knowledge base based on the classified RPTC topic area and generates a draft response with confidence score. It does not display the answer to the user.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
   intent: {}
   actions:
     - kind: ConditionGroup
-      id: conditionGroup_HSTczN
+      id: conditionGroup_rptcKnowledgeFolders
       conditions:
-        - id: conditionItem_cGKijT
-          condition: =Global.topicArea = "policy_compliance"
+        - id: conditionItem_rptcProgressReports
+          condition: =Global.topicArea = "rptc_progress_reports"
           actions:
+            - kind: SetVariable
+              id: setSourceUseInstructions_rptcProgressReports
+              variable: Global.sourceUseInstructions
+              value: "This folder contains all RPTC progress reports. It answers questions like: What were the main achievements of the Regular Programme of Technical Cooperation in 2024? How many countries, requests, interventions, and people were supported through RPTC in 2024? Which UN implementing entities delivered RPTC activities, and how did their results differ? How did RPTC support least developed countries, landlocked developing countries, and small island developing States? What challenges and recommendations does the report identify for strengthening RPTC in future years?"
+
             - kind: SearchAndSummarizeContent
-              id: VteyUC
+              id: search_rptcProgressReports
               autoSend: false
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
                 "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC progress reports, achievements, results, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, or recommendations.
+                Answer using ONLY the provided RPTC progress report knowledge source.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+                For count questions, count matching records or reported figures from the progress report source where possible. If the source only supports an approximate count, state that limitation clearly.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
                 ANSWER: Your detailed answer
                 SOURCES: List each source document title and link used
@@ -33,23 +42,30 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
-                  - copilots_header_3141e.topic.PolicyGuidanceReference_ComplianceRequirementsRPTC_7Nzrzb3LGcSTW840rGknZ
+                  - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
 
-        - id: conditionItem_a98AD7
-          condition: =Global.topicArea = "reporting_documentation"
+        - id: conditionItem_rptcGuidanceTemplates
+          condition: =Global.topicArea = "rptc_guidance_templates" || Global.topicArea = "policy_compliance" || Global.topicArea = "policy_guidance_compliance" || Global.topicArea = "reporting_documentation" || Global.topicArea = "process_governance" || Global.topicArea = "budget_finance" || Global.topicArea = "design_evaluation" || Global.topicArea = "definition" || Global.topicArea = "governance_roles" || Global.topicArea = "programme_design_standards" || Global.topicArea = "evaluation_criteria" || Global.topicArea = "reports" || Global.topicArea = "templates" || Global.topicArea = "monitoring_reporting"
           actions:
+            - kind: SetVariable
+              id: setSourceUseInstructions_rptcGuidanceTemplates
+              variable: Global.sourceUseInstructions
+              value: "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements."
+
             - kind: SearchAndSummarizeContent
-              id: vWkDD5
+              id: search_rptcGuidanceTemplates
               autoSend: false
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
                 "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC guidance, templates, standards, activity proposals, reporting standards, IRA recruitment/administration, activity reports, planning, approval, implementation, proposal revisions, or post-activity reporting.
+                Answer using ONLY the provided RPTC guidance and templates knowledge source.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
                 ANSWER: Your detailed answer
                 SOURCES: List each source document title and link used
@@ -61,131 +77,28 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.ReportingDocumentationRPTC_RGn0_xENU5Enk3Q2boLvu
-
-        - id: conditionItem_AZI6Jl
-          condition: =Global.topicArea = "process_governance"
-          actions:
-            - kind: SearchAndSummarizeContent
-              id: YgRjBH
-              autoSend: false
-              variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
-              additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
-                Format your response as follows:
-                ANSWER: Your detailed answer
-                SOURCES: List each source document title and link used
-                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
-              fileSearchDataSource:
-                searchFilesMode:
-                  kind: DoNotSearchFiles
-
-              knowledgeSources:
-                kind: SearchSpecificKnowledgeSources
-                knowledgeSources:
-                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
-                  - copilots_header_3141e.topic.Process_GovernanceProjectManagementRolesRPTC_BQyT2nfCpctv7q1Az2svg
-
-        - id: conditionItem_2cplcy
-          condition: =Global.topicArea = "budget_finance"
-          actions:
-            - kind: SearchAndSummarizeContent
-              id: bTSDcR
-              autoSend: false
-              variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
-              additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
-                Format your response as follows:
-                ANSWER: Your detailed answer
-                SOURCES: List each source document title and link used
-                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
-              fileSearchDataSource:
-                searchFilesMode:
-                  kind: DoNotSearchFiles
-
-              knowledgeSources:
-                kind: SearchSpecificKnowledgeSources
-                knowledgeSources:
-                  - copilots_header_3141e.topic.DefinitionsRPTC_wLaXVKE89ApEPQwbfQccX
-
-        - id: conditionItem_GWUkJW
-          condition: =Global.topicArea = "design_evaluation"
-          actions:
-            - kind: SearchAndSummarizeContent
-              id: GK2LPh
-              autoSend: false
-              variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
-              additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
-                Format your response as follows:
-                ANSWER: Your detailed answer
-                SOURCES: List each source document title and link used
-                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
-              fileSearchDataSource:
-                searchFilesMode:
-                  kind: DoNotSearchFiles
-
-              knowledgeSources:
-                kind: SearchSpecificKnowledgeSources
-                knowledgeSources:
-                  - copilots_header_3141e.topic.ProgrammeDesignStandardsEvaluationCriteriaRPTC_JZjsz2vsXKtvGbqeStIOA
-
-        - id: conditionItem_wZNiqD
-          condition: =Global.topicArea = "definition"
-          actions:
-            - kind: SearchAndSummarizeContent
-              id: SUtjCV
-              autoSend: false
-              variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
-              additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
-                Answer the question using ONLY the provided RPTC knowledge sources.
-                Format your response as follows:
-                ANSWER: Your detailed answer
-                SOURCES: List each source document title and link used
-                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
-              fileSearchDataSource:
-                searchFilesMode:
-                  kind: DoNotSearchFiles
-
-              knowledgeSources:
-                kind: SearchSpecificKnowledgeSources
-                knowledgeSources:
-                  - copilots_header_3141e.topic.DefinitionsRPTC_KoksT0RxbpLiZrZ7wk5RO
-                  - copilots_header_3141e.topic.UNDESACDPMORPTCTPolicyGuidanceReference_ComplianceRequirementsRPTC_QosCz
                   - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
 
       elseActions:
+        - kind: SetVariable
+          id: setSourceUseInstructions_rptcFallback
+          variable: Global.sourceUseInstructions
+          value: Use the RPTC guidance and templates source for planning, approval, implementation, reporting, proposals, standards, IRA, and template questions. Use RPTC progress reports for questions about achievements, results, countries supported, requests, interventions, people supported, implementing entities, SIDS/LDC/LLDC support, challenges, or recommendations.
+
         - kind: SearchAndSummarizeContent
-          id: SdPeJr
+          id: search_rptcFallback
           autoSend: false
           variable: Global.draftResponse
           userInput: |-
             ="User question: " & Global.userQuestion & Char(10) & Char(10) &
             "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-            "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+            "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+            "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided RPTC knowledge sources.
+            If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+            For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
             Format your response as follows:
             ANSWER: Your detailed answer
             SOURCES: List each source document title and link used
@@ -200,13 +113,13 @@ beginDialog:
               - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
 
     - kind: ConditionGroup
-      id: conditionGroup_cxOFGO
+      id: conditionGroup_rptcFallbackNoResult
       conditions:
-        - id: conditionItem_dliUzg
+        - id: conditionItem_rptcNoResult
           condition: =IsBlank(Global.draftResponse)
           actions:
             - kind: SearchAndSummarizeContent
-              id: oQLadz
+              id: search_rptcNoResultFallback
               autoSend: false
               variable: Global.draftResponse
               userInput: |-
@@ -214,7 +127,7 @@ beginDialog:
                 "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
                 "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
               additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
+                You are Cidy, a UN DESA knowledge assistant. The specific RPTC knowledge folder did not contain a relevant answer. Search the broader RPTC knowledge source.
                 Answer the question using ONLY the provided RPTC knowledge sources.
                 Format your response as follows:
                 ANSWER: Your detailed answer
