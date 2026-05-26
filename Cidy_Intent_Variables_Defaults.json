@@ -38,6 +38,12 @@
                                                                    "ownerTopic":  "Question Enhancer",
                                                                    "description":  "Non-routing search hints generated after clarification and before routing. Formulate Response topics may use this as additional search context, but it must not override the finalized intent variables."
                                                                },
+                      "Global.testMode":  {
+                                              "type":  "Boolean",
+                                              "default":  false,
+                                              "ownerTopic":  "Intent Classifier",
+                                              "description":  "Controls whether DEBUG SendActivity messages are shown during the intent, clarification, routing, and question-enhancement flow."
+                                          },
                       "Global.intentStatus":  {
                                                   "type":  "String",
                                                   "default":  "needs_classification",
@@ -241,6 +247,7 @@
                                                      "Global.intentJson":  "{}",
                                                      "Global.intentReason":  "",
                                                      "Global.executiveQuestionEnhancements":  "",
+                                                     "Global.testMode":  false,
                                                      "Global.intentStatus":  "needs_classification",
                                                      "Global.knowledgeDomain":  "unclear",
                                                      "Global.fundingStream":  "UNCLEAR",

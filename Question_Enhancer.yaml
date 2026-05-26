@@ -29,9 +29,15 @@ beginDialog:
               variable: Global.executiveQuestionEnhancements
               value: =Text(Topic.enhancerResult.text)
 
-            - kind: SendActivity
-              id: sendActivity_debug_questionEnhancer
-              activity: "DEBUG - Question Enhancer: {Global.executiveQuestionEnhancements}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_questionEnhancer
+              conditions:
+                - id: conditionItem_sendActivity_debug_questionEnhancer
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_questionEnhancer
+                      activity: "DEBUG - Question Enhancer: {Global.executiveQuestionEnhancements}"
 
       elseActions:
         - kind: SetVariable

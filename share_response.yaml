@@ -23,7 +23,7 @@ beginDialog:
     - kind: SendActivity
       id: sendResponse
       activity: |-
-        **DEBUG :Answer:** {Global.formattedAnswer}
+        **Answer:** {Global.formattedAnswer}
 
         **Sources:**
         {Global.formattedSources}

@@ -11,6 +11,11 @@ beginDialog:
       value: "{}"
 
     - kind: SetVariable
+      id: setVariable_testMode
+      variable: Global.testMode
+      value: false
+
+    - kind: SetVariable
       id: setVariable_resetIntentReason
       variable: Global.intentReason
       value:
@@ -122,9 +127,15 @@ beginDialog:
       variable: Topic.classificationText
       value: =Text(Topic.promptResult.text)
 
-    - kind: SendActivity
-      id: sendActivity_debug_initial
-      activity: "DEBUG — Raw classification: {Topic.classificationText}"
+    - kind: ConditionGroup
+      id: conditionGroup_sendActivity_debug_initial
+      conditions:
+        - id: conditionItem_sendActivity_debug_initial
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_initial
+              activity: "DEBUG - Raw classification: {Topic.classificationText}"
 
     - kind: SetVariable
       id: setVariable_storeIntentJson
@@ -519,9 +530,15 @@ beginDialog:
           variable: Global.intentStatus
           value: dead_end
 
-    - kind: SendActivity
-      id: sendActivity_debug_classifierFinal
-      activity: "DEBUG — Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+    - kind: ConditionGroup
+      id: conditionGroup_sendActivity_debug_classifierFinal
+      conditions:
+        - id: conditionItem_sendActivity_debug_classifierFinal
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_classifierFinal
+              activity: "DEBUG - Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
     - kind: BeginDialog
       id: goToClarifier

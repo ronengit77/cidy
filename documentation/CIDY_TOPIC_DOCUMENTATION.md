@@ -131,8 +131,8 @@ Resolved since the previous scan:
 2. `Formulate_Response_Programme_Development.yaml` is wired, but some branch prompt text still says the user is asking about the Development Account and its knowledge-source IDs should be reviewed.
 3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
 4. RPTC has been consolidated around two current knowledge areas: `rptc_guidance_templates` for planning, approval, implementation, activity proposals, IRA guidance, reporting standards, activity report templates, and post-activity reporting; and `rptc_progress_reports` for achievements, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, and recommendations. The RPTC `elseActions` branch is the RPTC folder-level fallback: it is used only after routing has already selected RPTC, when no more specific RPTC topic-area condition matched, and it should search the broad RPTC-all folder rather than the top-level Cidy `Knowledge` source.
-5. Several user-facing/debug strings contain mojibake such as `DEBUG â€”`. These should likely be corrected to plain ASCII hyphens or proper UTF-8 em dashes in Copilot Studio exports.
-6. `share_response.yaml` sends `**DEBUG :Answer:**` to the user. If this is production-facing, remove `DEBUG :`.
+5. DEBUG `SendActivity` messages in the active intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
+6. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
 7. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
 8. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
