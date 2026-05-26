@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "generatedAt": "2026-05-26T20:35:09+00:00",
+  "generatedAt": "2026-05-26T20:59:47+00:00",
   "generatedFrom": [
     "Cidy_Intent_Router.yaml",
     "Formulate_Response_DA.yaml",
@@ -21,28 +21,6 @@
       "firstSeenAt": ""
     },
     {
-      "id": "da",
-      "label": "Development Account",
-      "fundingStream": "DA",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.DA",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development",
-      "label": "Programme Development",
-      "fundingStream": "UNCLEAR",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "notes": "Discovered from Cidy_Intent_Router.yaml.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
       "id": "about_cidy",
       "label": "About Cidy",
       "fundingStream": "UNCLEAR",
@@ -50,6 +28,17 @@
       "routerDialog": "",
       "yamlFile": "Formulate_Response_About_Cidy.yaml",
       "notes": "Router recognizes this domain, but no response YAML was discovered.",
+      "isNewYaml": false,
+      "firstSeenAt": ""
+    },
+    {
+      "id": "pdf",
+      "label": "Peace and Development Trust Fund / UNPDF",
+      "fundingStream": "PDF",
+      "routerStatus": "missing_yaml",
+      "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
+      "yamlFile": "Formulate_Response_PDF.yaml",
+      "notes": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered.",
       "isNewYaml": false,
       "firstSeenAt": ""
     },
@@ -65,13 +54,24 @@
       "firstSeenAt": ""
     },
     {
-      "id": "pdf",
-      "label": "Peace and Development Trust Fund / UNPDF",
-      "fundingStream": "PDF",
-      "routerStatus": "missing_yaml",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
-      "yamlFile": "Formulate_Response_PDF.yaml",
-      "notes": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered.",
+      "id": "programme_development",
+      "label": "Programme Development",
+      "fundingStream": "UNCLEAR",
+      "routerStatus": "wired",
+      "routerDialog": "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+      "yamlFile": "Formulate_Response_Programme_Development.yaml",
+      "notes": "Discovered from Cidy_Intent_Router.yaml.",
+      "isNewYaml": false,
+      "firstSeenAt": ""
+    },
+    {
+      "id": "da",
+      "label": "Development Account",
+      "fundingStream": "DA",
+      "routerStatus": "wired",
+      "routerDialog": "copilots_header_3141e.topic.DA",
+      "yamlFile": "Formulate_Response_DA.yaml",
+      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
       "isNewYaml": false,
       "firstSeenAt": ""
     }
@@ -155,12 +155,12 @@
       "topicArea": "general",
       "topicName": "General",
       "folderName": "Da Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ",
       "sourceIds": [
-        "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF"
+        "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ"
       ],
       "sourceLabels": [
-        "DA"
+        "Cidy DA All F Nqe 7 Z 76 Sp Dpr Z"
       ],
       "sourceCount": 1,
       "yamlConditionId": "elseActions",
@@ -275,12 +275,12 @@
       "topicArea": "guidelines_templates",
       "topicName": "Guidelines Templates",
       "folderName": "Guidelines Templates",
-      "knowledgeSourceId": "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn",
+      "knowledgeSourceId": "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS",
       "sourceIds": [
-        "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn"
+        "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS"
       ],
       "sourceLabels": [
-        "Knowledge WY Tp Gld A Wsk 7 O 4 C 6 Vn"
+        "Guidelines Andtemplates"
       ],
       "sourceCount": 1,
       "yamlConditionId": "conditionItem_guidelinesTemplates",
@@ -289,7 +289,7 @@
       "sourceUseInstructionSource": "Global.sourceUseInstructions",
       "mappingStatus": "review_required",
       "ownerUnit": "TBD",
-      "instructions": "These uploaded documents provide templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.",
+      "instructions": "This folder provides templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.",
       "isNewTopic": false,
       "firstSeenAt": ""
     },
@@ -299,12 +299,12 @@
       "topicArea": "implementing_partners_grants",
       "topicName": "Implementing Partners Grants",
       "folderName": "Implementing Partners Grants",
-      "knowledgeSourceId": "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa",
       "sourceIds": [
-        "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn"
+        "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa"
       ],
       "sourceLabels": [
-        "Knowledge WY Tp Gld A Wsk 7 O 4 C 6 Vn"
+        "Cidy Implementing Partners And Grants"
       ],
       "sourceCount": 1,
       "yamlConditionId": "conditionItem_implementingPartnersGrants",
@@ -323,12 +323,12 @@
       "topicArea": "general",
       "topicName": "General",
       "folderName": "Programme Development Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5",
       "sourceIds": [
-        "copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF"
+        "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5"
       ],
       "sourceLabels": [
-        "DA"
+        "Cidy PD All"
       ],
       "sourceCount": 1,
       "yamlConditionId": "elseActions",
@@ -347,14 +347,16 @@
       "topicArea": "rptc_progress_reports",
       "topicName": "Rptc Progress Reports",
       "folderName": "Rptc Progress Reports",
-      "knowledgeSourceId": "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+      "knowledgeSourceId": "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
       "sourceIds": [
+        "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS",
         "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
       ],
       "sourceLabels": [
+        "Progressreports",
         "Ng C 2 C 2 Fsu Wn 41 Qlf"
       ],
-      "sourceCount": 1,
+      "sourceCount": 2,
       "yamlConditionId": "conditionItem_rptcProgressReports",
       "yamlFile": "Formulate_Response_RPTC.yaml",
       "generatedFromYaml": true,
@@ -362,8 +364,8 @@
       "mappingStatus": "mapped",
       "ownerUnit": "TBD",
       "instructions": "This folder contains all RPTC progress reports. It answers questions like: What were the main achievements of the Regular Programme of Technical Cooperation in 2024? How many countries, requests, interventions, and people were supported through RPTC in 2024? Which UN implementing entities delivered RPTC activities, and how did their results differ? How did RPTC support least developed countries, landlocked developing countries, and small island developing States? What challenges and recommendations does the report identify for strengthening RPTC in future years?",
-      "isNewTopic": true,
-      "firstSeenAt": "2026-05-26T20:35:09+00:00"
+      "isNewTopic": false,
+      "firstSeenAt": ""
     },
     {
       "id": "rptc_rptc_guidance_templates",
@@ -371,14 +373,16 @@
       "topicArea": "rptc_guidance_templates",
       "topicName": "Rptc Guidance Templates",
       "folderName": "Rptc Guidance Templates",
-      "knowledgeSourceId": "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
       "sourceIds": [
+        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
         "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
       ],
       "sourceLabels": [
+        "Cidy RPTC Guidance Andtemplates",
         "Ng C 2 C 2 Fsu Wn 41 Qlf"
       ],
-      "sourceCount": 1,
+      "sourceCount": 2,
       "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
       "yamlFile": "Formulate_Response_RPTC.yaml",
       "generatedFromYaml": true,
@@ -386,8 +390,8 @@
       "mappingStatus": "mapped",
       "ownerUnit": "TBD",
       "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": true,
-      "firstSeenAt": "2026-05-26T20:35:09+00:00"
+      "isNewTopic": false,
+      "firstSeenAt": ""
     },
     {
       "id": "rptc_fallback",
@@ -395,12 +399,12 @@
       "topicArea": "general",
       "topicName": "General",
       "folderName": "Rptc Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS",
       "sourceIds": [
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+        "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS"
       ],
       "sourceLabels": [
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
+        "Cidy RPTC All T Rqm"
       ],
       "sourceCount": 1,
       "yamlConditionId": "elseActions",
