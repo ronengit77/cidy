@@ -151,7 +151,7 @@ beginDialog:
           knowledgeSources:
             kind: SearchSpecificKnowledgeSources
             knowledgeSources:
-              - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+              - copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ
 
     - kind: ConditionGroup
       id: conditionGroup_fallback

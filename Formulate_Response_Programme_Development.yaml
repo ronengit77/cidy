@@ -120,7 +120,7 @@ beginDialog:
             - kind: SetVariable
               id: setVariable_guidelinesTemplatesInstructions
               variable: Global.sourceUseInstructions
-              value: These uploaded documents provide templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.
+              value: This folder provides templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.
 
             - kind: SearchAndSummarizeContent
               id: search_guidelinesTemplates
@@ -147,7 +147,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
+                  - copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS
 
         - id: conditionItem_implementingPartnersGrants
           condition: =Global.topicArea = "implementing_partners_grants"
@@ -182,7 +182,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
+                  - copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa
 
       elseActions:
         - kind: SearchAndSummarizeContent
@@ -209,7 +209,7 @@ beginDialog:
           knowledgeSources:
             kind: SearchSpecificKnowledgeSources
             knowledgeSources:
-              - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+              - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
 
     - kind: ConditionGroup
       id: conditionGroup_fallback

@@ -42,6 +42,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
+                  - copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS
                   - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
 
         - id: conditionItem_rptcGuidanceTemplates
@@ -50,7 +51,7 @@ beginDialog:
             - kind: SetVariable
               id: setSourceUseInstructions_rptcGuidanceTemplates
               variable: Global.sourceUseInstructions
-              value: "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements."
+              value: This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.
 
             - kind: SearchAndSummarizeContent
               id: search_rptcGuidanceTemplates
@@ -77,6 +78,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
+                  - copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk
                   - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
 
       elseActions:
@@ -110,7 +112,7 @@ beginDialog:
           knowledgeSources:
             kind: SearchSpecificKnowledgeSources
             knowledgeSources:
-              - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
+              - copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS
 
     - kind: ConditionGroup
       id: conditionGroup_rptcFallbackNoResult
