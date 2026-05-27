@@ -236,6 +236,17 @@
                                                  "ownerTopic":  "User Feedback",
                                                  "description":  "Whether the user wants to ask another question."
                                              },
+                      "Global.nextActionContext":  {
+                                                       "type":  "String",
+                                                       "default":  "",
+                                                       "allowedValues":  [
+                                                                             "",
+                                                                             "feedback",
+                                                                             "post_escalation"
+                                                                         ],
+                                                       "ownerTopic":  "User Feedback / Escalate / Continue Or Close",
+                                                       "description":  "Context flag used by the reusable Continue Or Close topic to show the correct next-step menu."
+                                                   },
                       "Global.retryMode":  {
                                                 "type":  "String",
                                                 "default":  "",
@@ -268,6 +279,7 @@
                                                       "Global.issueSummary":  "",
                                                       "Global.userFeedback":  "",
                                                       "Global.askAnother":  "",
+                                                      "Global.nextActionContext":  "",
                                                       "Global.retryMode":  ""
                                                   }
                         },

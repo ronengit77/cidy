@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: Classifies the user's question for the split Cidy intent flow. It does not ask clarifications, search knowledge sources, or route to Formulate Response topics. It sets intent variables and passes control to Intent Clarifier.
+modelDescription: Mandatory first-step intake topic for Cidy substantive inquiries. This topic classifies the user’s question for the split Cidy intent flow, sets the required intent variables, and passes control to Intent Clarifier. It must be consulted before clarification, routing, knowledge search, or answer generation. It does not answer the user, ask clarifying questions, search knowledge sources, or route directly to Formulate Response topics. Use this topic for questions about DESA capacity development guidance, DA, RPTC, project lifecycle procedures, templates, eligibility, reporting, monitoring, evaluation, governance, and country-level support.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
@@ -23,6 +23,11 @@ beginDialog:
     - kind: SetVariable
       id: setVariable_resetQuestionEnhancements
       variable: Global.executiveQuestionEnhancements
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetNextActionContext
+      variable: Global.nextActionContext
       value:
 
     - kind: SetVariable

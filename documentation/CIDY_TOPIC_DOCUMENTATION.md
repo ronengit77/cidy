@@ -24,11 +24,18 @@ Response topics
       -> warn.yaml                        [ApologizeWarn] when confidence < 4
           -> share_response.yaml
               -> user_feedback.yaml       [UserFeedback2]
+                  -> continue_or_close.yaml [ContinueOrClose]
 
 Feedback topic
-  -> Cidy_Intent.yaml                     [Intent_c8W] for another question
-  -> escalate.yaml                        [Escalate] for human escalation
-  -> close session
+  -> continue_or_close.yaml               [ContinueOrClose]
+      -> Cidy_Intent.yaml                 [Intent_c8W] for another question
+      -> Formulate_Response_General.yaml  [FormulateResponse] for wide retry
+      -> escalate.yaml                    [Escalate] for human escalation
+      -> close session
+
+Escalation topic
+  -> continue_or_close.yaml               [ContinueOrClose]
+      post-escalation menu is the single user-facing confirmation and omits "Escalate to a human" because the inquiry has already been escalated
 
 Utility/system-like topics
   -> start_over.yaml
@@ -69,8 +76,9 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `assess_confidence.yaml` | Parses/formats a generated answer into answer, sources, confidence score, confidence label, and explanation. | `OnRecognizedIntent` | `ShareResponse`, `ApologizeWarn` |
 | `warn.yaml` | Sets warning text for low or medium confidence answers. | `OnRecognizedIntent` | `ShareResponse` |
 | `share_response.yaml` | Sends the warning, answer, sources, and confidence label to the user, then asks for feedback. | `OnRecognizedIntent` | `UserFeedback2` |
-| `user_feedback.yaml` | Collects helpfulness feedback and asks whether to ask another question, escalate, or close. | `OnRecognizedIntent` | `Intent_c8W`, `Escalate` |
-| `escalate.yaml` | Collects escalation notes, generates an issue summary, and sends an Outlook email to staff. | `OnEscalate` plus trigger phrases | `Office365Outlook-SendanemailV2` action |
+| `user_feedback.yaml` | Collects helpfulness feedback, sets `Global.nextActionContext=feedback`, and hands off to the reusable next-step menu. | `OnRecognizedIntent` | `ContinueOrClose` |
+| `continue_or_close.yaml` | Offers context-aware next-step choices. Normal feedback can ask another question, retry wide knowledge, escalate, or close; post-escalation can ask another question, retry wide knowledge, or close. | `OnRecognizedIntent` | `Intent_c8W`, `FormulateResponse`, `Escalate` |
+| `escalate.yaml` | Collects escalation notes, generates an issue summary, sends an Outlook email to staff, records the escalation in transcript, then sets `Global.nextActionContext=post_escalation` for the single visible confirmation/follow-up prompt. | `OnEscalate` plus trigger phrases | `Office365Outlook-SendanemailV2` action, `ContinueOrClose` |
 | `start_over.yaml` | Confirms restart and redirects to reset conversation. | `OnRecognizedIntent` with start-over phrases | `ResetConversation` |
 | `reset_conversation.yaml` | Intended target for restart flow. | None, file is empty | None |
 | `Goodbye.yaml` | Handles goodbye intent and optionally ends the conversation. | `OnRecognizedIntent` with goodbye phrases | `EndofConversation` |
@@ -89,6 +97,7 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `QuestionEnhancer` | `Question_Enhancer.yaml` |
 | `Intent-Router` | `Cidy_Intent_Router.yaml` |
 | `UserFeedback2` | `user_feedback.yaml` |
+| `ContinueOrClose` | `continue_or_close.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |
 | `FormulateResponseCopy` | `Formulate_Response_RPTC.yaml` |
 | `AssessConfidence` | `assess_confidence.yaml` |
@@ -134,8 +143,9 @@ Resolved since the previous scan:
 5. Programme Development now includes `resident_coordinator` for RC/RCO, UNCT, CCA/UNSDCF, country-level support, and CDPMO country-engagement questions; and `cd_strategy` for strategic priorities, service delivery model, service lines, request prioritization, partnerships, and the AI-enabled Capacity Development Knowledge Hub/Cidy.
 6. DEBUG `SendActivity` messages in the active intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
 7. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
-8. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
-9. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
+8. `continue_or_close.yaml` is the shared next-step topic. It uses `Global.nextActionContext` so post-escalation users are not offered a second escalation option.
+9. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
+10. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
 ## Response Pipeline Notes
 

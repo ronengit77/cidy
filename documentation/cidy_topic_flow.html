@@ -458,9 +458,10 @@
           <div class="branch">
             <span class="badge warn">Loop and escalation</span>
             <ul>
-              <li><code>user_feedback.yaml</code> asks what to do next.</li>
+              <li><code>user_feedback.yaml</code> collects helpfulness feedback.</li>
+              <li><code>continue_or_close.yaml</code> asks what to do next.</li>
               <li>Ask another question returns to <code>Cidy_Intent.yaml</code>.</li>
-              <li>Escalation calls <code>escalate.yaml</code>.</li>
+              <li>Escalation calls <code>escalate.yaml</code>, then returns to <code>continue_or_close.yaml</code> for the single visible confirmation and follow-up prompt.</li>
             </ul>
           </div>
         </div>
@@ -517,7 +518,7 @@
             <div class="num">7</div>
             <div>
               <h3>Close the loop</h3>
-              <p>Confidence formatting, warning, sharing, feedback, escalation, restart, and end-of-conversation topics complete the interaction lifecycle.</p>
+              <p>Confidence formatting, warning, sharing, feedback, the reusable continue-or-close menu, escalation, restart, and end-of-conversation topics complete the interaction lifecycle.</p>
             </div>
           </div>
         </div>
@@ -636,8 +637,8 @@
           </tr>
           <tr>
             <td>Lifecycle</td>
-            <td><code>user_feedback.yaml</code>, <code>escalate.yaml</code>, <code>start_over.yaml</code>, <code>Goodbye.yaml</code>, <code>end_of_conversation.yaml</code></td>
-            <td>Collects feedback, loops to a new question, sends escalation email, restarts, or ends the conversation.</td>
+            <td><code>user_feedback.yaml</code>, <code>continue_or_close.yaml</code>, <code>escalate.yaml</code>, <code>start_over.yaml</code>, <code>Goodbye.yaml</code>, <code>end_of_conversation.yaml</code></td>
+            <td>Collects feedback, offers context-aware next actions, loops to a new question, retries wider knowledge, sends escalation email, restarts, or ends the conversation.</td>
           </tr>
           <tr>
             <td>System support</td>

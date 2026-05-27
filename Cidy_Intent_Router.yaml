@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: Routes finalized Cidy intent variables to the correct Formulate Response topic or User Feedback. It does not classify and does not ask clarification questions.
+modelDescription: Internal Cidy workflow topic used only after Intent and Intent Clarifier have completed classification. It routes the classified inquiry to the correct response path based on approved variables. Do not use this topic directly from user messages. Do not answer the user or search knowledge sources.
 beginDialog:
   kind: OnRecognizedIntent
   id: main

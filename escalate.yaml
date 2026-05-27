@@ -153,15 +153,19 @@ beginDialog:
 
       dialog: copilots_header_3141e.action.Office365Outlook-SendanemailV2
 
-    - kind: SendActivity
-      id: msg_closing
-      conversationOutcome: Escalated
-      activity: Your inquiry has been escalated. A staff member will reach back by email or Teams. Thank you for reaching out to CIDY!
-
     - kind: SetVariable
       id: setVariable_transcript_closing
       variable: Global.transcript
       value: "=Global.transcript & \"CIDY: \" & \"Your inquiry has been escalated. A staff member will be in touch. Thank you for reaching out to CIDY!\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: SetVariable
+      id: set_nextActionContext_postEscalation
+      variable: Global.nextActionContext
+      value: post_escalation
+
+    - kind: BeginDialog
+      id: goToContinueOrCloseAfterEscalation
+      dialog: copilots_header_3141e.topic.ContinueOrClose
 
     - kind: EndDialog
       id: end_escalate

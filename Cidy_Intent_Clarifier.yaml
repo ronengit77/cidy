@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: Resolves incomplete Cidy intent classifications. It asks targeted clarifications, validates clicked or typed answers, updates routing variables, and passes finalized intent state to Intent Router. It does not search knowledge sources or call Formulate Response topics.
+modelDescription: Internal Cidy workflow topic used only after Intent has classified the user’s question. It checks whether required classification variables are complete and asks limited clarification questions only when needed. Do not use this topic as the first step for user inquiries. Do not search knowledge sources or generate final answers.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
