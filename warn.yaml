@@ -14,13 +14,13 @@ beginDialog:
             - kind: SetVariable
               id: setVar_lowWarn
               variable: Topic.warningMessage
-              value: I am sorry, I was not able to find a confident answer to your question in my knowledge sources.  I am still under development and new knowledge is coming in every week. See [Cidy Knowledge Status](https://unitednations.sharepoint.com/:w:/r/sites/DESA-CDPMO/Shared%20Documents/General/5.%20Programme%20Development/AI%20Projects/Cidy/Knowledge/About%20Cidy/Cidy%20Knowledge%20Log.docx?d=w1d06feccc9cb459eb8228946fc118e7e&csf=1&web=1&e=KSvcrK) for more information.
+              value: I am sorry, I was not able to find a confident answer to your question in my knowledge sources. I am still under development and new knowledge is coming in every week. See [Cidy Knowledge Status](https://ronengit77.github.io/cidy/documentation/cidy_knowledge_control_center.html) for more information.
 
       elseActions:
         - kind: SetVariable
           id: setVar_medWarn
           variable: Topic.warningMessage
-          value: I found some relevant information, but I am not fully certain it covers your question. Please review the sources carefully and requst to escalate to a coleague if uncertain. I am still under development and new knowledge is coming in every week. See [Cidy Knowledge Status](https://unitednations.sharepoint.com/:w:/r/sites/DESA-CDPMO/Shared%20Documents/General/5.%20Programme%20Development/AI%20Projects/Cidy/Knowledge/About%20Cidy/Cidy%20Knowledge%20Log.docx?d=w1d06feccc9cb459eb8228946fc118e7e&csf=1&web=1&e=KSvcrK) for more information.
+          value: I found some relevant information, but I am not fully certain it covers your question. Please review the sources carefully and request escalation to a colleague if uncertain. I am still under development and new knowledge is coming in every week. See [Cidy Knowledge Status](https://ronengit77.github.io/cidy/documentation/cidy_knowledge_control_center.html) for more information.
 
     - kind: SetVariable
       id: setVar_globalWarn
