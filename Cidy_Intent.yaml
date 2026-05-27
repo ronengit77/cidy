@@ -26,6 +26,41 @@ beginDialog:
       value:
 
     - kind: SetVariable
+      id: setVariable_resetDraftResponse
+      variable: Global.draftResponse
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetFormattedAnswer
+      variable: Global.formattedAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetFormattedSources
+      variable: Global.formattedSources
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceScore
+      variable: Global.confidenceScore
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceLabel
+      variable: Global.confidenceLabel
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceExplanation
+      variable: Global.confidenceExplanation
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetWarningMessage
+      variable: Global.warningMessage
+      value:
+
+    - kind: SetVariable
       id: setVariable_resetIntentStatus
       variable: Global.intentStatus
       value: needs_classification
