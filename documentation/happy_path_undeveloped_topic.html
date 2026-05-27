@@ -9,12 +9,12 @@
   </style>
 </head>
 <body>
-  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Happy Path -> Undeveloped Topic</h1><p>Test question: "How does Cidy work?"</p></div></header>
+  <header><div class="wrap hero"><a class="back" href="cidy_topic_flow.html">Back to topic architecture</a><h1>Happy Path -> About Cidy</h1><p>Test question: "How does Cidy work?"</p></div></header>
   <main class="wrap">
     <section class="summary">
       <div class="card"><strong>Expected classification</strong><p><code>knowledgeDomain=about_cidy</code><br><code>requiresClarification=No</code></p></div>
       <div class="card"><strong>Clarification</strong><p>None. The intent is directly about Cidy.</p></div>
-      <div class="card"><strong>Current route</strong><p>Temporary about-Cidy not-developed message.</p></div>
+      <div class="card"><strong>Current route</strong><p><code>Formulate_Response_Cidy_About.yaml</code></p></div>
     </section>
     <section>
       <h2>Topic Flow Diagram</h2>
@@ -23,7 +23,7 @@
         <div class="step intent"><h3>2. Classifier</h3><p><code>Cidy_Intent.yaml</code></p><p class="muted">Classifies as <code>about_cidy</code>.</p></div>
         <div class="step intent"><h3>3. Clarifier</h3><p><code>Cidy_Intent_Clarifier.yaml</code></p><p class="muted">Bypasses because no clarification is needed.</p></div>
         <div class="step router"><h3>4. Router</h3><p><code>Cidy_Intent_Router.yaml</code></p><p class="muted">Matches about-Cidy branch.</p></div>
-        <div class="step warn"><h3>5. Temporary Output</h3><p>Not developed message</p><p class="muted">Ends dialog in current router.</p></div>
+        <div class="step warn"><h3>5. Response</h3><p><code>Formulate_Response_Cidy_About.yaml</code></p><p class="muted">Searches About Cidy material, then begins confidence assessment.</p></div>
       </div>
     </section>
     <section>
@@ -33,14 +33,15 @@
         <tbody>
           <tr><td><code>Cidy_Intent.yaml</code></td><td>Sets <code>knowledgeDomain=about_cidy</code>, <code>requiresClarification=No</code>, <code>intentStatus=ready_to_route</code>.</td><td>Proceed to router through clarifier bypass.</td></tr>
           <tr><td><code>Cidy_Intent_Clarifier.yaml</code></td><td>No user prompt.</td><td>Begin router.</td></tr>
-          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=Formulate Response About Cidy</code>, sends temporary not-developed message.</td><td>Ends dialog instead of answer/confidence path.</td></tr>
+          <tr><td><code>Cidy_Intent_Router.yaml</code></td><td>Sets <code>Global.routingTarget=Formulate Response About Cidy</code> and begins <code>FormulateResponseCidyAbout</code>.</td><td>Proceed to answer/confidence path.</td></tr>
+          <tr><td><code>Formulate_Response_Cidy_About.yaml</code></td><td>Searches About Cidy material and writes <code>Global.draftResponse</code>.</td><td>Begin <code>assess_confidence.yaml</code>.</td></tr>
         </tbody>
       </table>
     </section>
     <section class="decision-grid">
       <div class="decision"><span class="label">Pass condition</span><p>Routes as <code>about_cidy</code> with no clarification.</p></div>
-      <div class="decision"><span class="label">Current limitation</span><p>No About Cidy response topic is wired yet.</p></div>
-      <div class="decision"><span class="label">Next step</span><p>Create and route an About Cidy response topic when that knowledge area is ready.</p></div>
+      <div class="decision"><span class="label">Response topic</span><p><code>Formulate_Response_Cidy_About.yaml</code> is wired.</p></div>
+      <div class="decision"><span class="label">Source note</span><p>Uses strict About Cidy source-use instructions; replace the top-level source with the folder-specific source ID when exported.</p></div>
     </section>
   </main>
 </body>

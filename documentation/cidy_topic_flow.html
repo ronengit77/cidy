@@ -384,7 +384,7 @@
         </div>
         <div class="metric">
           <strong>1</strong>
-          <span>Empty but called file: <code>reset_conversation.yaml</code>.</span>
+          <span>Reset route now clears active state and returns to user inquiry.</span>
         </div>
         <div class="metric">
           <strong>1</strong>
@@ -527,7 +527,6 @@
           <div class="finding">
             <span class="badge risk">Incomplete</span>
             <ul>
-              <li><code>reset_conversation.yaml</code> exists but is zero bytes.</li>
               <li><code>FormulateResponse</code> is called for PDF/UNPDF but has no clear file.</li>
               <li><code>Fallback</code> is called from the multiple-topic selector but is not present as a YAML file.</li>
             </ul>
@@ -594,10 +593,10 @@
             <td>Should classify as <code>out_of_scope</code>, show the scope message, then go to the feedback/escalation path. No clarification.</td>
           </tr>
           <tr>
-            <td><a class="scenario-link" href="happy_path_undeveloped_topic.html"><span class="badge warn">Happy path</span><br>Undeveloped topic</a></td>
+            <td><a class="scenario-link" href="happy_path_undeveloped_topic.html"><span class="badge intent">Happy path</span><br>About Cidy</a></td>
             <td>How does Cidy work?</td>
             <td>None</td>
-            <td>Should route to <code>about_cidy</code> or the temporary "About Cidy is not yet developed" message. No clarification.</td>
+            <td>Should route to <code>about_cidy</code> and call <code>Formulate_Response_Cidy_About.yaml</code>. No clarification.</td>
           </tr>
         </tbody>
       </table>
@@ -627,7 +626,7 @@
           </tr>
           <tr>
             <td>Response</td>
-            <td><code>Formulate_Response_DA.yaml</code>, <code>Formulate_Response_RPTC.yaml</code>, <code>Formulate_Response_General.yaml</code>, <code>Formulate_Response_Programme_Development.yaml</code></td>
+            <td><code>Formulate_Response_DA.yaml</code>, <code>Formulate_Response_RPTC.yaml</code>, <code>Formulate_Response_General.yaml</code>, <code>Formulate_Response_Cidy_About.yaml</code>, <code>Formulate_Response_Programme_Development.yaml</code></td>
             <td>Searches knowledge sources and prepares draft answers using the finalized user question and question-enhancement context.</td>
           </tr>
           <tr>
@@ -643,7 +642,7 @@
           <tr>
             <td>System support</td>
             <td><code>mutliple_topics_match.yaml</code>, <code>reset_conversation.yaml</code></td>
-            <td>Handles topic disambiguation and reset behavior. Reset still needs content.</td>
+            <td>Handles topic disambiguation and reset behavior. Reset clears active state and routes back to user inquiry.</td>
           </tr>
         </tbody>
       </table>

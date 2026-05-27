@@ -39,7 +39,7 @@ Escalation topic
 
 Utility/system-like topics
   -> start_over.yaml
-      -> reset_conversation.yaml          [ResetConversation, file currently empty]
+      -> reset_conversation.yaml          [ResetConversation]
   -> Goodbye.yaml
       -> end_of_conversation.yaml         [EndofConversation]
   -> mutliple_topics_match.yaml
@@ -57,7 +57,7 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | Clarification path -> not-yet-developed topic | What are the reporting requirements? | Choose RPTC | First asks fund clarification. After RPTC selection, routes to the RPTC branch or the temporary "not developed yet" message, depending on the current router/response-topic alignment. |
 | Vague path | I need help with a project. Where do I start? | Choose Development Account (DA) only if asked after domain clarification | Should ask domain clarification, not force DA/RPTC/PDF immediately. Expected clarification type: `domain`. |
 | Out of scope | What is the weather in New York today? | None | Should classify as `out_of_scope`, show the scope message, then go to the feedback/escalation path. No clarification. |
-| Happy path -> undeveloped topic | How does Cidy work? | None | Should route to `about_cidy` or the temporary "About Cidy is not yet developed" message. No clarification. |
+| Happy path -> About Cidy | How does Cidy work? | None | Should route to `about_cidy` and call `Formulate_Response_Cidy_About.yaml`. No clarification. |
 
 ## Topic Inventory
 
@@ -72,6 +72,7 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `Formulate_Response_DA.yaml` | Searches DA knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_RPTC.yaml` | Searches RPTC knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_General.yaml` | Searches the general CDPMO knowledge source and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
+| `Formulate_Response_Cidy_About.yaml` | Searches About Cidy material and writes `Global.draftResponse` for questions about Cidy's purpose, knowledge coverage, good prompts, confidence/feedback/escalation behavior, and Copilot Studio architecture. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_Programme_Development.yaml` | Searches Programme Development sources, including TAG/Steering Committee materials, project evaluations, guidelines/templates, implementing partners/grants, Resident Coordinator country engagement, DESA capacity-development strategy, and the broad Programme Development fallback. | `OnRecognizedIntent` | `AssessConfidence` |
 | `assess_confidence.yaml` | Parses/formats a generated answer into answer, sources, confidence score, confidence label, and explanation. | `OnRecognizedIntent` | `ShareResponse`, `ApologizeWarn` |
 | `warn.yaml` | Sets warning text for low or medium confidence answers. | `OnRecognizedIntent` | `ShareResponse` |
@@ -80,7 +81,7 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `continue_or_close.yaml` | Offers context-aware next-step choices. Normal feedback can ask another question, retry wide knowledge, escalate, or close; post-escalation can ask another question, retry wide knowledge, or close. | `OnRecognizedIntent` | `Intent_c8W`, `FormulateResponse`, `Escalate` |
 | `escalate.yaml` | Collects escalation notes, generates an issue summary, sends an Outlook email to staff, records the escalation in transcript, then sets `Global.nextActionContext=post_escalation` for the single visible confirmation/follow-up prompt. | `OnEscalate` plus trigger phrases | `Office365Outlook-SendanemailV2` action, `ContinueOrClose` |
 | `start_over.yaml` | Confirms restart and redirects to reset conversation. | `OnRecognizedIntent` with start-over phrases | `ResetConversation` |
-| `reset_conversation.yaml` | Intended target for restart flow. | None, file is empty | None |
+| `reset_conversation.yaml` | Clears active Cidy state and routes back to the user inquiry topic. | `OnRecognizedIntent` | `UserInquiry2` |
 | `Goodbye.yaml` | Handles goodbye intent and optionally ends the conversation. | `OnRecognizedIntent` with goodbye phrases | `EndofConversation` |
 | `end_of_conversation.yaml` | System redirect flow that asks satisfaction/CSAT, offers retry, and can escalate if the user says the answer did not help. | `OnSystemRedirect` | `Escalate` |
 | `mutliple_topics_match.yaml` | Handles multiple matched topics by asking the user to choose one, with a "None of these" option. | `OnSelectIntent` | `Fallback` via `ReplaceDialog` |
@@ -100,11 +101,12 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `ContinueOrClose` | `continue_or_close.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |
 | `FormulateResponseCopy` | `Formulate_Response_RPTC.yaml` |
+| `FormulateResponseCidyAbout` | `Formulate_Response_Cidy_About.yaml` |
 | `AssessConfidence` | `assess_confidence.yaml` |
 | `ApologizeWarn` | `warn.yaml` |
 | `ShareResponse` | `share_response.yaml` |
 | `Escalate` | `escalate.yaml` |
-| `ResetConversation` | `reset_conversation.yaml`, but the file is currently empty |
+| `ResetConversation` | `reset_conversation.yaml` |
 | `EndofConversation` | `end_of_conversation.yaml` |
 
 ## Called Topics Not Found Or Not Complete
@@ -114,7 +116,7 @@ These topic references appear in `dialog:` or `ReplaceDialog` calls but do not h
 | Referenced topic/action | Called from | Notes |
 | --- | --- | --- |
 | `FormulateResponse` | `Cidy_Intent_Router.yaml` | Used for the PDF/UNPDF route. No clear PDF response YAML exists. If this is meant to be a PDF topic, add/export it. If it maps to an existing file, rename/document the mapping. |
-| `ResetConversation` | `start_over.yaml` | `reset_conversation.yaml` now exists but is zero bytes, so this route is still incomplete in the export. |
+| `ResetConversation` | `start_over.yaml` | Resolved. `reset_conversation.yaml` now clears active state and routes back to `UserInquiry2`. |
 | `Fallback` | `mutliple_topics_match.yaml` | Called when the user selects "None of these" from the multiple-topic selector. No `fallback.yaml` or clear matching file exists. This may be a built-in/system topic, but confirm in Copilot Studio. |
 | `Office365Outlook-SendanemailV2` | `escalate.yaml` | This is an action/connector call, not expected to be represented as a topic YAML file. |
 
@@ -122,21 +124,21 @@ Resolved since the previous scan:
 
 - `UserInquiry2` now maps to `user_inquiry.yaml`.
 - `EndofConversation` now maps to `end_of_conversation.yaml`.
+- `ResetConversation` now maps to a populated `reset_conversation.yaml`.
 - `mutliple_topics_match.yaml` is no longer empty; it is a multiple-topic disambiguation topic.
 
 ## Potentially Unused Or Cleanup Candidates
 
 | File | Why it may be unused or risky | Recommendation |
 | --- | --- | --- |
-| `reset_conversation.yaml` | The file exists but is empty, while `start_over.yaml` calls `ResetConversation`. | Re-export or recreate the reset topic before relying on start-over behavior. |
 | `Formulate_Response_Programme_Development.yaml` | The topic is now wired for programme-development topic areas, but some branch prompt text/source labels still need human validation. | Review programme-development source IDs and wording as knowledge coverage matures. |
 | `Formulate_Response_General.yaml` | The topic is now used for broad/general retry behavior. | Keep it aligned with the top-level `Knowledge` source and wide-retry feedback path. |
 | `Goodbye.yaml` | Not called by other custom topics, but it has its own goodbye trigger phrases. | Keep if the bot should support standalone goodbye intent. |
-| `start_over.yaml` | Not called by other custom topics, but it has its own start-over trigger phrases. | Keep if the bot should support standalone restart intent after `reset_conversation.yaml` is populated. |
+| `start_over.yaml` | Not called by other custom topics, but it has its own start-over trigger phrases. | Keep if the bot should support standalone restart intent. |
 
 ## Routing Gaps And Consistency Notes
 
-1. `about_cidy` is recognized by the classifier and clarifier, but no matching response YAML exists yet.
+1. `about_cidy` now routes to `Formulate_Response_Cidy_About.yaml`. The current YAML uses the top-level `Knowledge` source with strict About Cidy source-use instructions until the folder-specific `Cidy - About` knowledge-source ID is available in the export.
 2. `Formulate_Response_Programme_Development.yaml` is wired for current Programme Development branches, including specific source IDs for `Cidy-PD-RC` and `Cidy-PD-Strategy`.
 3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
 4. RPTC has been consolidated around two current knowledge areas: `rptc_guidance_templates` for planning, approval, implementation, activity proposals, IRA guidance, reporting standards, activity report templates, and post-activity reporting; and `rptc_progress_reports` for achievements, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, and recommendations. The RPTC `elseActions` branch is the RPTC folder-level fallback: it is used only after routing has already selected RPTC, when no more specific RPTC topic-area condition matched, and it should search the broad RPTC-all folder rather than the top-level Cidy `Knowledge` source.
@@ -155,8 +157,7 @@ All `SearchAndSummarizeContent` actions in Formulate Response topics that are fo
 
 ## Suggested Next Cleanup Pass
 
-1. Re-export or rebuild `reset_conversation.yaml`, because the file exists but is empty.
-2. Decide whether `FormulateResponse` is an exported PDF topic that is missing from this folder. If so, add it. If not, update the router to the correct topic name.
-3. Confirm whether `Fallback` is a built-in/system topic. If it is custom, export it into this folder.
-4. Align classifier `topic_area` values with the condition checks inside each response topic, especially RPTC.
-5. Rename typoed files only if Copilot Studio export/import tooling and any external references will tolerate the filename changes.
+1. Decide whether `FormulateResponse` is an exported PDF topic that is missing from this folder. If so, add it. If not, update the router to the correct topic name.
+2. Confirm whether `Fallback` is a built-in/system topic. If it is custom, export it into this folder.
+3. Align classifier `topic_area` values with the condition checks inside each response topic, especially RPTC.
+4. Rename typoed files only if Copilot Studio export/import tooling and any external references will tolerate the filename changes.

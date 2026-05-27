@@ -1,6 +1,6 @@
 param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
-    [string]$TestCasesPath = "documentation/Cidy_Intent_Test_Cases_82.json",
+    [string]$TestCasesPath = "documentation/Cidy_Intent_Test_Cases_90.json",
     [string]$InventoryPath = "documentation/cidy_knowledge_inventory.json",
     [string]$ResultsPath = "documentation/cidy_intent_test_results.json",
     [string]$FailuresPath = "documentation/cidy_intent_test_failures.json",
@@ -69,7 +69,7 @@ function Infer-Domain {
     if ($text -match "formulate response rptc|routes? (directly )?to rptc") { return "rptc" }
     if ($text -match "formulate response pdf|routes? (directly )?to pdf") { return "pdf" }
     if ($text -match "programme development|steering committee|tag meeting|tag materials|capacity development strategy|resident coordinator|resident coordinator system|rco|unct|unsdcf|cca|country-level support|country level support|service delivery model|capacity development knowledge hub|knowledge hub") { return "programme_development" }
-    if ($text -match "about cidy|how does cidy work|knowledge sources does cidy|maintains cidy") { return "about_cidy" }
+    if ($text -match "\bcidy\b|about cidy|capacity development assistant|general-purpose ai chatbot|general purpose ai chatbot|what problem.*solve|knowledge areas|knowledge topics|what kinds of.*questions|good user questions|good prompt|how does cidy work|knowledge sources does cidy|classif(y|ies).*question|rout(e|es).*question|low confidence|uncertain|feedback|escalation flow|copilot studio architecture|application architecture|main components|maintains cidy") { return "about_cidy" }
     if ($text -match "unpdf|pdf|peace and development") { return "pdf" }
     if ($text -match "rptc|regular programme") { return "rptc" }
     if ($text -match "\bda\b|development account|section 35") { return "da" }
@@ -127,6 +127,7 @@ function Infer-TopicAreas {
     if ($text -match "evaluation_criteria|evaluation criteria") { $areas.Add("evaluation_criteria") }
     if ($text -match "\breports\b|reporting requirements|guidance on rptc reports") { $areas.Add("reports") }
     if ($text -match "policy_guidance_compliance") { $areas.Add("policy_guidance_compliance") }
+    if ($text -match "\bcidy\b|about cidy|capacity development assistant|general-purpose ai chatbot|general purpose ai chatbot|knowledge areas|knowledge topics|good user questions|good prompt|classif(y|ies).*question|rout(e|es).*question|low confidence|uncertain|feedback|escalation flow|copilot studio architecture|application architecture|main components") { $areas.Add("about_cidy") }
     if ($text -match "general") { $areas.Add("general") }
 
     if ($areas.Count -eq 0) {

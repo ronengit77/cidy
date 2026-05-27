@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-27T16:45:00-04:00",
+                    "generatedAt":  "2026-05-27T19:47:38-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  82,
-                    "passed":  69,
-                    "failed":  13
+                    "total":  90,
+                    "passed":  81,
+                    "failed":  9
                 },
     "results":  [
                     {
@@ -2209,7 +2209,8 @@
                                                     "knowledgeDomain":  "programme_development",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "general"
+                                                                       "general",
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -2233,7 +2234,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "general"
+                                                                                 "general",
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -2248,7 +2250,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "general"
+                                                                                 "general",
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -2282,7 +2285,7 @@
                                                                                                       "general"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "about_cidy"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -3697,23 +3700,23 @@
                     },
                     {
                         "id":  "TC36",
-                        "scenario":  "Happy path - About Cidy undeveloped",
+                        "scenario":  "Happy path - About Cidy",
                         "question":  "How does Cidy work?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to About Cidy or a temporary not-yet-developed About Cidy message. No clarification should be required.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response Cidy About with topic_area=about_cidy. No clarification should be required.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response About Cidy",
-                                           "routerDialog":  "",
-                                           "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                           "routerStatus":  "missing_yaml",
-                                           "finalTopic":  "Formulate_Response_About_Cidy.yaml"
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
                                        },
                         "finalClassification":  {
                                                     "knowledgeDomain":  "about_cidy",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "unclear"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -3722,9 +3725,9 @@
                                           "Cidy_Intent_Clarifier.yaml",
                                           "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
-                                          "Formulate_Response_About_Cidy.yaml"
+                                          "Formulate_Response_Cidy_About.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3737,7 +3740,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -3752,7 +3755,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -3770,16 +3773,16 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response About Cidy",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "missing_yaml",
-                                                              "yamlFile":  "Formulate_Response_About_Cidy.yaml"
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
                                                           },
-                                               "decision":  "Begin Formulate_Response_About_Cidy.yaml"
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
                                            },
                                            {
-                                               "topic":  "Formulate_Response_About_Cidy.yaml",
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
                                                "output":  {
-                                                              "yamlExists":  false,
+                                                              "yamlExists":  true,
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
@@ -3790,15 +3793,11 @@
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Stop: YAML not found"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Formulate_Response_YAML_not_found",
-                                             "point":  "Intent Router",
-                                             "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -3806,20 +3805,20 @@
                         "scenario":  "Happy path - About Cidy coverage",
                         "question":  "What knowledge sources does Cidy currently use?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to About Cidy or temporary not-yet-developed message.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response About Cidy",
-                                           "routerDialog":  "",
-                                           "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                           "routerStatus":  "missing_yaml",
-                                           "finalTopic":  "Formulate_Response_About_Cidy.yaml"
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
                                        },
                         "finalClassification":  {
                                                     "knowledgeDomain":  "about_cidy",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "unclear"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -3828,9 +3827,9 @@
                                           "Cidy_Intent_Clarifier.yaml",
                                           "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
-                                          "Formulate_Response_About_Cidy.yaml"
+                                          "Formulate_Response_Cidy_About.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3843,7 +3842,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -3858,7 +3857,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -3876,16 +3875,16 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response About Cidy",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "missing_yaml",
-                                                              "yamlFile":  "Formulate_Response_About_Cidy.yaml"
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
                                                           },
-                                               "decision":  "Begin Formulate_Response_About_Cidy.yaml"
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
                                            },
                                            {
-                                               "topic":  "Formulate_Response_About_Cidy.yaml",
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
                                                "output":  {
-                                                              "yamlExists":  false,
+                                                              "yamlExists":  true,
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
@@ -3896,15 +3895,11 @@
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Stop: YAML not found"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Formulate_Response_YAML_not_found",
-                                             "point":  "Intent Router",
-                                             "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -3912,20 +3907,20 @@
                         "scenario":  "Happy path - About Cidy maintenance",
                         "question":  "Who maintains Cidy\u0027s knowledge?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes to About Cidy or temporary not-yet-developed message.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Routes to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response About Cidy",
-                                           "routerDialog":  "",
-                                           "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                           "routerStatus":  "missing_yaml",
-                                           "finalTopic":  "Formulate_Response_About_Cidy.yaml"
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
                                        },
                         "finalClassification":  {
                                                     "knowledgeDomain":  "about_cidy",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "unclear"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -3934,9 +3929,9 @@
                                           "Cidy_Intent_Clarifier.yaml",
                                           "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
-                                          "Formulate_Response_About_Cidy.yaml"
+                                          "Formulate_Response_Cidy_About.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -3949,7 +3944,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -3964,7 +3959,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -3982,16 +3977,16 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response About Cidy",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "missing_yaml",
-                                                              "yamlFile":  "Formulate_Response_About_Cidy.yaml"
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
                                                           },
-                                               "decision":  "Begin Formulate_Response_About_Cidy.yaml"
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
                                            },
                                            {
-                                               "topic":  "Formulate_Response_About_Cidy.yaml",
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
                                                "output":  {
-                                                              "yamlExists":  false,
+                                                              "yamlExists":  true,
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
@@ -4002,15 +3997,11 @@
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Stop: YAML not found"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Formulate_Response_YAML_not_found",
-                                             "point":  "Intent Router",
-                                             "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -4362,10 +4353,11 @@
                                            {
                                                "topic":  "Cidy_Intent.yaml",
                                                "output":  {
-                                                              "knowledgeDomain":  "general_cd",
+                                                              "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
                                                                                  "budget_finance",
+                                                                                 "about_cidy",
                                                                                  "general"
                                                                              ],
                                                               "requiresClarification":  "Yes",
@@ -4741,14 +4733,14 @@
                         "scenario":  "Clarification path - domain to About Cidy",
                         "question":  "I need help. What is this tool?",
                         "clarification":  "About Cidy",
-                        "expectedBehavior":  "Clarifier maps to knowledge_domain=about_cidy. Router routes to About Cidy or temporary not-yet-developed message.",
-                        "status":  "fail",
+                        "expectedBehavior":  "Clarifier maps to knowledge_domain=about_cidy. Router routes to Formulate Response Cidy About.",
+                        "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response About Cidy",
-                                           "routerDialog":  "",
-                                           "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                           "routerStatus":  "missing_yaml",
-                                           "finalTopic":  "Formulate_Response_About_Cidy.yaml"
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
                                        },
                         "finalClassification":  {
                                                     "knowledgeDomain":  "about_cidy",
@@ -4763,9 +4755,9 @@
                                           "Cidy_Intent_Clarifier.yaml",
                                           "Question_Enhancer.yaml",
                                           "Cidy_Intent_Router.yaml",
-                                          "Formulate_Response_About_Cidy.yaml"
+                                          "Formulate_Response_Cidy_About.yaml"
                                       ],
-                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
                         "routeTrace":  [
                                            {
                                                "topic":  "user_inquiry.yaml",
@@ -4778,7 +4770,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
                                                               "clarificationType":  "domain"
@@ -4811,16 +4803,16 @@
                                                "topic":  "Cidy_Intent_Router.yaml",
                                                "output":  {
                                                               "routingTarget":  "Formulate Response About Cidy",
-                                                              "routerDialog":  "",
-                                                              "routerStatus":  "missing_yaml",
-                                                              "yamlFile":  "Formulate_Response_About_Cidy.yaml"
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
                                                           },
-                                               "decision":  "Begin Formulate_Response_About_Cidy.yaml"
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
                                            },
                                            {
-                                               "topic":  "Formulate_Response_About_Cidy.yaml",
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
                                                "output":  {
-                                                              "yamlExists":  false,
+                                                              "yamlExists":  true,
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
@@ -4831,15 +4823,11 @@
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Stop: YAML not found"
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [
-                                         {
-                                             "type":  "Formulate_Response_YAML_not_found",
-                                             "point":  "Intent Router",
-                                             "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                         }
+
                                      ]
                     },
                     {
@@ -5766,7 +5754,8 @@
                                                     "knowledgeDomain":  "dead_end",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "templates"
+                                                                       "templates",
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -5786,10 +5775,11 @@
                                            {
                                                "topic":  "Cidy_Intent.yaml",
                                                "output":  {
-                                                              "knowledgeDomain":  "unclear",
+                                                              "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
                                                               "clarificationType":  "artifact"
@@ -5804,7 +5794,8 @@
                                                               "knowledgeDomain":  "dead_end",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6191,7 +6182,7 @@
                                                     "knowledgeDomain":  "awaiting_clarification",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "unclear"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6214,7 +6205,7 @@
                                                               "knowledgeDomain":  "about_cidy",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
                                                               "clarificationType":  "fund"
@@ -6229,7 +6220,7 @@
                                                               "knowledgeDomain":  "awaiting_clarification",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "unclear"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6276,7 +6267,7 @@
                                                     "knowledgeDomain":  "out_of_scope",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "out_of_scope"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6299,7 +6290,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6314,7 +6305,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6361,7 +6352,7 @@
                                                     "knowledgeDomain":  "out_of_scope",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "out_of_scope"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6384,7 +6375,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6399,7 +6390,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6446,7 +6437,7 @@
                                                     "knowledgeDomain":  "out_of_scope",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "out_of_scope"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6469,7 +6460,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6484,7 +6475,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6531,7 +6522,7 @@
                                                     "knowledgeDomain":  "out_of_scope",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "out_of_scope"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6554,7 +6545,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6569,7 +6560,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6616,7 +6607,7 @@
                                                     "knowledgeDomain":  "out_of_scope",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "out_of_scope"
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6639,7 +6630,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6654,7 +6645,7 @@
                                                               "knowledgeDomain":  "out_of_scope",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "out_of_scope"
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -8258,7 +8249,8 @@
                                                     "knowledgeDomain":  "programme_development",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "cd_strategy"
+                                                                       "cd_strategy",
+                                                                       "about_cidy"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -8282,7 +8274,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "cd_strategy"
+                                                                                 "cd_strategy",
+                                                                                 "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
                                                               "clarificationType":  "domain"
@@ -8297,7 +8290,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "cd_strategy"
+                                                                                 "cd_strategy",
+                                                                                 "about_cidy"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -8329,6 +8323,828 @@
                                                                                       "mapped":  true,
                                                                                       "matched":  [
                                                                                                       "cd_strategy"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC83",
+                        "scenario":  "Happy path - About Cidy overview",
+                        "question":  "What is Cidy and what problem is it intended to solve?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Intent Classifier sets knowledge_domain=about_cidy, funding_stream=UNCLEAR, topic_area=about_cidy, requires_clarification=No. Intent Router routes to Formulate Response Cidy About.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC84",
+                        "scenario":  "Happy path - About Cidy comparison",
+                        "question":  "How does Cidy differ from a general-purpose AI chatbot?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy",
+                                                                       "general"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy",
+                                                                                 "general"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy",
+                                                                                 "general"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC85",
+                        "scenario":  "Happy path - About Cidy coverage",
+                        "question":  "Which topics and knowledge areas does Cidy currently cover?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC86",
+                        "scenario":  "Happy path - About Cidy user questions",
+                        "question":  "What kinds of DA, RPTC, Programme Development, and general CDPMO questions can users ask Cidy?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy",
+                                                                       "general"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy",
+                                                                                 "general"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy",
+                                                                                 "general"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "general"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC87",
+                        "scenario":  "Happy path - About Cidy prompt examples",
+                        "question":  "What are examples of good user questions for Cidy?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC88",
+                        "scenario":  "Happy path - About Cidy routing flow",
+                        "question":  "How does Cidy classify a question and route it to the right knowledge source?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC89",
+                        "scenario":  "Happy path - About Cidy low confidence",
+                        "question":  "What happens when Cidy is uncertain or the answer has low confidence?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC90",
+                        "scenario":  "Happy path - About Cidy architecture",
+                        "question":  "What are the main components of Cidy\u0027s Copilot Studio architecture?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response About Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                           "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Cidy_About.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "about_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Cidy_About.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Cidy_About.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "about_cidy",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response About Cidy",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Cidy_About.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Cidy_About.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Cidy_About.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+
                                                                                                   ],
                                                                                       "unmapped":  [
 

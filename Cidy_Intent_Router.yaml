@@ -135,12 +135,22 @@ beginDialog:
               variable: Global.routingTarget
               value: Formulate Response About Cidy
 
-            - kind: SendActivity
-              id: sendActivity_aboutCidyNotDeveloped
-              activity: Cidy Is under development this topic is not yet developed (about cidy)
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_routeAboutCidy
+              conditions:
+                - id: conditionItem_sendActivity_debug_routeAboutCidy
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeAboutCidy
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: goToAboutCidy
+              dialog: copilots_header_3141e.topic.FormulateResponseCidyAbout
 
             - kind: EndDialog
-              id: end_aboutCidyNotDeveloped
+              id: end_afterAboutCidy
 
         - id: conditionItem_routeProgrammeDevelopment
           condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations" || Global.topicArea = "tag_meetings" || Global.topicArea = "steering_committee" || Global.topicArea = "cd_strategy" || Global.topicArea = "guidelines_templates" || Global.topicArea = "implementing_partners_grants" || Global.topicArea = "resident_coordinator"

@@ -149,12 +149,13 @@ beginDialog:
             "9. If the user asks about Programme Development guidance, templates, project design, progress reports, annual progress reports, final report templates, project closure, project-document preparation, workplans, budgets, indicators, implementation rates, revisions, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, or country-specific action plans, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=guidelines_templates, requires_clarification=No." & Char(10) &
             "10. If the user asks about implementing partners, grants, grantees, partner agreements, project cooperation agreements, due diligence, IPGC, routing slips to CDO, agreement clauses, partner evaluation, procurement versus grant or implementing partner modality, or procedures to identify, screen, select, approve, amend, monitor, close, or keep records for partners/grants, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=implementing_partners_grants, requires_clarification=No." & Char(10) &
             "11. If the user asks about DESA engagement with the Resident Coordinator system, Resident Coordinator or RCO notification, country-level support, UNCT membership, UNSDCF signatory status, CCA or UNSDCF alignment, DESA country missions, CDPMO coordination of country-level engagement, or countries with DESA UNCT membership or contribution status, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=resident_coordinator, requires_clarification=No." & Char(10) &
-            "12. If the user asks about DESA strategic priorities, 2023 action areas, DESA's capacity development strategy, service delivery model, five service lines or areas of work, prioritization of capacity development requests, partnerships in delivery, or the AI-enabled Capacity Development Knowledge Hub/Cidy, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=cd_strategy, requires_clarification=No." & Char(10) &
-            "13. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
-            "14. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
-            "15. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
-            "16. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
-            "17. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "12. If the user asks about Cidy itself, including what Cidy is, what problem it solves, how it differs from a general-purpose AI chatbot, what knowledge areas it covers, examples of good user questions, how Cidy classifies or routes questions, what happens when confidence is low or Cidy is uncertain, feedback or escalation flow, or Cidy's Copilot Studio architecture/components, set knowledge_domain=about_cidy, funding_stream=UNCLEAR, topic_area=about_cidy, requires_clarification=No." & Char(10) &
+            "13. If the user asks about DESA strategic priorities, 2023 action areas, DESA's capacity development strategy, service delivery model, five service lines or areas of work, prioritization of capacity development requests, or partnerships in delivery, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=cd_strategy, requires_clarification=No." & Char(10) &
+            "14. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
+            "15. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
+            "16. If the user asks a broad but plausible Cidy-related question that is not clearly about Cidy itself or another allowed domain, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "17. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "18. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
             "User question:" & Char(10) &
             Global.userQuestion
 
@@ -292,6 +293,42 @@ beginDialog:
               id: normalize_clarificationTypeNone
               variable: Global.clarificationType
               value: none
+
+    - kind: ConditionGroup
+      id: conditionGroup_aboutCidyFallback
+      conditions:
+        - id: conditionItem_aboutCidyFallback
+          condition: =Or(Find("cidy", Lower(Global.userQuestion)) > 0, Find("capacity development assistant", Lower(Global.userQuestion)) > 0, Find("general-purpose ai chatbot", Lower(Global.userQuestion)) > 0, Find("general purpose ai chatbot", Lower(Global.userQuestion)) > 0, Find("good user questions", Lower(Global.userQuestion)) > 0, Find("good prompt", Lower(Global.userQuestion)) > 0, Find("knowledge areas", Lower(Global.userQuestion)) > 0, Find("knowledge topics", Lower(Global.userQuestion)) > 0, Find("classify a question", Lower(Global.userQuestion)) > 0, Find("route a question", Lower(Global.userQuestion)) > 0, Find("routes a question", Lower(Global.userQuestion)) > 0, Find("low confidence", Lower(Global.userQuestion)) > 0, Find("when uncertain", Lower(Global.userQuestion)) > 0, Find("copilot studio architecture", Lower(Global.userQuestion)) > 0, Find("application architecture", Lower(Global.userQuestion)) > 0) && !Or(Find("stock", Lower(Global.userQuestion)) > 0, Find("weather", Lower(Global.userQuestion)) > 0, Find("world cup", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainAboutCidy
+              variable: Global.knowledgeDomain
+              value: about_cidy
+
+            - kind: SetVariable
+              id: fallback_setFundingAboutCidy
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: fallback_setTopicAboutCidy
+              variable: Global.topicArea
+              value: about_cidy
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoAboutCidy
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneAboutCidy
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionAboutCidy
+              variable: Global.clarificationQuestion
+              value:
 
     - kind: ConditionGroup
       id: conditionGroup_projectEvaluationDiscoveryFallback

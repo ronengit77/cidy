@@ -24,6 +24,7 @@ function Get-ExpectedYaml {
     if ($DomainId -eq "pdf") { return "Formulate_Response_PDF.yaml" }
     if ($DomainId -eq "da") { return "Formulate_Response_DA.yaml" }
     if ($DomainId -eq "rptc") { return "Formulate_Response_RPTC.yaml" }
+    if ($DomainId -eq "about_cidy") { return "Formulate_Response_Cidy_About.yaml" }
     $suffix = ConvertTo-Title $DomainId
     $suffix = $suffix -replace "[^A-Za-z0-9]+", "_"
     return "Formulate_Response_$suffix.yaml"
@@ -32,7 +33,9 @@ function Get-ExpectedYaml {
 function Get-DomainFromResponseFile {
     param([string]$FileName)
     $suffix = [IO.Path]::GetFileNameWithoutExtension($FileName) -replace "^Formulate_Response_", ""
-    return ConvertTo-Slug $suffix
+    $domain = ConvertTo-Slug $suffix
+    if ($domain -eq "cidy_about") { return "about_cidy" }
+    return $domain
 }
 
 function Get-ResponseTopicAlias {
@@ -41,7 +44,9 @@ function Get-ResponseTopicAlias {
     if ($Dialog -eq "copilots_header_3141e.topic.FormulateResponseCopy") { return "rptc" }
     if ($Dialog -eq "copilots_header_3141e.topic.FormulateResponse") { return "pdf" }
     $last = ($Dialog -split "\.")[-1]
-    return ConvertTo-Slug ($last -replace "^FormulateResponse", "")
+    $alias = ConvertTo-Slug ($last -replace "^FormulateResponse", "")
+    if ($alias -eq "cidy_about") { return "about_cidy" }
+    return $alias
 }
 
 function Get-RouterDomains {

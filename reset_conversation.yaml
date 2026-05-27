@@ -1,0 +1,160 @@
+kind: AdaptiveDialog
+modelDescription: Resets active Cidy conversation state and routes the user back to a new-question prompt.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: reset_userQuestion
+      variable: Global.userQuestion
+      value:
+
+    - kind: SetVariable
+      id: reset_transcript
+      variable: Global.transcript
+      value:
+
+    - kind: SetVariable
+      id: reset_intentJson
+      variable: Global.intentJson
+      value: "{}"
+
+    - kind: SetVariable
+      id: reset_intentReason
+      variable: Global.intentReason
+      value:
+
+    - kind: SetVariable
+      id: reset_questionEnhancements
+      variable: Global.executiveQuestionEnhancements
+      value:
+
+    - kind: SetVariable
+      id: reset_nextActionContext
+      variable: Global.nextActionContext
+      value:
+
+    - kind: SetVariable
+      id: reset_intentStatus
+      variable: Global.intentStatus
+      value: needs_classification
+
+    - kind: SetVariable
+      id: reset_knowledgeDomain
+      variable: Global.knowledgeDomain
+      value: unclear
+
+    - kind: SetVariable
+      id: reset_fundingStream
+      variable: Global.fundingStream
+      value: UNCLEAR
+
+    - kind: SetVariable
+      id: reset_topicArea
+      variable: Global.topicArea
+      value: unclear
+
+    - kind: SetVariable
+      id: reset_requiresClarification
+      variable: Global.requiresClarification
+      value: No
+
+    - kind: SetVariable
+      id: reset_clarificationType
+      variable: Global.clarificationType
+      value: none
+
+    - kind: SetVariable
+      id: reset_clarificationQuestion
+      variable: Global.clarificationQuestion
+      value:
+
+    - kind: SetVariable
+      id: reset_clarificationAnswer
+      variable: Global.clarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: reset_normalizedClarificationAnswer
+      variable: Global.normalizedClarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: reset_clarificationAttempts
+      variable: Global.clarificationAttempts
+      value: 0
+
+    - kind: SetVariable
+      id: reset_routingTarget
+      variable: Global.routingTarget
+      value:
+
+    - kind: SetVariable
+      id: reset_draftResponse
+      variable: Global.draftResponse
+      value:
+
+    - kind: SetVariable
+      id: reset_formattedAnswer
+      variable: Global.formattedAnswer
+      value:
+
+    - kind: SetVariable
+      id: reset_formattedSources
+      variable: Global.formattedSources
+      value:
+
+    - kind: SetVariable
+      id: reset_confidenceScore
+      variable: Global.confidenceScore
+      value:
+
+    - kind: SetVariable
+      id: reset_confidenceLabel
+      variable: Global.confidenceLabel
+      value:
+
+    - kind: SetVariable
+      id: reset_confidenceExplanation
+      variable: Global.confidenceExplanation
+      value:
+
+    - kind: SetVariable
+      id: reset_warningMessage
+      variable: Global.warningMessage
+      value:
+
+    - kind: SetVariable
+      id: reset_issueSummary
+      variable: Global.issueSummary
+      value:
+
+    - kind: SetVariable
+      id: reset_userFeedback
+      variable: Global.userFeedback
+      value:
+
+    - kind: SetVariable
+      id: reset_askAnother
+      variable: Global.askAnother
+      value:
+
+    - kind: SetVariable
+      id: reset_retryMode
+      variable: Global.retryMode
+      value:
+
+    - kind: SendActivity
+      id: msg_resetComplete
+      activity: Conversation state has been reset.
+
+    - kind: BeginDialog
+      id: goToUserInquiryAfterReset
+      dialog: copilots_header_3141e.topic.UserInquiry2
+
+    - kind: EndDialog
+      id: end_resetConversation
+
+inputType: {}
+outputType: {}

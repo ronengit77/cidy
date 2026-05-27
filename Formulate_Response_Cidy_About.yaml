@@ -1,0 +1,46 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the About Cidy knowledge source and generates a draft response with confidence score. It does not display the answer to the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: setSourceUseInstructions_aboutCidy
+      variable: Global.sourceUseInstructions
+      value: This folder contains text-only Word documents that describe Cidy, the UN DESA Capacity Development Assistant. The documents explain what Cidy does, what knowledge topics it currently covers, examples of questions users can ask, and the application architecture behind the agent, including its inquiry capture, intent classification, clarification, question enhancement, routing, response generation, confidence assessment, feedback, and escalation flow. Together, the documents provide a non-technical overview for users and a practical orientation for staff maintaining or explaining the system.
+
+    - kind: SearchAndSummarizeContent
+      id: search_aboutCidy
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: |-
+        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+        "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+        "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+        "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. The user is asking about Cidy itself, including what Cidy does, what problem it solves, how it differs from a general-purpose AI chatbot, what knowledge areas it covers, examples of good user questions, or how the application flow and architecture work.
+        Answer using ONLY the provided About Cidy knowledge source and the binding source-use instructions. Do not answer as a generic AI chatbot explanation. Keep the answer specific to Cidy and the documented UN DESA capacity-development assistant.
+        If the question asks about current coverage, classification, clarification, question enhancement, routing, response generation, confidence assessment, feedback, escalation, or maintenance, summarize only what the About Cidy source supports and say when the source does not contain enough detail.
+        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, version, or document date used.
+        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no labels, no words such as uncertain. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

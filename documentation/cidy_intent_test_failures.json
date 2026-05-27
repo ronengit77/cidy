@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-27T16:45:00-04:00",
+                    "generatedAt":  "2026-05-27T19:47:38-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  82,
-                    "passed":  69,
-                    "failed":  13
+                    "total":  90,
+                    "passed":  81,
+                    "failed":  9
                 },
     "failures":  [
                      {
@@ -171,168 +171,6 @@
                                                ]
                      },
                      {
-                         "id":  "TC36",
-                         "scenario":  "Happy path - About Cidy undeveloped",
-                         "question":  "How does Cidy work?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response About Cidy",
-                                            "routerDialog":  "",
-                                            "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                            "routerStatus":  "missing_yaml",
-                                            "finalTopic":  "Formulate_Response_About_Cidy.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_About_Cidy.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "Formulate_Response_YAML_not_found",
-                                              "point":  "Intent Router",
-                                              "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Bypass clarification"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_About_Cidy.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_About_Cidy.yaml",
-                                                       "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC37",
-                         "scenario":  "Happy path - About Cidy coverage",
-                         "question":  "What knowledge sources does Cidy currently use?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response About Cidy",
-                                            "routerDialog":  "",
-                                            "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                            "routerStatus":  "missing_yaml",
-                                            "finalTopic":  "Formulate_Response_About_Cidy.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_About_Cidy.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "Formulate_Response_YAML_not_found",
-                                              "point":  "Intent Router",
-                                              "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Bypass clarification"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_About_Cidy.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_About_Cidy.yaml",
-                                                       "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC38",
-                         "scenario":  "Happy path - About Cidy maintenance",
-                         "question":  "Who maintains Cidy\u0027s knowledge?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response About Cidy",
-                                            "routerDialog":  "",
-                                            "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                            "routerStatus":  "missing_yaml",
-                                            "finalTopic":  "Formulate_Response_About_Cidy.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_About_Cidy.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "Formulate_Response_YAML_not_found",
-                                              "point":  "Intent Router",
-                                              "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Bypass clarification"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_About_Cidy.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_About_Cidy.yaml",
-                                                       "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
                          "id":  "TC41",
                          "scenario":  "Clarification path - fund to PDF",
                          "question":  "Which reporting template should I use?",
@@ -382,60 +220,6 @@
                                                    },
                                                    {
                                                        "topic":  "Formulate_Response_PDF.yaml",
-                                                       "decision":  "Stop: YAML not found"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC46",
-                         "scenario":  "Clarification path - domain to About Cidy",
-                         "question":  "I need help. What is this tool?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response About Cidy",
-                                            "routerDialog":  "",
-                                            "yamlFile":  "Formulate_Response_About_Cidy.yaml",
-                                            "routerStatus":  "missing_yaml",
-                                            "finalTopic":  "Formulate_Response_About_Cidy.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_About_Cidy.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_About_Cidy.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "Formulate_Response_YAML_not_found",
-                                              "point":  "Intent Router",
-                                              "message":  "Expected YAML not found: Formulate_Response_About_Cidy.yaml."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Clarifier.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_About_Cidy.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_About_Cidy.yaml",
                                                        "decision":  "Stop: YAML not found"
                                                    }
                                                ]

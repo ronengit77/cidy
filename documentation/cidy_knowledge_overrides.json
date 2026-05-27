@@ -46,6 +46,11 @@
       "folderName": "CDPMO Knowledge v2"
     },
     {
+      "id": "about_cidy_general",
+      "folderName": "Cidy - About",
+      "description": "Text-only Word documents describing Cidy, the knowledge topics it covers, examples of questions users can ask, and the Copilot Studio architecture and flow behind inquiry capture, classification, clarification, question enhancement, routing, response generation, confidence assessment, feedback, and escalation."
+    },
+    {
       "id": "programme_development_steering_committee",
       "folderName": "Capacity Development Steering Committee"
     },
