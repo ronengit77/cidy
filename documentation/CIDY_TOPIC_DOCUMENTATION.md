@@ -65,7 +65,7 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `Formulate_Response_DA.yaml` | Searches DA knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_RPTC.yaml` | Searches RPTC knowledge sources and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
 | `Formulate_Response_General.yaml` | Searches the general CDPMO knowledge source and writes `Global.draftResponse`. | `OnRecognizedIntent` | `AssessConfidence` |
-| `Formulate_Response_Programme_Development.yaml` | Intended to search programme-development sources, currently using DA-oriented instructions/source IDs in the file. | `OnRecognizedIntent` | `AssessConfidence` |
+| `Formulate_Response_Programme_Development.yaml` | Searches Programme Development sources, including TAG/Steering Committee materials, project evaluations, guidelines/templates, implementing partners/grants, Resident Coordinator country engagement, DESA capacity-development strategy, and the broad Programme Development fallback. | `OnRecognizedIntent` | `AssessConfidence` |
 | `assess_confidence.yaml` | Parses/formats a generated answer into answer, sources, confidence score, confidence label, and explanation. | `OnRecognizedIntent` | `ShareResponse`, `ApologizeWarn` |
 | `warn.yaml` | Sets warning text for low or medium confidence answers. | `OnRecognizedIntent` | `ShareResponse` |
 | `share_response.yaml` | Sends the warning, answer, sources, and confidence label to the user, then asks for feedback. | `OnRecognizedIntent` | `UserFeedback2` |
@@ -128,13 +128,14 @@ Resolved since the previous scan:
 ## Routing Gaps And Consistency Notes
 
 1. `about_cidy` is recognized by the classifier and clarifier, but no matching response YAML exists yet.
-2. `Formulate_Response_Programme_Development.yaml` is wired, but some branch prompt text still says the user is asking about the Development Account and its knowledge-source IDs should be reviewed.
+2. `Formulate_Response_Programme_Development.yaml` is wired for current Programme Development branches, including specific source IDs for `Cidy-PD-RC` and `Cidy-PD-Strategy`.
 3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
 4. RPTC has been consolidated around two current knowledge areas: `rptc_guidance_templates` for planning, approval, implementation, activity proposals, IRA guidance, reporting standards, activity report templates, and post-activity reporting; and `rptc_progress_reports` for achievements, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, and recommendations. The RPTC `elseActions` branch is the RPTC folder-level fallback: it is used only after routing has already selected RPTC, when no more specific RPTC topic-area condition matched, and it should search the broad RPTC-all folder rather than the top-level Cidy `Knowledge` source.
-5. DEBUG `SendActivity` messages in the active intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
-6. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
-7. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
-8. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
+5. Programme Development now includes `resident_coordinator` for RC/RCO, UNCT, CCA/UNSDCF, country-level support, and CDPMO country-engagement questions; and `cd_strategy` for strategic priorities, service delivery model, service lines, request prioritization, partnerships, and the AI-enabled Capacity Development Knowledge Hub/Cidy.
+6. DEBUG `SendActivity` messages in the active intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
+7. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
+8. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
+9. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
 ## Response Pipeline Notes
 

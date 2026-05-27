@@ -94,7 +94,7 @@ beginDialog:
             "Allowed funding_stream values:" & Char(10) &
             "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
             "Allowed topic_area values:" & Char(10) &
-            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, rptc_guidance_templates, rptc_progress_reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, resident_coordinator, rptc_guidance_templates, rptc_progress_reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
             "Allowed requires_clarification values: Yes, No" & Char(10) &
             "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
             "Critical routing rules:" & Char(10) &
@@ -108,11 +108,13 @@ beginDialog:
             "8. If the user asks about TAG meetings, Tag Team meetings, steering committee meetings, meeting materials, decisions, minutes, actions, or conclusions, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=tag_meetings or steering_committee as appropriate, requires_clarification=No. These are Programme Development knowledge areas, not DA/RPTC/PDF fund-specific questions." & Char(10) &
             "9. If the user asks about Programme Development guidance, templates, project design, progress reports, annual progress reports, final report templates, project closure, project-document preparation, workplans, budgets, indicators, implementation rates, revisions, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, or country-specific action plans, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=guidelines_templates, requires_clarification=No." & Char(10) &
             "10. If the user asks about implementing partners, grants, grantees, partner agreements, project cooperation agreements, due diligence, IPGC, routing slips to CDO, agreement clauses, partner evaluation, procurement versus grant or implementing partner modality, or procedures to identify, screen, select, approve, amend, monitor, close, or keep records for partners/grants, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=implementing_partners_grants, requires_clarification=No." & Char(10) &
-            "11. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
-            "12. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
-            "13. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
-            "14. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
-            "15. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "11. If the user asks about DESA engagement with the Resident Coordinator system, Resident Coordinator or RCO notification, country-level support, UNCT membership, UNSDCF signatory status, CCA or UNSDCF alignment, DESA country missions, CDPMO coordination of country-level engagement, or countries with DESA UNCT membership or contribution status, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=resident_coordinator, requires_clarification=No." & Char(10) &
+            "12. If the user asks about DESA strategic priorities, 2023 action areas, DESA's capacity development strategy, service delivery model, five service lines or areas of work, prioritization of capacity development requests, partnerships in delivery, or the AI-enabled Capacity Development Knowledge Hub/Cidy, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=cd_strategy, requires_clarification=No." & Char(10) &
+            "13. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
+            "14. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
+            "15. If the user asks a broad but plausible Cidy-related question, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "16. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "17. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
             "User question:" & Char(10) &
             Global.userQuestion
 
@@ -345,7 +347,7 @@ beginDialog:
       id: conditionGroup_programmeDevelopmentGuidanceFallback
       conditions:
         - id: conditionItem_guidelinesTemplatesFallback
-          condition: =Or(Find("annual progress report", Lower(Global.userQuestion)) > 0, Find("progress report template", Lower(Global.userQuestion)) > 0, Find("final report template", Lower(Global.userQuestion)) > 0, Find("project document preparation", Lower(Global.userQuestion)) > 0, Find("project-document preparation", Lower(Global.userQuestion)) > 0, Find("project design", Lower(Global.userQuestion)) > 0, Find("implementation rate", Lower(Global.userQuestion)) > 0, Find("indicators of achievement", Lower(Global.userQuestion)) > 0, Find("output delivery", Lower(Global.userQuestion)) > 0, Find("resident coordinator", Lower(Global.userQuestion)) > 0, Find("country-specific action plan", Lower(Global.userQuestion)) > 0, Find("workplan", Lower(Global.userQuestion)) > 0, Find("budget justification", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          condition: =Or(Find("annual progress report", Lower(Global.userQuestion)) > 0, Find("progress report template", Lower(Global.userQuestion)) > 0, Find("final report template", Lower(Global.userQuestion)) > 0, Find("project document preparation", Lower(Global.userQuestion)) > 0, Find("project-document preparation", Lower(Global.userQuestion)) > 0, Find("project design", Lower(Global.userQuestion)) > 0, Find("implementation rate", Lower(Global.userQuestion)) > 0, Find("indicators of achievement", Lower(Global.userQuestion)) > 0, Find("output delivery", Lower(Global.userQuestion)) > 0, Find("country-specific action plan", Lower(Global.userQuestion)) > 0, Find("workplan", Lower(Global.userQuestion)) > 0, Find("budget justification", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
           actions:
             - kind: SetVariable
               id: fallback_setDomainGuidelinesTemplates
@@ -397,6 +399,62 @@ beginDialog:
 
             - kind: SetVariable
               id: fallback_clearClarificationQuestionImplementingPartnersGrants
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_residentCoordinatorFallback
+          condition: =Or(Find("resident coordinator", Lower(Global.userQuestion)) > 0, Find("rco", Lower(Global.userQuestion)) > 0, Find("unct", Lower(Global.userQuestion)) > 0, Find("unsdcf", Lower(Global.userQuestion)) > 0, Find("cca", Lower(Global.userQuestion)) > 0, Find("country-level support", Lower(Global.userQuestion)) > 0, Find("country level support", Lower(Global.userQuestion)) > 0, Find("country mission", Lower(Global.userQuestion)) > 0, Find("country-level engagement", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainResidentCoordinator
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicResidentCoordinator
+              variable: Global.topicArea
+              value: resident_coordinator
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoResidentCoordinator
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneResidentCoordinator
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionResidentCoordinator
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_cdStrategyFallback
+          condition: =Or(Find("strategic priorities", Lower(Global.userQuestion)) > 0, Find("main action areas", Lower(Global.userQuestion)) > 0, Find("capacity development strategy", Lower(Global.userQuestion)) > 0, Find("service delivery model", Lower(Global.userQuestion)) > 0, Find("service lines", Lower(Global.userQuestion)) > 0, Find("areas of work", Lower(Global.userQuestion)) > 0, Find("prioritize capacity development requests", Lower(Global.userQuestion)) > 0, Find("prioritise capacity development requests", Lower(Global.userQuestion)) > 0, Find("capacity development knowledge hub", Lower(Global.userQuestion)) > 0, Find("knowledge hub", Lower(Global.userQuestion)) > 0, Find("ai-enabled", Lower(Global.userQuestion)) > 0, Find("ai enabled", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainCDStrategy
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicCDStrategy
+              variable: Global.topicArea
+              value: cd_strategy
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCDStrategy
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneCDStrategy
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionCDStrategy
               variable: Global.clarificationQuestion
               value:
 

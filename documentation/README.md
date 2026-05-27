@@ -66,7 +66,7 @@ Run the structural route simulator after updating intent, clarifier, router, or 
 .\tools\run_intent_test_cases.ps1
 ```
 
-The runner reads `documentation/Cidy_Intent_Test_Cases_76.json` and writes:
+The runner reads `documentation/Cidy_Intent_Test_Cases_82.json` and writes:
 
 - `documentation/cidy_intent_test_results.json` for every test case and route trace,
 - `documentation/cidy_intent_test_failures.json` for failed cases only.

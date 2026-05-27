@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-26T17:44:28-04:00",
+                    "generatedAt":  "2026-05-27T11:14:41-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  76,
-                    "passed":  62,
-                    "failed":  14
+                    "total":  82,
+                    "passed":  69,
+                    "failed":  13
                 },
     "failures":  [
                      {
@@ -112,60 +112,6 @@
                                                    },
                                                    {
                                                        "topic":  "Formulate_Response_DA.yaml",
-                                                       "decision":  "Use fallback or update topic-area mapping"
-                                                   }
-                                               ]
-                     },
-                     {
-                         "id":  "TC19",
-                         "scenario":  "Happy path - Programme Development CD Strategy",
-                         "question":  "What is DESA\u0027s capacity development strategy?",
-                         "finalRoute":  {
-                                            "routingTarget":  "Formulate Response Programme Development",
-                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
-                                            "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                                            "routerStatus":  "wired",
-                                            "finalTopic":  "Formulate_Response_Programme_Development.yaml"
-                                        },
-                         "routePath":  [
-                                           "user_inquiry.yaml",
-                                           "Cidy_Intent.yaml",
-                                           "Cidy_Intent_Clarifier.yaml",
-                                           "Question_Enhancer.yaml",
-                                           "Cidy_Intent_Router.yaml",
-                                           "Formulate_Response_Programme_Development.yaml"
-                                       ],
-                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
-                         "failures":  [
-                                          {
-                                              "type":  "topic_area_not_mapped",
-                                              "point":  "Formulate Response",
-                                              "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: cd_strategy."
-                                          }
-                                      ],
-                         "routeTraceSummary":  [
-                                                   {
-                                                       "topic":  "user_inquiry.yaml",
-                                                       "decision":  "Begin Cidy_Intent.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent.yaml",
-                                                       "decision":  "Bypass clarification"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
-                                                       "decision":  "Begin Question_Enhancer.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Question_Enhancer.yaml",
-                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Cidy_Intent_Router.yaml",
-                                                       "decision":  "Begin Formulate_Response_Programme_Development.yaml"
-                                                   },
-                                                   {
-                                                       "topic":  "Formulate_Response_Programme_Development.yaml",
                                                        "decision":  "Use fallback or update topic-area mapping"
                                                    }
                                                ]

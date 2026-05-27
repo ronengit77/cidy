@@ -471,6 +471,48 @@
       "Clarification": "",
       "Expected behavior": "Routes to Formulate Response RPTC with topic_area=rptc_progress_reports.",
       "date-created": "2026-05-26"
+    },
+    {
+      "Scenario": "Happy path - Programme Development Resident Coordinator mission notice",
+      "Test question": "When should DESA inform the RC or RCO about a planned country mission?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=resident_coordinator.",
+      "date-created": "2026-05-27"
+    },
+    {
+      "Scenario": "Happy path - Programme Development UNSDCF alignment",
+      "Test question": "How should DESA align country-level support with the CCA and UNSDCF processes?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=resident_coordinator.",
+      "date-created": "2026-05-27"
+    },
+    {
+      "Scenario": "Happy path - Programme Development UNCT membership",
+      "Test question": "When can DESA become a UNCT member or UNSDCF signatory?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=resident_coordinator.",
+      "date-created": "2026-05-27"
+    },
+    {
+      "Scenario": "Happy path - Programme Development strategic priorities",
+      "Test question": "What are DESA's main action areas for 2023?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=cd_strategy.",
+      "date-created": "2026-05-27"
+    },
+    {
+      "Scenario": "Happy path - Programme Development service delivery model",
+      "Test question": "What are the five service lines or areas of work in DESA's capacity development strategy?",
+      "Clarification": "",
+      "Expected behavior": "Routes to Programme Development with topic_area=cd_strategy.",
+      "date-created": "2026-05-27"
+    },
+    {
+      "Scenario": "Clarification path - Programme Development strategy from broad Cidy question",
+      "Test question": "How does the knowledge hub prioritize requests?",
+      "Clarification": "Programme Development",
+      "Expected behavior": "Classifier may ask domain clarification for broad Cidy-related knowledge hub wording. Clarifier maps Programme Development and routes to Programme Development with topic_area=cd_strategy.",
+      "date-created": "2026-05-27"
     }
   ]
 }
