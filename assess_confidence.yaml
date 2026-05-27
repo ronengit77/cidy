@@ -5,6 +5,44 @@ beginDialog:
   id: main
   intent: {}
   actions:
+    - kind: ConditionGroup
+      id: conditionGroup_blankDraftResponse
+      conditions:
+        - id: conditionItem_blankDraftResponse
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SetVariable
+              id: setVariable_blankDraftAnswer
+              variable: Global.formattedAnswer
+              value: I was not able to find information in my knowledge sources that could answer this question.
+
+            - kind: SetVariable
+              id: setVariable_blankDraftSources
+              variable: Global.formattedSources
+              value: No sources found.
+
+            - kind: SetVariable
+              id: setVariable_blankDraftConfidence
+              variable: Global.confidenceScore
+              value: 0
+
+            - kind: SetVariable
+              id: setVariable_blankDraftLabel
+              variable: Global.confidenceLabel
+              value: Low
+
+            - kind: SetVariable
+              id: setVariable_blankDraftExplanation
+              variable: Global.confidenceExplanation
+              value: No draft response was generated from the configured knowledge sources.
+
+            - kind: BeginDialog
+              id: goToWarn_blankDraft
+              dialog: copilots_header_3141e.topic.ApologizeWarn
+
+            - kind: EndDialog
+              id: end_blankDraftResponse
+
     - kind: InvokeAIBuilderModelAction
       id: invokeAIBuilderModelAction_J9p8bn
       displayName: Formatting Response JSON
