@@ -16,6 +16,7 @@ beginDialog:
       variable: Global.draftResponse
       userInput: |-
         ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+        "Search terms: Cidy; UN DESA Capacity Development Assistant; how Cidy works; knowledge coverage; good user questions; Copilot Studio architecture; inquiry capture; intent classification; clarification; question enhancement; routing; response generation; confidence assessment; feedback; escalation." & Char(10) & Char(10) &
         "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
         "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
         "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
@@ -37,6 +38,39 @@ beginDialog:
         kind: SearchSpecificKnowledgeSources
         knowledgeSources:
           - copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs
+
+    - kind: ConditionGroup
+      id: conditionGroup_aboutCidyFallback
+      conditions:
+        - id: conditionItem_aboutCidyNoResult
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_aboutCidyTopLevelFallback
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Search terms: Cidy; UN DESA Capacity Development Assistant; how Cidy works; knowledge coverage; good user questions; Copilot Studio architecture; inquiry capture; intent classification; clarification; question enhancement; routing; response generation; confidence assessment; feedback; escalation." & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "The folder-specific About Cidy source did not return a result. Search the broader top-level Knowledge source, but answer only from documents that are explicitly about Cidy."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The folder-specific About Cidy search did not return a result, so this is a constrained fallback search across the broader top-level Knowledge source.
+                Answer ONLY if the retrieved source is explicitly about Cidy, the UN DESA Capacity Development Assistant, its knowledge coverage, user question examples, confidence/feedback/escalation behavior, or Copilot Studio architecture. Do not use unrelated DA, RPTC, PDF, Programme Development, or general CDPMO sources unless they explicitly describe Cidy itself.
+                If no explicitly About Cidy source is found, say the knowledge source does not contain enough reliable information.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no labels, no words such as uncertain. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
 
     - kind: BeginDialog
       id: goToAssess

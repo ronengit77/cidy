@@ -487,853 +487,857 @@
 
   <script id="embeddedInventory" type="application/json">
 {
-  "schemaVersion": "1.1",
-  "generatedAt": "2026-05-27T23:48:24+00:00",
-  "generatedFrom": [
-    "Cidy_Intent_Router.yaml",
-    "Formulate_Response_Cidy_About.yaml",
-    "Formulate_Response_DA.yaml",
-    "Formulate_Response_General.yaml",
-    "Formulate_Response_Programme_Development.yaml",
-    "Formulate_Response_RPTC.yaml"
-  ],
-  "domains": [
-    {
-      "id": "about_cidy",
-      "label": "About Cidy",
-      "fundingStream": "UNCLEAR",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponseCidyAbout",
-      "yamlFile": "Formulate_Response_Cidy_About.yaml",
-      "notes": "Discovered from Cidy_Intent_Router.yaml.",
-      "isNewYaml": true,
-      "firstSeenAt": "2026-05-27T23:48:24+00:00"
-    },
-    {
-      "id": "rptc",
-      "label": "Regular Programme of Technical Cooperation",
-      "fundingStream": "RPTC",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponseCopy",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "notes": "Developed route. Uses specific branches for RPTC guidance/templates and progress reports, with a broad RPTC fallback branch for other RPTC questions.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development",
-      "label": "Programme Development",
-      "fundingStream": "UNCLEAR",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "notes": "Discovered from Cidy_Intent_Router.yaml.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "general_cd",
-      "label": "General CDPMO",
-      "fundingStream": "UNCLEAR",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
-      "yamlFile": "Formulate_Response_General.yaml",
-      "notes": "Discovered from Cidy_Intent_Router.yaml.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "da",
-      "label": "Development Account",
-      "fundingStream": "DA",
-      "routerStatus": "wired",
-      "routerDialog": "copilots_header_3141e.topic.DA",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "notes": "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "pdf",
-      "label": "Peace and Development Trust Fund / UNPDF",
-      "fundingStream": "PDF",
-      "routerStatus": "missing_yaml",
-      "routerDialog": "copilots_header_3141e.topic.FormulateResponse",
-      "yamlFile": "Formulate_Response_PDF.yaml",
-      "notes": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered.",
-      "isNewYaml": false,
-      "firstSeenAt": ""
-    }
-  ],
-  "folders": [
-    {
-      "id": "about_cidy_general",
-      "domain": "about_cidy",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "Cidy - About",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs"
-      ],
-      "sourceLabels": [
-        "Cidy About 0 C"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "",
-      "yamlFile": "Formulate_Response_Cidy_About.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "No separate source-use instruction variable is currently set in this YAML.",
-      "isNewTopic": true,
-      "firstSeenAt": "2026-05-27T23:48:24+00:00"
-    },
-    {
-      "id": "da_project_planning_design",
-      "domain": "da",
-      "topicArea": "project_planning_design",
-      "topicName": "Project Planning Design",
-      "folderName": "Project Planning and Design",
-      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
-      "sourceIds": [
-        "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
-      ],
-      "sourceLabels": [
-        "Project Planning And Design"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_mMA5gI",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "da_evaluation_design",
-      "domain": "da",
-      "topicArea": "evaluation_design",
-      "topicName": "Evaluation Design",
-      "folderName": "Evaluations",
-      "knowledgeSourceId": "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
-      "sourceIds": [
-        "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo"
-      ],
-      "sourceLabels": [
-        "Evaluations"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_O9CKVo",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "da_general",
-      "domain": "da",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "General",
-      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
-      "sourceIds": [
-        "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
-      ],
-      "sourceLabels": [
-        "Project Planning And Design"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_PGrWf8",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "da_fallback",
-      "domain": "da",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "Da Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ"
-      ],
-      "sourceLabels": [
-        "Cidy DA All F Nqe 7 Z 76 Sp Dpr Z"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "elseActions",
-      "yamlFile": "Formulate_Response_DA.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "",
-      "mappingStatus": "fallback",
-      "ownerUnit": "TBD",
-      "instructions": "Fallback knowledge source used when no specific branch applies or when the draft response is blank.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "general_cd_general",
-      "domain": "general_cd",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "CDPMO Knowledge v2",
-      "knowledgeSourceId": "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn",
-      "sourceIds": [
-        "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn"
-      ],
-      "sourceLabels": [
-        "Knowledge WY Tp Gld A Wsk 7 O 4 C 6 Vn"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "",
-      "yamlFile": "Formulate_Response_General.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "No separate source-use instruction variable is currently set in this YAML.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_steering_committee",
-      "domain": "programme_development",
-      "topicArea": "steering_committee",
-      "topicName": "Steering Committee",
-      "folderName": "Capacity Development Steering Committee",
-      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
-      "sourceIds": [
-        "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
-      ],
-      "sourceLabels": [
-        "Project Planning And Design"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_mMA5gI",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like What was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_tag_meetings",
-      "domain": "programme_development",
-      "topicArea": "tag_meetings",
-      "topicName": "Tag Meetings",
-      "folderName": "Tag Meetings",
-      "knowledgeSourceId": "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF",
-      "sourceIds": [
-        "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF"
-      ],
-      "sourceLabels": [
-        "TAG Meetings"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_O9CKVo",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like What was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_projects_evaluations",
-      "domain": "programme_development",
-      "topicArea": "projects_evaluations",
-      "topicName": "Projects Evaluations",
-      "folderName": "Projects Evaluations",
-      "knowledgeSourceId": "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se",
-      "sourceIds": [
-        "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se"
-      ],
-      "sourceLabels": [
-        "Project Evaluations 4 Cj 3 N 0 N Ll 1 O 8 Se"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_QD3pfU",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title Division(s) EvaluationYear Countries RecommendationsList LessonsLearnedList FileName ShortPath FullPath. Use this folder for questions about specific evaluations or evaluation reports, including finding, listing, counting, filtering, or retrieving evaluations by topic, title, country, countries, region, division, year, recommendation, lesson learned, project attribute, FileName, ShortPath, or FullPath. When the user asks how many reports or evaluations match criteria, count matching records from the evaluation file if possible and cite the file. When the user asks to find evaluations about a subject or country, return the most relevant matching evaluation titles with the fields that support the match.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_guidelines_templates",
-      "domain": "programme_development",
-      "topicArea": "guidelines_templates",
-      "topicName": "Guidelines Templates",
-      "folderName": "Guidelines Templates",
-      "knowledgeSourceId": "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS",
-      "sourceIds": [
-        "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS"
-      ],
-      "sourceLabels": [
-        "Guidelines Andtemplates"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_guidelinesTemplates",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "This folder provides templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_implementing_partners_grants",
-      "domain": "programme_development",
-      "topicArea": "implementing_partners_grants",
-      "topicName": "Implementing Partners Grants",
-      "folderName": "Implementing Partners Grants",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa"
-      ],
-      "sourceLabels": [
-        "Cidy Implementing Partners And Grants"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_implementingPartnersGrants",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "This folder provides DESA's 25 September 2018 interim guidance and working templates for using grants and implementing partner agreements. Use this knowledge for questions about when to use a grant, implementing partner modality, or procurement; definitions of implementing partners, grants, and vendors; procedures for identifying, screening, selecting, approving, amending, monitoring, closing, and keeping records for grantees and implementing partners; and the roles of DESA divisions, CDO, OCSS/Procurement, IPGC, OLA, and the Controller's Office in due diligence and agreement approval. The annexes file supplies operational templates needed to apply those guidelines, including a routing slip to CDO, a project cooperation agreement template, required agreement clauses on funds, reporting, audits, anti-fraud/anti-corruption, termination, intellectual property, equipment, and privileges/immunities, plus a due-diligence questionnaire, IPGC decision template, partner evaluation template, and a reference table distinguishing activities that normally fit implementing-partner arrangements versus procurement.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_resident_coordinator",
-      "domain": "programme_development",
-      "topicArea": "resident_coordinator",
-      "topicName": "Resident Coordinator",
-      "folderName": "Resident Coordinator",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_"
-      ],
-      "sourceLabels": [
-        "Cidy 3 Ee 3 54 1 R"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_residentCoordinator",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "These files provide guidance on DESA's engagement with the Resident Coordinator system, country-level support, UNCT membership, and procedures for aligning DESA activities with the CCA and UNSDCF processes. Use this knowledge for questions about when DESA should inform the RC or RCO about a planned country mission; how DESA should align country-level support with the UNSDCF; DESA's principles for country-level support; when DESA can become a UNCT member or UNSDCF signatory; CDPMO's role in coordinating DESA country-level engagement; and which countries had DESA UNCT membership or contribution status as of October 2023.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_cd_strategy",
-      "domain": "programme_development",
-      "topicArea": "cd_strategy",
-      "topicName": "Cd Strategy",
-      "folderName": "Cd Strategy",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9"
-      ],
-      "sourceLabels": [
-        "Cidy PD Strategy 4 7 Zk 7 K Qdy 8 9 Xg 9"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "conditionItem_cdStrategy",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "review_required",
-      "ownerUnit": "TBD",
-      "instructions": "These files contain information on DESA's strategic priorities, capacity development approach, service delivery model, and the proposed AI-enabled Capacity Development Knowledge Hub/Cidy. Use this knowledge for questions about DESA's main action areas for 2023; the goals of DESA's capacity development strategy; the five service lines or areas of work; how DESA prioritizes capacity development requests; and the role partnerships play in delivery.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "programme_development_fallback",
-      "domain": "programme_development",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "Programme Development Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5"
-      ],
-      "sourceLabels": [
-        "Cidy PD All"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "elseActions",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "",
-      "mappingStatus": "fallback",
-      "ownerUnit": "TBD",
-      "instructions": "Fallback knowledge source used when no specific branch applies or when the draft response is blank.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_rptc_progress_reports",
-      "domain": "rptc",
-      "topicArea": "rptc_progress_reports",
-      "topicName": "Rptc Progress Reports",
-      "folderName": "Rptc Progress Reports",
-      "knowledgeSourceId": "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Progressreports",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcProgressReports",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains all RPTC progress reports. It answers questions like: What were the main achievements of the Regular Programme of Technical Cooperation in 2024? How many countries, requests, interventions, and people were supported through RPTC in 2024? Which UN implementing entities delivered RPTC activities, and how did their results differ? How did RPTC support least developed countries, landlocked developing countries, and small island developing States? What challenges and recommendations does the report identify for strengthening RPTC in future years?",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_rptc_guidance_templates",
-      "domain": "rptc",
-      "topicArea": "rptc_guidance_templates",
-      "topicName": "Rptc Guidance Templates",
-      "folderName": "Rptc Guidance Templates",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "mapped",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_policy_compliance",
-      "domain": "rptc",
-      "topicArea": "policy_compliance",
-      "topicName": "Policy Compliance",
-      "folderName": "Policy Compliance",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_policy_guidance_compliance",
-      "domain": "rptc",
-      "topicArea": "policy_guidance_compliance",
-      "topicName": "Policy Guidance Compliance",
-      "folderName": "Policy Guidance Compliance",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_reporting_documentation",
-      "domain": "rptc",
-      "topicArea": "reporting_documentation",
-      "topicName": "Reporting Documentation",
-      "folderName": "Reporting Documentation",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_process_governance",
-      "domain": "rptc",
-      "topicArea": "process_governance",
-      "topicName": "Process Governance",
-      "folderName": "Process Governance",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_budget_finance",
-      "domain": "rptc",
-      "topicArea": "budget_finance",
-      "topicName": "Budget Finance",
-      "folderName": "Budget Finance",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_design_evaluation",
-      "domain": "rptc",
-      "topicArea": "design_evaluation",
-      "topicName": "Design Evaluation",
-      "folderName": "Design Evaluation",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_definition",
-      "domain": "rptc",
-      "topicArea": "definition",
-      "topicName": "Definition",
-      "folderName": "Definition",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_governance_roles",
-      "domain": "rptc",
-      "topicArea": "governance_roles",
-      "topicName": "Governance Roles",
-      "folderName": "Governance Roles",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_programme_design_standards",
-      "domain": "rptc",
-      "topicArea": "programme_design_standards",
-      "topicName": "Programme Design Standards",
-      "folderName": "Programme Design Standards",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_evaluation_criteria",
-      "domain": "rptc",
-      "topicArea": "evaluation_criteria",
-      "topicName": "Evaluation Criteria",
-      "folderName": "Evaluation Criteria",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_reports",
-      "domain": "rptc",
-      "topicArea": "reports",
-      "topicName": "Reports",
-      "folderName": "Reports",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_templates",
-      "domain": "rptc",
-      "topicArea": "templates",
-      "topicName": "Templates",
-      "folderName": "Templates",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_monitoring_reporting",
-      "domain": "rptc",
-      "topicArea": "monitoring_reporting",
-      "topicName": "Monitoring Reporting",
-      "folderName": "Monitoring Reporting",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-        "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC Guidance Andtemplates",
-        "Ng C 2 C 2 Fsu Wn 41 Qlf"
-      ],
-      "sourceCount": 2,
-      "yamlConditionId": "conditionItem_rptcGuidanceTemplates",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "alias",
-      "ownerUnit": "TBD",
-      "instructions": "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    },
-    {
-      "id": "rptc_fallback",
-      "domain": "rptc",
-      "topicArea": "general",
-      "topicName": "General",
-      "folderName": "Rptc Fallback",
-      "knowledgeSourceId": "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS",
-      "sourceIds": [
-        "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS"
-      ],
-      "sourceLabels": [
-        "Cidy RPTC All T Rqm"
-      ],
-      "sourceCount": 1,
-      "yamlConditionId": "elseActions",
-      "yamlFile": "Formulate_Response_RPTC.yaml",
-      "generatedFromYaml": true,
-      "sourceUseInstructionSource": "Global.sourceUseInstructions",
-      "mappingStatus": "fallback",
-      "ownerUnit": "TBD",
-      "instructions": "Use the RPTC guidance and templates source for planning, approval, implementation, reporting, proposals, standards, IRA, and template questions. Use RPTC progress reports for questions about achievements, results, countries supported, requests, interventions, people supported, implementing entities, SIDS/LDC/LLDC support, challenges, or recommendations.",
-      "isNewTopic": false,
-      "firstSeenAt": ""
-    }
-  ],
-  "knownGaps": [
-    {
-      "id": "missing_pdf_yaml",
-      "severity": "high",
-      "title": "Create PDF response YAML",
-      "yamlFile": "Formulate_Response_PDF.yaml",
-      "description": "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
-    },
-    {
-      "id": "programme_development_sources_review",
-      "severity": "medium",
-      "title": "Review Programme Development source IDs",
-      "yamlFile": "Formulate_Response_Programme_Development.yaml",
-      "description": "Programme Development YAML has folders/sources that require human validation."
-    }
-  ],
-  "managerUpdates": []
+    "schemaVersion":  "1.1",
+    "generatedAt":  "2026-05-28T09:51:46-04:00",
+    "generatedFrom":  [
+                          "Cidy_Intent_Router.yaml",
+                          "Formulate_Response_Cidy_About.yaml",
+                          "Formulate_Response_DA.yaml",
+                          "Formulate_Response_General.yaml",
+                          "Formulate_Response_Programme_Development.yaml",
+                          "Formulate_Response_RPTC.yaml"
+                      ],
+    "domains":  [
+                    {
+                        "id":  "rptc",
+                        "label":  "Regular Programme of Technical Cooperation",
+                        "fundingStream":  "RPTC",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCopy",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "notes":  "Developed route. Uses specific branches for RPTC guidance/templates and progress reports, with a broad RPTC fallback branch for other RPTC questions.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "general_cd",
+                        "label":  "General CDPMO",
+                        "fundingStream":  "UNCLEAR",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponse",
+                        "yamlFile":  "Formulate_Response_General.yaml",
+                        "notes":  "Discovered from Cidy_Intent_Router.yaml.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "da",
+                        "label":  "Development Account",
+                        "fundingStream":  "DA",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.DA",
+                        "yamlFile":  "Formulate_Response_DA.yaml",
+                        "notes":  "Developed route. Uses topic-area conditions for project planning/design, evaluation design, and general.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "pdf",
+                        "label":  "Peace and Development Trust Fund / UNPDF",
+                        "fundingStream":  "PDF",
+                        "routerStatus":  "missing_yaml",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponse",
+                        "yamlFile":  "Formulate_Response_PDF.yaml",
+                        "notes":  "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "about_cidy",
+                        "label":  "About Cidy",
+                        "fundingStream":  "UNCLEAR",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
+                        "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                        "notes":  "Discovered from Cidy_Intent_Router.yaml.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development",
+                        "label":  "Programme Development",
+                        "fundingStream":  "UNCLEAR",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "notes":  "Discovered from Cidy_Intent_Router.yaml.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    }
+                ],
+    "folders":  [
+                    {
+                        "id":  "about_cidy_general",
+                        "domain":  "about_cidy",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "Cidy - About",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs; copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyAbout_G0C_NOH4HBzjTFPTB5DPs",
+                                          "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy About 0 C",
+                                             "Knowledge WY Tp Gld A Wsk 7 O 4 C 6 Vn"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "",
+                        "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains text-only Word documents that describe Cidy, the UN DESA Capacity Development Assistant. The documents explain what Cidy does, what knowledge topics it currently covers, examples of questions users can ask, and the application architecture behind the agent, including its inquiry capture, intent classification, clarification, question enhancement, routing, response generation, confidence assessment, feedback, and escalation flow. Together, the documents provide a non-technical overview for users and a practical orientation for staff maintaining or explaining the system.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "da_project_planning_design",
+                        "domain":  "da",
+                        "topicArea":  "project_planning_design",
+                        "topicName":  "Project Planning Design",
+                        "folderName":  "Project Planning and Design",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_mMA5gI",
+                        "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "da_evaluation_design",
+                        "domain":  "da",
+                        "topicArea":  "evaluation_design",
+                        "topicName":  "Evaluation Design",
+                        "folderName":  "Evaluations",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo"
+                                      ],
+                        "sourceLabels":  [
+                                             "Evaluations"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_O9CKVo",
+                        "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "da_general",
+                        "domain":  "da",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "General",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_PGrWf8",
+                        "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "da_fallback",
+                        "domain":  "da",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "Da Fallback",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy DA All F Nqe 7 Z 76 Sp Dpr Z"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
+                        "yamlFile":  "Formulate_Response_DA.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
+                        "mappingStatus":  "fallback",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "Fallback knowledge source used when no specific branch applies or when the draft response is blank.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "general_cd_general",
+                        "domain":  "general_cd",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "CDPMO Knowledge v2",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn"
+                                      ],
+                        "sourceLabels":  [
+                                             "Knowledge WY Tp Gld A Wsk 7 O 4 C 6 Vn"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "",
+                        "yamlFile":  "Formulate_Response_General.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This is a second attempt because the user was not satisfied. Search the broad top-level Knowledge source. Do not limit to the previously classified domain/topic. Prefer stronger sources and explain if the wider search changes or corrects the previous answer.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_steering_committee",
+                        "domain":  "programme_development",
+                        "topicArea":  "steering_committee",
+                        "topicName":  "Steering Committee",
+                        "folderName":  "Capacity Development Steering Committee",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Planning And Design"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_mMA5gI",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains all historical meetings of the Capacity Development Steering Committee. Items in this folder could answer questions like What was decided in the steering committee meeting in a certain year or draw conclusions from multiple meetings.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_tag_meetings",
+                        "domain":  "programme_development",
+                        "topicArea":  "tag_meetings",
+                        "topicName":  "Tag Meetings",
+                        "folderName":  "Tag Meetings",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF"
+                                      ],
+                        "sourceLabels":  [
+                                             "TAG Meetings"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_O9CKVo",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains all historical meetings of the Capacity Development Tag Team. Items in this folder could answer questions like What was decided in the TAG meeting in a certain year or draw conclusions from multiple meetings.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_projects_evaluations",
+                        "domain":  "programme_development",
+                        "topicArea":  "projects_evaluations",
+                        "topicName":  "Projects Evaluations",
+                        "folderName":  "Projects Evaluations",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se"
+                                      ],
+                        "sourceLabels":  [
+                                             "Project Evaluations 4 Cj 3 N 0 N Ll 1 O 8 Se"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_QD3pfU",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title Division(s) EvaluationYear Countries RecommendationsList LessonsLearnedList FileName ShortPath FullPath. Use this folder for questions about specific evaluations or evaluation reports, including finding, listing, counting, filtering, or retrieving evaluations by topic, title, country, countries, region, division, year, recommendation, lesson learned, project attribute, FileName, ShortPath, or FullPath. When the user asks how many reports or evaluations match criteria, count matching records from the evaluation file if possible and cite the file. When the user asks to find evaluations about a subject or country, return the most relevant matching evaluation titles with the fields that support the match.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_guidelines_templates",
+                        "domain":  "programme_development",
+                        "topicArea":  "guidelines_templates",
+                        "topicName":  "Guidelines Templates",
+                        "folderName":  "Guidelines Templates",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS"
+                                      ],
+                        "sourceLabels":  [
+                                             "Guidelines Andtemplates"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_guidelinesTemplates",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder provides templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_implementing_partners_grants",
+                        "domain":  "programme_development",
+                        "topicArea":  "implementing_partners_grants",
+                        "topicName":  "Implementing Partners Grants",
+                        "folderName":  "Implementing Partners Grants",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy Implementing Partners And Grants"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_implementingPartnersGrants",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder provides DESA\u0027s 25 September 2018 interim guidance and working templates for using grants and implementing partner agreements. Use this knowledge for questions about when to use a grant, implementing partner modality, or procurement; definitions of implementing partners, grants, and vendors; procedures for identifying, screening, selecting, approving, amending, monitoring, closing, and keeping records for grantees and implementing partners; and the roles of DESA divisions, CDO, OCSS/Procurement, IPGC, OLA, and the Controller\u0027s Office in due diligence and agreement approval. The annexes file supplies operational templates needed to apply those guidelines, including a routing slip to CDO, a project cooperation agreement template, required agreement clauses on funds, reporting, audits, anti-fraud/anti-corruption, termination, intellectual property, equipment, and privileges/immunities, plus a due-diligence questionnaire, IPGC decision template, partner evaluation template, and a reference table distinguishing activities that normally fit implementing-partner arrangements versus procurement.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_resident_coordinator",
+                        "domain":  "programme_development",
+                        "topicArea":  "resident_coordinator",
+                        "topicName":  "Resident Coordinator",
+                        "folderName":  "Resident Coordinator",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy 3 Ee 3 54 1 R"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_residentCoordinator",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "These files provide guidance on DESA\u0027s engagement with the Resident Coordinator system, country-level support, UNCT membership, and procedures for aligning DESA activities with the CCA and UNSDCF processes. Use this knowledge for questions about when DESA should inform the RC or RCO about a planned country mission; how DESA should align country-level support with the UNSDCF; DESA\u0027s principles for country-level support; when DESA can become a UNCT member or UNSDCF signatory; CDPMO\u0027s role in coordinating DESA country-level engagement; and which countries had DESA UNCT membership or contribution status as of October 2023.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_cd_strategy",
+                        "domain":  "programme_development",
+                        "topicArea":  "cd_strategy",
+                        "topicName":  "Cd Strategy",
+                        "folderName":  "Cd Strategy",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy PD Strategy 4 7 Zk 7 K Qdy 8 9 Xg 9"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_cdStrategy",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "These files contain information on DESA\u0027s strategic priorities, capacity development approach, service delivery model, and the proposed AI-enabled Capacity Development Knowledge Hub/Cidy. Use this knowledge for questions about DESA\u0027s main action areas for 2023; the goals of DESA\u0027s capacity development strategy; the five service lines or areas of work; how DESA prioritizes capacity development requests; and the role partnerships play in delivery.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_fallback",
+                        "domain":  "programme_development",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "Programme Development Fallback",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy PD All"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "",
+                        "mappingStatus":  "fallback",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "Fallback knowledge source used when no specific branch applies or when the draft response is blank.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_rptc_progress_reports",
+                        "domain":  "rptc",
+                        "topicArea":  "rptc_progress_reports",
+                        "topicName":  "Rptc Progress Reports",
+                        "folderName":  "Rptc Progress Reports",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Progressreports",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcProgressReports",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains all RPTC progress reports. It answers questions like: What were the main achievements of the Regular Programme of Technical Cooperation in 2024? How many countries, requests, interventions, and people were supported through RPTC in 2024? Which UN implementing entities delivered RPTC activities, and how did their results differ? How did RPTC support least developed countries, landlocked developing countries, and small island developing States? What challenges and recommendations does the report identify for strengthening RPTC in future years?",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_rptc_guidance_templates",
+                        "domain":  "rptc",
+                        "topicArea":  "rptc_guidance_templates",
+                        "topicName":  "Rptc Guidance Templates",
+                        "folderName":  "Rptc Guidance Templates",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "mapped",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_policy_compliance",
+                        "domain":  "rptc",
+                        "topicArea":  "policy_compliance",
+                        "topicName":  "Policy Compliance",
+                        "folderName":  "Policy Compliance",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_policy_guidance_compliance",
+                        "domain":  "rptc",
+                        "topicArea":  "policy_guidance_compliance",
+                        "topicName":  "Policy Guidance Compliance",
+                        "folderName":  "Policy Guidance Compliance",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_reporting_documentation",
+                        "domain":  "rptc",
+                        "topicArea":  "reporting_documentation",
+                        "topicName":  "Reporting Documentation",
+                        "folderName":  "Reporting Documentation",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_process_governance",
+                        "domain":  "rptc",
+                        "topicArea":  "process_governance",
+                        "topicName":  "Process Governance",
+                        "folderName":  "Process Governance",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_budget_finance",
+                        "domain":  "rptc",
+                        "topicArea":  "budget_finance",
+                        "topicName":  "Budget Finance",
+                        "folderName":  "Budget Finance",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_design_evaluation",
+                        "domain":  "rptc",
+                        "topicArea":  "design_evaluation",
+                        "topicName":  "Design Evaluation",
+                        "folderName":  "Design Evaluation",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_definition",
+                        "domain":  "rptc",
+                        "topicArea":  "definition",
+                        "topicName":  "Definition",
+                        "folderName":  "Definition",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_governance_roles",
+                        "domain":  "rptc",
+                        "topicArea":  "governance_roles",
+                        "topicName":  "Governance Roles",
+                        "folderName":  "Governance Roles",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_programme_design_standards",
+                        "domain":  "rptc",
+                        "topicArea":  "programme_design_standards",
+                        "topicName":  "Programme Design Standards",
+                        "folderName":  "Programme Design Standards",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_evaluation_criteria",
+                        "domain":  "rptc",
+                        "topicArea":  "evaluation_criteria",
+                        "topicName":  "Evaluation Criteria",
+                        "folderName":  "Evaluation Criteria",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_reports",
+                        "domain":  "rptc",
+                        "topicArea":  "reports",
+                        "topicName":  "Reports",
+                        "folderName":  "Reports",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_templates",
+                        "domain":  "rptc",
+                        "topicArea":  "templates",
+                        "topicName":  "Templates",
+                        "folderName":  "Templates",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_monitoring_reporting",
+                        "domain":  "rptc",
+                        "topicArea":  "monitoring_reporting",
+                        "topicName":  "Monitoring Reporting",
+                        "folderName":  "Monitoring Reporting",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
+                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC Guidance Andtemplates",
+                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                         ],
+                        "sourceCount":  2,
+                        "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "alias",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme\u0027s purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "rptc_fallback",
+                        "domain":  "rptc",
+                        "topicArea":  "general",
+                        "topicName":  "General",
+                        "folderName":  "Rptc Fallback",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy RPTC All T Rqm"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "elseActions",
+                        "yamlFile":  "Formulate_Response_RPTC.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "fallback",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "Use the RPTC guidance and templates source for planning, approval, implementation, reporting, proposals, standards, IRA, and template questions. Use RPTC progress reports for questions about achievements, results, countries supported, requests, interventions, people supported, implementing entities, SIDS/LDC/LLDC support, challenges, or recommendations.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    }
+                ],
+    "knownGaps":  [
+                      {
+                          "id":  "programme_development_sources_review",
+                          "severity":  "medium",
+                          "title":  "Review Programme Development source IDs",
+                          "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                          "description":  "Programme Development YAML has folders/sources that require human validation."
+                      },
+                      {
+                          "id":  "missing_pdf_yaml",
+                          "severity":  "high",
+                          "title":  "Create PDF response YAML",
+                          "yamlFile":  "Formulate_Response_PDF.yaml",
+                          "description":  "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
+                      }
+                  ],
+    "managerUpdates":  [
+
+                       ]
 }
   </script>
 

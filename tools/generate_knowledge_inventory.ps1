@@ -188,10 +188,11 @@ function Get-FoldersFromResponseYaml {
         }
     }
 
-    if ($conditionMatches.Count -eq 0) {
+    if ($folders.Count -eq 0) {
         $sources = Get-KnowledgeSources $text
         if ($sources.Count -gt 0) {
             $sourceLabels = Get-SourceLabels $sources
+            $instructions = Get-SourceUseInstruction $text
             $folders.Add([ordered]@{
                 id                = "$(ConvertTo-Slug $DomainId)_general"
                 domain            = $DomainId
@@ -205,10 +206,10 @@ function Get-FoldersFromResponseYaml {
                 yamlConditionId   = ""
                 yamlFile          = $fileName
                 generatedFromYaml = $true
-                sourceUseInstructionSource = ""
+                sourceUseInstructionSource = if ($instructions) { "Global.sourceUseInstructions" } else { "" }
                 mappingStatus     = if ($RouterStatus -eq "not_wired") { "yaml_exists_not_wired" } else { "mapped" }
                 ownerUnit         = "TBD"
-                instructions      = "No separate source-use instruction variable is currently set in this YAML."
+                instructions      = if ($instructions) { $instructions } else { "No separate source-use instruction variable is currently set in this YAML." }
             })
         }
     }
