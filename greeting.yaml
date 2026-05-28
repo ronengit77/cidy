@@ -1,0 +1,41 @@
+kind: AdaptiveDialog
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Greeting
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - hi
+      - hi cidy
+      - hello
+      - hello cidy
+      - hey
+      - hey cidy
+      - good morning
+      - good afternoon
+      - good evening
+
+  actions:
+    - kind: SendActivity
+      id: sendActivity_greeting
+      activity: |-
+        Hi, I am Cidy. I am here to help with DA project planning/design and evaluation guidance; RPTC guidance and reports; Programme Development guidance, TAG meetings, Steering Committee materials, project evaluations, implementing partners and grants, Resident Coordinator country engagement, DESA capacity-development strategy, recommendations, lessons learned, and general CDPMO knowledge.
+
+    - kind: SetVariable
+      id: clearUserQuestionBeforeInquiry
+      variable: Global.userQuestion
+      value: =Blank()
+
+    - kind: SetVariable
+      id: clearAwaitingNewQuestionBeforeInquiry
+      variable: Global.awaitingNewQuestion
+      value: =false
+
+    - kind: BeginDialog
+      id: goToUserInquiry
+      dialog: copilots_header_3141e.topic.UserInquiry2
+
+inputType: {}
+outputType: {}

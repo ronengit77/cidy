@@ -8,6 +8,9 @@ This folder contains Copilot Studio topic YAML exports for Cidy, the UN DESA Cap
 conversation_start.yaml
   -> user_inquiry.yaml                    [UserInquiry2]
       captures Global.userQuestion
+      checks whether the captured input is only a greeting/social opener
+        -> greeting.yaml                  [Greeting] when isGreeting=true
+            clears Global.userQuestion and returns to UserInquiry2 for a fresh substantive question
       -> Cidy_Intent.yaml                 [Intent_c8W]
           -> Cidy_Intent_Clarifier.yaml   [Intent-Clarifier]
               -> Question_Enhancer.yaml   [QuestionEnhancer]
@@ -58,13 +61,16 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | Vague path | I need help with a project. Where do I start? | Choose Development Account (DA) only if asked after domain clarification | Should ask domain clarification, not force DA/RPTC/PDF immediately. Expected clarification type: `domain`. |
 | Out of scope | What is the weather in New York today? | None | Should classify as `out_of_scope`, show the scope message, then go to the feedback/escalation path. No clarification. |
 | Happy path -> About Cidy | How does Cidy work? | None | Should route to `about_cidy` and call `Formulate_Response_Cidy_About.yaml`. No clarification. |
+| Greeting path | Bonjour | None | `UserInquiry2` should classify the input as a greeting, call `greeting.yaml`, clear stale question state, and return to `UserInquiry2` for a fresh substantive question. It should not send the greeting into `Cidy_Intent.yaml`. |
+| Greeting guard | Good morning, how do I design a DA concept note? | None | Should not be treated as greeting-only because it contains a substantive question. It should proceed through Intent and route to `Formulate Response DA`. |
 
 ## Topic Inventory
 
 | File | Purpose | Entry trigger | Calls |
 | --- | --- | --- | --- |
 | `conversation_start.yaml` | Sends the welcome message and stores `Topic.conversationID`. | `OnConversationStart` | `UserInquiry2` |
-| `user_inquiry.yaml` | Captures the user's first or looped follow-up question into `Global.userQuestion` and initializes/appends transcript text. | `OnRecognizedIntent` | `Intent_c8W` |
+| `greeting.yaml` | Handles greeting-only openers before substantive intake, sends a short Cidy scope message, clears stale `Global.userQuestion` / `Global.awaitingNewQuestion`, then starts the normal inquiry capture topic. | `OnRecognizedIntent` with greeting trigger phrases, or `UserInquiry2` greeting gate | `UserInquiry2` |
+| `user_inquiry.yaml` | Captures the user's first or looped follow-up question into `Global.userQuestion`, initializes/appends transcript text, and uses an AI Builder JSON greeting gate before deciding whether to call `Greeting` or `Intent_c8W`. | `OnRecognizedIntent` | `Greeting`, `Intent_c8W` |
 | `Cidy_Intent.yaml` | Classifies the user's question into intent variables such as `Global.knowledgeDomain`, `Global.fundingStream`, `Global.topicArea`, and clarification state. | `OnRecognizedIntent` | `Intent-Clarifier` |
 | `Cidy_Intent_Clarifier.yaml` | Resolves unclear fund, domain, or artifact classifications through targeted questions. | `OnRecognizedIntent` | `QuestionEnhancer` |
 | `Question_Enhancer.yaml` | Adds non-routing search intelligence to `Global.executiveQuestionEnhancements` after clarification and before routing. It expands useful acronyms, dates, recency cues, filters, and source-selection hints without changing finalized intent variables. | `OnRecognizedIntent` | `Intent-Router` |
@@ -97,6 +103,7 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `Intent-Clarifier` | `Cidy_Intent_Clarifier.yaml` |
 | `QuestionEnhancer` | `Question_Enhancer.yaml` |
 | `Intent-Router` | `Cidy_Intent_Router.yaml` |
+| `Greeting` | `greeting.yaml` |
 | `UserFeedback2` | `user_feedback.yaml` |
 | `ContinueOrClose` | `continue_or_close.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |
@@ -143,11 +150,12 @@ Resolved since the previous scan:
 3. The PDF/UNPDF route calls `FormulateResponse`, but there is no clearly named PDF YAML file in this folder.
 4. RPTC has been consolidated around two current knowledge areas: `rptc_guidance_templates` for planning, approval, implementation, activity proposals, IRA guidance, reporting standards, activity report templates, and post-activity reporting; and `rptc_progress_reports` for achievements, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, and recommendations. The RPTC `elseActions` branch is the RPTC folder-level fallback: it is used only after routing has already selected RPTC, when no more specific RPTC topic-area condition matched, and it should search the broad RPTC-all folder rather than the top-level Cidy `Knowledge` source.
 5. Programme Development now includes `resident_coordinator` for RC/RCO, UNCT, CCA/UNSDCF, country-level support, and CDPMO country-engagement questions; and `cd_strategy` for strategic priorities, service delivery model, service lines, request prioritization, partnerships, and the AI-enabled Capacity Development Knowledge Hub/Cidy.
-6. DEBUG `SendActivity` messages in the active intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
-7. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
-8. `continue_or_close.yaml` is the shared next-step topic. It uses `Global.nextActionContext` so post-escalation users are not offered a second escalation option.
-9. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
-10. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
+6. `UserInquiry2` now includes an AI Builder greeting gate. Greeting-only inputs, including common multilingual greetings, route to `greeting.yaml`; inputs that include both a greeting and a substantive question continue to `Cidy_Intent.yaml`.
+7. DEBUG `SendActivity` messages in the active inquiry, intent, clarifier, router, and question enhancer topics are controlled by `Global.testMode`. The default is `false`, set near the top of `Cidy_Intent.yaml`; set it to `true` only when route diagnostics should be visible.
+8. `share_response.yaml` should use the production-facing `**Answer:**` label, not a DEBUG answer label.
+9. `continue_or_close.yaml` is the shared next-step topic. It uses `Global.nextActionContext` so post-escalation users are not offered a second escalation option.
+10. `warn.yaml` has typos in user-facing text: `requst` and `coleague`.
+11. The file `mutliple_topics_match.yaml` appears to have a typo in the filename: `mutliple` instead of `multiple`.
 
 ## Response Pipeline Notes
 

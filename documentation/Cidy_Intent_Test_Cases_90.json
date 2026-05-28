@@ -570,6 +570,27 @@
                           "Clarification":  "",
                           "Expected behavior":  "Routes directly to Formulate Response Cidy About with topic_area=about_cidy.",
                           "date-created":  "2026-05-27"
+                      },
+                      {
+                          "Scenario":  "Greeting path - English greeting only",
+                          "Test question":  "Hi",
+                          "Clarification":  "",
+                          "Expected behavior":  "User Inquiry greeting classifier sets isGreeting=true and routes to Greeting. Greeting sends the Cidy scope message, clears Global.userQuestion and Global.awaitingNewQuestion, then returns to User Inquiry for a fresh substantive question. It should not route the greeting to Intent.",
+                          "date-created":  "2026-05-28"
+                      },
+                      {
+                          "Scenario":  "Greeting path - Multilingual greeting only",
+                          "Test question":  "Bonjour",
+                          "Clarification":  "",
+                          "Expected behavior":  "User Inquiry greeting classifier sets isGreeting=true and routes to Greeting. Greeting sends the Cidy scope message, clears Global.userQuestion and Global.awaitingNewQuestion, then returns to User Inquiry for a fresh substantive question. It should not route the greeting to Intent.",
+                          "date-created":  "2026-05-28"
+                      },
+                      {
+                          "Scenario":  "Greeting guard - greeting plus substantive question",
+                          "Test question":  "Good morning, how do I design a DA concept note?",
+                          "Clarification":  "",
+                          "Expected behavior":  "User Inquiry greeting classifier sets isGreeting=false because the input includes a substantive question. The input continues to Intent and routes to Formulate Response DA with funding_stream=DA and topic_area=project_planning_design.",
+                          "date-created":  "2026-05-28"
                       }
                   ]
 }

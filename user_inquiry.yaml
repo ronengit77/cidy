@@ -12,6 +12,16 @@ beginDialog:
         - id: conditionItem_awaiting
           condition: =Global.awaitingNewQuestion = true
           actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_awaitingNewQuestionEntry
+              conditions:
+                - id: conditionItem_debug_awaitingNewQuestionEntry
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_awaitingNewQuestionEntry
+                      activity: "DEBUG - User Inquiry awaitingNewQuestion branch entered. Incoming text: {System.Activity.Text}"
+
             - kind: SetVariable
               id: clear_flag
               variable: Global.awaitingNewQuestion
@@ -27,9 +37,75 @@ beginDialog:
               variable: Global.transcript
               value: "=Global.transcript & \"USER: \" & System.Activity.Text & Char(13) & Char(10) & Char(13) & Char(10)"
 
-            - kind: BeginDialog
-              id: goToClassifyFromLoop
-              dialog: copilots_header_3141e.topic.Intent_c8W
+            - kind: ConditionGroup
+              id: conditionGroup_debug_awaitingNewQuestionCaptured
+              conditions:
+                - id: conditionItem_debug_awaitingNewQuestionCaptured
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_awaitingNewQuestionCaptured
+                      activity: "DEBUG - User Inquiry captured awaited question. Global.userQuestion: {Global.userQuestion} | awaitingNewQuestion cleared: {Global.awaitingNewQuestion}"
+
+            - kind: InvokeAIBuilderModelAction
+              id: invokeAIBuilderModelAction_classifyAwaitedGreeting
+              input:
+                binding:
+                  UserQuestion: |
+                    ="Classify whether the following user input is only a greeting or social opener for Cidy, a DESA capacity-development knowledge assistant." & Char(10) & Char(10) &
+                    "Return ONLY valid JSON. Do not include markdown, prose, comments, or code fences." & Char(10) & Char(10) &
+                    "Required JSON schema:" & Char(10) &
+                    "{""isGreeting"":true,""reason"":""...""}" & Char(10) & Char(10) &
+                    "Rules:" & Char(10) &
+                    "1. Set isGreeting=true only when the input is just a greeting, salutation, thanks, or social opener, with no substantive knowledge question." & Char(10) &
+                    "2. Recognize common greetings in multiple languages and international workplace usage, including short forms such as hi, hello, hey, good morning, good afternoon, good evening, bonjour, hola, buenos dias, guten tag, ciao, namaste, salam, salaam, marhaba, ni hao, and similar." & Char(10) &
+                    "3. Set isGreeting=false when the input includes any substantive request, question, topic, document, funding stream, procedure, policy, or knowledge need, even if it starts with a greeting." & Char(10) &
+                    "4. Examples with isGreeting=true: Hi; Hello Cidy; Good morning; Bonjour; Thanks; Thank you." & Char(10) &
+                    "5. Examples with isGreeting=false: Hi, how do I design a DA concept note?; Good morning, what is RPTC?; Bonjour, explain DESA capacity development strategy." & Char(10) &
+                    "6. If uncertain, set isGreeting=false so the user's input can continue to the normal intent classifier." & Char(10) & Char(10) &
+                    "User input:" & Char(10) &
+                    Global.userQuestion
+
+              output:
+                binding:
+                  predictionOutput: Topic.greetingCheckResult
+
+              aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+            - kind: SetVariable
+              id: setVariable_greetingCheckTextAwaited
+              variable: Topic.greetingCheckText
+              value: =Text(Topic.greetingCheckResult.text)
+
+            - kind: SetVariable
+              id: setVariable_isGreetingTextAwaited
+              variable: Topic.isGreetingText
+              value: =IfError(Lower(Text(ParseJSON(Topic.greetingCheckText).isGreeting)), "false")
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_greetingCheckAwaited
+              conditions:
+                - id: conditionItem_debug_greetingCheckAwaited
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_greetingCheckAwaited
+                      activity: "DEBUG - User Inquiry awaited greeting check: {Topic.greetingCheckText} | isGreeting: {Topic.isGreetingText}"
+
+            - kind: ConditionGroup
+              id: conditionGroup_routeAwaitedGreetingOrIntent
+              conditions:
+                - id: conditionItem_awaitedGreeting
+                  condition: =Topic.isGreetingText = "true"
+                  actions:
+                    - kind: BeginDialog
+                      id: goToGreetingFromAwaitedQuestion
+                      dialog: copilots_header_3141e.topic.Greeting
+
+              elseActions:
+                - kind: BeginDialog
+                  id: goToClassifyFromLoop
+                  dialog: copilots_header_3141e.topic.Intent_c8W
 
             - kind: EndDialog
               id: end_afterLoop
@@ -55,9 +131,65 @@ beginDialog:
       variable: Global.transcript
       value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
 
-    - kind: BeginDialog
-      id: 8B1Pt0
-      dialog: copilots_header_3141e.topic.Intent_c8W
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_classifyInitialGreeting
+      input:
+        binding:
+          UserQuestion: |
+            ="Classify whether the following user input is only a greeting or social opener for Cidy, a DESA capacity-development knowledge assistant." & Char(10) & Char(10) &
+            "Return ONLY valid JSON. Do not include markdown, prose, comments, or code fences." & Char(10) & Char(10) &
+            "Required JSON schema:" & Char(10) &
+            "{""isGreeting"":true,""reason"":""...""}" & Char(10) & Char(10) &
+            "Rules:" & Char(10) &
+            "1. Set isGreeting=true only when the input is just a greeting, salutation, thanks, or social opener, with no substantive knowledge question." & Char(10) &
+            "2. Recognize common greetings in multiple languages and international workplace usage, including short forms such as hi, hello, hey, good morning, good afternoon, good evening, bonjour, hola, buenos dias, guten tag, ciao, namaste, salam, salaam, marhaba, ni hao, and similar." & Char(10) &
+            "3. Set isGreeting=false when the input includes any substantive request, question, topic, document, funding stream, procedure, policy, or knowledge need, even if it starts with a greeting." & Char(10) &
+            "4. Examples with isGreeting=true: Hi; Hello Cidy; Good morning; Bonjour; Thanks; Thank you." & Char(10) &
+            "5. Examples with isGreeting=false: Hi, how do I design a DA concept note?; Good morning, what is RPTC?; Bonjour, explain DESA capacity development strategy." & Char(10) &
+            "6. If uncertain, set isGreeting=false so the user's input can continue to the normal intent classifier." & Char(10) & Char(10) &
+            "User input:" & Char(10) &
+            Global.userQuestion
+
+      output:
+        binding:
+          predictionOutput: Topic.greetingCheckResult
+
+      aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+    - kind: SetVariable
+      id: setVariable_greetingCheckTextInitial
+      variable: Topic.greetingCheckText
+      value: =Text(Topic.greetingCheckResult.text)
+
+    - kind: SetVariable
+      id: setVariable_isGreetingTextInitial
+      variable: Topic.isGreetingText
+      value: =IfError(Lower(Text(ParseJSON(Topic.greetingCheckText).isGreeting)), "false")
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_greetingCheckInitial
+      conditions:
+        - id: conditionItem_debug_greetingCheckInitial
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_greetingCheckInitial
+              activity: "DEBUG - User Inquiry initial greeting check: {Topic.greetingCheckText} | isGreeting: {Topic.isGreetingText}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_routeInitialGreetingOrIntent
+      conditions:
+        - id: conditionItem_initialGreeting
+          condition: =Topic.isGreetingText = "true"
+          actions:
+            - kind: BeginDialog
+              id: goToGreetingFromInitialQuestion
+              dialog: copilots_header_3141e.topic.Greeting
+
+      elseActions:
+        - kind: BeginDialog
+          id: 8B1Pt0
+          dialog: copilots_header_3141e.topic.Intent_c8W
 
 inputType: {}
 outputType: {}

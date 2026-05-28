@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-28T09:51:47-04:00",
+                    "generatedAt":  "2026-05-28T18:42:35-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  90,
-                    "passed":  81,
+                    "total":  93,
+                    "passed":  84,
                     "failed":  9
                 },
     "results":  [
@@ -9145,6 +9145,206 @@
                                                                                       "mapped":  true,
                                                                                       "matched":  [
 
+                                                                                                  ],
+                                                                                      "unmapped":  [
+
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC91",
+                        "scenario":  "Greeting path - English greeting only",
+                        "question":  "Hi",
+                        "clarification":  "",
+                        "expectedBehavior":  "User Inquiry greeting classifier sets isGreeting=true and routes to Greeting. Greeting sends the Cidy scope message, clears Global.userQuestion and Global.awaitingNewQuestion, then returns to User Inquiry for a fresh substantive question. It should not route the greeting to Intent.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Greeting",
+                                           "routerDialog":  "copilots_header_3141e.topic.Greeting",
+                                           "yamlFile":  "greeting.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "greeting.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "greeting",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "greeting"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "greeting.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e greeting.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  {
+                                                              "greetingCheck":  "isGreeting=true",
+                                                              "staleQuestionGuard":  "Greeting clears Global.userQuestion before returning to UserInquiry2"
+                                                          },
+                                               "decision":  "Begin greeting.yaml"
+                                           },
+                                           {
+                                               "topic":  "greeting.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "clearsUserQuestion":  true,
+                                                              "clearsAwaitingNewQuestion":  true
+                                                          },
+                                               "decision":  "Return to user_inquiry.yaml for fresh substantive question"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC92",
+                        "scenario":  "Greeting path - Multilingual greeting only",
+                        "question":  "Bonjour",
+                        "clarification":  "",
+                        "expectedBehavior":  "User Inquiry greeting classifier sets isGreeting=true and routes to Greeting. Greeting sends the Cidy scope message, clears Global.userQuestion and Global.awaitingNewQuestion, then returns to User Inquiry for a fresh substantive question. It should not route the greeting to Intent.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Greeting",
+                                           "routerDialog":  "copilots_header_3141e.topic.Greeting",
+                                           "yamlFile":  "greeting.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "greeting.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "greeting",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "greeting"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "greeting.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e greeting.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  {
+                                                              "greetingCheck":  "isGreeting=true",
+                                                              "staleQuestionGuard":  "Greeting clears Global.userQuestion before returning to UserInquiry2"
+                                                          },
+                                               "decision":  "Begin greeting.yaml"
+                                           },
+                                           {
+                                               "topic":  "greeting.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "clearsUserQuestion":  true,
+                                                              "clearsAwaitingNewQuestion":  true
+                                                          },
+                                               "decision":  "Return to user_inquiry.yaml for fresh substantive question"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC93",
+                        "scenario":  "Greeting guard - greeting plus substantive question",
+                        "question":  "Good morning, how do I design a DA concept note?",
+                        "clarification":  "",
+                        "expectedBehavior":  "User Inquiry greeting classifier sets isGreeting=false because the input includes a substantive question. The input continues to Intent and routes to Formulate Response DA with funding_stream=DA and topic_area=project_planning_design.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Development Account",
+                                           "routerDialog":  "copilots_header_3141e.topic.DA",
+                                           "yamlFile":  "Formulate_Response_DA.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_DA.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "da",
+                                                    "fundingStream":  "DA",
+                                                    "topicAreas":  [
+                                                                       "project_planning_design"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_DA.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "da",
+                                                              "fundingStream":  "DA",
+                                                              "topicAreas":  [
+                                                                                 "project_planning_design"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "da",
+                                                              "fundingStream":  "DA",
+                                                              "topicAreas":  [
+                                                                                 "project_planning_design"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Development Account",
+                                                              "routerDialog":  "copilots_header_3141e.topic.DA",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_DA.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_DA.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_DA.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "project_planning_design"
                                                                                                   ],
                                                                                       "unmapped":  [
 

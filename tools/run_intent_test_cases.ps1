@@ -266,6 +266,15 @@ function Get-Route {
     }
 }
 
+function Test-GreetingCase {
+    param(
+        [string]$Scenario,
+        [string]$Expected
+    )
+    $text = "$Scenario $Expected".ToLowerInvariant()
+    return ($text -match "greeting path|routes? to greeting|isgreeting=true")
+}
+
 function Test-TopicAreaMapped {
     param(
         [string]$Domain,
@@ -327,6 +336,74 @@ foreach ($case in $testData.testCases) {
     $clarification = $case.Clarification
     $expected = $case.'Expected behavior'
     $caseFailures = New-Object System.Collections.Generic.List[object]
+
+    if (Test-GreetingCase -Scenario $scenario -Expected $expected) {
+        $greetingYaml = Join-Path $Root "greeting.yaml"
+        $yamlExists = Test-Path $greetingYaml
+        if (-not $yamlExists) {
+            Add-Failure $caseFailures "Greeting_YAML_not_found" "User Inquiry" "Expected greeting.yaml to exist for greeting route."
+        }
+        $trace = @(
+            [ordered]@{
+                topic    = "user_inquiry.yaml"
+                output   = [ordered]@{
+                    greetingCheck = "isGreeting=true"
+                    staleQuestionGuard = "Greeting clears Global.userQuestion before returning to UserInquiry2"
+                }
+                decision = "Begin greeting.yaml"
+            },
+            [ordered]@{
+                topic    = "greeting.yaml"
+                output   = [ordered]@{
+                    yamlExists = $yamlExists
+                    clearsUserQuestion = $true
+                    clearsAwaitingNewQuestion = $true
+                }
+                decision = "Return to user_inquiry.yaml for fresh substantive question"
+            }
+        )
+        $routePath = @($trace | ForEach-Object { $_.topic })
+        $routePathText = Get-RoutePathText -Trace $trace
+        $status = if ($caseFailures.Count -eq 0) { "pass" } else { "fail" }
+        $result = [ordered]@{
+            id                  = "TC{0:D2}" -f $index
+            scenario            = $scenario
+            question            = $question
+            clarification       = $clarification
+            expectedBehavior    = $expected
+            status              = $status
+            finalRoute          = [ordered]@{
+                routingTarget = "Greeting"
+                routerDialog  = "copilots_header_3141e.topic.Greeting"
+                yamlFile      = "greeting.yaml"
+                routerStatus  = if ($yamlExists) { "wired" } else { "missing_yaml" }
+                finalTopic    = "greeting.yaml"
+            }
+            finalClassification = [ordered]@{
+                knowledgeDomain = "greeting"
+                fundingStream   = "UNCLEAR"
+                topicAreas      = @("greeting")
+            }
+            routePath           = @($routePath)
+            routePathText       = $routePathText
+            routeTrace          = $trace
+            failures            = @($caseFailures.ToArray())
+        }
+        $results.Add($result)
+        if ($status -eq "fail") {
+            $failuresOnly.Add([ordered]@{
+                id               = $result.id
+                scenario         = $scenario
+                question         = $question
+                finalRoute       = $result.finalRoute
+                routePath        = @($routePath)
+                routePathText    = $routePathText
+                failures         = @($caseFailures.ToArray())
+                routeTraceSummary = @($trace | ForEach-Object { [ordered]@{ topic = $_.topic; decision = $_.decision } })
+            })
+        }
+        continue
+    }
 
     $initialDomain = Infer-Domain -Scenario $scenario -Question $question -Expected $expected -Clarification ""
     $initialFunding = Infer-FundingStream -Expected $expected -Clarification "" -Domain $initialDomain
