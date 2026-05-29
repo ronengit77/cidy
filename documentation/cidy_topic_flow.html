@@ -462,6 +462,8 @@
               <li><code>continue_or_close.yaml</code> asks what to do next.</li>
               <li>Ask another question returns to <code>Cidy_Intent.yaml</code>.</li>
               <li>Escalation calls <code>escalate.yaml</code>, then returns to <code>continue_or_close.yaml</code> for the single visible confirmation and follow-up prompt.</li>
+              <li>Close clears active question/answer state and tells users they can restart later with <code>Back to Cidy flow</code>.</li>
+              <li><code>return_to_cidy.yaml</code> is the rescue path for controlled re-entry from any drifted or built-in conversation path. It captures a fresh question and routes it directly to <code>Cidy_Intent.yaml</code>.</li>
             </ul>
           </div>
         </div>
@@ -476,7 +478,7 @@
             <div class="num">1</div>
             <div>
               <h3>Capture</h3>
-              <p>The conversation starts with a welcome, then <code>UserInquiry2</code> captures the first question, initializes transcript state, and runs a greeting gate before substantive intent classification.</p>
+              <p>The conversation starts with a welcome, then the start topic captures the first substantive question, initializes transcript state, and sends it directly to the controlled intent flow.</p>
             </div>
           </div>
           <div class="step">
@@ -628,8 +630,8 @@
         <tbody>
           <tr>
             <td>Entry</td>
-            <td><code>conversation_start.yaml</code>, <code>greeting.yaml</code>, <code>user_inquiry.yaml</code></td>
-            <td>Welcomes the user, classifies greeting-only openers before substantive intake, clears stale greeting state before returning to inquiry capture, captures the question, and starts transcript logging.</td>
+            <td><code>conversation_start.yaml</code>, <code>greeting.yaml</code>, <code>return_to_cidy.yaml</code>, <code>user_inquiry.yaml</code></td>
+            <td>Welcomes the user, classifies greeting-only openers before substantive intake, provides a <code>Back to Cidy flow</code> rescue phrase for controlled re-entry, clears stale state, captures a fresh question, starts transcript logging, and sends substantive questions into the controlled intent flow.</td>
           </tr>
           <tr>
             <td>Intent</td>
@@ -649,7 +651,7 @@
           <tr>
             <td>Lifecycle</td>
             <td><code>user_feedback.yaml</code>, <code>continue_or_close.yaml</code>, <code>escalate.yaml</code>, <code>start_over.yaml</code>, <code>Goodbye.yaml</code>, <code>end_of_conversation.yaml</code></td>
-            <td>Collects feedback, offers context-aware next actions, loops to a new question, retries wider knowledge, sends escalation email, restarts, or ends the conversation.</td>
+            <td>Collects feedback, offers context-aware next actions, loops to a new question, retries wider knowledge, sends escalation email, restarts, closes while preserving a restart path, or ends the conversation.</td>
           </tr>
           <tr>
             <td>System support</td>

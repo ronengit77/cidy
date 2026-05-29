@@ -12,6 +12,16 @@ beginDialog:
       - restart
 
   actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_startOverEntry
+      conditions:
+        - id: conditionItem_debug_startOverEntry
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_startOverEntry
+              activity: "DEBUG - Start Over topic entered. Incoming text: {System.Activity.Text}"
+
     - kind: Question
       id: question_zguoVV
       alwaysPrompt: false
@@ -25,11 +35,31 @@ beginDialog:
         - id: conditionItem_sVQtHa
           condition: =Topic.Confirm = true
           actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_startOverConfirmed
+              conditions:
+                - id: conditionItem_debug_startOverConfirmed
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_startOverConfirmed
+                      activity: "DEBUG - Start Over confirmed. Routing to ResetConversation."
+
             - kind: BeginDialog
               id: 0YKYsy
               dialog: copilots_header_3141e.topic.ResetConversation
 
       elseActions:
+        - kind: ConditionGroup
+          id: conditionGroup_debug_startOverCancelled
+          conditions:
+            - id: conditionItem_debug_startOverCancelled
+              condition: =Global.testMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_startOverCancelled
+                  activity: "DEBUG - Start Over cancelled by user."
+
         - kind: SendActivity
           id: sendMessage_lk2CyQ
           activity: Ok. Let's carry on.

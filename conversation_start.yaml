@@ -3,6 +3,16 @@ beginDialog:
   kind: OnConversationStart
   id: main
   actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_conversationStartEntry
+      conditions:
+        - id: conditionItem_debug_conversationStartEntry
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_conversationStartEntry
+              activity: "DEBUG - Conversation Start entered. Conversation ID: {System.Conversation.Id}"
+
     - kind: SendActivity
       id: sendActivity_XSPG5a
       displayName: Welcome Message
@@ -21,13 +31,52 @@ beginDialog:
         A good prompt will mention which funding stream and topic area your question is regarding (e.g., DA, RPTC, PDF/UNPDF, Programme Development, or general AND reporting, evaluation, governance, project design, TAG meetings, etc.)
         Example prompt: *"When is a final evaluation required for a Development Account project?"*
 
-        
-
     - kind: SetVariable
       id: setVariable_bGQ2Qa
       variable: Topic.conversationID
       value: =System.Conversation.Id
 
+    - kind: ConditionGroup
+      id: conditionGroup_debug_conversationStartBeforeQuestion
+      conditions:
+        - id: conditionItem_debug_conversationStartBeforeQuestion
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_conversationStartBeforeQuestion
+              activity: DEBUG - Conversation Start is prompting for controlled intake question.
+
+    - kind: Question
+      id: question_startInput
+      interruptionPolicy:
+        allowInterruption: false
+
+      variable: Global.userQuestion
+      prompt: "**Please describe what you are looking for:**"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: initialize_transcript
+      variable: Global.transcript
+      value: ="TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SetVariable
+      id: log_startQuestion
+      variable: Global.transcript
+      value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_conversationStartCaptured
+      conditions:
+        - id: conditionItem_debug_conversationStartCaptured
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_conversationStartCaptured
+              activity: "DEBUG - Conversation Start captured question and is routing to Intent. Global.userQuestion: {Global.userQuestion}"
+
     - kind: BeginDialog
-      id: Fwgg2N
-      dialog: copilots_header_3141e.topic.UserInquiry2
+      id: goToIntentFromStart
+      dialog: copilots_header_3141e.topic.Intent_c8W

@@ -34,13 +34,15 @@ Feedback topic
       -> Cidy_Intent.yaml                 [Intent_c8W] for another question
       -> Formulate_Response_General.yaml  [FormulateResponse] for wide retry
       -> escalate.yaml                    [Escalate] for human escalation
-      -> close session
+      -> close session after clearing active answer/question state; users can restart later by typing Back to Cidy flow
 
 Escalation topic
   -> continue_or_close.yaml               [ContinueOrClose]
       post-escalation menu is the single user-facing confirmation and omits "Escalate to a human" because the inquiry has already been escalated
 
 Utility/system-like topics
+  -> return_to_cidy.yaml                  [Return to Cidy]
+      triggered by "Back to Cidy flow"; cancels other topics, clears active Cidy state, asks for a fresh substantive question, and routes the captured question to Intent_c8W
   -> start_over.yaml
       -> reset_conversation.yaml          [ResetConversation]
   -> Goodbye.yaml
@@ -68,7 +70,7 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 
 | File | Purpose | Entry trigger | Calls |
 | --- | --- | --- | --- |
-| `conversation_start.yaml` | Sends the welcome message and stores `Topic.conversationID`. | `OnConversationStart` | `UserInquiry2` |
+| `conversation_start.yaml` | Sends the welcome message, stores `Topic.conversationID`, captures the first substantive question, initializes transcript state, and routes to `Intent_c8W`. | `OnConversationStart` | `Intent_c8W` |
 | `greeting.yaml` | Handles greeting-only openers before substantive intake, sends a short Cidy scope message, clears stale `Global.userQuestion` / `Global.awaitingNewQuestion`, then starts the normal inquiry capture topic. | `OnRecognizedIntent` with greeting trigger phrases, or `UserInquiry2` greeting gate | `UserInquiry2` |
 | `user_inquiry.yaml` | Captures the user's first or looped follow-up question into `Global.userQuestion`, initializes/appends transcript text, and uses an AI Builder JSON greeting gate before deciding whether to call `Greeting` or `Intent_c8W`. | `OnRecognizedIntent` | `Greeting`, `Intent_c8W` |
 | `Cidy_Intent.yaml` | Classifies the user's question into intent variables such as `Global.knowledgeDomain`, `Global.fundingStream`, `Global.topicArea`, and clarification state. | `OnRecognizedIntent` | `Intent-Clarifier` |
@@ -84,12 +86,13 @@ Use these flows as smoke tests for the classifier, clarifier, router, and respon
 | `warn.yaml` | Sets warning text for low or medium confidence answers. | `OnRecognizedIntent` | `ShareResponse` |
 | `share_response.yaml` | Sends the warning, answer, sources, and confidence label to the user, then asks for feedback. | `OnRecognizedIntent` | `UserFeedback2` |
 | `user_feedback.yaml` | Collects helpfulness feedback, sets `Global.nextActionContext=feedback`, and hands off to the reusable next-step menu. | `OnRecognizedIntent` | `ContinueOrClose` |
-| `continue_or_close.yaml` | Offers context-aware next-step choices. Normal feedback can ask another question, retry wide knowledge, escalate, or close; post-escalation can ask another question, retry wide knowledge, or close. | `OnRecognizedIntent` | `Intent_c8W`, `FormulateResponse`, `Escalate` |
+| `continue_or_close.yaml` | Offers context-aware next-step choices. Normal feedback can ask another question, retry wide knowledge, escalate, or close; post-escalation can ask another question, retry wide knowledge, or close. Close clears active question/answer state and tells users they can restart with `Back to Cidy flow`. | `OnRecognizedIntent` | `Intent_c8W`, `FormulateResponse`, `Escalate` |
 | `escalate.yaml` | Collects escalation notes, generates an issue summary, sends an Outlook email to staff, records the escalation in transcript, then sets `Global.nextActionContext=post_escalation` for the single visible confirmation/follow-up prompt. | `OnEscalate` plus trigger phrases | `Office365Outlook-SendanemailV2` action, `ContinueOrClose` |
+| `return_to_cidy.yaml` | Rescue path that cancels other topics, clears active Cidy state, says the user is back in Cidy's controlled flow, asks for a fresh substantive question, and routes the captured question directly to `Intent_c8W`. Use this when the bot has drifted into an uncontrolled or built-in path. | `OnRecognizedIntent` with `Back to Cidy flow` | `Intent_c8W` |
 | `start_over.yaml` | Confirms restart and redirects to reset conversation. | `OnRecognizedIntent` with start-over phrases | `ResetConversation` |
 | `reset_conversation.yaml` | Clears active Cidy state and routes back to the user inquiry topic. | `OnRecognizedIntent` | `UserInquiry2` |
-| `Goodbye.yaml` | Handles goodbye intent and optionally ends the conversation. | `OnRecognizedIntent` with goodbye phrases | `EndofConversation` |
-| `end_of_conversation.yaml` | System redirect flow that asks satisfaction/CSAT, offers retry, and can escalate if the user says the answer did not help. | `OnSystemRedirect` | `Escalate` |
+| `Goodbye.yaml` | Handles goodbye intent and optionally ends the conversation; if the user cancels goodbye, it returns explicitly to `UserInquiry2`. | `OnRecognizedIntent` with goodbye phrases | `EndofConversation`, `UserInquiry2` |
+| `end_of_conversation.yaml` | System redirect flow that asks satisfaction/CSAT, offers retry, returns explicitly to `UserInquiry2` when the user wants to continue, and can escalate if the user says the answer did not help. | `OnSystemRedirect` | `Escalate`, `UserInquiry2` |
 | `mutliple_topics_match.yaml` | Handles multiple matched topics by asking the user to choose one, with a "None of these" option. | `OnSelectIntent` | `Fallback` via `ReplaceDialog` |
 
 ## Inferred Topic Name Mapping
@@ -104,6 +107,7 @@ The YAML files in this folder do not include an explicit exported topic ID field
 | `QuestionEnhancer` | `Question_Enhancer.yaml` |
 | `Intent-Router` | `Cidy_Intent_Router.yaml` |
 | `Greeting` | `greeting.yaml` |
+| `Return to Cidy` | `return_to_cidy.yaml` |
 | `UserFeedback2` | `user_feedback.yaml` |
 | `ContinueOrClose` | `continue_or_close.yaml` |
 | `DA` | `Formulate_Response_DA.yaml` |

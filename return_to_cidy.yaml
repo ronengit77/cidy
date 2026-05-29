@@ -1,19 +1,25 @@
 kind: AdaptiveDialog
-startBehavior: UseLatestPublishedContentAndCancelOtherTopics
-modelDescription: Resets active Cidy conversation state, captures a fresh user question, and routes it into the controlled Cidy intent flow.
+modelDescription: Rescue topic that returns users to Cidy's controlled intake flow from any conversation path.
+startBehavior: CancelOtherTopics
 beginDialog:
-  kind: OnSystemRedirect
+  kind: OnRecognizedIntent
   id: main
+  intent:
+    displayName: Return to Cidy
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Back to Cidy flow
+
   actions:
     - kind: ConditionGroup
-      id: conditionGroup_debug_resetEntry
+      id: conditionGroup_debug_returnToCidyEntry
       conditions:
-        - id: conditionItem_debug_resetEntry
+        - id: conditionItem_debug_returnToCidyEntry
           condition: =Global.testMode = true
           actions:
             - kind: SendActivity
-              id: sendActivity_debug_resetEntry
-              activity: "DEBUG - ResetConversation entered. userQuestion before reset: {Global.userQuestion} | intentStatus: {Global.intentStatus} | routingTarget: {Global.routingTarget}"
+              id: sendActivity_debug_returnToCidyEntry
+              activity: "DEBUG - Return to Cidy entered. Incoming text: {System.Activity.Text} | Current userQuestion before reset: {Global.userQuestion}"
 
     - kind: SetVariable
       id: reset_userQuestion
@@ -161,21 +167,21 @@ beginDialog:
       value: =Blank()
 
     - kind: SendActivity
-      id: msg_resetComplete
-      activity: Conversation state has been reset. Please type your question.
+      id: msg_returnToCidy
+      activity: You are now back in Cidy's controlled flow.
 
     - kind: ConditionGroup
-      id: conditionGroup_debug_resetBeforeQuestion
+      id: conditionGroup_debug_returnToCidyBeforeQuestion
       conditions:
-        - id: conditionItem_debug_resetBeforeQuestion
+        - id: conditionItem_debug_returnToCidyBeforeQuestion
           condition: =Global.testMode = true
           actions:
             - kind: SendActivity
-              id: sendActivity_debug_resetBeforeQuestion
-              activity: "DEBUG - ResetConversation reset complete. Prompting for a fresh controlled-flow question."
+              id: sendActivity_debug_returnToCidyBeforeQuestion
+              activity: DEBUG - Return to Cidy reset complete. Prompting for a fresh controlled-flow question.
 
     - kind: Question
-      id: question_resetInput
+      id: question_returnToCidyInput
       interruptionPolicy:
         allowInterruption: false
 
@@ -198,24 +204,24 @@ beginDialog:
     - kind: SetVariable
       id: log_newQuestion
       variable: Global.transcript
-      value: =Global.transcript & "USER: " & Topic.newQuestion & Char(13) & Char(10) & Char(13) & Char(10)
+      value: "=Global.transcript & \"USER: \" & Topic.newQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
 
     - kind: ConditionGroup
-      id: conditionGroup_debug_resetCaptured
+      id: conditionGroup_debug_returnToCidyCaptured
       conditions:
-        - id: conditionItem_debug_resetCaptured
+        - id: conditionItem_debug_returnToCidyCaptured
           condition: =Global.testMode = true
           actions:
             - kind: SendActivity
-              id: sendActivity_debug_resetCaptured
-              activity: "DEBUG - ResetConversation captured fresh question and is routing to Intent. Global.userQuestion: {Global.userQuestion}"
+              id: sendActivity_debug_returnToCidyCaptured
+              activity: "DEBUG - Return to Cidy captured fresh question and is routing to Intent. Global.userQuestion: {Global.userQuestion}"
 
     - kind: BeginDialog
       id: goToIntent
       dialog: copilots_header_3141e.topic.Intent_c8W
 
     - kind: EndDialog
-      id: end_resetConversation
+      id: end_returnToCidy
 
 inputType: {}
 outputType: {}

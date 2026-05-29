@@ -591,6 +591,13 @@
                           "Clarification":  "",
                           "Expected behavior":  "User Inquiry greeting classifier sets isGreeting=false because the input includes a substantive question. The input continues to Intent and routes to Formulate Response DA with funding_stream=DA and topic_area=project_planning_design.",
                           "date-created":  "2026-05-28"
+                      },
+                      {
+                          "Scenario":  "Return to Cidy rescue path",
+                          "Test question":  "Back to Cidy flow",
+                          "Clarification":  "",
+                          "Expected behavior":  "Return to Cidy topic cancels other topics, clears active Cidy state, asks for a fresh substantive question, stores it as Global.userQuestion, and routes that captured question to Intent_c8W.",
+                          "date-created":  "2026-05-28"
                       }
                   ]
 }

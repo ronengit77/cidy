@@ -275,6 +275,15 @@ function Test-GreetingCase {
     return ($text -match "greeting path|routes? to greeting|isgreeting=true")
 }
 
+function Test-ReturnToCidyCase {
+    param(
+        [string]$Scenario,
+        [string]$Expected
+    )
+    $text = "$Scenario $Expected".ToLowerInvariant()
+    return ($text -match "return to cidy|rescue path|controlled re-entry|controlled flow")
+}
+
 function Test-TopicAreaMapped {
     param(
         [string]$Domain,
@@ -383,6 +392,71 @@ foreach ($case in $testData.testCases) {
                 knowledgeDomain = "greeting"
                 fundingStream   = "UNCLEAR"
                 topicAreas      = @("greeting")
+            }
+            routePath           = @($routePath)
+            routePathText       = $routePathText
+            routeTrace          = $trace
+            failures            = @($caseFailures.ToArray())
+        }
+        $results.Add($result)
+        if ($status -eq "fail") {
+            $failuresOnly.Add([ordered]@{
+                id               = $result.id
+                scenario         = $scenario
+                question         = $question
+                finalRoute       = $result.finalRoute
+                routePath        = @($routePath)
+                routePathText    = $routePathText
+                failures         = @($caseFailures.ToArray())
+                routeTraceSummary = @($trace | ForEach-Object { [ordered]@{ topic = $_.topic; decision = $_.decision } })
+            })
+        }
+        continue
+    }
+
+    if (Test-ReturnToCidyCase -Scenario $scenario -Expected $expected) {
+        $returnYaml = Join-Path $Root "return_to_cidy.yaml"
+        $yamlExists = Test-Path $returnYaml
+        if (-not $yamlExists) {
+            Add-Failure $caseFailures "Return_To_Cidy_YAML_not_found" "Return to Cidy" "Expected return_to_cidy.yaml to exist for rescue route."
+        }
+        $trace = @(
+            [ordered]@{
+                topic    = "return_to_cidy.yaml"
+                output   = [ordered]@{
+                    yamlExists = $yamlExists
+                    startBehavior = "CancelOtherTopics"
+                    clearsActiveState = $true
+                }
+                decision = "Capture fresh question"
+            },
+            [ordered]@{
+                topic    = "Cidy_Intent.yaml"
+                output   = "Classifies the freshly captured question"
+                decision = "Continue normal controlled flow"
+            }
+        )
+        $routePath = @($trace | ForEach-Object { $_.topic })
+        $routePathText = Get-RoutePathText -Trace $trace
+        $status = if ($caseFailures.Count -eq 0) { "pass" } else { "fail" }
+        $result = [ordered]@{
+            id                  = "TC{0:D2}" -f $index
+            scenario            = $scenario
+            question            = $question
+            clarification       = $clarification
+            expectedBehavior    = $expected
+            status              = $status
+            finalRoute          = [ordered]@{
+                routingTarget = "Return to Cidy"
+                routerDialog  = "copilots_header_3141e.topic.Intent_c8W"
+                yamlFile      = "return_to_cidy.yaml"
+                routerStatus  = if ($yamlExists) { "wired" } else { "missing_yaml" }
+                finalTopic    = "Cidy_Intent.yaml"
+            }
+            finalClassification = [ordered]@{
+                knowledgeDomain = "return_to_cidy"
+                fundingStream   = "UNCLEAR"
+                topicAreas      = @("return_to_cidy")
             }
             routePath           = @($routePath)
             routePathText       = $routePathText

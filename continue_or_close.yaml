@@ -239,20 +239,85 @@ beginDialog:
         - id: condition_close
           condition: =Global.askAnother = "no"
           actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_closeBranchEntry
+              conditions:
+                - id: conditionItem_debug_closeBranchEntry
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_closeBranchEntry
+                      activity: "DEBUG - ContinueOrClose close branch entered. askAnother: {Global.askAnother} | userQuestion before clear: {Global.userQuestion} | nextActionContext: {Global.nextActionContext}"
+
             - kind: SetVariable
               id: clear_nextActionContext_close
               variable: Global.nextActionContext
               value:
 
+            - kind: SetVariable
+              id: clear_userQuestion_close
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_awaitingNewQuestion_close
+              variable: Global.awaitingNewQuestion
+              value: =false
+
+            - kind: SetVariable
+              id: clear_askAnother_close
+              variable: Global.askAnother
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_draftResponse_close
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedAnswer_close
+              variable: Global.formattedAnswer
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedSources_close
+              variable: Global.formattedSources
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceScore_close
+              variable: Global.confidenceScore
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceLabel_close
+              variable: Global.confidenceLabel
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_warningMessage_close
+              variable: Global.warningMessage
+              value: =Blank()
+
             - kind: SendActivity
               id: msg_close
-              activity: Thank you. The conversation is now closed.
+              activity: Thank you. The conversation is now closed. You can return any time by typing Back to Cidy flow.
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_closeBranchAfterClear
+              conditions:
+                - id: conditionItem_debug_closeBranchAfterClear
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_closeBranchAfterClear
+                      activity: "DEBUG - ContinueOrClose close branch completed state clear. userQuestion: {Global.userQuestion} | awaitingNewQuestion: {Global.awaitingNewQuestion} | askAnother: {Global.askAnother}"
 
             - kind: SetVariable
               id: log_close
               variable: Global.transcript
               value: |
-                =Global.transcript & "CIDY: " & "Thank you. The conversation is now closed." & Char(13) & Char(10) & Char(13) & Char(10)
+                =Global.transcript & "CIDY: " & "Thank you. The conversation is now closed. You can return any time by typing Back to Cidy flow." & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: EndDialog
               id: end_close
@@ -261,6 +326,10 @@ beginDialog:
         - kind: SendActivity
           id: msg_fallback
           activity: I could not determine what you would like to do next. Please start a new question or request human follow-up.
+
+        - kind: BeginDialog
+          id: ubApqt
+          dialog: copilots_header_3141e.topic.greeting
 
         - kind: EndDialog
           id: end_fallback

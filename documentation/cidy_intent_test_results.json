@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-28T18:42:35-04:00",
+                    "generatedAt":  "2026-05-29T11:48:18-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  93,
-                    "passed":  84,
+                    "total":  94,
+                    "passed":  85,
                     "failed":  9
                 },
     "results":  [
@@ -9352,6 +9352,52 @@
                                                                                   }
                                                           },
                                                "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC94",
+                        "scenario":  "Return to Cidy rescue path",
+                        "question":  "Back to Cidy flow",
+                        "clarification":  "",
+                        "expectedBehavior":  "Return to Cidy topic cancels other topics, clears active Cidy state, asks for a fresh substantive question, stores it as Global.userQuestion, and routes that captured question to Intent_c8W.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Return to Cidy",
+                                           "routerDialog":  "copilots_header_3141e.topic.Intent_c8W",
+                                           "yamlFile":  "return_to_cidy.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Cidy_Intent.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "return_to_cidy",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "return_to_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "return_to_cidy.yaml",
+                                          "Cidy_Intent.yaml"
+                                      ],
+                        "routePathText":  "return_to_cidy.yaml \u003e Cidy_Intent.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "return_to_cidy.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "startBehavior":  "CancelOtherTopics",
+                                                              "clearsActiveState":  true
+                                                          },
+                                               "decision":  "Capture fresh question"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  "Classifies the freshly captured question",
+                                               "decision":  "Continue normal controlled flow"
                                            }
                                        ],
                         "failures":  [

@@ -37,3 +37,7 @@ beginDialog:
             - kind: SendActivity
               id: sendMessage_LdLhmf
               activity: Go ahead. I'm listening.
+
+            - kind: BeginDialog
+              id: goToUserInquiry_goodbyeCancelled
+              dialog: copilots_header_3141e.topic.UserInquiry2

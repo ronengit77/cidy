@@ -43,10 +43,14 @@ beginDialog:
                       id: sendMessage_4eOE6h
                       activity: Go ahead. I'm listening.
 
+                    - kind: BeginDialog
+                      id: goToUserInquiry_continue
+                      dialog: copilots_header_3141e.topic.UserInquiry2
+
               elseActions:
                 - kind: SendActivity
                   id: yHBz55
-                  activity: Ok, goodbye.
+                  activity: Ok, goodbye. You can return any time by typing Back to Cidy flow whenever you have another question.
 
                 - kind: EndConversation
                   id: jh1GMT
@@ -73,3 +77,7 @@ beginDialog:
             - kind: SendActivity
               id: GrVHEW
               activity: Go ahead. I'm listening.
+
+            - kind: BeginDialog
+              id: goToUserInquiry_tryAgain
+              dialog: copilots_header_3141e.topic.UserInquiry2
