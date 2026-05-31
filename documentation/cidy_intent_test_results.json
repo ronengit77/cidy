@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-29T11:48:18-04:00",
+                    "generatedAt":  "2026-05-31T14:12:48-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  94,
-                    "passed":  85,
+                    "total":  96,
+                    "passed":  87,
                     "failed":  9
                 },
     "results":  [
@@ -9360,6 +9360,98 @@
                     },
                     {
                         "id":  "TC94",
+                        "scenario":  "Exit Cidy flow command - exact phrase",
+                        "question":  "exit Cidy flow",
+                        "clarification":  "",
+                        "expectedBehavior":  "Exit Cidy Flow switches Global.cidyMode to open, sends the outside structured Cidy flow message, and continues future user messages through open conversation mode without routing the command to Intent.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Exit Cidy Flow",
+                                           "routerDialog":  "copilots_header_3141e.topic.UserInquiry2",
+                                           "yamlFile":  "Exit_Cidy_Flow.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "user_inquiry.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "exit_cidy_flow",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "exit_cidy_flow"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "Exit_Cidy_Flow.yaml",
+                                          "user_inquiry.yaml"
+                                      ],
+                        "routePathText":  "Exit_Cidy_Flow.yaml \u003e user_inquiry.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "Exit_Cidy_Flow.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "setsCidyMode":  "open",
+                                                              "sendsExitMessage":  true
+                                                          },
+                                               "decision":  "Switch to open conversation mode"
+                                           },
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Open mode answers with broad approved Cidy knowledge and does not route through Intent",
+                                               "decision":  "Continue open conversation"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC95",
+                        "scenario":  "Exit Cidy flow command - Cindy typo",
+                        "question":  "exit Cindy flow",
+                        "clarification":  "",
+                        "expectedBehavior":  "Exit Cidy Flow recognizes the Cindy typo, switches Global.cidyMode to open, sends the outside structured Cidy flow message, and does not route the command as an About Cidy knowledge question.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Exit Cidy Flow",
+                                           "routerDialog":  "copilots_header_3141e.topic.UserInquiry2",
+                                           "yamlFile":  "Exit_Cidy_Flow.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "user_inquiry.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "exit_cidy_flow",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "exit_cidy_flow"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "Exit_Cidy_Flow.yaml",
+                                          "user_inquiry.yaml"
+                                      ],
+                        "routePathText":  "Exit_Cidy_Flow.yaml \u003e user_inquiry.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "Exit_Cidy_Flow.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "setsCidyMode":  "open",
+                                                              "sendsExitMessage":  true
+                                                          },
+                                               "decision":  "Switch to open conversation mode"
+                                           },
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Open mode answers with broad approved Cidy knowledge and does not route through Intent",
+                                               "decision":  "Continue open conversation"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC96",
                         "scenario":  "Return to Cidy rescue path",
                         "question":  "Back to Cidy flow",
                         "clarification":  "",

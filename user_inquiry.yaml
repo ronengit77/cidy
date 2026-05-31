@@ -7,6 +7,169 @@ beginDialog:
   intent: {}
   actions:
     - kind: ConditionGroup
+      id: conditionGroup_openCidyMode
+      conditions:
+        - id: conditionItem_openCidyMode
+          condition: =Global.cidyMode = "open"
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_openModeEntry
+              conditions:
+                - id: conditionItem_debug_openModeEntry
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_openModeEntry
+                      activity: "DEBUG - User Inquiry open mode branch entered. Incoming text: {System.Activity.Text}"
+
+            - kind: ConditionGroup
+              id: conditionGroup_returnCommand_openMode
+              conditions:
+                - id: conditionItem_returnCommand_openMode
+                  condition: =Or(Find("back to cidy flow", Lower(System.Activity.Text)) > 0, Find("back to cindy flow", Lower(System.Activity.Text)) > 0, Find("back to cidy", Lower(System.Activity.Text)) > 0, Find("back to cindy", Lower(System.Activity.Text)) > 0, Find("return to cidy flow", Lower(System.Activity.Text)) > 0, Find("return to cindy flow", Lower(System.Activity.Text)) > 0, Find("return to cidy", Lower(System.Activity.Text)) > 0, Find("return to cindy", Lower(System.Activity.Text)) > 0, Find("return to structured cidy flow", Lower(System.Activity.Text)) > 0, Find("return to structured cindy flow", Lower(System.Activity.Text)) > 0, Find("go back to cidy flow", Lower(System.Activity.Text)) > 0, Find("go back to cindy flow", Lower(System.Activity.Text)) > 0, Find("go back to controlled flow", Lower(System.Activity.Text)) > 0, Find("back to controlled flow", Lower(System.Activity.Text)) > 0, Find("back to flow", Lower(System.Activity.Text)) > 0)
+                  actions:
+                    - kind: SetVariable
+                      id: set_cidyMode_structured_openMode
+                      variable: Global.cidyMode
+                      value: structured
+
+                    - kind: SetVariable
+                      id: clear_userQuestion_returnCommand_openMode
+                      variable: Global.userQuestion
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_transcript_returnCommand_openMode
+                      variable: Global.transcript
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_nextActionContext_returnCommand_openMode
+                      variable: Global.nextActionContext
+                      value: =Blank()
+
+                    - kind: SendActivity
+                      id: msg_returnToCidy_openMode
+                      activity: |-
+                        Hi, {System.User.FirstName}!
+
+                        You are now back in Cidy's controlled flow.
+                        Type your inquiry below.
+
+                    - kind: Question
+                      id: question_returnCommand_openModeInput
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: Topic.newQuestion
+                      prompt: Please type your question.
+                      entity:
+                        kind: StringPrebuiltEntity
+                        sensitivityLevel: None
+
+                    - kind: SetVariable
+                      id: initialize_transcript_returnCommand_openMode
+                      variable: Global.transcript
+                      value: ="TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)
+
+                    - kind: SetVariable
+                      id: set_globalQuestion_returnCommand_openMode
+                      variable: Global.userQuestion
+                      value: =Topic.newQuestion
+
+                    - kind: SetVariable
+                      id: log_newQuestion_returnCommand_openMode
+                      variable: Global.transcript
+                      value: "=Global.transcript & \"USER: \" & Topic.newQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+                    - kind: BeginDialog
+                      id: goToIntent_returnCommand_openMode
+                      dialog: copilots_header_3141e.topic.Intent_c8W
+
+                    - kind: EndDialog
+                      id: end_returnCommand_openMode
+
+            - kind: SetVariable
+              id: capture_openModeQuestion
+              variable: Global.userQuestion
+              value: =System.Activity.Text
+
+            - kind: SetVariable
+              id: clear_openModeDraftResponse
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_openModeFormattedAnswer
+              variable: Global.formattedAnswer
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_openModeFormattedSources
+              variable: Global.formattedSources
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_openModeConfidenceScore
+              variable: Global.confidenceScore
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_openModeConfidenceLabel
+              variable: Global.confidenceLabel
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_openModeWarningMessage
+              variable: Global.warningMessage
+              value: =Blank()
+
+            - kind: SetVariable
+              id: set_openModeSourceUseInstructions
+              variable: Global.sourceUseInstructions
+              value: Open Cidy chat mode. Search the broad top-level Knowledge source and answer naturally. Use approved Cidy knowledge where relevant. If the available Cidy knowledge does not support the answer, say so instead of inventing details.
+
+            - kind: SetVariable
+              id: log_openModeQuestion
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "USER: " & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: SearchAndSummarizeContent
+              id: search_openCidyMode
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
+                "First identify the user's intent internally, then answer in a natural conversational style using approved Cidy knowledge where relevant. If the available Cidy knowledge does not contain enough reliable information, say so."
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is outside the structured Cidy flow and is continuing in a more open conversation.
+                Identify the user's intent internally before answering. Do not show a separate intent label unless it is helpful to the user.
+                Search broadly across the provided Knowledge source. Do not force the user through structured classification or routing, but keep answers grounded in approved Cidy knowledge where relevant.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no labels, no words such as uncertain. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
+
+            - kind: BeginDialog
+              id: goToAssessFromOpenMode
+              dialog: copilots_header_3141e.topic.AssessConfidence
+
+            - kind: EndDialog
+              id: end_openCidyMode
+
+    - kind: ConditionGroup
       id: conditionGroup_checkAwait
       conditions:
         - id: conditionItem_awaiting
@@ -31,6 +194,32 @@ beginDialog:
               id: capture_newQuestion
               variable: Global.userQuestion
               value: =System.Activity.Text
+
+            - kind: ConditionGroup
+              id: conditionGroup_exitCommand_awaitingNewQuestion
+              conditions:
+                - id: conditionItem_exitCommand_awaitingNewQuestion
+                  condition: =Or(Find("exit cidy flow", Lower(Global.userQuestion)) > 0, Find("exit cindy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cidy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cindy flow", Lower(Global.userQuestion)) > 0, Find("leave cidy flow", Lower(Global.userQuestion)) > 0, Find("leave cindy flow", Lower(Global.userQuestion)) > 0, Find("leave structured flow", Lower(Global.userQuestion)) > 0, Find("stop cidy flow", Lower(Global.userQuestion)) > 0, Find("stop cindy flow", Lower(Global.userQuestion)) > 0, Find("leave controlled flow", Lower(Global.userQuestion)) > 0, Find("exit controlled flow", Lower(Global.userQuestion)) > 0, Find("switch to open chat", Lower(Global.userQuestion)) > 0, Find("open conversation", Lower(Global.userQuestion)) > 0, Find("switch to open conversation", Lower(Global.userQuestion)) > 0)
+                  actions:
+                    - kind: SetVariable
+                      id: set_cidyMode_open_awaitingNewQuestion
+                      variable: Global.cidyMode
+                      value: open
+
+                    - kind: SetVariable
+                      id: clear_userQuestion_exit_awaitingNewQuestion
+                      variable: Global.userQuestion
+                      value: =Blank()
+
+                    - kind: SendActivity
+                      id: msg_exitCidyFlow_awaitingNewQuestion
+                      activity: |-
+                        You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                        You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+                    - kind: EndDialog
+                      id: end_exitCommand_awaitingNewQuestion
 
             - kind: SetVariable
               id: log_newQuestion
@@ -130,6 +319,32 @@ beginDialog:
       id: setVariable_yWwTw0
       variable: Global.transcript
       value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_exitCommand_initialQuestion
+      conditions:
+        - id: conditionItem_exitCommand_initialQuestion
+          condition: =Or(Find("exit cidy flow", Lower(Global.userQuestion)) > 0, Find("exit cindy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cidy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cindy flow", Lower(Global.userQuestion)) > 0, Find("leave cidy flow", Lower(Global.userQuestion)) > 0, Find("leave cindy flow", Lower(Global.userQuestion)) > 0, Find("leave structured flow", Lower(Global.userQuestion)) > 0, Find("stop cidy flow", Lower(Global.userQuestion)) > 0, Find("stop cindy flow", Lower(Global.userQuestion)) > 0, Find("leave controlled flow", Lower(Global.userQuestion)) > 0, Find("exit controlled flow", Lower(Global.userQuestion)) > 0, Find("switch to open chat", Lower(Global.userQuestion)) > 0, Find("open conversation", Lower(Global.userQuestion)) > 0, Find("switch to open conversation", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: set_cidyMode_open_initialQuestion
+              variable: Global.cidyMode
+              value: open
+
+            - kind: SetVariable
+              id: clear_userQuestion_exit_initialQuestion
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SendActivity
+              id: msg_exitCidyFlow_initialQuestion
+              activity: |-
+                You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+            - kind: EndDialog
+              id: end_exitCommand_initialQuestion
 
     - kind: InvokeAIBuilderModelAction
       id: invokeAIBuilderModelAction_classifyInitialGreeting

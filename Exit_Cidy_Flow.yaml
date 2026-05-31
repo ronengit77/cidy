@@ -1,0 +1,74 @@
+kind: AdaptiveDialog
+modelDescription: Lets users leave Cidy's structured intake and routing flow for a more open chat mode while preserving the instruction to use approved Cidy knowledge where relevant.
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Exit Cidy Flow
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Exit Cidy flow
+      - Exit Cindy flow
+      - Exit structured Cidy flow
+      - Exit structured Cindy flow
+      - Leave Cidy flow
+      - Leave Cindy flow
+      - Leave structured flow
+      - Stop Cidy flow
+      - Stop Cindy flow
+      - Leave controlled flow
+      - Exit controlled flow
+      - Switch to open chat
+      - Open conversation
+      - Switch to open conversation
+
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_exitCidyFlowEntry
+      conditions:
+        - id: conditionItem_debug_exitCidyFlowEntry
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_exitCidyFlowEntry
+              activity: "DEBUG - Exit Cidy Flow entered. Incoming text: {System.Activity.Text} | Current mode: {Global.cidyMode}"
+
+    - kind: SetVariable
+      id: set_cidyMode_open
+      variable: Global.cidyMode
+      value: open
+
+    - kind: SetVariable
+      id: clear_awaitingNewQuestion_exit
+      variable: Global.awaitingNewQuestion
+      value: =false
+
+    - kind: SetVariable
+      id: clear_nextActionContext_exit
+      variable: Global.nextActionContext
+      value:
+
+    - kind: SetVariable
+      id: clear_askAnother_exit
+      variable: Global.askAnother
+      value: =Blank()
+
+    - kind: SendActivity
+      id: msg_exitCidyFlow
+      activity: |-
+        You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+        You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+    - kind: SetVariable
+      id: log_exitCidyFlow
+      variable: Global.transcript
+      value: |
+        =Global.transcript & "CIDY: You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant." & Char(13) & Char(10) & "You can say ""return to Cidy flow"" at any time to go back to the structured guidance path." & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: EndDialog
+      id: end_exitCidyFlow
+
+inputType: {}
+outputType: {}

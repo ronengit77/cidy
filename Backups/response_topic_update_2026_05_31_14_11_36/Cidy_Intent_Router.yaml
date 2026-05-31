@@ -1,13 +1,19 @@
 kind: AdaptiveDialog
-modelDescription: Routes finalized Cidy intent variables to the correct Formulate Response topic or User Feedback. It does not classify and does not ask clarification questions.
+modelDescription: Internal Cidy workflow topic used only after Intent and Intent Clarifier have completed classification. It routes the classified inquiry to the correct response path based on approved variables. Do not use this topic directly from user messages. Do not answer the user or search knowledge sources.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
   intent: {}
   actions:
-    - kind: SendActivity
-      id: sendActivity_debug_routerEntry
-      activity: "DEBUG — Intent Router entry: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+    - kind: ConditionGroup
+      id: conditionGroup_sendActivity_debug_routerEntry
+      conditions:
+        - id: conditionItem_sendActivity_debug_routerEntry
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_routerEntry
+              activity: "DEBUG - Intent Router entry: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
     - kind: ConditionGroup
       id: conditionGroup_routeByIntentStatus
@@ -40,9 +46,15 @@ beginDialog:
               value: |
                 ="Out-of-scope question: " & Global.userQuestion
 
-            - kind: SendActivity
-              id: sendActivity_debug_outOfScopeRoute
-              activity: "DEBUG — Router out-of-scope route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_outOfScopeRoute
+              conditions:
+                - id: conditionItem_sendActivity_debug_outOfScopeRoute
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_outOfScopeRoute
+                      activity: "DEBUG - Router out-of-scope route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
 
             - kind: BeginDialog
               id: fYdVTl
@@ -79,9 +91,15 @@ beginDialog:
               value: |
                 ="Clarification dead end. User question: " & Global.userQuestion & " Last clarification answer: " & Global.clarificationAnswer
 
-            - kind: SendActivity
-              id: sendActivity_debug_deadEndRoute
-              activity: "DEBUG — Router dead-end route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_deadEndRoute
+              conditions:
+                - id: conditionItem_sendActivity_debug_deadEndRoute
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_deadEndRoute
+                      activity: "DEBUG - Router dead-end route: Routing target: {Global.routingTarget} | Issue summary: {Global.issueSummary}"
 
             - kind: BeginDialog
               id: 0ZXYOl
@@ -117,24 +135,40 @@ beginDialog:
               variable: Global.routingTarget
               value: Formulate Response About Cidy
 
-            - kind: SendActivity
-              id: sendActivity_aboutCidyNotDeveloped
-              activity: Cidy Is under development this topic is not yet developed (about cidy)
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_routeAboutCidy
+              conditions:
+                - id: conditionItem_sendActivity_debug_routeAboutCidy
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeAboutCidy
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: BeginDialog
+              id: goToAboutCidy
+              dialog: copilots_header_3141e.topic.FormulateResponseCidyAbout
 
             - kind: EndDialog
-              id: end_aboutCidyNotDeveloped
+              id: end_afterAboutCidy
 
         - id: conditionItem_routeProgrammeDevelopment
-          condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations"
+          condition: =Global.knowledgeDomain = "programme_development" || Global.topicArea = "projects_evaluations" || Global.topicArea = "tag_meetings" || Global.topicArea = "steering_committee" || Global.topicArea = "cd_strategy" || Global.topicArea = "guidelines_templates" || Global.topicArea = "implementing_partners_grants" || Global.topicArea = "resident_coordinator"
           actions:
             - kind: SetVariable
               id: setRoutingTarget_programmeDevelopment
               variable: Global.routingTarget
               value: Formulate Response Programme Development
 
-            - kind: SendActivity
-              id: sendActivity_M2shGu
-              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_M2shGu
+              conditions:
+                - id: conditionItem_sendActivity_M2shGu
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_M2shGu
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: EtEXZZ
@@ -151,9 +185,15 @@ beginDialog:
               variable: Global.routingTarget
               value: Formulate Response DA
 
-            - kind: SendActivity
-              id: sendActivity_debug_routeDA
-              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_routeDA
+              conditions:
+                - id: conditionItem_sendActivity_debug_routeDA
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeDA
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: goToDA
@@ -163,16 +203,22 @@ beginDialog:
               id: end_afterDA
 
         - id: conditionItem_routeRPTC
-          condition: =Global.knowledgeDomain = "rptc" || Global.fundingStream = "RPTC"
+          condition: =Global.knowledgeDomain = "rptc" || Global.fundingStream = "RPTC" || Global.topicArea = "rptc_guidance_templates" || Global.topicArea = "rptc_progress_reports"
           actions:
             - kind: SetVariable
               id: setRoutingTarget_RPTC
               variable: Global.routingTarget
               value: Formulate Response RPTC
 
-            - kind: SendActivity
-              id: sendActivity_debug_routeRPTC
-              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_routeRPTC
+              conditions:
+                - id: conditionItem_sendActivity_debug_routeRPTC
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeRPTC
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: goToRPTC
@@ -189,9 +235,15 @@ beginDialog:
               variable: Global.routingTarget
               value: Formulate Response PDF
 
-            - kind: SendActivity
-              id: sendActivity_debug_routePDF
-              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_routePDF
+              conditions:
+                - id: conditionItem_sendActivity_debug_routePDF
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routePDF
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: goToPDF
@@ -208,9 +260,15 @@ beginDialog:
               variable: Global.routingTarget
               value: Formulate Response General
 
-            - kind: SendActivity
-              id: sendActivity_Fjbd95
-              activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_Fjbd95
+              conditions:
+                - id: conditionItem_sendActivity_Fjbd95
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_Fjbd95
+                      activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: KveG2l

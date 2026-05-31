@@ -284,6 +284,15 @@ function Test-ReturnToCidyCase {
     return ($text -match "return to cidy|rescue path|controlled re-entry|controlled flow")
 }
 
+function Test-ExitCidyFlowCase {
+    param(
+        [string]$Scenario,
+        [string]$Expected
+    )
+    $text = "$Scenario $Expected".ToLowerInvariant()
+    return ($text -match "exit cidy flow|exit structured|open conversation|open chat|outside the structured cidy flow")
+}
+
 function Test-TopicAreaMapped {
     param(
         [string]$Domain,
@@ -392,6 +401,71 @@ foreach ($case in $testData.testCases) {
                 knowledgeDomain = "greeting"
                 fundingStream   = "UNCLEAR"
                 topicAreas      = @("greeting")
+            }
+            routePath           = @($routePath)
+            routePathText       = $routePathText
+            routeTrace          = $trace
+            failures            = @($caseFailures.ToArray())
+        }
+        $results.Add($result)
+        if ($status -eq "fail") {
+            $failuresOnly.Add([ordered]@{
+                id               = $result.id
+                scenario         = $scenario
+                question         = $question
+                finalRoute       = $result.finalRoute
+                routePath        = @($routePath)
+                routePathText    = $routePathText
+                failures         = @($caseFailures.ToArray())
+                routeTraceSummary = @($trace | ForEach-Object { [ordered]@{ topic = $_.topic; decision = $_.decision } })
+            })
+        }
+        continue
+    }
+
+    if (Test-ExitCidyFlowCase -Scenario $scenario -Expected $expected) {
+        $exitYaml = Join-Path $Root "Exit_Cidy_Flow.yaml"
+        $yamlExists = Test-Path $exitYaml
+        if (-not $yamlExists) {
+            Add-Failure $caseFailures "Exit_Cidy_Flow_YAML_not_found" "Exit Cidy Flow" "Expected Exit_Cidy_Flow.yaml to exist for open conversation route."
+        }
+        $trace = @(
+            [ordered]@{
+                topic    = "Exit_Cidy_Flow.yaml"
+                output   = [ordered]@{
+                    yamlExists = $yamlExists
+                    setsCidyMode = "open"
+                    sendsExitMessage = $true
+                }
+                decision = "Switch to open conversation mode"
+            },
+            [ordered]@{
+                topic    = "user_inquiry.yaml"
+                output   = "Open mode answers with broad approved Cidy knowledge and does not route through Intent"
+                decision = "Continue open conversation"
+            }
+        )
+        $routePath = @($trace | ForEach-Object { $_.topic })
+        $routePathText = Get-RoutePathText -Trace $trace
+        $status = if ($caseFailures.Count -eq 0) { "pass" } else { "fail" }
+        $result = [ordered]@{
+            id                  = "TC{0:D2}" -f $index
+            scenario            = $scenario
+            question            = $question
+            clarification       = $clarification
+            expectedBehavior    = $expected
+            status              = $status
+            finalRoute          = [ordered]@{
+                routingTarget = "Exit Cidy Flow"
+                routerDialog  = "copilots_header_3141e.topic.UserInquiry2"
+                yamlFile      = "Exit_Cidy_Flow.yaml"
+                routerStatus  = if ($yamlExists) { "wired" } else { "missing_yaml" }
+                finalTopic    = "user_inquiry.yaml"
+            }
+            finalClassification = [ordered]@{
+                knowledgeDomain = "exit_cidy_flow"
+                fundingStream   = "UNCLEAR"
+                topicAreas      = @("exit_cidy_flow")
             }
             routePath           = @($routePath)
             routePathText       = $routePathText

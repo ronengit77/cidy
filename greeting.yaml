@@ -23,6 +23,8 @@ beginDialog:
       activity: |-
         Hi, I am Cidy. I am here to help with DA project planning/design and evaluation guidance; RPTC guidance and reports; Programme Development guidance, TAG meetings, Steering Committee materials, project evaluations, implementing partners and grants, Resident Coordinator country engagement, DESA capacity-development strategy, recommendations, lessons learned, and general CDPMO knowledge.
 
+        You can say **"exit Cidy flow"** to continue in a more open conversation, and **"return to Cidy flow"** to come back to the controlled guidance path.
+
     - kind: SetVariable
       id: clearUserQuestionBeforeInquiry
       variable: Global.userQuestion

@@ -30,6 +30,9 @@ beginDialog:
                     - id: Try again (with wider knowledgebase)
                       displayName: Try again (with wider knowledgebase)
 
+                    - id: Exit Cidy flow
+                      displayName: Exit Cidy flow
+
                     - id: Close the conversation
                       displayName: Close the conversation
 
@@ -53,6 +56,7 @@ beginDialog:
                   Text(Topic.nextActionChoicePostEscalation),
                   "Ask another question", "yes",
                   "Try again (with wider knowledgebase)", "retry_wide",
+                  "Exit Cidy flow", "open",
                   "Close the conversation", "no",
                   "unknown"
                 )
@@ -80,6 +84,9 @@ beginDialog:
                 - id: Escalate to a human
                   displayName: Escalate to a human
 
+                - id: Exit Cidy flow
+                  displayName: Exit Cidy flow
+
                 - id: Close the session
                   displayName: Close the session
 
@@ -104,6 +111,7 @@ beginDialog:
               "Ask another question", "yes",
               "Try again (with wider knowledgebase)", "retry_wide",
               "Escalate to a human", "escalate",
+              "Exit Cidy flow", "open",
               "Close the session", "no",
               "unknown"
             )
@@ -114,6 +122,29 @@ beginDialog:
         - id: condition_askAnother
           condition: =Global.askAnother = "yes"
           actions:
+            - kind: ConditionGroup
+              id: conditionGroup_openModeAskAnother
+              conditions:
+                - id: conditionItem_openModeAskAnother
+                  condition: =Global.cidyMode = "open"
+                  actions:
+                    - kind: SetVariable
+                      id: clear_nextActionContext_openModeNewQuestion
+                      variable: Global.nextActionContext
+                      value:
+
+                    - kind: SetVariable
+                      id: clear_askAnother_openModeNewQuestion
+                      variable: Global.askAnother
+                      value: =Blank()
+
+                    - kind: SendActivity
+                      id: msg_openModeAskAnother
+                      activity: Go ahead. I'm listening.
+
+                    - kind: EndDialog
+                      id: end_openModeAskAnother
+
             - kind: SetVariable
               id: clear_nextActionContext_newQuestion
               variable: Global.nextActionContext
@@ -142,13 +173,39 @@ beginDialog:
             - kind: Question
               id: question_newInput
               interruptionPolicy:
-                allowInterruption: false
+                allowInterruption: true
 
               variable: Topic.newQuestion
               prompt: Of course. Please type your next question.
               entity:
                 kind: StringPrebuiltEntity
                 sensitivityLevel: None
+
+            - kind: ConditionGroup
+              id: conditionGroup_exitCommand_newInput
+              conditions:
+                - id: conditionItem_exitCommand_newInput
+                  condition: =Or(Find("exit cidy flow", Lower(Topic.newQuestion)) > 0, Find("exit cindy flow", Lower(Topic.newQuestion)) > 0, Find("exit structured cidy flow", Lower(Topic.newQuestion)) > 0, Find("exit structured cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave cidy flow", Lower(Topic.newQuestion)) > 0, Find("leave cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave structured flow", Lower(Topic.newQuestion)) > 0, Find("stop cidy flow", Lower(Topic.newQuestion)) > 0, Find("stop cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave controlled flow", Lower(Topic.newQuestion)) > 0, Find("exit controlled flow", Lower(Topic.newQuestion)) > 0, Find("switch to open chat", Lower(Topic.newQuestion)) > 0, Find("open conversation", Lower(Topic.newQuestion)) > 0, Find("switch to open conversation", Lower(Topic.newQuestion)) > 0)
+                  actions:
+                    - kind: SetVariable
+                      id: set_cidyMode_open_newInput
+                      variable: Global.cidyMode
+                      value: open
+
+                    - kind: SetVariable
+                      id: clear_askAnother_exit_newInput
+                      variable: Global.askAnother
+                      value: =Blank()
+
+                    - kind: SendActivity
+                      id: msg_exitCidyFlow_newInput
+                      activity: |-
+                        You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                        You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+                    - kind: EndDialog
+                      id: end_exitCommand_newInput
 
             - kind: SetVariable
               id: set_globalQuestion
@@ -235,6 +292,45 @@ beginDialog:
             - kind: BeginDialog
               id: goToEscalate
               dialog: copilots_header_3141e.topic.Escalate
+
+        - id: condition_exitCidyFlow
+          condition: =Global.askAnother = "open"
+          actions:
+            - kind: SetVariable
+              id: set_cidyMode_open_nextAction
+              variable: Global.cidyMode
+              value: open
+
+            - kind: SetVariable
+              id: clear_nextActionContext_exitFlow
+              variable: Global.nextActionContext
+              value:
+
+            - kind: SetVariable
+              id: clear_awaitingNewQuestion_exitFlow
+              variable: Global.awaitingNewQuestion
+              value: =false
+
+            - kind: SetVariable
+              id: clear_askAnother_exitFlow
+              variable: Global.askAnother
+              value: =Blank()
+
+            - kind: SendActivity
+              id: msg_exitCidyFlow
+              activity: |-
+                You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                You can say "return to Cidy flow" at any time to go back to the structured guidance path.
+
+            - kind: SetVariable
+              id: log_exitCidyFlow
+              variable: Global.transcript
+              value: |
+                =Global.transcript & "CIDY: You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant." & Char(13) & Char(10) & "You can say ""return to Cidy flow"" at any time to go back to the structured guidance path." & Char(13) & Char(10) & Char(13) & Char(10)
+
+            - kind: EndDialog
+              id: end_exitCidyFlow
 
         - id: condition_close
           condition: =Global.askAnother = "no"

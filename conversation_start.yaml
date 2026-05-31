@@ -31,6 +31,13 @@ beginDialog:
         A good prompt will mention which funding stream and topic area your question is regarding (e.g., DA, RPTC, PDF/UNPDF, Programme Development, or general AND reporting, evaluation, governance, project design, TAG meetings, etc.)
         Example prompt: *"When is a final evaluation required for a Development Account project?"*
 
+        You can say **"exit Cidy flow"** to continue in a more open conversation, and **"return to Cidy flow"** to come back to the controlled guidance path.
+
+    - kind: SetVariable
+      id: set_cidyMode_structured_start
+      variable: Global.cidyMode
+      value: structured
+
     - kind: SetVariable
       id: setVariable_bGQ2Qa
       variable: Topic.conversationID
@@ -49,13 +56,39 @@ beginDialog:
     - kind: Question
       id: question_startInput
       interruptionPolicy:
-        allowInterruption: false
+        allowInterruption: true
 
       variable: Global.userQuestion
       prompt: "**Please describe what you are looking for:**"
       entity:
         kind: StringPrebuiltEntity
         sensitivityLevel: None
+
+    - kind: ConditionGroup
+      id: conditionGroup_exitCommand_startInput
+      conditions:
+        - id: conditionItem_exitCommand_startInput
+          condition: =Or(Find("exit cidy flow", Lower(Global.userQuestion)) > 0, Find("exit cindy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cidy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cindy flow", Lower(Global.userQuestion)) > 0, Find("leave cidy flow", Lower(Global.userQuestion)) > 0, Find("leave cindy flow", Lower(Global.userQuestion)) > 0, Find("leave structured flow", Lower(Global.userQuestion)) > 0, Find("stop cidy flow", Lower(Global.userQuestion)) > 0, Find("stop cindy flow", Lower(Global.userQuestion)) > 0, Find("leave controlled flow", Lower(Global.userQuestion)) > 0, Find("exit controlled flow", Lower(Global.userQuestion)) > 0, Find("switch to open chat", Lower(Global.userQuestion)) > 0, Find("open conversation", Lower(Global.userQuestion)) > 0, Find("switch to open conversation", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: set_cidyMode_open_startInput
+              variable: Global.cidyMode
+              value: open
+
+            - kind: SetVariable
+              id: clear_userQuestion_exit_startInput
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SendActivity
+              id: msg_exitCidyFlow_startInput
+              activity: |-
+                You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+            - kind: EndDialog
+              id: end_exitCommand_startInput
 
     - kind: SetVariable
       id: initialize_transcript

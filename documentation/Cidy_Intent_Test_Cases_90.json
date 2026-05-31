@@ -593,6 +593,20 @@
                           "date-created":  "2026-05-28"
                       },
                       {
+                          "Scenario":  "Exit Cidy flow command - exact phrase",
+                          "Test question":  "exit Cidy flow",
+                          "Clarification":  "",
+                          "Expected behavior":  "Exit Cidy Flow switches Global.cidyMode to open, sends the outside structured Cidy flow message, and continues future user messages through open conversation mode without routing the command to Intent.",
+                          "date-created":  "2026-05-31"
+                      },
+                      {
+                          "Scenario":  "Exit Cidy flow command - Cindy typo",
+                          "Test question":  "exit Cindy flow",
+                          "Clarification":  "",
+                          "Expected behavior":  "Exit Cidy Flow recognizes the Cindy typo, switches Global.cidyMode to open, sends the outside structured Cidy flow message, and does not route the command as an About Cidy knowledge question.",
+                          "date-created":  "2026-05-31"
+                      },
+                      {
                           "Scenario":  "Return to Cidy rescue path",
                           "Test question":  "Back to Cidy flow",
                           "Clarification":  "",

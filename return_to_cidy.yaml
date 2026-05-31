@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: Rescue topic that returns users to Cidy's controlled intake flow from any conversation path.
+modelDescription: Rescue topic that returns users to Cidy's controlled intake flow from any conversation path. Activated by phrases like 'return to cidy', 'back to cidy', 'back to flow' 'back to controlled flow'.
 startBehavior: CancelOtherTopics
 beginDialog:
   kind: OnRecognizedIntent
@@ -9,6 +9,20 @@ beginDialog:
     includeInOnSelectIntent: false
     triggerQueries:
       - Back to Cidy flow
+      - Back to Cindy flow
+      - back to Cidy
+      - back to Cindy
+      - return to Cidy flow
+      - return to Cindy flow
+      - return to Cidy
+      - return to Cindy
+      - return to structured Cidy flow
+      - return to structured Cindy flow
+      - go back to Cidy flow
+      - go back to Cindy flow
+      - go back to controlled flow
+      - back to controlled flow
+      - back to flow
 
   actions:
     - kind: ConditionGroup
@@ -166,9 +180,18 @@ beginDialog:
       variable: Global.retryMode
       value: =Blank()
 
+    - kind: SetVariable
+      id: set_cidyMode_structured
+      variable: Global.cidyMode
+      value: structured
+
     - kind: SendActivity
       id: msg_returnToCidy
-      activity: You are now back in Cidy's controlled flow.
+      activity: |-
+        Hi, {System.User.FirstName}!
+
+        You are now back in Cidy's controlled flow.
+        Type your inquiry below.
 
     - kind: ConditionGroup
       id: conditionGroup_debug_returnToCidyBeforeQuestion
@@ -183,13 +206,34 @@ beginDialog:
     - kind: Question
       id: question_returnToCidyInput
       interruptionPolicy:
-        allowInterruption: false
+        allowInterruption: true
 
       variable: Topic.newQuestion
       prompt: Please type your question.
       entity:
         kind: StringPrebuiltEntity
         sensitivityLevel: None
+
+    - kind: ConditionGroup
+      id: conditionGroup_exitCommand_returnToCidyInput
+      conditions:
+        - id: conditionItem_exitCommand_returnToCidyInput
+          condition: =Or(Find("exit cidy flow", Lower(Topic.newQuestion)) > 0, Find("exit cindy flow", Lower(Topic.newQuestion)) > 0, Find("exit structured cidy flow", Lower(Topic.newQuestion)) > 0, Find("exit structured cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave cidy flow", Lower(Topic.newQuestion)) > 0, Find("leave cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave structured flow", Lower(Topic.newQuestion)) > 0, Find("stop cidy flow", Lower(Topic.newQuestion)) > 0, Find("stop cindy flow", Lower(Topic.newQuestion)) > 0, Find("leave controlled flow", Lower(Topic.newQuestion)) > 0, Find("exit controlled flow", Lower(Topic.newQuestion)) > 0, Find("switch to open chat", Lower(Topic.newQuestion)) > 0, Find("open conversation", Lower(Topic.newQuestion)) > 0, Find("switch to open conversation", Lower(Topic.newQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: set_cidyMode_open_returnToCidyInput
+              variable: Global.cidyMode
+              value: open
+
+            - kind: SendActivity
+              id: msg_exitCidyFlow_returnToCidyInput
+              activity: |-
+                You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+            - kind: EndDialog
+              id: end_exitCommand_returnToCidyInput
 
     - kind: SetVariable
       id: initialize_transcript

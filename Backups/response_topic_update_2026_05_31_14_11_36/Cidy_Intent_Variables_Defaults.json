@@ -32,6 +32,18 @@
                                                   "ownerTopic":  "Intent Classifier",
                                                   "description":  "Brief classifier reason for debugging only."
                                               },
+                      "Global.executiveQuestionEnhancements":  {
+                                                                   "type":  "String",
+                                                                   "default":  "",
+                                                                   "ownerTopic":  "Question Enhancer",
+                                                                   "description":  "Non-routing search hints generated after clarification and before routing. Formulate Response topics may use this as additional search context, but it must not override the finalized intent variables."
+                                                               },
+                      "Global.testMode":  {
+                                              "type":  "Boolean",
+                                              "default":  false,
+                                              "ownerTopic":  "Intent Classifier",
+                                              "description":  "Controls whether DEBUG SendActivity messages are shown during the intent, clarification, routing, and question-enhancement flow."
+                                          },
                       "Global.intentStatus":  {
                                                   "type":  "String",
                                                   "default":  "needs_classification",
@@ -87,6 +99,8 @@
                                                                      "evaluation_design",
                                                                      "general",
                                                                      "governance_roles",
+                                                                     "guidelines_templates",
+                                                                     "implementing_partners_grants",
                                                                      "ipmr",
                                                                      "lessons_learned",
                                                                      "monitoring_reporting",
@@ -100,6 +114,9 @@
                                                                      "recommendations",
                                                                      "reporting_documentation",
                                                                      "reports",
+                                                                     "resident_coordinator",
+                                                                     "rptc_guidance_templates",
+                                                                     "rptc_progress_reports",
                                                                      "steering_committee",
                                                                      "tag",
                                                                      "tag_meetings",
@@ -219,17 +236,40 @@
                                                  "ownerTopic":  "User Feedback",
                                                  "description":  "Whether the user wants to ask another question."
                                              },
+                      "Global.nextActionContext":  {
+                                                       "type":  "String",
+                                                       "default":  "",
+                                                       "allowedValues":  [
+                                                                             "",
+                                                                             "feedback",
+                                                                             "post_escalation"
+                                                                         ],
+                                                       "ownerTopic":  "User Feedback / Escalate / Continue Or Close",
+                                                       "description":  "Context flag used by the reusable Continue Or Close topic to show the correct next-step menu."
+                                                   },
                       "Global.retryMode":  {
                                                 "type":  "String",
                                                 "default":  "",
                                                 "ownerTopic":  "User Feedback / Formulate Response General",
                                                 "description":  "Optional answer-recovery mode, such as wide_knowledge for retrying the same question against the top-level Knowledge source."
+                                             },
+                      "Global.cidyMode":  {
+                                               "type":  "String",
+                                               "default":  "structured",
+                                               "allowedValues":  [
+                                                                     "structured",
+                                                                     "open"
+                                                                 ],
+                                               "ownerTopic":  "Conversation Start / Exit Cidy Flow / Return to Cidy",
+                                               "description":  "Controls whether user messages follow the structured Cidy intake/classification path or a more open chat path that still uses approved Cidy knowledge where relevant."
                                              }
                   },
     "initialization":  {
                            "onNewUserQuestion":  {
                                                      "Global.intentJson":  "{}",
                                                      "Global.intentReason":  "",
+                                                     "Global.executiveQuestionEnhancements":  "",
+                                                     "Global.testMode":  false,
                                                      "Global.intentStatus":  "needs_classification",
                                                      "Global.knowledgeDomain":  "unclear",
                                                      "Global.fundingStream":  "UNCLEAR",
@@ -249,7 +289,9 @@
                                                       "Global.issueSummary":  "",
                                                       "Global.userFeedback":  "",
                                                       "Global.askAnother":  "",
-                                                      "Global.retryMode":  ""
+                                                      "Global.nextActionContext":  "",
+                                                      "Global.retryMode":  "",
+                                                      "Global.cidyMode":  "structured"
                                                   }
                         },
     "statusRules":  {

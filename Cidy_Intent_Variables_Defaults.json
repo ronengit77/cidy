@@ -252,6 +252,16 @@
                                                 "default":  "",
                                                 "ownerTopic":  "User Feedback / Formulate Response General",
                                                 "description":  "Optional answer-recovery mode, such as wide_knowledge for retrying the same question against the top-level Knowledge source."
+                                             },
+                      "Global.cidyMode":  {
+                                               "type":  "String",
+                                               "default":  "structured",
+                                               "allowedValues":  [
+                                                                     "structured",
+                                                                     "open"
+                                                                 ],
+                                               "ownerTopic":  "Conversation Start / Exit Cidy Flow / Return to Cidy",
+                                               "description":  "Controls whether user messages follow the structured Cidy intake/classification path or a more open chat path that still uses approved Cidy knowledge where relevant."
                                              }
                   },
     "initialization":  {
@@ -280,7 +290,8 @@
                                                       "Global.userFeedback":  "",
                                                       "Global.askAnother":  "",
                                                       "Global.nextActionContext":  "",
-                                                      "Global.retryMode":  ""
+                                                      "Global.retryMode":  "",
+                                                      "Global.cidyMode":  "structured"
                                                   }
                         },
     "statusRules":  {
