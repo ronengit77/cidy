@@ -612,6 +612,27 @@
                           "Clarification":  "",
                           "Expected behavior":  "Return to Cidy topic cancels other topics, clears active Cidy state, asks for a fresh substantive question, stores it as Global.userQuestion, and routes that captured question to Intent_c8W.",
                           "date-created":  "2026-05-28"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme operations active projects by country",
+                          "Test question":  "Which projects are currently active in Kenya?",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for active projects by country.",
+                          "date-created":  "2026-06-02"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme operations proposal year list",
+                          "Test question":  "I'd like to see 2026 proposals.",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for proposal-year filtering.",
+                          "date-created":  "2026-06-02"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme operations LDC activity count",
+                          "Test question":  "How many activities in 2025 targeted LDCs?",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for activity counts by year and LDC target group.",
+                          "date-created":  "2026-06-02"
                       }
                   ]
 }

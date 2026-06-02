@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-05-31T14:27:50-04:00",
+                    "generatedAt":  "2026-06-02T15:44:10-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  96,
-                    "passed":  87,
+                    "total":  99,
+                    "passed":  90,
                     "failed":  9
                 },
     "results":  [
@@ -6799,7 +6799,8 @@
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
                                                                        "rptc_guidance_templates",
-                                                                       "templates"
+                                                                       "templates",
+                                                                       "programme_operations"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6824,7 +6825,8 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "programme_operations"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6840,7 +6842,8 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "programme_operations"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6875,7 +6878,7 @@
                                                                                                       "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "programme_operations"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7117,7 +7120,8 @@
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
                                                                        "rptc_guidance_templates",
-                                                                       "templates"
+                                                                       "templates",
+                                                                       "programme_operations"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7142,7 +7146,8 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "programme_operations"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7158,7 +7163,8 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
-                                                                                 "templates"
+                                                                                 "templates",
+                                                                                 "programme_operations"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7193,7 +7199,7 @@
                                                                                                       "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "programme_operations"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7324,7 +7330,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
-                                                                       "rptc_progress_reports"
+                                                                       "rptc_progress_reports",
+                                                                       "programme_operations"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7348,7 +7355,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
-                                                                                 "rptc_progress_reports"
+                                                                                 "rptc_progress_reports",
+                                                                                 "programme_operations"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7363,7 +7371,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
-                                                                                 "rptc_progress_reports"
+                                                                                 "rptc_progress_reports",
+                                                                                 "programme_operations"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7397,7 +7406,7 @@
                                                                                                       "rptc_progress_reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "programme_operations"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7426,7 +7435,8 @@
                                                     "knowledgeDomain":  "rptc",
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
-                                                                       "rptc_progress_reports"
+                                                                       "rptc_progress_reports",
+                                                                       "programme_operations"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7450,7 +7460,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
-                                                                                 "rptc_progress_reports"
+                                                                                 "rptc_progress_reports",
+                                                                                 "programme_operations"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7465,7 +7476,8 @@
                                                               "knowledgeDomain":  "rptc",
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
-                                                                                 "rptc_progress_reports"
+                                                                                 "rptc_progress_reports",
+                                                                                 "programme_operations"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7499,7 +7511,7 @@
                                                                                                       "rptc_progress_reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "programme_operations"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -8250,6 +8262,7 @@
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
                                                                        "cd_strategy",
+                                                                       "programme_operations",
                                                                        "about_cidy"
                                                                    ]
                                                 },
@@ -8275,6 +8288,7 @@
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
                                                                                  "cd_strategy",
+                                                                                 "programme_operations",
                                                                                  "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
@@ -8291,6 +8305,7 @@
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
                                                                                  "cd_strategy",
+                                                                                 "programme_operations",
                                                                                  "about_cidy"
                                                                              ]
                                                           },
@@ -8322,7 +8337,8 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "cd_strategy"
+                                                                                                      "cd_strategy",
+                                                                                                      "programme_operations"
                                                                                                   ],
                                                                                       "unmapped":  [
                                                                                                        "about_cidy"
@@ -9490,6 +9506,325 @@
                                                "topic":  "Cidy_Intent.yaml",
                                                "output":  "Classifies the freshly captured question",
                                                "decision":  "Continue normal controlled flow"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC97",
+                        "scenario":  "Happy path - Programme operations active projects by country",
+                        "question":  "Which projects are currently active in Kenya?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for active projects by country.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "programme_operations",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "programme_operations"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC98",
+                        "scenario":  "Happy path - Programme operations proposal year list",
+                        "question":  "I\u0027d like to see 2026 proposals.",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for proposal-year filtering.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "programme_operations",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "programme_operations"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC99",
+                        "scenario":  "Happy path - Programme operations LDC activity count",
+                        "question":  "How many activities in 2025 targeted LDCs?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for activity counts by year and LDC target group.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "programme_operations",
+                                                                       "rptc_progress_reports",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "rptc_progress_reports",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "programme_operations",
+                                                                                 "rptc_progress_reports",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "programme_operations"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "rptc_progress_reports",
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
                                            }
                                        ],
                         "failures":  [

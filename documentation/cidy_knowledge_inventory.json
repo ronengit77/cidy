@@ -1,6 +1,6 @@
 {
     "schemaVersion":  "1.1",
-    "generatedAt":  "2026-05-31T14:27:49-04:00",
+    "generatedAt":  "2026-06-02T15:44:09-04:00",
     "generatedFrom":  [
                           "Cidy_Intent_Router.yaml",
                           "Formulate_Response_Cidy_About.yaml",
@@ -389,6 +389,30 @@
                         "mappingStatus":  "review_required",
                         "ownerUnit":  "TBD",
                         "instructions":  "These files contain information on DESA\u0027s strategic priorities, capacity development approach, service delivery model, and the proposed AI-enabled Capacity Development Knowledge Hub/Cidy. Use this knowledge for questions about DESA\u0027s main action areas for 2023; the goals of DESA\u0027s capacity development strategy; the five service lines or areas of work; how DESA prioritizes capacity development requests; and the role partnerships play in delivery.",
+                        "isNewTopic":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development_programme_operations",
+                        "domain":  "programme_development",
+                        "topicArea":  "programme_operations",
+                        "topicName":  "Programme Operations",
+                        "folderName":  "Cidy-PD-Operations",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy PD All"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_programmeOperations",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains an Excel document with Programme Development operational records, including projects, proposals, requests, and activities. Use the Cidy-PD-Operations folder for questions that ask to find, list, filter, count, compare, or summarize operational records by country, region, year, status, proposal year, activity year, target group, LDC/LLDC/SIDS status, project/request/activity attributes, or current/ongoing/active state. Examples include which projects are currently active or ongoing in a country, showing 2026 proposals, counting 2025 activities that targeted LDCs, listing requests by country or year, and identifying activities by target group. Prefer structured Excel fields and exact record counts where available. If a field name, status definition, or coverage period is unclear from the source, state the limitation.",
                         "isNewTopic":  false,
                         "firstSeenAt":  ""
                     },

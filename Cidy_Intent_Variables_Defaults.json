@@ -109,6 +109,7 @@
                                                                      "process_governance",
                                                                      "programme_design_standards",
                                                                      "programme_management",
+                                                                     "programme_operations",
                                                                      "project_planning_design",
                                                                      "projects_evaluations",
                                                                      "recommendations",
@@ -351,6 +352,7 @@
                                                  "question":  "Which area should Cidy use for this question?",
                                                  "choices":  [
                                                                  "Programme Development",
+                                                                 "Programme Operations",
                                                                  "Project Evaluations / Lessons Learned",
                                                                  "Development Account (DA)",
                                                                  "RPTC",
@@ -423,6 +425,16 @@
                                                                      "Global.knowledgeDomain":  "programme_development",
                                                                      "Global.fundingStream":  "UNCLEAR"
                                                                  },
+                                                          "Programme Operations":  {
+                                                                                       "Global.knowledgeDomain":  "programme_development",
+                                                                                       "Global.topicArea":  "programme_operations",
+                                                                                       "Global.fundingStream":  "UNCLEAR"
+                                                                                   },
+                                                          "Operations":  {
+                                                                             "Global.knowledgeDomain":  "programme_development",
+                                                                             "Global.topicArea":  "programme_operations",
+                                                                             "Global.fundingStream":  "UNCLEAR"
+                                                                         },
                                                           "Project Evaluations / Lessons Learned":  {
                                                                                                         "Global.knowledgeDomain":  "programme_development",
                                                                                                         "Global.topicArea":  "projects_evaluations",

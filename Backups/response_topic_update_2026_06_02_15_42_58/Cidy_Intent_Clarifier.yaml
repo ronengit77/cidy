@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: Resolves incomplete Cidy intent classifications. It asks targeted clarifications, validates clicked or typed answers, updates routing variables, and passes finalized intent state to Intent Router. It does not search knowledge sources or call Formulate Response topics.
+modelDescription: Internal Cidy workflow topic used only after Intent has classified the user’s question. It checks whether required classification variables are complete and asks limited clarification questions only when needed. Do not use this topic as the first step for user inquiries. Do not search knowledge sources or generate final answers.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
@@ -11,13 +11,19 @@ beginDialog:
         - id: conditionItem_alreadyReadyToRoute
           condition: =Global.intentStatus = "ready_to_route" || Global.intentStatus = "out_of_scope" || Global.intentStatus = "dead_end"
           actions:
-            - kind: SendActivity
-              id: sendActivity_debug_clarifierBypass
-              activity: "DEBUG — Intent Clarifier bypass: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_clarifierBypass
+              conditions:
+                - id: conditionItem_sendActivity_debug_clarifierBypass
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_clarifierBypass
+                      activity: "DEBUG - Intent Clarifier bypass: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
 
             - kind: BeginDialog
               id: xXOWoi
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_bypass
@@ -46,13 +52,19 @@ beginDialog:
               value: |
                 ="Clarification dead end. User question: " & Global.userQuestion & " Last clarification answer: " & Global.clarificationAnswer
 
-            - kind: SendActivity
-              id: sendActivity_debug_maxClarifications
-              activity: "DEBUG — Intent Clarifier max attempts reached: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_maxClarifications
+              conditions:
+                - id: conditionItem_sendActivity_debug_maxClarifications
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_maxClarifications
+                      activity: "DEBUG - Intent Clarifier max attempts reached: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea}"
 
             - kind: BeginDialog
               id: sZxn78
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_maxClarifications
@@ -213,13 +225,19 @@ beginDialog:
               variable: Global.intentStatus
               value: ready_to_route
 
-            - kind: SendActivity
-              id: sendActivity_debug_afterFundClarification
-              activity: "DEBUG — After fund clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_afterFundClarification
+              conditions:
+                - id: conditionItem_sendActivity_debug_afterFundClarification
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_afterFundClarification
+                      activity: "DEBUG - After fund clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: OaUzJ3
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterFundClarification
@@ -253,6 +271,9 @@ beginDialog:
 
                     - id: projects_evaluations
                       displayName: Project evaluations, recommendations, and lessons learned
+
+                    - id: programme_operations
+                      displayName: Programme operations: projects, proposals, requests, and activities
 
                     - id: da
                       displayName: Development Account (DA)
@@ -346,6 +367,24 @@ beginDialog:
                       variable: Global.fundingStream
                       value: UNCLEAR
 
+                - id: conditionItem_domainProgrammeOperations
+                  condition: =Or(Text(Topic.domainChoice) = "programme_operations", StartsWith(Text(Topic.domainChoice), "Programme operations"), Find("projects, proposals, requests, and activities", Text(Topic.domainChoice)) > 0, Lower(Text(Topic.domainChoice)) = "operations")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_programmeOperations
+                      variable: Global.knowledgeDomain
+                      value: programme_development
+
+                    - kind: SetVariable
+                      id: setTopic_programmeOperations
+                      variable: Global.topicArea
+                      value: programme_operations
+
+                    - kind: SetVariable
+                      id: setFund_programmeOperations
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
                 - id: conditionItem_domainDA
                   condition: =Or(Text(Topic.domainChoice) = "da", Text(Topic.domainChoice) = "DA", Text(Topic.domainChoice) = "Development Account (DA)", Lower(Text(Topic.domainChoice)) = "development account", EndsWith(Text(Topic.domainChoice), "(DA)"))
                   actions:
@@ -427,13 +466,19 @@ beginDialog:
               variable: Global.intentStatus
               value: ready_to_route
 
-            - kind: SendActivity
-              id: sendActivity_debug_afterDomainClarification
-              activity: "DEBUG — After domain clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_afterDomainClarification
+              conditions:
+                - id: conditionItem_sendActivity_debug_afterDomainClarification
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_afterDomainClarification
+                      activity: "DEBUG - After domain clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: yfOLOU
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterDomainClarification
@@ -629,13 +674,19 @@ beginDialog:
               variable: Global.intentStatus
               value: ready_to_route
 
-            - kind: SendActivity
-              id: sendActivity_debug_afterArtifactClarification
-              activity: "DEBUG — After artifact clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_afterArtifactClarification
+              conditions:
+                - id: conditionItem_sendActivity_debug_afterArtifactClarification
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_afterArtifactClarification
+                      activity: "DEBUG - After artifact clarification reclassify: Attempts: {Global.clarificationAttempts} / {Global.maxClarificationAttempts} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
 
             - kind: BeginDialog
               id: sIHko1
-              dialog: copilots_header_3141e.topic.Intent-Router
+              dialog: copilots_header_3141e.topic.QuestionEnhancer
 
             - kind: EndDialog
               id: endClarifier_afterArtifactClarification
@@ -657,13 +708,19 @@ beginDialog:
           value: |
             ="Clarification dead end. User question: " & Global.userQuestion & " Clarification type: " & Global.clarificationType
 
-        - kind: SendActivity
-          id: sendActivity_debug_noClarificationBranch
-          activity: "DEBUG — Intent Clarifier dead end: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
+        - kind: ConditionGroup
+          id: conditionGroup_sendActivity_debug_noClarificationBranch
+          conditions:
+            - id: conditionItem_sendActivity_debug_noClarificationBranch
+              condition: =Global.testMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_noClarificationBranch
+                  activity: "DEBUG - Intent Clarifier dead end: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType}"
 
         - kind: BeginDialog
           id: H2EMSf
-          dialog: copilots_header_3141e.topic.Intent-Router
+          dialog: copilots_header_3141e.topic.QuestionEnhancer
 
         - kind: EndDialog
           id: endClarifier_noClarificationBranch

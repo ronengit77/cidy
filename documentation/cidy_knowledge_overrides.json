@@ -57,6 +57,11 @@
     {
       "id": "programme_development_tag",
       "folderName": "Capacity Development Tag Team"
+    },
+    {
+      "id": "programme_development_programme_operations",
+      "folderName": "Cidy-PD-Operations",
+      "description": "Operational Excel records for Programme Development projects, proposals, requests, and activities, including country, year, status, target-group, and LDC/LLDC/SIDS-style filtering and counting questions."
     }
   ],
   "managerUpdates": []

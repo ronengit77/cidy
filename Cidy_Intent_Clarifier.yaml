@@ -272,6 +272,9 @@ beginDialog:
                     - id: projects_evaluations
                       displayName: Project evaluations, recommendations, and lessons learned
 
+                    - id: programme_operations
+                      displayName: Programme operations: projects, proposals, requests, and activities
+
                     - id: da
                       displayName: Development Account (DA)
 
@@ -361,6 +364,24 @@ beginDialog:
 
                     - kind: SetVariable
                       id: setFund_projectsEvaluations
+                      variable: Global.fundingStream
+                      value: UNCLEAR
+
+                - id: conditionItem_domainProgrammeOperations
+                  condition: =Or(Text(Topic.domainChoice) = "programme_operations", StartsWith(Text(Topic.domainChoice), "Programme operations"), Find("projects, proposals, requests, and activities", Text(Topic.domainChoice)) > 0, Lower(Text(Topic.domainChoice)) = "operations")
+                  actions:
+                    - kind: SetVariable
+                      id: setDomain_programmeOperations
+                      variable: Global.knowledgeDomain
+                      value: programme_development
+
+                    - kind: SetVariable
+                      id: setTopic_programmeOperations
+                      variable: Global.topicArea
+                      value: programme_operations
+
+                    - kind: SetVariable
+                      id: setFund_programmeOperations
                       variable: Global.fundingStream
                       value: UNCLEAR
 
