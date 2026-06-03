@@ -289,7 +289,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+                  - copilots_header_3141e.topic.CidyPDOperations_StltcJ5rxdEH1EZgIcpTs
 
       elseActions:
         - kind: SearchAndSummarizeContent
