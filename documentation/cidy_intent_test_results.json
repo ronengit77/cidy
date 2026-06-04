@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-03T15:36:01-04:00",
+                    "generatedAt":  "2026-06-04T12:17:37-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  99,
@@ -6800,7 +6800,7 @@
                                                     "topicAreas":  [
                                                                        "rptc_guidance_templates",
                                                                        "templates",
-                                                                       "programme_operations"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -6826,7 +6826,7 @@
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
                                                                                  "templates",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -6843,7 +6843,7 @@
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
                                                                                  "templates",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -6878,7 +6878,7 @@
                                                                                                       "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "programme_operations"
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7121,7 +7121,7 @@
                                                     "topicAreas":  [
                                                                        "rptc_guidance_templates",
                                                                        "templates",
-                                                                       "programme_operations"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7147,7 +7147,7 @@
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
                                                                                  "templates",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7164,7 +7164,7 @@
                                                               "topicAreas":  [
                                                                                  "rptc_guidance_templates",
                                                                                  "templates",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7199,7 +7199,7 @@
                                                                                                       "templates"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "programme_operations"
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7331,7 +7331,7 @@
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
                                                                        "rptc_progress_reports",
-                                                                       "programme_operations"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7356,7 +7356,7 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_progress_reports",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7372,7 +7372,7 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_progress_reports",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7406,7 +7406,7 @@
                                                                                                       "rptc_progress_reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "programme_operations"
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -7436,7 +7436,7 @@
                                                     "fundingStream":  "RPTC",
                                                     "topicAreas":  [
                                                                        "rptc_progress_reports",
-                                                                       "programme_operations"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -7461,7 +7461,7 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_progress_reports",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -7477,7 +7477,7 @@
                                                               "fundingStream":  "RPTC",
                                                               "topicAreas":  [
                                                                                  "rptc_progress_reports",
-                                                                                 "programme_operations"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -7511,7 +7511,7 @@
                                                                                                       "rptc_progress_reports"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "programme_operations"
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -8262,7 +8262,7 @@
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
                                                                        "cd_strategy",
-                                                                       "programme_operations",
+                                                                       "country_data",
                                                                        "about_cidy"
                                                                    ]
                                                 },
@@ -8288,7 +8288,7 @@
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
                                                                                  "cd_strategy",
-                                                                                 "programme_operations",
+                                                                                 "country_data",
                                                                                  "about_cidy"
                                                                              ],
                                                               "requiresClarification":  "Yes",
@@ -8305,7 +8305,7 @@
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
                                                                                  "cd_strategy",
-                                                                                 "programme_operations",
+                                                                                 "country_data",
                                                                                  "about_cidy"
                                                                              ]
                                                           },
@@ -8338,7 +8338,7 @@
                                                                                       "mapped":  true,
                                                                                       "matched":  [
                                                                                                       "cd_strategy",
-                                                                                                      "programme_operations"
+                                                                                                      "country_data"
                                                                                                   ],
                                                                                       "unmapped":  [
                                                                                                        "about_cidy"
@@ -9514,10 +9514,10 @@
                     },
                     {
                         "id":  "TC97",
-                        "scenario":  "Happy path - Programme operations active projects by country",
+                        "scenario":  "Happy path - Country Data active projects by country",
                         "question":  "Which projects are currently active in Kenya?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for active projects by country.",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for active projects by country.",
                         "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
@@ -9530,8 +9530,7 @@
                                                     "knowledgeDomain":  "programme_development",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "programme_operations",
-                                                                       "about_cidy"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -9555,8 +9554,7 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "about_cidy"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -9571,8 +9569,7 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "about_cidy"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -9603,10 +9600,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "programme_operations"
+                                                                                                      "country_data"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "about_cidy"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -9619,10 +9616,10 @@
                     },
                     {
                         "id":  "TC98",
-                        "scenario":  "Happy path - Programme operations proposal year list",
+                        "scenario":  "Happy path - Country Data proposal year list",
                         "question":  "I\u0027d like to see 2026 proposals.",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for proposal-year filtering.",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for proposal-year filtering.",
                         "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
@@ -9635,8 +9632,7 @@
                                                     "knowledgeDomain":  "programme_development",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "programme_operations",
-                                                                       "about_cidy"
+                                                                       "country_data"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -9660,8 +9656,7 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "about_cidy"
+                                                                                 "country_data"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -9676,8 +9671,7 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "about_cidy"
+                                                                                 "country_data"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -9708,10 +9702,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "programme_operations"
+                                                                                                      "country_data"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "about_cidy"
+
                                                                                                    ]
                                                                                   }
                                                           },
@@ -9724,10 +9718,10 @@
                     },
                     {
                         "id":  "TC99",
-                        "scenario":  "Happy path - Programme operations LDC activity count",
+                        "scenario":  "Happy path - Country Data LDC activity count",
                         "question":  "How many activities in 2025 targeted LDCs?",
                         "clarification":  "",
-                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for activity counts by year and LDC target group.",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for activity counts by year and LDC target group.",
                         "status":  "pass",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
@@ -9740,9 +9734,8 @@
                                                     "knowledgeDomain":  "programme_development",
                                                     "fundingStream":  "UNCLEAR",
                                                     "topicAreas":  [
-                                                                       "programme_operations",
-                                                                       "rptc_progress_reports",
-                                                                       "about_cidy"
+                                                                       "country_data",
+                                                                       "rptc_progress_reports"
                                                                    ]
                                                 },
                         "routePath":  [
@@ -9766,9 +9759,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "rptc_progress_reports",
-                                                                                 "about_cidy"
+                                                                                 "country_data",
+                                                                                 "rptc_progress_reports"
                                                                              ],
                                                               "requiresClarification":  "No",
                                                               "clarificationType":  "none"
@@ -9783,9 +9775,8 @@
                                                               "knowledgeDomain":  "programme_development",
                                                               "fundingStream":  "UNCLEAR",
                                                               "topicAreas":  [
-                                                                                 "programme_operations",
-                                                                                 "rptc_progress_reports",
-                                                                                 "about_cidy"
+                                                                                 "country_data",
+                                                                                 "rptc_progress_reports"
                                                                              ]
                                                           },
                                                "decision":  "Begin Question_Enhancer.yaml"
@@ -9816,11 +9807,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "programme_operations"
+                                                                                                      "country_data"
                                                                                                   ],
                                                                                       "unmapped":  [
-                                                                                                       "rptc_progress_reports",
-                                                                                                       "about_cidy"
+                                                                                                       "rptc_progress_reports"
                                                                                                    ]
                                                                                   }
                                                           },

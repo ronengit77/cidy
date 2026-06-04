@@ -272,8 +272,8 @@ beginDialog:
                     - id: projects_evaluations
                       displayName: Project evaluations, recommendations, and lessons learned
 
-                    - id: programme_operations
-                      displayName: Programme operations: projects, proposals, requests, and activities
+                    - id: country_data
+                      displayName: Country Data: projects, proposals, requests, travel, activities, and contacts
 
                     - id: da
                       displayName: Development Account (DA)
@@ -367,21 +367,21 @@ beginDialog:
                       variable: Global.fundingStream
                       value: UNCLEAR
 
-                - id: conditionItem_domainProgrammeOperations
-                  condition: =Or(Text(Topic.domainChoice) = "programme_operations", StartsWith(Text(Topic.domainChoice), "Programme operations"), Find("projects, proposals, requests, and activities", Text(Topic.domainChoice)) > 0, Lower(Text(Topic.domainChoice)) = "operations")
+                - id: conditionItem_domainCountryData
+                  condition: =Or(Text(Topic.domainChoice) = "country_data", StartsWith(Text(Topic.domainChoice), "Country Data"), Find("projects, proposals, requests", Text(Topic.domainChoice)) > 0, Find("contacts", Lower(Text(Topic.domainChoice))) > 0, Lower(Text(Topic.domainChoice)) = "country data")
                   actions:
                     - kind: SetVariable
-                      id: setDomain_programmeOperations
+                      id: setDomain_countryData
                       variable: Global.knowledgeDomain
                       value: programme_development
 
                     - kind: SetVariable
-                      id: setTopic_programmeOperations
+                      id: setTopic_countryData
                       variable: Global.topicArea
-                      value: programme_operations
+                      value: country_data
 
                     - kind: SetVariable
-                      id: setFund_programmeOperations
+                      id: setFund_countryData
                       variable: Global.fundingStream
                       value: UNCLEAR
 

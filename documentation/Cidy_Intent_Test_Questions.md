@@ -678,27 +678,27 @@ Total test cases: 99
 
 **Date created:** 2026-05-28
 
-## 97. Happy path - Programme operations active projects by country
+## 97. Happy path - Country Data active projects by country
 
 **Question:** Which projects are currently active in Kenya?
 
-**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for active projects by country.
+**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for active projects by country.
 
 **Date created:** 2026-06-02
 
-## 98. Happy path - Programme operations proposal year list
+## 98. Happy path - Country Data proposal year list
 
 **Question:** I'd like to see 2026 proposals.
 
-**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for proposal-year filtering.
+**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for proposal-year filtering.
 
 **Date created:** 2026-06-02
 
-## 99. Happy path - Programme operations LDC activity count
+## 99. Happy path - Country Data LDC activity count
 
 **Question:** How many activities in 2025 targeted LDCs?
 
-**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for activity counts by year and LDC target group.
+**Expected behavior:** Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for activity counts by year and LDC target group.
 
 **Date created:** 2026-06-02
 

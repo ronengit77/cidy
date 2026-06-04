@@ -614,24 +614,24 @@
                           "date-created":  "2026-05-28"
                       },
                       {
-                          "Scenario":  "Happy path - Programme operations active projects by country",
+                          "Scenario":  "Happy path - Country Data active projects by country",
                           "Test question":  "Which projects are currently active in Kenya?",
                           "Clarification":  "",
-                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for active projects by country.",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for active projects by country.",
                           "date-created":  "2026-06-02"
                       },
                       {
-                          "Scenario":  "Happy path - Programme operations proposal year list",
+                          "Scenario":  "Happy path - Country Data proposal year list",
                           "Test question":  "I'd like to see 2026 proposals.",
                           "Clarification":  "",
-                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for proposal-year filtering.",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for proposal-year filtering.",
                           "date-created":  "2026-06-02"
                       },
                       {
-                          "Scenario":  "Happy path - Programme operations LDC activity count",
+                          "Scenario":  "Happy path - Country Data LDC activity count",
                           "Test question":  "How many activities in 2025 targeted LDCs?",
                           "Clarification":  "",
-                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Response uses the Cidy-PD-Operations operational records for activity counts by year and LDC target group.",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for activity counts by year and LDC target group.",
                           "date-created":  "2026-06-02"
                       }
                   ]
