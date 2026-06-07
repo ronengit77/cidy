@@ -273,7 +273,7 @@ beginDialog:
                       displayName: Project evaluations, recommendations, and lessons learned
 
                     - id: country_data
-                      displayName: Country Data: projects, proposals, requests, travel, activities, and contacts
+                      displayName: Country/region data: work, projects, requests, proposals, activities, travel, contacts, budgets, and statuses
 
                     - id: da
                       displayName: Development Account (DA)
@@ -368,7 +368,7 @@ beginDialog:
                       value: UNCLEAR
 
                 - id: conditionItem_domainCountryData
-                  condition: =Or(Text(Topic.domainChoice) = "country_data", StartsWith(Text(Topic.domainChoice), "Country Data"), Find("projects, proposals, requests", Text(Topic.domainChoice)) > 0, Find("contacts", Lower(Text(Topic.domainChoice))) > 0, Lower(Text(Topic.domainChoice)) = "country data")
+                  condition: =Or(Text(Topic.domainChoice) = "country_data", StartsWith(Text(Topic.domainChoice), "Country Data"), StartsWith(Text(Topic.domainChoice), "Country/region data"), Find("projects", Lower(Text(Topic.domainChoice))) > 0 && Find("requests", Lower(Text(Topic.domainChoice))) > 0, Find("contacts", Lower(Text(Topic.domainChoice))) > 0, Find("region", Lower(Text(Topic.domainChoice))) > 0, Find("work", Lower(Text(Topic.domainChoice))) > 0, Lower(Text(Topic.domainChoice)) = "country data")
                   actions:
                     - kind: SetVariable
                       id: setDomain_countryData

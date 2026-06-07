@@ -37,7 +37,6 @@ beginDialog:
               fileSearchDataSource:
                 searchFilesMode:
                   kind: DoNotSearchFiles
-
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
@@ -260,38 +259,87 @@ beginDialog:
             - kind: SetVariable
               id: setVariable_countryDataInstructions
               variable: Global.sourceUseInstructions
-              value: This folder contains country-level Programme Development data, with country docs and PDFs covering projects, proposals, requests, travel, activities, and contact people. Use the Country Data folder for questions that ask to find, list, filter, count, compare, or summarize records by country, region, year, status, proposal/request/activity/travel attributes, contact person, target group, LDC/LLDC/SIDS status, or current/ongoing/active state. Examples include which projects are currently active or ongoing in a country, showing proposals or requests for a country or year, listing travel and activities linked to a country, identifying contact people, and counting activities that targeted LDCs. Prefer explicit fields, headings, tables, and country-specific source documents such as country-card-*.pdf where available. If a field name, status definition, contact role, travel coverage period, or country-file coverage is unclear from the source, state the limitation.
+              value: |-
+                Use the Country Data knowledge source for country-level and region-level records about countries, regions, projects, requests, proposals, activities, travel, contacts, target groups, years, statuses, budgets, divisions, and LDC/LLDC/SIDS status.
+                For broad or vague country/region questions such as list work in Fiji, what is happening in Fiji, show work in the Pacific, or what do we have for SIDS, interpret work broadly as projects, requests, proposals, activities, travel records, contacts, budgets, statuses, divisions, and summary metrics.
+                Do not treat vague country or region wording as insufficient by itself. Expand retrieval with country/region anchors before searching.
+                Prefer country-specific records, region-specific records, country-card files, compact country filenames, headings, tables, explicit counts, and summaries.
+                Answer from explicit source content. If a category has zero records, include it as zero when supported. If only partial information is available, answer with what is available and state the limitation.
+
+            - kind: SetVariable
+              id: setVariable_countryDataEnhancedQuestion
+              variable: Global.countryDataEnhancedQuestion
+              value: =Trim(If(Find("fiji", Lower(Global.userQuestion)) > 0, "Fiji FJI fji", Global.userQuestion) & " country card country record compact country file region subregion ISO3 lowercase ISO3 projects requests proposals RPTC proposals activities RPTC activities travel contacts budgets statuses divisions current ongoing active planned completed closed SIDS LDC LLDC source file")
+
+            - kind: ConditionGroup
+              id: debug_countryDataGenerateAnswerInput
+              conditions:
+                - id: debug_countryDataGenerateAnswerInput_enabled
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: debug_countryDataGenerateAnswerInput_message
+                      activity: |-
+                        DEBUG - Programme Development country_data generate answer card input
+
+                        Global.userQuestion:
+                        {Global.userQuestion}
+
+                        Global.sourceUseInstructions:
+                        {Global.sourceUseInstructions}
+
+                        userInput sent to SearchAndSummarizeContent:
+                        {Global.countryDataEnhancedQuestion}
+
+                        additionalInstructions sent to SearchAndSummarizeContent:
+                        Answer using ONLY the selected Country Data knowledge source.
+
+                        Use the enhanced retrieval query. It intentionally starts with the detected country, region, grouping, and retrieval anchors because short phrases like "list work in Fiji" are too vague for reliable retrieval.
+
+                        For country or region work queries, interpret "work" broadly as:
+                        projects, requests, proposals, RPTC proposals, activities, RPTC activities, travel records, contacts, budgets, statuses, divisions, current/ongoing/active records, completed/closed records, and summary metrics.
+
+                        Prefer country-specific records, region-specific records, compact country filenames, country-card files, headings, tables, explicit counts, and summary sections.
+
+                        Use country name, region name, ISO3, lowercase ISO3, and compact filename patterns as retrieval clues only. Answer from explicit source content.
+
+                        If the source gives counts, include them. If a category has zero records, include it as zero. If details are missing or unclear, answer with the available information and state the limitation.
+
+                        Format:
+                        ANSWER:
+                        SOURCES:
+                        CONFIDENCE:
+
+                        knowledgeSources:
+                        copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy
 
             - kind: SearchAndSummarizeContent
               id: search_countryData
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the Country Data folder and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              userInput: =Global.countryDataEnhancedQuestion
               additionalInstructions: |-
-                You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development country data for projects, proposals, requests, travel, activities, or contact people, topic area: {Global.topicArea}.
-                Answer using ONLY records from the Country Data folder.
-                For list, filter, and count questions, use explicit country documents, PDFs, tables, headings, metadata, and structured records where possible. Return exact counts when supported; otherwise state the limitation clearly.
-                For active/current/ongoing questions, use explicit status/date fields from the source. Do not infer current status from title text alone.
-                For contact questions, distinguish named people, roles, offices, and organizations when the source supports it. Do not infer a person's current role unless the source states it.
-                For travel questions, use explicit travel dates, mission references, locations, and country context where available.
-                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, version, or operational data period used.
-                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
-                Format your response as follows:
-                ANSWER: Your detailed answer
-                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
-                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
-              fileSearchDataSource:
-                searchFilesMode:
-                  kind: DoNotSearchFiles
+                Answer using ONLY the selected Country Data knowledge source.
 
+                Use the enhanced retrieval query. It intentionally starts with the detected country, region, grouping, and retrieval anchors because short phrases like "list work in Fiji" are too vague for reliable retrieval.
+
+                For country or region work queries, interpret "work" broadly as:
+                projects, requests, proposals, RPTC proposals, activities, RPTC activities, travel records, contacts, budgets, statuses, divisions, current/ongoing/active records, completed/closed records, and summary metrics.
+
+                Prefer country-specific records, region-specific records, compact country filenames, country-card files, headings, tables, explicit counts, and summary sections.
+
+                Use country name, region name, ISO3, lowercase ISO3, and compact filename patterns as retrieval clues only. Answer from explicit source content.
+
+                If the source gives counts, include them. If a category has zero records, include it as zero. If details are missing or unclear, answer with the available information and state the limitation.
+
+                Format:
+                ANSWER:
+                SOURCES:
+                CONFIDENCE:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyPDOperations_7bH_yaMUW3gykErOHPjI3
+                  - copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy
 
       elseActions:
         - kind: SearchAndSummarizeContent
@@ -324,7 +372,7 @@ beginDialog:
       id: conditionGroup_fallback
       conditions:
         - id: conditionItem_noResult
-          condition: =IsBlank(Global.draftResponse)
+          condition: =IsBlank(Global.draftResponse) && Global.topicArea <> "country_data"
           actions:
             - kind: SearchAndSummarizeContent
               id: search_DA_fallback

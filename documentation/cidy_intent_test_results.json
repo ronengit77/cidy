@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-04T12:17:37-04:00",
+                    "generatedAt":  "2026-06-06T23:31:01-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  99,
-                    "passed":  90,
-                    "failed":  9
+                    "passed":  87,
+                    "failed":  12
                 },
     "results":  [
                     {
@@ -8337,10 +8337,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "cd_strategy",
-                                                                                                      "country_data"
+                                                                                                      "cd_strategy"
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "country_data",
                                                                                                        "about_cidy"
                                                                                                    ]
                                                                                   }
@@ -9518,7 +9518,7 @@
                         "question":  "Which projects are currently active in Kenya?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for active projects by country.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
@@ -9598,20 +9598,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "country_data"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: country_data."
+                                         }
                                      ]
                     },
                     {
@@ -9620,7 +9624,7 @@
                         "question":  "I\u0027d like to see 2026 proposals.",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for proposal-year filtering.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
@@ -9700,20 +9704,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "country_data"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "country_data"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: country_data."
+                                         }
                                      ]
                     },
                     {
@@ -9722,7 +9730,7 @@
                         "question":  "How many activities in 2025 targeted LDCs?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for activity counts by year and LDC target group.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Programme Development",
                                            "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
@@ -9805,20 +9813,25 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "country_data"
+
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "country_data",
                                                                                                        "rptc_progress_reports"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: country_data, rptc_progress_reports."
+                                         }
                                      ]
                     }
                 ]

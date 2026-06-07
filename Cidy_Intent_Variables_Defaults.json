@@ -38,6 +38,12 @@
                                                                    "ownerTopic":  "Question Enhancer",
                                                                    "description":  "Non-routing search hints generated after clarification and before routing. Formulate Response topics may use this as additional search context, but it must not override the finalized intent variables."
                                                                },
+                      "Global.countryDataEnhancedQuestion":  {
+                                                                 "type":  "String",
+                                                                 "default":  "",
+                                                                 "ownerTopic":  "Formulate Response Programme Development",
+                                                                 "description":  "Expanded retrieval query used by the Programme Development country_data branch to improve country and region data search."
+                                                             },
                       "Global.testMode":  {
                                               "type":  "Boolean",
                                               "default":  false,
@@ -93,6 +99,7 @@
                                                                      "about_cidy",
                                                                      "budget_finance",
                                                                      "cd_strategy",
+                                                                     "country_data",
                                                                      "definition",
                                                                      "design_evaluation",
                                                                      "evaluation_criteria",
@@ -109,7 +116,6 @@
                                                                      "process_governance",
                                                                      "programme_design_standards",
                                                                      "programme_management",
-                                                                     "country_data",
                                                                      "project_planning_design",
                                                                      "projects_evaluations",
                                                                      "recommendations",
@@ -232,11 +238,11 @@
                                                   "description":  "User satisfaction or feedback response."
                                               },
                       "Global.askAnother":  {
-                                                 "type":  "String",
-                                                 "default":  "",
-                                                 "ownerTopic":  "User Feedback",
-                                                 "description":  "Whether the user wants to ask another question."
-                                             },
+                                                "type":  "String",
+                                                "default":  "",
+                                                "ownerTopic":  "User Feedback",
+                                                "description":  "Whether the user wants to ask another question."
+                                            },
                       "Global.nextActionContext":  {
                                                        "type":  "String",
                                                        "default":  "",
@@ -249,27 +255,28 @@
                                                        "description":  "Context flag used by the reusable Continue Or Close topic to show the correct next-step menu."
                                                    },
                       "Global.retryMode":  {
-                                                "type":  "String",
-                                                "default":  "",
-                                                "ownerTopic":  "User Feedback / Formulate Response General",
-                                                "description":  "Optional answer-recovery mode, such as wide_knowledge for retrying the same question against the top-level Knowledge source."
-                                             },
-                      "Global.cidyMode":  {
                                                "type":  "String",
-                                               "default":  "structured",
-                                               "allowedValues":  [
-                                                                     "structured",
-                                                                     "open"
-                                                                 ],
-                                               "ownerTopic":  "Conversation Start / Exit Cidy Flow / Return to Cidy",
-                                               "description":  "Controls whether user messages follow the structured Cidy intake/classification path or a more open chat path that still uses approved Cidy knowledge where relevant."
-                                             }
+                                               "default":  "",
+                                               "ownerTopic":  "User Feedback / Formulate Response General",
+                                               "description":  "Optional answer-recovery mode, such as wide_knowledge for retrying the same question against the top-level Knowledge source."
+                                           },
+                      "Global.cidyMode":  {
+                                              "type":  "String",
+                                              "default":  "structured",
+                                              "allowedValues":  [
+                                                                    "structured",
+                                                                    "open"
+                                                                ],
+                                              "ownerTopic":  "Conversation Start / Exit Cidy Flow / Return to Cidy",
+                                              "description":  "Controls whether user messages follow the structured Cidy intake/classification path or a more open chat path that still uses approved Cidy knowledge where relevant."
+                                          }
                   },
     "initialization":  {
                            "onNewUserQuestion":  {
                                                      "Global.intentJson":  "{}",
                                                      "Global.intentReason":  "",
                                                      "Global.executiveQuestionEnhancements":  "",
+                                                     "Global.countryDataEnhancedQuestion":  "",
                                                      "Global.testMode":  false,
                                                      "Global.intentStatus":  "needs_classification",
                                                      "Global.knowledgeDomain":  "unclear",
@@ -287,14 +294,14 @@
                                                      "Global.confidenceScore":  "",
                                                      "Global.confidenceLabel":  "",
                                                      "Global.warningMessage":  "",
-                                                      "Global.issueSummary":  "",
-                                                      "Global.userFeedback":  "",
-                                                      "Global.askAnother":  "",
-                                                      "Global.nextActionContext":  "",
-                                                      "Global.retryMode":  "",
-                                                      "Global.cidyMode":  "structured"
-                                                  }
-                        },
+                                                     "Global.issueSummary":  "",
+                                                     "Global.userFeedback":  "",
+                                                     "Global.askAnother":  "",
+                                                     "Global.nextActionContext":  "",
+                                                     "Global.retryMode":  "",
+                                                     "Global.cidyMode":  "structured"
+                                                 }
+                       },
     "statusRules":  {
                         "afterInitialClassification":  [
                                                            {
@@ -426,10 +433,10 @@
                                                                      "Global.fundingStream":  "UNCLEAR"
                                                                  },
                                                           "Country Data":  {
-                                                                                       "Global.knowledgeDomain":  "programme_development",
-                                                                                       "Global.topicArea":  "country_data",
-                                                                                       "Global.fundingStream":  "UNCLEAR"
-                                                                                   },
+                                                                               "Global.knowledgeDomain":  "programme_development",
+                                                                               "Global.topicArea":  "country_data",
+                                                                               "Global.fundingStream":  "UNCLEAR"
+                                                                           },
                                                           "Project Evaluations / Lessons Learned":  {
                                                                                                         "Global.knowledgeDomain":  "programme_development",
                                                                                                         "Global.topicArea":  "projects_evaluations",
