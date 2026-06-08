@@ -61,6 +61,16 @@ beginDialog:
       value: =Blank()
 
     - kind: SetVariable
+      id: reset_sourceUseInstructions
+      variable: Global.sourceUseInstructions
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_countryDataEnhancedQuestion
+      variable: Global.countryDataEnhancedQuestion
+      value: =Blank()
+
+    - kind: SetVariable
       id: reset_nextActionContext
       variable: Global.nextActionContext
       value: =Blank()

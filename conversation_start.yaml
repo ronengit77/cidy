@@ -39,6 +39,161 @@ beginDialog:
       value: structured
 
     - kind: SetVariable
+      id: reset_userQuestion_start
+      variable: Global.userQuestion
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_transcript_start
+      variable: Global.transcript
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_intentJson_start
+      variable: Global.intentJson
+      value: "{}"
+
+    - kind: SetVariable
+      id: reset_intentReason_start
+      variable: Global.intentReason
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_questionEnhancements_start
+      variable: Global.executiveQuestionEnhancements
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_sourceUseInstructions_start
+      variable: Global.sourceUseInstructions
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_countryDataEnhancedQuestion_start
+      variable: Global.countryDataEnhancedQuestion
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_nextActionContext_start
+      variable: Global.nextActionContext
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_awaitingNewQuestion_start
+      variable: Global.awaitingNewQuestion
+      value: =false
+
+    - kind: SetVariable
+      id: reset_intentStatus_start
+      variable: Global.intentStatus
+      value: needs_classification
+
+    - kind: SetVariable
+      id: reset_knowledgeDomain_start
+      variable: Global.knowledgeDomain
+      value: unclear
+
+    - kind: SetVariable
+      id: reset_fundingStream_start
+      variable: Global.fundingStream
+      value: UNCLEAR
+
+    - kind: SetVariable
+      id: reset_topicArea_start
+      variable: Global.topicArea
+      value: unclear
+
+    - kind: SetVariable
+      id: reset_requiresClarification_start
+      variable: Global.requiresClarification
+      value: No
+
+    - kind: SetVariable
+      id: reset_clarificationType_start
+      variable: Global.clarificationType
+      value: none
+
+    - kind: SetVariable
+      id: reset_clarificationQuestion_start
+      variable: Global.clarificationQuestion
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_clarificationAnswer_start
+      variable: Global.clarificationAnswer
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_normalizedClarificationAnswer_start
+      variable: Global.normalizedClarificationAnswer
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_clarificationAttempts_start
+      variable: Global.clarificationAttempts
+      value: 0
+
+    - kind: SetVariable
+      id: reset_routingTarget_start
+      variable: Global.routingTarget
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_draftResponse_start
+      variable: Global.draftResponse
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_formattedAnswer_start
+      variable: Global.formattedAnswer
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_formattedSources_start
+      variable: Global.formattedSources
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_confidenceScore_start
+      variable: Global.confidenceScore
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_confidenceLabel_start
+      variable: Global.confidenceLabel
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_confidenceExplanation_start
+      variable: Global.confidenceExplanation
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_warningMessage_start
+      variable: Global.warningMessage
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_issueSummary_start
+      variable: Global.issueSummary
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_userFeedback_start
+      variable: Global.userFeedback
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_askAnother_start
+      variable: Global.askAnother
+      value: =Blank()
+
+    - kind: SetVariable
+      id: reset_retryMode_start
+      variable: Global.retryMode
+      value: =Blank()
+
+    - kind: SetVariable
       id: setVariable_bGQ2Qa
       variable: Topic.conversationID
       value: =System.Conversation.Id

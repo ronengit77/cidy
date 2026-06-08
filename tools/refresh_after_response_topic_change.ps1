@@ -124,6 +124,7 @@ function Get-InventoryTopicAreas {
         "about_cidy",
         "budget_finance",
         "cd_strategy",
+        "country_data",
         "definition",
         "design_evaluation",
         "evaluation_criteria",
