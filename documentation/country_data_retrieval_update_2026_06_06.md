@@ -47,3 +47,10 @@ Question enhancements: {"funding_stream":"UNCLEAR","topic_area":"other_unclear"}
 ```
 
 The generate-answer query should be optimized for finding the right source file first. Instructions about how to interpret and format the answer belong in `additionalInstructions`, not in the retrieval query.
+
+## Follow-Up For Tomorrow
+
+- Review all newly added global/topic variables and confirm they reset in every relevant lifecycle path.
+- Confirm `Global.countryDataEnhancedQuestion` resets when the user asks a new question.
+- Confirm new retrieval/debug variables reset when the user exits controlled conversation mode, enters free/open conversation mode, returns to controlled mode, or starts a fresh controlled-flow question.
+- Avoid carrying stale retrieval inputs, debug values, routing values, or enhanced-question text across controlled/free conversation transitions.

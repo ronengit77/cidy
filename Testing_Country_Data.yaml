@@ -1,0 +1,140 @@
+kind: AdaptiveDialog
+modelDescription: Local diagnostic topic for testing the Country Data knowledge source directly. It bypasses Cidy routing and intent classification and tests both specific-source and all-knowledge retrieval.
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Testing Country Data
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Testing 123
+      - "Testing 123: list work in Fiji"
+      - "Testing 123:list work in Fiji"
+      - "Testing 123:list work happening in Fiji"
+      - "Testing 123:list work happening in country"
+      - testing country data
+      - testing country data list work happening in country
+      - testing country data list work happening in Fiji
+      - testing country data country work
+      - testing country data country records
+
+  actions:
+    - kind: SetVariable
+      id: set_testQuestion
+      variable: Topic.testQuestion
+      value: =Coalesce(System.Activity.Text, Global.userQuestion, "")
+
+    - kind: SetVariable
+      id: set_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =Trim(If(StartsWith(Lower(Topic.testQuestion), "testing 123:"), Mid(Topic.testQuestion, Len("Testing 123:") + 1, Len(Topic.testQuestion)), If(StartsWith(Lower(Topic.testQuestion), "testing 123"), Trim(Mid(Topic.testQuestion, Len("Testing 123") + 1, Len(Topic.testQuestion))), If(StartsWith(Lower(Topic.testQuestion), "testing country data:"), Mid(Topic.testQuestion, Len("testing country data:") + 1, Len(Topic.testQuestion)), If(StartsWith(Lower(Topic.testQuestion), "testing country data"), Trim(Mid(Topic.testQuestion, Len("testing country data") + 1, Len(Topic.testQuestion))), Topic.testQuestion)))))
+
+    - kind: SetVariable
+      id: normalize_empty_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =If(IsBlank(Topic.cleanQuestion), Topic.testQuestion, Topic.cleanQuestion)
+
+    - kind: SetVariable
+      id: set_countryRegionRetrievalQuestion
+      variable: Topic.countryRegionRetrievalQuestion
+      value: =Topic.cleanQuestion & " country region country card regional record compact country record projects requests proposals activities travel contacts Programme Development status budget division current ongoing active planned completed closed list summarize compare count SIDS LDC LLDC ISO3 source file"
+
+    - kind: SetVariable
+      id: clear_countryRegionResponse
+      variable: Topic.countryRegionResponse
+      value: =Blank()
+
+    - kind: SendActivity
+      id: debug_start
+      activity: |-
+        DEBUG - Testing Country/Region Data topic entered.
+
+        Incoming text:
+        {System.Activity.Text}
+
+        Raw routed question:
+        {Topic.testQuestion}
+
+        Clean question:
+        {Topic.cleanQuestion}
+
+        Expanded retrieval question:
+        {Topic.countryRegionRetrievalQuestion}
+
+        Specific knowledge source ID:
+        copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy
+
+        Test plan:
+        Search selected Country Data knowledge source once using the expanded country/region retrieval question.
+
+    - kind: SearchAndSummarizeContent
+      id: search_countryRegionData_specific_expanded
+      autoSend: false
+      variable: Topic.countryRegionResponse
+      userInput: =Topic.countryRegionRetrievalQuestion
+      additionalInstructions: |-
+        You are testing the Country Data knowledge source directly.
+
+        Use ONLY the selected Country Data knowledge source.
+        Do not use Cidy intent classification, routing, fallback topics, or other knowledge sources.
+        Do not answer from general knowledge.
+
+        The user input passed to you is an expanded retrieval query. It includes the user's original country or region wording plus retrieval anchors.
+
+        Identify the country, region, subregion, or country grouping mentioned in the user question. Examples include country names, ISO3 codes, regions, subregions, SIDS, LDCs, LLDCs, and regional groupings.
+
+        For country or region work queries, interpret "work" broadly as:
+        projects, requests, proposals, activities, travel records, contacts, budgets, statuses, divisions, current/ongoing/active records, completed/closed records, and summary metrics.
+
+        Do not treat short phrases such as "list work", "what is happening", "what do we have", "show work", "current work", or "ongoing work" as insufficient. Use them as country/region portfolio summary requests.
+
+        Prefer country-specific files, region-specific files, compact country record filenames, country-card files, headings, tables, explicit counts, and summary sections.
+
+        Compact country record filenames may look like:
+        fji-prjct-3-rqst-24-prpsl-1-act-0-trvl-0-cntct-1-26-06-06-21-11
+
+        Use filename patterns only as retrieval clues for country, record counts, and date/time. Answer from explicit source content, including headings, tables, summaries, and country-specific or region-specific records.
+
+        If the user asks to list work for a country or region, group the answer by record type when possible:
+        projects, requests, proposals, activities, travel, contacts, and other relevant records.
+
+        Include counts where available.
+        If a category has zero records, include it as zero rather than saying no information was found.
+        Do not require the exact phrase "Programme Development" to appear in the source.
+        Return exact record names, dates, statuses, counts, budgets, divisions, and contact details only when the source explicitly supports them.
+        If a field, status, date, contact role, travel coverage period, or source coverage is unclear, answer with the available information and state the limitation.
+
+        If no relevant source is found, say so clearly and include the main country, region, or grouping terms you attempted from the user text.
+
+        Format your response exactly as follows:
+
+        DEBUG_RETRIEVAL:
+        Briefly name the country, region, grouping, file pattern, and search terms used.
+
+        ANSWER:
+        Provide the direct answer grouped by record type where possible.
+
+        SOURCES:
+        List each source as a markdown link in this exact format: [name of file](full url). If a full URL is not available, list the source title as plain text.
+
+        CONFIDENCE:
+        Write only a single number from 0 to 5 on this line.
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy
+
+    - kind: SendActivity
+      id: debug_countryRegion_response
+      activity: |-
+        DEBUG - Result: Specific Country Data source + expanded country/region query
+
+        Query sent:
+        {Topic.countryRegionRetrievalQuestion}
+
+        Response:
+        {Topic.countryRegionResponse}
+
+inputType: {}
+outputType: {}

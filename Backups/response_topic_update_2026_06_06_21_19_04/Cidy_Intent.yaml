@@ -1,0 +1,772 @@
+kind: AdaptiveDialog
+modelDescription: Mandatory first-step intake topic for Cidy substantive inquiries. This topic classifies the user’s question for the split Cidy intent flow, sets the required intent variables, and passes control to Intent Clarifier. It must be consulted before clarification, routing, knowledge search, or answer generation. It does not answer the user, ask clarifying questions, search knowledge sources, or route directly to Formulate Response topics. Use this topic for questions about DESA capacity development guidance, DA, RPTC, project lifecycle procedures, templates, eligibility, reporting, monitoring, evaluation, governance, and country-level support.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: setVariable_resetIntentJson
+      variable: Global.intentJson
+      value: "{}"
+
+    - kind: SetVariable
+      id: setVariable_testMode
+      variable: Global.testMode
+      value: false
+
+    - kind: SetVariable
+      id: setVariable_resetIntentReason
+      variable: Global.intentReason
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetQuestionEnhancements
+      variable: Global.executiveQuestionEnhancements
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetNextActionContext
+      variable: Global.nextActionContext
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetDraftResponse
+      variable: Global.draftResponse
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetFormattedAnswer
+      variable: Global.formattedAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetFormattedSources
+      variable: Global.formattedSources
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceScore
+      variable: Global.confidenceScore
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceLabel
+      variable: Global.confidenceLabel
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetConfidenceExplanation
+      variable: Global.confidenceExplanation
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetWarningMessage
+      variable: Global.warningMessage
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetIntentStatus
+      variable: Global.intentStatus
+      value: needs_classification
+
+    - kind: SetVariable
+      id: setVariable_resetKnowledgeDomain
+      variable: Global.knowledgeDomain
+      value: unclear
+
+    - kind: SetVariable
+      id: setVariable_resetFundingStream
+      variable: Global.fundingStream
+      value: UNCLEAR
+
+    - kind: SetVariable
+      id: setVariable_resetTopicArea
+      variable: Global.topicArea
+      value: unclear
+
+    - kind: SetVariable
+      id: setVariable_resetRequiresClarification
+      variable: Global.requiresClarification
+      value: No
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationType
+      variable: Global.clarificationType
+      value: none
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationQuestion
+      variable: Global.clarificationQuestion
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationAnswer
+      variable: Global.clarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetNormalizedClarificationAnswer
+      variable: Global.normalizedClarificationAnswer
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetClarificationAttempts
+      variable: Global.clarificationAttempts
+      value: 0
+
+    - kind: SetVariable
+      id: setVariable_maxClarificationAttempts
+      variable: Global.maxClarificationAttempts
+      value: 2
+
+    - kind: ConditionGroup
+      id: conditionGroup_exitCommand_classifierGuard
+      conditions:
+        - id: conditionItem_exitCommand_classifierGuard
+          condition: =Or(Find("exit cidy flow", Lower(Global.userQuestion)) > 0, Find("exit cindy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cidy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cindy flow", Lower(Global.userQuestion)) > 0, Find("leave cidy flow", Lower(Global.userQuestion)) > 0, Find("leave cindy flow", Lower(Global.userQuestion)) > 0, Find("leave structured flow", Lower(Global.userQuestion)) > 0, Find("stop cidy flow", Lower(Global.userQuestion)) > 0, Find("stop cindy flow", Lower(Global.userQuestion)) > 0, Find("leave controlled flow", Lower(Global.userQuestion)) > 0, Find("exit controlled flow", Lower(Global.userQuestion)) > 0, Find("switch to open chat", Lower(Global.userQuestion)) > 0, Find("open conversation", Lower(Global.userQuestion)) > 0, Find("switch to open conversation", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: set_cidyMode_open_classifierGuard
+              variable: Global.cidyMode
+              value: open
+
+            - kind: SetVariable
+              id: clear_userQuestion_exit_classifierGuard
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SendActivity
+              id: msg_exitCidyFlow_classifierGuard
+              activity: |-
+                You are now outside the structured Cidy flow. I can continue in a more open conversation, but I will still use approved Cidy knowledge where relevant.
+
+                You can say **"return to Cidy flow"** at any time to go back to the structured guidance path.
+
+            - kind: EndDialog
+              id: end_exitCommand_classifierGuard
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_initialClassify
+      input:
+        binding:
+          UserQuestion: |
+            ="Classify the following user question for Cidy, a DESA capacity-development knowledge assistant." & Char(10) & Char(10) &
+            "Return ONLY valid JSON. Do not include markdown, prose, comments, or code fences." & Char(10) & Char(10) &
+            "Required JSON schema:" & Char(10) &
+            "{""knowledge_domain"":""..."",""funding_stream"":""..."",""topic_area"":""..."",""requires_clarification"":""..."",""clarification_type"":""..."",""clarification_question"":""..."",""reason"":""...""}" & Char(10) & Char(10) &
+            "Allowed knowledge_domain values:" & Char(10) &
+            "about_cidy, da, rptc, pdf, programme_development, general_cd, out_of_scope, unclear" & Char(10) & Char(10) &
+            "Allowed funding_stream values:" & Char(10) &
+            "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
+            "Allowed topic_area values:" & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, country_data, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, resident_coordinator, rptc_guidance_templates, rptc_progress_reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "Allowed requires_clarification values: Yes, No" & Char(10) &
+            "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
+            "Critical routing rules:" & Char(10) &
+            "1. Do not infer DA, RPTC, or PDF only from artifact types such as concept note, project document, evaluation, report, template, annex, budget table, management response, drafting guidance, review checklist, results framework, theory of change, or logframe. These artifact types can exist under multiple funds." & Char(10) &
+            "2. Only classify funding_stream as DA, RPTC, or PDF if the user explicitly mentions the fund or gives a strong fund-specific signal such as Development Account, DA, Section 35, RPTC, Section 23, PDF, UNPDF, or Peace and Development Trust Fund." & Char(10) &
+            "3. If the fund is not explicit or strongly fund-specific, classify funding_stream as UNCLEAR." & Char(10) &
+            "4. Distinguish evaluation design guidance from evaluation evidence. Questions asking how to write, prepare, design, fill, create, or use an evaluation report/template/guidance are evaluation_design. Questions asking what evaluations found, said, recommended, concluded, or what lessons learned exist are programme_development/projects_evaluations." & Char(10) &
+            "5. If the user asks how to write or prepare an evaluation report and no fund is specified, set knowledge_domain=unclear, funding_stream=UNCLEAR, topic_area=evaluation_design, requires_clarification=Yes, clarification_type=fund, clarification_question=Which funding stream is this question about?" & Char(10) &
+            "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=programme_development, topic_area=projects_evaluations, and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
+            "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X." & Char(10) &
+            "8. If the user asks about TAG meetings, Tag Team meetings, steering committee meetings, meeting materials, decisions, minutes, actions, or conclusions, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=tag_meetings or steering_committee as appropriate, requires_clarification=No. These are Programme Development knowledge areas, not DA/RPTC/PDF fund-specific questions." & Char(10) &
+            "9. If the user asks about Programme Development guidance, templates, project design, progress reports, annual progress reports, final report templates, project closure, project-document preparation, workplans, budgets, indicators, implementation rates, revisions, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, or country-specific action plans, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=guidelines_templates, requires_clarification=No." & Char(10) &
+            "10. If the user asks about implementing partners, grants, grantees, partner agreements, project cooperation agreements, due diligence, IPGC, routing slips to CDO, agreement clauses, partner evaluation, procurement versus grant or implementing partner modality, or procedures to identify, screen, select, approve, amend, monitor, close, or keep records for partners/grants, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=implementing_partners_grants, requires_clarification=No." & Char(10) &
+            "11. If the user asks about DESA engagement with the Resident Coordinator system, Resident Coordinator or RCO notification, country-level support, UNCT membership, UNSDCF signatory status, CCA or UNSDCF alignment, DESA country missions, CDPMO coordination of country-level engagement, or countries with DESA UNCT membership or contribution status, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=resident_coordinator, requires_clarification=No." & Char(10) &
+            "12. If the user asks about Cidy itself, including what Cidy is, what problem it solves, how it differs from a general-purpose AI chatbot, what knowledge areas it covers, examples of good user questions, how Cidy classifies or routes questions, what happens when confidence is low or Cidy is uncertain, feedback or escalation flow, or Cidy's Copilot Studio architecture/components, set knowledge_domain=about_cidy, funding_stream=UNCLEAR, topic_area=about_cidy, requires_clarification=No." & Char(10) &
+            "13. If the user asks about DESA strategic priorities, 2023 action areas, DESA's capacity development strategy, service delivery model, five service lines or areas of work, prioritization of capacity development requests, or partnerships in delivery, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=cd_strategy, requires_clarification=No." & Char(10) &
+            "14. If the user asks to find, list, count, filter, identify, compare, or summarize Programme Development country data such as country-level projects, proposals, requests, travels, activities, or contact people by country, year, status, active/current/ongoing state, target group, LDC/LLDC/SIDS status, region, division, contact, travel attribute, or record attribute, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Examples: which projects are currently active in country X, show 2026 proposals for country X, list requests from country X, who are the contact people for country X, summarize travels to country X, how many activities in 2025 targeted LDCs." & Char(10) &
+            "15. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
+            "16. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
+            "17. If the user asks a broad but plausible Cidy-related question that is not clearly about Cidy itself or another allowed domain, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
+            "18. If the user question is clearly unrelated to Cidy, DESA capacity development, DA, RPTC, PDF/UNPDF, programme development, project evaluation evidence, lessons learned, or Cidy's own functionality, classify as out_of_scope with requires_clarification=No." & Char(10) &
+            "19. Navigation commands such as exit Cidy flow, exit Cindy flow, return to Cidy flow, back to Cidy flow, back to controlled flow, leave controlled flow, or switch to open chat are control commands, not About Cidy knowledge questions. Do not classify them as about_cidy." & Char(10) &
+            "20. Do not use values outside the allowed lists. If uncertain, use unclear." & Char(10) & Char(10) &
+            "User question:" & Char(10) &
+            Global.userQuestion
+
+      output:
+        binding:
+          predictionOutput: Topic.promptResult
+
+      aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+    - kind: SetVariable
+      id: setVariable_extractText_initial
+      variable: Topic.classificationText
+      value: =Text(Topic.promptResult.text)
+
+    - kind: ConditionGroup
+      id: conditionGroup_sendActivity_debug_initial
+      conditions:
+        - id: conditionItem_sendActivity_debug_initial
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_initial
+              activity: "DEBUG - Raw classification: {Topic.classificationText}"
+
+    - kind: SetVariable
+      id: setVariable_storeIntentJson
+      variable: Global.intentJson
+      value: =Topic.classificationText
+
+    - kind: SetVariable
+      id: setVariable_parseJSON_initial
+      variable: Topic.parsedResult
+      value: =ParseJSON(Topic.classificationText)
+
+    - kind: SetVariable
+      id: setVariable_knowledgeDomain_initial
+      variable: Global.knowledgeDomain
+      value: =Text(Topic.parsedResult.knowledge_domain)
+
+    - kind: SetVariable
+      id: setVariable_fundingStream_initial
+      variable: Global.fundingStream
+      value: =Text(Topic.parsedResult.funding_stream)
+
+    - kind: SetVariable
+      id: setVariable_topicArea_initial
+      variable: Global.topicArea
+      value: =Text(Topic.parsedResult.topic_area)
+
+    - kind: SetVariable
+      id: setVariable_requiresClarification_initial
+      variable: Global.requiresClarification
+      value: =Text(Topic.parsedResult.requires_clarification)
+
+    - kind: SetVariable
+      id: setVariable_clarificationType_initial
+      variable: Global.clarificationType
+      value: =Text(Topic.parsedResult.clarification_type)
+
+    - kind: SetVariable
+      id: setVariable_clarificationQuestion_initial
+      variable: Global.clarificationQuestion
+      value: =Text(Topic.parsedResult.clarification_question)
+
+    - kind: SetVariable
+      id: setVariable_intentReason_initial
+      variable: Global.intentReason
+      value: =Text(Topic.parsedResult.reason)
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeKnowledgeDomain
+      conditions:
+        - id: conditionItem_knowledgeDomainBlank
+          condition: =IsBlank(Global.knowledgeDomain) || Global.knowledgeDomain = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_knowledgeDomainUnclear
+              variable: Global.knowledgeDomain
+              value: unclear
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeFundingStream
+      conditions:
+        - id: conditionItem_fundingStreamBlank
+          condition: =IsBlank(Global.fundingStream) || Global.fundingStream = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_fundingStreamUnclear
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeTopicArea
+      conditions:
+        - id: conditionItem_topicAreaBlankOrLegacyOther
+          condition: =IsBlank(Global.topicArea) || Global.topicArea = "" || Global.topicArea = "other_unclear"
+          actions:
+            - kind: SetVariable
+              id: normalize_topicAreaUnclear
+              variable: Global.topicArea
+              value: unclear
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeRequiresClarification
+      conditions:
+        - id: conditionItem_requiresClarificationTrue
+          condition: =Lower(Text(Global.requiresClarification)) = "true" || Lower(Text(Global.requiresClarification)) = "yes"
+          actions:
+            - kind: SetVariable
+              id: normalize_requiresClarificationYes
+              variable: Global.requiresClarification
+              value: Yes
+
+        - id: conditionItem_requiresClarificationFalse
+          condition: =Lower(Text(Global.requiresClarification)) = "false" || Lower(Text(Global.requiresClarification)) = "no"
+          actions:
+            - kind: SetVariable
+              id: normalize_requiresClarificationNo
+              variable: Global.requiresClarification
+              value: No
+
+      elseActions:
+        - kind: SetVariable
+          id: normalize_requiresClarificationDefaultNo
+          variable: Global.requiresClarification
+          value: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_normalizeClarificationType
+      conditions:
+        - id: conditionItem_clarificationTypeBlank
+          condition: =IsBlank(Global.clarificationType) || Global.clarificationType = ""
+          actions:
+            - kind: SetVariable
+              id: normalize_clarificationTypeNone
+              variable: Global.clarificationType
+              value: none
+
+    - kind: ConditionGroup
+      id: conditionGroup_aboutCidyFallback
+      conditions:
+        - id: conditionItem_aboutCidyFallback
+          condition: =Or(Find("cidy", Lower(Global.userQuestion)) > 0, Find("capacity development assistant", Lower(Global.userQuestion)) > 0, Find("general-purpose ai chatbot", Lower(Global.userQuestion)) > 0, Find("general purpose ai chatbot", Lower(Global.userQuestion)) > 0, Find("good user questions", Lower(Global.userQuestion)) > 0, Find("good prompt", Lower(Global.userQuestion)) > 0, Find("knowledge areas", Lower(Global.userQuestion)) > 0, Find("knowledge topics", Lower(Global.userQuestion)) > 0, Find("classify a question", Lower(Global.userQuestion)) > 0, Find("route a question", Lower(Global.userQuestion)) > 0, Find("routes a question", Lower(Global.userQuestion)) > 0, Find("low confidence", Lower(Global.userQuestion)) > 0, Find("when uncertain", Lower(Global.userQuestion)) > 0, Find("copilot studio architecture", Lower(Global.userQuestion)) > 0, Find("application architecture", Lower(Global.userQuestion)) > 0) && !Or(Find("stock", Lower(Global.userQuestion)) > 0, Find("weather", Lower(Global.userQuestion)) > 0, Find("world cup", Lower(Global.userQuestion)) > 0, Find("exit cidy flow", Lower(Global.userQuestion)) > 0, Find("exit cindy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cidy flow", Lower(Global.userQuestion)) > 0, Find("exit structured cindy flow", Lower(Global.userQuestion)) > 0, Find("leave cidy flow", Lower(Global.userQuestion)) > 0, Find("leave cindy flow", Lower(Global.userQuestion)) > 0, Find("leave structured flow", Lower(Global.userQuestion)) > 0, Find("stop cidy flow", Lower(Global.userQuestion)) > 0, Find("stop cindy flow", Lower(Global.userQuestion)) > 0, Find("leave controlled flow", Lower(Global.userQuestion)) > 0, Find("exit controlled flow", Lower(Global.userQuestion)) > 0, Find("switch to open chat", Lower(Global.userQuestion)) > 0, Find("open conversation", Lower(Global.userQuestion)) > 0, Find("switch to open conversation", Lower(Global.userQuestion)) > 0, Find("back to cidy flow", Lower(Global.userQuestion)) > 0, Find("back to cindy flow", Lower(Global.userQuestion)) > 0, Find("return to cidy flow", Lower(Global.userQuestion)) > 0, Find("return to cindy flow", Lower(Global.userQuestion)) > 0, Find("back to controlled flow", Lower(Global.userQuestion)) > 0, Find("back to flow", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainAboutCidy
+              variable: Global.knowledgeDomain
+              value: about_cidy
+
+            - kind: SetVariable
+              id: fallback_setFundingAboutCidy
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: fallback_setTopicAboutCidy
+              variable: Global.topicArea
+              value: about_cidy
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoAboutCidy
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneAboutCidy
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionAboutCidy
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_projectEvaluationDiscoveryFallback
+      conditions:
+        - id: conditionItem_projectEvaluationDiscovery
+          condition: =Or(Find("project evaluation", Lower(Global.userQuestion)) > 0, Find("project evaluations", Lower(Global.userQuestion)) > 0, Find("evaluation reports", Lower(Global.userQuestion)) > 0, Find("evaluation report", Lower(Global.userQuestion)) > 0, Find("reports on evaluations", Lower(Global.userQuestion)) > 0, Find("evaluations about", Lower(Global.userQuestion)) > 0, Find("evaluations by", Lower(Global.userQuestion)) > 0, Find("evaluations in", Lower(Global.userQuestion)) > 0, Find("evaluations that include", Lower(Global.userQuestion)) > 0, Find("evaluations include", Lower(Global.userQuestion)) > 0, Find("find evaluations", Lower(Global.userQuestion)) > 0, Find("find me evaluations", Lower(Global.userQuestion)) > 0, Find("list evaluations", Lower(Global.userQuestion)) > 0, Find("need evaluations", Lower(Global.userQuestion)) > 0, Find("how many evaluations", Lower(Global.userQuestion)) > 0, Find("how many evaluation", Lower(Global.userQuestion)) > 0) && !Or(Find("write", Lower(Global.userQuestion)) > 0, Find("prepare", Lower(Global.userQuestion)) > 0, Find("design", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("fill", Lower(Global.userQuestion)) > 0, Find("create", Lower(Global.userQuestion)) > 0, Find("use an evaluation", Lower(Global.userQuestion)) > 0, Find("form should", Lower(Global.userQuestion)) > 0, Find("management response", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainProjectEvaluations
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicProjectEvaluations
+              variable: Global.topicArea
+              value: projects_evaluations
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoProjectEvaluations
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneProjectEvaluations
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionProjectEvaluations
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_programmeDevelopmentMeetingFallback
+      conditions:
+        - id: conditionItem_tagMeetingFallback
+          condition: =Or(Find("tag meeting", Lower(Global.userQuestion)) > 0, Find("tag meetings", Lower(Global.userQuestion)) > 0, Find("tag team", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainTagMeetings
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicTagMeetings
+              variable: Global.topicArea
+              value: tag_meetings
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoTagMeetings
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneTagMeetings
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionTagMeetings
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_steeringCommitteeFallback
+          condition: =Find("steering committee", Lower(Global.userQuestion)) > 0 && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainSteeringCommittee
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicSteeringCommittee
+              variable: Global.topicArea
+              value: steering_committee
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoSteeringCommittee
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneSteeringCommittee
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionSteeringCommittee
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_programmeDevelopmentGuidanceFallback
+      conditions:
+        - id: conditionItem_countryDataRPTCActivitiesFallback
+          condition: =Find("rptc", Lower(Global.userQuestion)) > 0 && Or(Find("activities", Lower(Global.userQuestion)) > 0, Find("activity", Lower(Global.userQuestion)) > 0) && Or(Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("count", Lower(Global.userQuestion)) > 0, Find("how many", Lower(Global.userQuestion)) > 0) && !Or(Find("progress report", Lower(Global.userQuestion)) > 0, Find("progress reports", Lower(Global.userQuestion)) > 0, Find("activity report", Lower(Global.userQuestion)) > 0, Find("activity proposal", Lower(Global.userQuestion)) > 0, Find("proposal template", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("guidelines", Lower(Global.userQuestion)) > 0, Find("reporting standards", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainCountryDataRPTCActivities
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setFundingCountryDataRPTCActivities
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: fallback_setTopicCountryDataRPTCActivities
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCountryDataRPTCActivities
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneCountryDataRPTCActivities
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionCountryDataRPTCActivities
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_countryDataFallback
+          condition: =Or(Find("country data", Lower(Global.userQuestion)) > 0, Find("country file", Lower(Global.userQuestion)) > 0, Find("country profile", Lower(Global.userQuestion)) > 0, Find("active project", Lower(Global.userQuestion)) > 0, Find("active projects", Lower(Global.userQuestion)) > 0, Find("ongoing project", Lower(Global.userQuestion)) > 0, Find("ongoing projects", Lower(Global.userQuestion)) > 0, Find("current project", Lower(Global.userQuestion)) > 0, Find("current projects", Lower(Global.userQuestion)) > 0, Find("which projects", Lower(Global.userQuestion)) > 0, Find("list projects", Lower(Global.userQuestion)) > 0, Find("show projects", Lower(Global.userQuestion)) > 0, Find("proposals", Lower(Global.userQuestion)) > 0, Find("proposal", Lower(Global.userQuestion)) > 0, Find("requests", Lower(Global.userQuestion)) > 0, Find("request", Lower(Global.userQuestion)) > 0, Find("travels", Lower(Global.userQuestion)) > 0, Find("travel", Lower(Global.userQuestion)) > 0, Find("missions", Lower(Global.userQuestion)) > 0, Find("mission", Lower(Global.userQuestion)) > 0, Find("contacts", Lower(Global.userQuestion)) > 0, Find("contact people", Lower(Global.userQuestion)) > 0, Find("focal point", Lower(Global.userQuestion)) > 0, Find("counterpart", Lower(Global.userQuestion)) > 0, Find("activities", Lower(Global.userQuestion)) > 0, Find("activity", Lower(Global.userQuestion)) > 0, Find("targeted ldcs", Lower(Global.userQuestion)) > 0, Find("targeted ldc", Lower(Global.userQuestion)) > 0, Find("targeting ldcs", Lower(Global.userQuestion)) > 0, Find("targeting ldc", Lower(Global.userQuestion)) > 0) && Or(Find("how many", Lower(Global.userQuestion)) > 0, Find("count", Lower(Global.userQuestion)) > 0, Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("who", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("summarize", Lower(Global.userQuestion)) > 0, Find("active", Lower(Global.userQuestion)) > 0, Find("ongoing", Lower(Global.userQuestion)) > 0, Find("current", Lower(Global.userQuestion)) > 0, Find("202", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainCountryData
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicCountryData
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCountryData
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneCountryData
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionCountryData
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_guidelinesTemplatesFallback
+          condition: =Or(Find("annual progress report", Lower(Global.userQuestion)) > 0, Find("progress report template", Lower(Global.userQuestion)) > 0, Find("final report template", Lower(Global.userQuestion)) > 0, Find("project document preparation", Lower(Global.userQuestion)) > 0, Find("project-document preparation", Lower(Global.userQuestion)) > 0, Find("project design", Lower(Global.userQuestion)) > 0, Find("implementation rate", Lower(Global.userQuestion)) > 0, Find("indicators of achievement", Lower(Global.userQuestion)) > 0, Find("output delivery", Lower(Global.userQuestion)) > 0, Find("country-specific action plan", Lower(Global.userQuestion)) > 0, Find("workplan", Lower(Global.userQuestion)) > 0, Find("budget justification", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainGuidelinesTemplates
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicGuidelinesTemplates
+              variable: Global.topicArea
+              value: guidelines_templates
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoGuidelinesTemplates
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneGuidelinesTemplates
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionGuidelinesTemplates
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_implementingPartnersGrantsFallback
+          condition: =Or(Find("implementing partner", Lower(Global.userQuestion)) > 0, Find("implementing partners", Lower(Global.userQuestion)) > 0, Find("partner agreement", Lower(Global.userQuestion)) > 0, Find("project cooperation agreement", Lower(Global.userQuestion)) > 0, Find("grantee", Lower(Global.userQuestion)) > 0, Find("grantees", Lower(Global.userQuestion)) > 0, Find("grant agreement", Lower(Global.userQuestion)) > 0, Find("due diligence", Lower(Global.userQuestion)) > 0, Find("ipgc", Lower(Global.userQuestion)) > 0, Find("routing slip", Lower(Global.userQuestion)) > 0, Find("partner evaluation", Lower(Global.userQuestion)) > 0, Find("procurement versus", Lower(Global.userQuestion)) > 0, Find("procurement vs", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainImplementingPartnersGrants
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicImplementingPartnersGrants
+              variable: Global.topicArea
+              value: implementing_partners_grants
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoImplementingPartnersGrants
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneImplementingPartnersGrants
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionImplementingPartnersGrants
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_residentCoordinatorFallback
+          condition: =Or(Find("resident coordinator", Lower(Global.userQuestion)) > 0, Find("rco", Lower(Global.userQuestion)) > 0, Find("unct", Lower(Global.userQuestion)) > 0, Find("unsdcf", Lower(Global.userQuestion)) > 0, Find("cca", Lower(Global.userQuestion)) > 0, Find("country-level support", Lower(Global.userQuestion)) > 0, Find("country level support", Lower(Global.userQuestion)) > 0, Find("country mission", Lower(Global.userQuestion)) > 0, Find("country-level engagement", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainResidentCoordinator
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicResidentCoordinator
+              variable: Global.topicArea
+              value: resident_coordinator
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoResidentCoordinator
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneResidentCoordinator
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionResidentCoordinator
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_cdStrategyFallback
+          condition: =Or(Find("strategic priorities", Lower(Global.userQuestion)) > 0, Find("main action areas", Lower(Global.userQuestion)) > 0, Find("capacity development strategy", Lower(Global.userQuestion)) > 0, Find("service delivery model", Lower(Global.userQuestion)) > 0, Find("service lines", Lower(Global.userQuestion)) > 0, Find("areas of work", Lower(Global.userQuestion)) > 0, Find("prioritize capacity development requests", Lower(Global.userQuestion)) > 0, Find("prioritise capacity development requests", Lower(Global.userQuestion)) > 0, Find("capacity development knowledge hub", Lower(Global.userQuestion)) > 0, Find("knowledge hub", Lower(Global.userQuestion)) > 0, Find("ai-enabled", Lower(Global.userQuestion)) > 0, Find("ai enabled", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainCDStrategy
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicCDStrategy
+              variable: Global.topicArea
+              value: cd_strategy
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCDStrategy
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneCDStrategy
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionCDStrategy
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
+      id: conditionGroup_legacyEvaluationReportFallback
+      conditions:
+        - id: conditionItem_rptcProgressReportsFallback
+          condition: =Or(Find("rptc progress report", Lower(Global.userQuestion)) > 0, Find("rptc progress reports", Lower(Global.userQuestion)) > 0, Find("regular programme of technical cooperation in 2024", Lower(Global.userQuestion)) > 0, Find("rptc in 2024", Lower(Global.userQuestion)) > 0, Find("countries, requests, interventions", Lower(Global.userQuestion)) > 0, Find("people were supported through rptc", Lower(Global.userQuestion)) > 0, Find("implementing entities delivered rptc", Lower(Global.userQuestion)) > 0, Find("rptc support least developed countries", Lower(Global.userQuestion)) > 0, Find("rptc support landlocked developing countries", Lower(Global.userQuestion)) > 0, Find("rptc support small island developing states", Lower(Global.userQuestion)) > 0, Find("rptc challenges and recommendations", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainRPTCProgressReports
+              variable: Global.knowledgeDomain
+              value: rptc
+
+            - kind: SetVariable
+              id: fallback_setFundingRPTCProgressReports
+              variable: Global.fundingStream
+              value: RPTC
+
+            - kind: SetVariable
+              id: fallback_setTopicRPTCProgressReports
+              variable: Global.topicArea
+              value: rptc_progress_reports
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoRPTCProgressReports
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneRPTCProgressReports
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionRPTCProgressReports
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_rptcGuidanceTemplatesFallback
+          condition: =Or(Find("rptc activity proposal", Lower(Global.userQuestion)) > 0, Find("rptc proposal template", Lower(Global.userQuestion)) > 0, Find("rptc guidance", Lower(Global.userQuestion)) > 0, Find("rptc guidelines", Lower(Global.userQuestion)) > 0, Find("rptc reporting standards", Lower(Global.userQuestion)) > 0, Find("rptc activity report template", Lower(Global.userQuestion)) > 0, Find("rptc activity report", Lower(Global.userQuestion)) > 0, Find("inter-regional adviser", Lower(Global.userQuestion)) > 0, Find("inter regional adviser", Lower(Global.userQuestion)) > 0, Find("ira recruitment", Lower(Global.userQuestion)) > 0, Find("ira administration", Lower(Global.userQuestion)) > 0, Find("rptc planning", Lower(Global.userQuestion)) > 0, Find("rptc approval", Lower(Global.userQuestion)) > 0, Find("rptc implementation", Lower(Global.userQuestion)) > 0, Find("rptc proposal revisions", Lower(Global.userQuestion)) > 0, Find("rptc post-activity reporting", Lower(Global.userQuestion)) > 0, Find("programme monitoring tool", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainRPTCGuidanceTemplates
+              variable: Global.knowledgeDomain
+              value: rptc
+
+            - kind: SetVariable
+              id: fallback_setFundingRPTCGuidanceTemplates
+              variable: Global.fundingStream
+              value: RPTC
+
+            - kind: SetVariable
+              id: fallback_setTopicRPTCGuidanceTemplates
+              variable: Global.topicArea
+              value: rptc_guidance_templates
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoRPTCGuidanceTemplates
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneRPTCGuidanceTemplates
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionRPTCGuidanceTemplates
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_legacyEvaluationReportNeedsFund
+          condition: =Global.knowledgeDomain = "unclear" && Global.fundingStream = "UNCLEAR" && (Global.topicArea = "unclear" || Global.topicArea = "other_unclear") && Find("evaluation report", Lower(Global.userQuestion)) > 0
+          actions:
+            - kind: SetVariable
+              id: fallback_setTopicEvaluationDesign
+              variable: Global.topicArea
+              value: evaluation_design
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationYes
+              variable: Global.requiresClarification
+              value: Yes
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeFund
+              variable: Global.clarificationType
+              value: fund
+
+            - kind: SetVariable
+              id: fallback_setClarificationQuestionFund
+              variable: Global.clarificationQuestion
+              value: Which funding stream is this question about?
+
+    - kind: ConditionGroup
+      id: conditionGroup_setIntentStatus
+      conditions:
+        - id: conditionItem_statusOutOfScope
+          condition: =Global.knowledgeDomain = "out_of_scope"
+          actions:
+            - kind: SetVariable
+              id: setStatus_outOfScope
+              variable: Global.intentStatus
+              value: out_of_scope
+
+            - kind: SetVariable
+              id: setRequiresNo_outOfScope
+              variable: Global.requiresClarification
+              value: No
+
+        - id: conditionItem_statusNeedsClarification
+          condition: =Global.requiresClarification = "Yes"
+          actions:
+            - kind: SetVariable
+              id: setStatus_needsClarification
+              variable: Global.intentStatus
+              value: needs_clarification
+
+        - id: conditionItem_statusReadyToRoute
+          condition: =Global.requiresClarification = "No"
+          actions:
+            - kind: SetVariable
+              id: setStatus_readyToRoute
+              variable: Global.intentStatus
+              value: ready_to_route
+
+      elseActions:
+        - kind: SetVariable
+          id: setStatus_deadEnd
+          variable: Global.intentStatus
+          value: dead_end
+
+    - kind: ConditionGroup
+      id: conditionGroup_sendActivity_debug_classifierFinal
+      conditions:
+        - id: conditionItem_sendActivity_debug_classifierFinal
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_classifierFinal
+              activity: "DEBUG - Intent Classifier final state: Status: {Global.intentStatus} | Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Requires clarification: {Global.requiresClarification} | Clarification type: {Global.clarificationType} | User question: {Global.userQuestion}"
+
+    - kind: BeginDialog
+      id: goToClarifier
+      dialog: copilots_header_3141e.topic.Intent-Clarifier
+
+inputType: {}
+outputType: {}
