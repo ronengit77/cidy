@@ -11,6 +11,11 @@ beginDialog:
       value: "{}"
 
     - kind: SetVariable
+      id: setVariable_testMode
+      variable: Global.testMode
+      value: false
+
+    - kind: SetVariable
       id: setVariable_resetIntentReason
       variable: Global.intentReason
       value:
@@ -21,28 +26,8 @@ beginDialog:
       value:
 
     - kind: SetVariable
-      id: setVariable_resetSourceUseInstructions
-      variable: Global.sourceUseInstructions
-      value:
-
-    - kind: SetVariable
-      id: setVariable_resetCountryDataEnhancedQuestion
-      variable: Global.countryDataEnhancedQuestion
-      value:
-
-    - kind: SetVariable
       id: setVariable_resetNextActionContext
       variable: Global.nextActionContext
-      value:
-
-    - kind: SetVariable
-      id: setVariable_resetRoutingTarget
-      variable: Global.routingTarget
-      value:
-
-    - kind: SetVariable
-      id: setVariable_resetIssueSummary
-      variable: Global.issueSummary
       value:
 
     - kind: SetVariable

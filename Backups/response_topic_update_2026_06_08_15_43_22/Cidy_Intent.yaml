@@ -26,8 +26,28 @@ beginDialog:
       value:
 
     - kind: SetVariable
+      id: setVariable_resetSourceUseInstructions
+      variable: Global.sourceUseInstructions
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetCountryDataEnhancedQuestion
+      variable: Global.countryDataEnhancedQuestion
+      value:
+
+    - kind: SetVariable
       id: setVariable_resetNextActionContext
       variable: Global.nextActionContext
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetRoutingTarget
+      variable: Global.routingTarget
+      value:
+
+    - kind: SetVariable
+      id: setVariable_resetIssueSummary
+      variable: Global.issueSummary
       value:
 
     - kind: SetVariable
@@ -160,7 +180,7 @@ beginDialog:
             "Allowed funding_stream values:" & Char(10) &
             "DA, RPTC, PDF, UNCLEAR" & Char(10) & Char(10) &
             "Allowed topic_area values:" & Char(10) &
-            "about_cidy, budget_finance, cd_strategy, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, programme_operations, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, resident_coordinator, rptc_guidance_templates, rptc_progress_reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
+            "about_cidy, budget_finance, cd_strategy, country_data, definition, design_evaluation, evaluation_criteria, evaluation_design, general, governance_roles, guidelines_templates, implementing_partners_grants, ipmr, lessons_learned, monitoring_reporting, policy_compliance, policy_guidance_compliance, process_governance, programme_design_standards, programme_management, project_planning_design, projects_evaluations, recommendations, reporting_documentation, reports, resident_coordinator, rptc_guidance_templates, rptc_progress_reports, steering_committee, tag, tag_meetings, templates, unclear" & Char(10) & Char(10) &
             "Allowed requires_clarification values: Yes, No" & Char(10) &
             "Allowed clarification_type values: none, fund, domain, artifact" & Char(10) & Char(10) &
             "Critical routing rules:" & Char(10) &
@@ -170,14 +190,14 @@ beginDialog:
             "4. Distinguish evaluation design guidance from evaluation evidence. Questions asking how to write, prepare, design, fill, create, or use an evaluation report/template/guidance are evaluation_design. Questions asking what evaluations found, said, recommended, concluded, or what lessons learned exist are programme_development/projects_evaluations." & Char(10) &
             "5. If the user asks how to write or prepare an evaluation report and no fund is specified, set knowledge_domain=unclear, funding_stream=UNCLEAR, topic_area=evaluation_design, requires_clarification=Yes, clarification_type=fund, clarification_question=Which funding stream is this question about?" & Char(10) &
             "6. If the user asks for actual evaluation findings, recommendations, or lessons learned, set knowledge_domain=programme_development, topic_area=projects_evaluations, and requires_clarification=No unless the question specifically asks for fund-specific procedure." & Char(10) &
-            "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X." & Char(10) &
+            "7. If the user asks to find, list, count, filter, identify, or retrieve specific project evaluations or evaluation reports, including by topic, country, countries, region, division, year, title, recommendation, lesson learned, or project attribute, set knowledge_domain=programme_development, topic_area=projects_evaluations, requires_clarification=No. Examples: how many evaluation reports, find evaluations about X, evaluations by division Y, evaluations that include country X. Do not use projects_evaluations for broad country portfolio wording such as list all work in country X unless the user explicitly says evaluation, evaluations, evaluation report, recommendation, or lessons learned." & Char(10) &
             "8. If the user asks about TAG meetings, Tag Team meetings, steering committee meetings, meeting materials, decisions, minutes, actions, or conclusions, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=tag_meetings or steering_committee as appropriate, requires_clarification=No. These are Programme Development knowledge areas, not DA/RPTC/PDF fund-specific questions." & Char(10) &
             "9. If the user asks about Programme Development guidance, templates, project design, progress reports, annual progress reports, final report templates, project closure, project-document preparation, workplans, budgets, indicators, implementation rates, revisions, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, or country-specific action plans, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=guidelines_templates, requires_clarification=No." & Char(10) &
             "10. If the user asks about implementing partners, grants, grantees, partner agreements, project cooperation agreements, due diligence, IPGC, routing slips to CDO, agreement clauses, partner evaluation, procurement versus grant or implementing partner modality, or procedures to identify, screen, select, approve, amend, monitor, close, or keep records for partners/grants, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=implementing_partners_grants, requires_clarification=No." & Char(10) &
             "11. If the user asks about DESA engagement with the Resident Coordinator system, Resident Coordinator or RCO notification, country-level support, UNCT membership, UNSDCF signatory status, CCA or UNSDCF alignment, DESA country missions, CDPMO coordination of country-level engagement, or countries with DESA UNCT membership or contribution status, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=resident_coordinator, requires_clarification=No." & Char(10) &
             "12. If the user asks about Cidy itself, including what Cidy is, what problem it solves, how it differs from a general-purpose AI chatbot, what knowledge areas it covers, examples of good user questions, how Cidy classifies or routes questions, what happens when confidence is low or Cidy is uncertain, feedback or escalation flow, or Cidy's Copilot Studio architecture/components, set knowledge_domain=about_cidy, funding_stream=UNCLEAR, topic_area=about_cidy, requires_clarification=No." & Char(10) &
             "13. If the user asks about DESA strategic priorities, 2023 action areas, DESA's capacity development strategy, service delivery model, five service lines or areas of work, prioritization of capacity development requests, or partnerships in delivery, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=cd_strategy, requires_clarification=No." & Char(10) &
-            "14. If the user asks to find, list, count, filter, identify, compare, or summarize Programme Development operational records such as projects, proposals, requests, or activities by country, year, status, active/current/ongoing state, target group, LDC/LLDC/SIDS status, region, division, or record attribute, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=programme_operations, requires_clarification=No. Examples: which projects are currently active in country X, show 2026 proposals, how many activities in 2025 targeted LDCs, list requests from country X." & Char(10) &
+            "14. If the user asks to find, list, count, filter, identify, compare, or summarize Programme Development country or region data such as country-level or region-level projects, proposals, requests, travels, activities, contact people, budgets, statuses, divisions, target groups, LDC/LLDC/SIDS status, or summary metrics, set knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Treat broad wording such as list all work in country X, list work in country X, what is happening in country X, show work in region X, what do we have for SIDS, current work, ongoing work, portfolio, support, activities, or country/region summary as country_data even if the user does not explicitly say project, request, proposal, activity, travel, or contact. Broad country work questions are country_data, not projects_evaluations, unless the user explicitly asks for evaluations, evaluation reports, recommendations, or lessons learned. Examples: list all work in Argentina, list work in Fiji, what is happening in the Pacific, which projects are currently active in country X, show 2026 proposals for country X, list requests from country X, who are the contact people for country X, summarize travels to country X, how many activities in 2025 targeted LDCs." & Char(10) &
             "15. If the user asks about RPTC activity proposal templates, RPTC guidance, RPTC reporting standards, IRA or Inter-Regional Adviser recruitment/administration, RPTC activity report templates, planning, approval, implementation, proposal revisions, or post-activity reporting requirements, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_guidance_templates, requires_clarification=No." & Char(10) &
             "16. If the user asks about RPTC progress report achievements, countries supported, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, recommendations, or future strengthening, set knowledge_domain=rptc, funding_stream=RPTC, topic_area=rptc_progress_reports, requires_clarification=No." & Char(10) &
             "17. If the user asks a broad but plausible Cidy-related question that is not clearly about Cidy itself or another allowed domain, set requires_clarification=Yes and clarification_type=domain." & Char(10) &
@@ -359,6 +379,42 @@ beginDialog:
               value:
 
     - kind: ConditionGroup
+      id: conditionGroup_broadCountryWorkFallback
+      conditions:
+        - id: conditionItem_broadCountryWorkFallback
+          condition: =Or(Find("work in", Lower(Global.userQuestion)) > 0, Find("work for", Lower(Global.userQuestion)) > 0, Find("work happening in", Lower(Global.userQuestion)) > 0, Find("what is happening in", Lower(Global.userQuestion)) > 0, Find("what's happening in", Lower(Global.userQuestion)) > 0, Find("portfolio in", Lower(Global.userQuestion)) > 0, Find("support in", Lower(Global.userQuestion)) > 0) && Or(Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("what", Lower(Global.userQuestion)) > 0, Find("summarize", Lower(Global.userQuestion)) > 0, Find("summary", Lower(Global.userQuestion)) > 0, Find("all work", Lower(Global.userQuestion)) > 0, Find("work", Lower(Global.userQuestion)) > 0, Find("portfolio", Lower(Global.userQuestion)) > 0, Find("support", Lower(Global.userQuestion)) > 0) && !Or(Find("evaluation", Lower(Global.userQuestion)) > 0, Find("evaluations", Lower(Global.userQuestion)) > 0, Find("evaluation report", Lower(Global.userQuestion)) > 0, Find("evaluation reports", Lower(Global.userQuestion)) > 0, Find("recommendation", Lower(Global.userQuestion)) > 0, Find("recommendations", Lower(Global.userQuestion)) > 0, Find("lesson learned", Lower(Global.userQuestion)) > 0, Find("lessons learned", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainBroadCountryWork
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setFundingBroadCountryWork
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: fallback_setTopicBroadCountryWork
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoBroadCountryWork
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneBroadCountryWork
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionBroadCountryWork
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
       id: conditionGroup_projectEvaluationDiscoveryFallback
       conditions:
         - id: conditionItem_projectEvaluationDiscovery
@@ -451,31 +507,64 @@ beginDialog:
     - kind: ConditionGroup
       id: conditionGroup_programmeDevelopmentGuidanceFallback
       conditions:
-        - id: conditionItem_programmeOperationsFallback
-          condition: =Or(Find("active project", Lower(Global.userQuestion)) > 0, Find("active projects", Lower(Global.userQuestion)) > 0, Find("ongoing project", Lower(Global.userQuestion)) > 0, Find("ongoing projects", Lower(Global.userQuestion)) > 0, Find("current project", Lower(Global.userQuestion)) > 0, Find("current projects", Lower(Global.userQuestion)) > 0, Find("which projects", Lower(Global.userQuestion)) > 0, Find("list projects", Lower(Global.userQuestion)) > 0, Find("show projects", Lower(Global.userQuestion)) > 0, Find("proposals", Lower(Global.userQuestion)) > 0, Find("proposal", Lower(Global.userQuestion)) > 0, Find("requests", Lower(Global.userQuestion)) > 0, Find("request", Lower(Global.userQuestion)) > 0, Find("activities", Lower(Global.userQuestion)) > 0, Find("activity", Lower(Global.userQuestion)) > 0, Find("targeted ldcs", Lower(Global.userQuestion)) > 0, Find("targeted ldc", Lower(Global.userQuestion)) > 0, Find("targeting ldcs", Lower(Global.userQuestion)) > 0, Find("targeting ldc", Lower(Global.userQuestion)) > 0) && Or(Find("how many", Lower(Global.userQuestion)) > 0, Find("count", Lower(Global.userQuestion)) > 0, Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("active", Lower(Global.userQuestion)) > 0, Find("ongoing", Lower(Global.userQuestion)) > 0, Find("current", Lower(Global.userQuestion)) > 0, Find("202", Lower(Global.userQuestion)) > 0) && !Or(Find("rptc", Lower(Global.userQuestion)) > 0, Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("pdf", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
+        - id: conditionItem_countryDataRPTCActivitiesFallback
+          condition: =Find("rptc", Lower(Global.userQuestion)) > 0 && Or(Find("activities", Lower(Global.userQuestion)) > 0, Find("activity", Lower(Global.userQuestion)) > 0) && Or(Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("count", Lower(Global.userQuestion)) > 0, Find("how many", Lower(Global.userQuestion)) > 0) && !Or(Find("progress report", Lower(Global.userQuestion)) > 0, Find("progress reports", Lower(Global.userQuestion)) > 0, Find("activity report", Lower(Global.userQuestion)) > 0, Find("activity proposal", Lower(Global.userQuestion)) > 0, Find("proposal template", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("guidelines", Lower(Global.userQuestion)) > 0, Find("reporting standards", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
           actions:
             - kind: SetVariable
-              id: fallback_setDomainProgrammeOperations
+              id: fallback_setDomainCountryDataRPTCActivities
               variable: Global.knowledgeDomain
               value: programme_development
 
             - kind: SetVariable
-              id: fallback_setTopicProgrammeOperations
-              variable: Global.topicArea
-              value: programme_operations
+              id: fallback_setFundingCountryDataRPTCActivities
+              variable: Global.fundingStream
+              value: UNCLEAR
 
             - kind: SetVariable
-              id: fallback_setRequiresClarificationNoProgrammeOperations
+              id: fallback_setTopicCountryDataRPTCActivities
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCountryDataRPTCActivities
               variable: Global.requiresClarification
               value: No
 
             - kind: SetVariable
-              id: fallback_setClarificationTypeNoneProgrammeOperations
+              id: fallback_setClarificationTypeNoneCountryDataRPTCActivities
               variable: Global.clarificationType
               value: none
 
             - kind: SetVariable
-              id: fallback_clearClarificationQuestionProgrammeOperations
+              id: fallback_clearClarificationQuestionCountryDataRPTCActivities
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_countryDataFallback
+          condition: =Or(Find("country data", Lower(Global.userQuestion)) > 0, Find("country file", Lower(Global.userQuestion)) > 0, Find("country profile", Lower(Global.userQuestion)) > 0, Find("country card", Lower(Global.userQuestion)) > 0, Find("country record", Lower(Global.userQuestion)) > 0, Find("regional record", Lower(Global.userQuestion)) > 0, Find("region", Lower(Global.userQuestion)) > 0, Find("subregion", Lower(Global.userQuestion)) > 0, Find("sids", Lower(Global.userQuestion)) > 0, Find("ldc", Lower(Global.userQuestion)) > 0, Find("lldc", Lower(Global.userQuestion)) > 0, Find("active project", Lower(Global.userQuestion)) > 0, Find("active projects", Lower(Global.userQuestion)) > 0, Find("ongoing project", Lower(Global.userQuestion)) > 0, Find("ongoing projects", Lower(Global.userQuestion)) > 0, Find("current project", Lower(Global.userQuestion)) > 0, Find("current projects", Lower(Global.userQuestion)) > 0, Find("which projects", Lower(Global.userQuestion)) > 0, Find("list projects", Lower(Global.userQuestion)) > 0, Find("show projects", Lower(Global.userQuestion)) > 0, Find("proposals", Lower(Global.userQuestion)) > 0, Find("proposal", Lower(Global.userQuestion)) > 0, Find("requests", Lower(Global.userQuestion)) > 0, Find("request", Lower(Global.userQuestion)) > 0, Find("travels", Lower(Global.userQuestion)) > 0, Find("travel", Lower(Global.userQuestion)) > 0, Find("missions", Lower(Global.userQuestion)) > 0, Find("mission", Lower(Global.userQuestion)) > 0, Find("contacts", Lower(Global.userQuestion)) > 0, Find("contact people", Lower(Global.userQuestion)) > 0, Find("focal point", Lower(Global.userQuestion)) > 0, Find("counterpart", Lower(Global.userQuestion)) > 0, Find("activities", Lower(Global.userQuestion)) > 0, Find("activity", Lower(Global.userQuestion)) > 0, Find("work in", Lower(Global.userQuestion)) > 0, Find("work for", Lower(Global.userQuestion)) > 0, Find("work happening", Lower(Global.userQuestion)) > 0, Find("what is happening", Lower(Global.userQuestion)) > 0, Find("what's happening", Lower(Global.userQuestion)) > 0, Find("what do we have", Lower(Global.userQuestion)) > 0, Find("portfolio", Lower(Global.userQuestion)) > 0, Find("support in", Lower(Global.userQuestion)) > 0, Find("support for", Lower(Global.userQuestion)) > 0, Find("targeted ldcs", Lower(Global.userQuestion)) > 0, Find("targeted ldc", Lower(Global.userQuestion)) > 0, Find("targeting ldcs", Lower(Global.userQuestion)) > 0, Find("targeting ldc", Lower(Global.userQuestion)) > 0) && Or(Find("how many", Lower(Global.userQuestion)) > 0, Find("count", Lower(Global.userQuestion)) > 0, Find("list", Lower(Global.userQuestion)) > 0, Find("show", Lower(Global.userQuestion)) > 0, Find("which", Lower(Global.userQuestion)) > 0, Find("who", Lower(Global.userQuestion)) > 0, Find("find", Lower(Global.userQuestion)) > 0, Find("summarize", Lower(Global.userQuestion)) > 0, Find("summary", Lower(Global.userQuestion)) > 0, Find("compare", Lower(Global.userQuestion)) > 0, Find("active", Lower(Global.userQuestion)) > 0, Find("ongoing", Lower(Global.userQuestion)) > 0, Find("current", Lower(Global.userQuestion)) > 0, Find("happening", Lower(Global.userQuestion)) > 0, Find("work", Lower(Global.userQuestion)) > 0, Find("portfolio", Lower(Global.userQuestion)) > 0, Find("support", Lower(Global.userQuestion)) > 0, Find("202", Lower(Global.userQuestion)) > 0) && !Or(Find("development account", Lower(Global.userQuestion)) > 0, Find(" da ", Lower(Global.userQuestion)) > 0, Find("unpdf", Lower(Global.userQuestion)) > 0, Find("template", Lower(Global.userQuestion)) > 0, Find("guidance", Lower(Global.userQuestion)) > 0, Find("how do i", Lower(Global.userQuestion)) > 0, Find("how to", Lower(Global.userQuestion)) > 0)
+          actions:
+            - kind: SetVariable
+              id: fallback_setDomainCountryData
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: fallback_setTopicCountryData
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: fallback_setRequiresClarificationNoCountryData
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: fallback_setClarificationTypeNoneCountryData
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: fallback_clearClarificationQuestionCountryData
               variable: Global.clarificationQuestion
               value:
 

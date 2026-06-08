@@ -621,6 +621,13 @@
                           "date-created":  "2026-06-02"
                       },
                       {
+                          "Scenario":  "Regression - broad country work routes to Country Data",
+                          "Test question":  "list all work in argentina",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Broad country work wording should use Country Data, not project evaluations, unless the user explicitly asks for evaluations.",
+                          "date-created":  "2026-06-08"
+                      },
+                      {
                           "Scenario":  "Happy path - Country Data proposal year list",
                           "Test question":  "I'd like to see 2026 proposals.",
                           "Clarification":  "",

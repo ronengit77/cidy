@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-08T14:25:39-04:00",
+                    "generatedAt":  "2026-06-08T16:31:56-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  99,
-                    "passed":  87,
+                    "total":  100,
+                    "passed":  88,
                     "failed":  12
                 },
     "results":  [
@@ -9620,6 +9620,111 @@
                     },
                     {
                         "id":  "TC98",
+                        "scenario":  "Regression - broad country work routes to Country Data",
+                        "question":  "list all work in argentina",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Broad country work wording should use Country Data, not project evaluations, unless the user explicitly asks for evaluations.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "country_data",
+                                                                       "projects_evaluations"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "country_data",
+                                                                                 "projects_evaluations"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "country_data",
+                                                                                 "projects_evaluations"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "projects_evaluations"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "country_data"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC99",
                         "scenario":  "Happy path - Country Data proposal year list",
                         "question":  "I\u0027d like to see 2026 proposals.",
                         "clarification":  "",
@@ -9725,7 +9830,7 @@
                                      ]
                     },
                     {
-                        "id":  "TC99",
+                        "id":  "TC100",
                         "scenario":  "Happy path - Country Data LDC activity count",
                         "question":  "How many activities in 2025 targeted LDCs?",
                         "clarification":  "",
