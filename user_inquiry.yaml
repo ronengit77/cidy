@@ -54,7 +54,20 @@ beginDialog:
                         Hi, {System.User.FirstName}!
 
                         You are now back in Cidy's controlled flow.
-                        Type your inquiry below.
+
+                        **I'm Cidy (beta version), the UN DESA Capacity Development Assistant.**
+
+                        My current knowledge areas include DA project planning/design and evaluation guidance; RPTC guidance and reports; Programme Development guidance, TAG meetings, Steering Committee materials, project evaluations, implementing partners and grants, Resident Coordinator country engagement, DESA capacity-development strategy, recommendations, and lessons learned; and general CDPMO knowledge. See the [Cidy knowledge map](https://ronengit77.github.io/cidy/documentation/cidy_response_topic_map.html).
+
+                        I'll answer your questions using official documents and share source links and a confidence level for each response.
+
+                        If I'm not confident that an answer is fully supported by available guidance, I'll let you know and help escalate your question to the appropriate team.
+
+                        Ready to start chatting - type your inquiry below.
+                        A good prompt will mention which funding stream and topic area your question is regarding (e.g., DA, RPTC, PDF/UNPDF, Programme Development, or general AND reporting, evaluation, governance, project design, TAG meetings, etc.)
+                        Example prompt: *"When is a final evaluation required for a Development Account project?"*
+
+                        You can say **"exit Cidy flow"** to continue in a more open conversation, and **"return to Cidy flow"** to come back to the controlled guidance path.
 
                     - kind: Question
                       id: question_returnCommand_openModeInput
