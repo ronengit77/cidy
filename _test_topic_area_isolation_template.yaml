@@ -1,0 +1,194 @@
+kind: AdaptiveDialog
+modelDescription: >-
+  TEMPLATE - Topic area isolation test. Copy this file, rename it to
+  Testing_[FundingStream]_[TopicArea].yaml, and replace every [REPLACE: ...]
+  value before pushing to Copilot Studio. See Testing_DA_PPD.yaml for a
+  completed reference example.
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Testing [REPLACE: Funding Stream] [REPLACE: Topic Area]
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - "testing mode: [REPLACE: direct document name question]"
+      - "testing mode: [REPLACE: how-to question]"
+      - "testing mode: [REPLACE: specific section or content question]"
+      - "testing mode: [REPLACE: budget or annex question]"
+      - "testing mode: [REPLACE: review or checklist question]"
+      - "testing mode: [REPLACE: recency or latest version question]"
+      - "testing mode: [REPLACE: comparison question]"
+      - "testing mode: [REPLACE: submission or process question]"
+      - "testing mode: [REPLACE: requirements question]"
+      - "testing mode: [REPLACE: template question]"
+      - "testing mode: [REPLACE: guidelines question]"
+      - "testing mode: [REPLACE: objectives or results question]"
+      - "testing mode: [REPLACE: implementing entity question]"
+      - "testing mode: [REPLACE: quality assurance question]"
+      - "testing mode: [REPLACE: general domain question 1]"
+      - testing mode [REPLACE: keyword 1]
+      - testing mode [REPLACE: keyword 2]
+      - testing mode [REPLACE: keyword 3]
+      - testing mode [REPLACE: keyword 4]
+      - testing mode [REPLACE: keyword 5]
+
+  actions:
+    - kind: SetVariable
+      id: set_testQuestion
+      variable: Topic.testQuestion
+      value: =Coalesce(System.Activity.Text, Global.userQuestion, "")
+
+    - kind: SetVariable
+      id: set_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =Trim(If(StartsWith(Lower(Topic.testQuestion), "testing mode:"), Mid(Topic.testQuestion, Len("testing mode:") + 1, Len(Topic.testQuestion)), If(StartsWith(Lower(Topic.testQuestion), "testing mode"), Trim(Mid(Topic.testQuestion, Len("testing mode") + 1, Len(Topic.testQuestion))), Topic.testQuestion)))
+
+    - kind: SetVariable
+      id: normalize_empty_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =If(IsBlank(Topic.cleanQuestion), Topic.testQuestion, Topic.cleanQuestion)
+
+    - kind: SetVariable
+      id: set_retrievalQuestion
+      variable: Topic.retrievalQuestion
+      # REPLACE: Build the suffix from the folder readme.
+      # Rules: flat terms only, no labels, no prose, no punctuation between terms.
+      # Include: all document type names (long form + abbreviation), all tranche labels
+      # (most recent first), recency language, key concepts users ask about.
+      # See How_to_prepare_a_topic_area_branch.md Step 3 for guidance.
+      value: =Topic.cleanQuestion & " [REPLACE: domain anchor suffix — e.g. Development Account DA concept note CN project document PD guidelines template Excel annex review checklist tranche T19 T18 T17 T16 latest most recent requirements sections objectives budget results framework quality assurance internal review submission]"
+
+    - kind: SetVariable
+      id: clear_response
+      variable: Topic.testResponse
+      value: =Blank()
+
+    - kind: SendActivity
+      id: debug_start
+      activity: |-
+        DEBUG - Testing [REPLACE: Funding Stream] [REPLACE: Topic Area] topic entered.
+
+        Incoming text:
+        {System.Activity.Text}
+
+        Raw question:
+        {Topic.testQuestion}
+
+        Clean question (prefix stripped):
+        {Topic.cleanQuestion}
+
+        Expanded retrieval question:
+        {Topic.retrievalQuestion}
+
+        Knowledge source under test:
+        [REPLACE: copilots_header_XXXX.topic.KnowledgeSourceId_XXXX]
+
+        Test plan:
+        Pass 1 - Specific [REPLACE: Topic Area] knowledge source with expanded query.
+        Pass 2 - Broad [REPLACE: Funding Stream] knowledge source if Pass 1 is blank.
+
+    - kind: SearchAndSummarizeContent
+      id: search_pass1
+      autoSend: false
+      variable: Topic.testResponse
+      userInput: =Topic.retrievalQuestion
+      additionalInstructions: |-
+        You are testing the [REPLACE: Topic Area] knowledge source directly.
+
+        Use ONLY the selected knowledge source. Do not use Cidy routing, fallback topics, or general knowledge.
+
+        The input is an expanded retrieval query built from the user's question plus domain anchor terms.
+
+        [REPLACE: Describe the documents in this knowledge source — types, tranches, primary sources, and which document answers which question type. Copy from sourceUseInstructions.]
+
+        If no relevant source is found, say so clearly and name the terms you attempted.
+
+        Format your response exactly as follows:
+
+        DEBUG_RETRIEVAL:
+        Name the document, tranche, file, and search terms matched.
+
+        ANSWER:
+        Provide the direct answer.
+
+        SOURCES:
+        List each source as a markdown link: [name of file](full url). If no URL is available, list the source title as plain text.
+
+        CONFIDENCE:
+        Write only a single number from 0 to 5.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - [REPLACE: copilots_header_XXXX.topic.KnowledgeSourceId_XXXX]
+
+    - kind: SendActivity
+      id: debug_pass1_result
+      activity: |-
+        DEBUG - Pass 1 result: Specific [REPLACE: Topic Area] knowledge source
+
+        Query sent:
+        {Topic.retrievalQuestion}
+
+        Response:
+        {Topic.testResponse}
+
+    - kind: ConditionGroup
+      id: conditionGroup_pass2
+      conditions:
+        - id: conditionItem_pass1_blank
+          condition: =IsBlank(Topic.testResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_pass2
+              autoSend: false
+              variable: Topic.testResponse
+              userInput: =Topic.retrievalQuestion
+              additionalInstructions: |-
+                You are testing the broad [REPLACE: Funding Stream] knowledge source. The specific [REPLACE: Topic Area] source returned no result.
+
+                Use ONLY the broad [REPLACE: Funding Stream] knowledge source provided. Do not use Cidy routing, fallback topics, or general knowledge.
+
+                Search broadly for [REPLACE: document types] across all tranches.
+
+                If no relevant source is found, say so clearly and name the terms you attempted.
+
+                Format your response exactly as follows:
+
+                DEBUG_RETRIEVAL:
+                Name the document, tranche, file, and search terms matched.
+
+                ANSWER:
+                Provide the direct answer.
+
+                SOURCES:
+                List each source as a markdown link: [name of file](full url). If no URL is available, list the source title as plain text.
+
+                CONFIDENCE:
+                Write only a single number from 0 to 5.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - [REPLACE: copilots_header_XXXX.topic.BroadFallbackKnowledgeSourceId_XXXX]
+
+            - kind: SendActivity
+              id: debug_pass2_result
+              activity: |-
+                DEBUG - Pass 2 result: Broad [REPLACE: Funding Stream] source (Pass 1 was blank)
+
+                Query sent:
+                {Topic.retrievalQuestion}
+
+                Response:
+                {Topic.testResponse}
+
+inputType: {}
+outputType: {}

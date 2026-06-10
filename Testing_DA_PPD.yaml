@@ -1,0 +1,193 @@
+kind: AdaptiveDialog
+modelDescription: Local diagnostic topic for testing the DA Project Planning and Design knowledge source directly. Bypasses Cidy routing and intent classification. Triggered by questions beginning with "testing mode:".
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Testing DA Project Planning Design
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - "testing mode: concept note guidelines"
+      - "testing mode: guidelines to draft da cn"
+      - "testing mode: DA concept note"
+      - "testing mode: project document guidelines"
+      - "testing mode: project planning design"
+      - "testing mode: how to draft a concept note"
+      - "testing mode: what sections are required"
+      - "testing mode: budget annex template"
+      - "testing mode: results framework"
+      - "testing mode: review checklist"
+      - "testing mode: T19 guidelines"
+      - "testing mode: latest tranche"
+      - "testing mode: submission requirements"
+      - "testing mode: objectives and outputs"
+      - "testing mode: implementing entity requirements"
+      - testing mode concept note
+      - testing mode DA guidelines
+      - testing mode project planning
+      - testing mode budget
+      - testing mode tranche
+      - testing mode checklist
+      - testing mode template
+      - testing mode submission
+
+  actions:
+    - kind: SetVariable
+      id: set_testQuestion
+      variable: Topic.testQuestion
+      value: =Coalesce(System.Activity.Text, Global.userQuestion, "")
+
+    - kind: SetVariable
+      id: set_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =Trim(If(StartsWith(Lower(Topic.testQuestion), "testing mode:"), Mid(Topic.testQuestion, Len("testing mode:") + 1, Len(Topic.testQuestion)), If(StartsWith(Lower(Topic.testQuestion), "testing mode"), Trim(Mid(Topic.testQuestion, Len("testing mode") + 1, Len(Topic.testQuestion))), Topic.testQuestion)))
+
+    - kind: SetVariable
+      id: normalize_empty_cleanQuestion
+      variable: Topic.cleanQuestion
+      value: =If(IsBlank(Topic.cleanQuestion), Topic.testQuestion, Topic.cleanQuestion)
+
+    - kind: SetVariable
+      id: set_ppdRetrievalQuestion
+      variable: Topic.ppdRetrievalQuestion
+      value: =Topic.cleanQuestion & " Development Account DA concept note CN project document PD guidelines template Excel annex review checklist tranche T19 T18 T17 T16 T15 T14 latest most recent project planning design requirements sections objectives budget results framework quality assurance internal review submission implementing entity"
+
+    - kind: SetVariable
+      id: clear_ppdResponse
+      variable: Topic.ppdResponse
+      value: =Blank()
+
+    - kind: SendActivity
+      id: debug_start
+      activity: |-
+        DEBUG - Testing DA Project Planning and Design topic entered.
+
+        Incoming text:
+        {System.Activity.Text}
+
+        Raw question:
+        {Topic.testQuestion}
+
+        Clean question (prefix stripped):
+        {Topic.cleanQuestion}
+
+        Expanded retrieval question:
+        {Topic.ppdRetrievalQuestion}
+
+        Knowledge source under test:
+        copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK
+
+        Test plan:
+        Pass 1 - Specific PPD knowledge source with expanded query.
+        Pass 2 - Broad DA knowledge source if Pass 1 is blank.
+
+    - kind: SearchAndSummarizeContent
+      id: search_ppd_pass1
+      autoSend: false
+      variable: Topic.ppdResponse
+      userInput: =Topic.ppdRetrievalQuestion
+      additionalInstructions: |-
+        You are testing the DA Project Planning and Design knowledge source directly.
+
+        Use ONLY the selected knowledge source. Do not use Cidy routing, fallback topics, or general knowledge.
+
+        The input is an expanded retrieval query built from the user's question plus DA project planning anchors.
+
+        This knowledge source contains DA project planning and design documents by tranche (T16, T17, T18, T19):
+        Concept Note Guidelines, Concept Note Templates, Concept Note Review Checklists, Project Document Guidelines, Project Document Templates, Project Document Review Checklists, Budget Annexes.
+
+        Use the highest tranche number as the most recent unless the question asks for an earlier tranche.
+        Prefer Concept Note Guidelines for concept note questions.
+        Prefer Project Document Guidelines for project document questions.
+
+        If no relevant source is found, say so clearly and name the terms you attempted.
+
+        Format your response exactly as follows:
+
+        DEBUG_RETRIEVAL:
+        Name the document, tranche, file, and search terms matched.
+
+        ANSWER:
+        Provide the direct answer.
+
+        SOURCES:
+        List each source as a markdown link: [name of file](full url). If no URL is available, list the source title as plain text.
+
+        CONFIDENCE:
+        Write only a single number from 0 to 5.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK
+
+    - kind: SendActivity
+      id: debug_pass1_result
+      activity: |-
+        DEBUG - Pass 1 result: Specific PPD knowledge source
+
+        Query sent:
+        {Topic.ppdRetrievalQuestion}
+
+        Response:
+        {Topic.ppdResponse}
+
+    - kind: ConditionGroup
+      id: conditionGroup_pass2
+      conditions:
+        - id: conditionItem_pass1_blank
+          condition: =IsBlank(Topic.ppdResponse)
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_ppd_pass2
+              autoSend: false
+              variable: Topic.ppdResponse
+              userInput: =Topic.ppdRetrievalQuestion
+              additionalInstructions: |-
+                You are testing the broad DA knowledge source. The specific Project Planning and Design source returned no result.
+
+                Use ONLY the broad DA knowledge source provided. Do not use Cidy routing, fallback topics, or general knowledge.
+
+                Search broadly for concept note guidelines, project document guidelines, templates, review checklists, and any DA project planning and design content across all tranches.
+
+                If no relevant source is found, say so clearly and name the terms you attempted.
+
+                Format your response exactly as follows:
+
+                DEBUG_RETRIEVAL:
+                Name the document, tranche, file, and search terms matched.
+
+                ANSWER:
+                Provide the direct answer.
+
+                SOURCES:
+                List each source as a markdown link: [name of file](full url). If no URL is available, list the source title as plain text.
+
+                CONFIDENCE:
+                Write only a single number from 0 to 5.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ
+
+            - kind: SendActivity
+              id: debug_pass2_result
+              activity: |-
+                DEBUG - Pass 2 result: Broad DA source (Pass 1 was blank)
+
+                Query sent:
+                {Topic.ppdRetrievalQuestion}
+
+                Response:
+                {Topic.ppdResponse}
+
+inputType: {}
+outputType: {}

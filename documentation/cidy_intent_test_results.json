@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-08T16:31:56-04:00",
+                    "generatedAt":  "2026-06-10T14:59:27-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  100,
-                    "passed":  88,
-                    "failed":  12
+                    "passed":  83,
+                    "failed":  17
                 },
     "results":  [
                     {
@@ -14,7 +14,7 @@
                         "question":  "What is required in a DA concept note?",
                         "clarification":  "",
                         "expectedBehavior":  "Intent Classifier sets knowledge_domain=da, funding_stream=DA, topic_area=project_planning_design, requires_clarification=No. Intent Clarifier bypasses. Intent Router routes to Formulate Response DA.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -94,20 +94,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: project_planning_design."
+                                         }
                                      ]
                     },
                     {
@@ -116,7 +120,7 @@
                         "question":  "For DA, how do I prepare a project document?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Formulate Response DA with topic_area=project_planning_design.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -196,20 +200,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: project_planning_design."
+                                         }
                                      ]
                     },
                     {
@@ -434,7 +442,7 @@
                         "question":  "What does Section 35 say about project design?",
                         "clarification":  "",
                         "expectedBehavior":  "Recognizes Section 35 as DA signal and routes to Formulate Response DA.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -514,20 +522,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: project_planning_design."
+                                         }
                                      ]
                     },
                     {
@@ -831,11 +843,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design",
                                                                                                       "general"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -954,7 +965,7 @@
                         "question":  "Is there a DA checklist for reviewing concept notes?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Formulate Response DA with topic_area=project_planning_design or templates.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -1037,20 +1048,25 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "project_planning_design",
                                                                                                        "templates"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: project_planning_design, templates."
+                                         }
                                      ]
                     },
                     {
@@ -4509,11 +4525,10 @@
                                                               "topicAreaStatus":  {
                                                                                       "mapped":  true,
                                                                                       "matched":  [
-                                                                                                      "general",
-                                                                                                      "project_planning_design"
+                                                                                                      "general"
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
@@ -9278,7 +9293,7 @@
                         "question":  "Good morning, how do I design a DA concept note?",
                         "clarification":  "",
                         "expectedBehavior":  "User Inquiry greeting classifier sets isGreeting=false because the input includes a substantive question. The input continues to Intent and routes to Formulate Response DA with funding_stream=DA and topic_area=project_planning_design.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -9358,20 +9373,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "project_planning_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "project_planning_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: project_planning_design."
+                                         }
                                      ]
                     },
                     {
