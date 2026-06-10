@@ -56,6 +56,19 @@ beginDialog:
 
       aIModelId: 98bc018f-3dc0-43ce-b008-0e77f7e85098
 
+    - kind: ConditionGroup
+      id: conditionGroup_parseGuard
+      conditions:
+        - id: conditionItem_parseError
+          condition: =IsError(ParseJSON(Global.jsonResponse.text))
+          actions:
+            - kind: SendActivity
+              id: sendActivity_parseError
+              activity: Cidy could not parse the result. Please ask again or escalate to a CDPMO representative by clicking on the escalate option in the follow up questions.
+
+            - kind: EndDialog
+              id: end_parseError
+
     - kind: SetVariable
       id: setVariable_answer
       variable: Global.formattedAnswer

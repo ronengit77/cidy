@@ -49,7 +49,7 @@ beginDialog:
             - kind: SetVariable
               id: setIssueSummary_maxClarifications
               variable: Global.issueSummary
-              value: |
+              value: |-
                 ="Clarification dead end. User question: " & Global.userQuestion & " Last clarification answer: " & Global.clarificationAnswer
 
             - kind: ConditionGroup
@@ -110,19 +110,19 @@ beginDialog:
             - kind: SetVariable
               id: log_fundClarificationPrompt
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "CIDY: Which funding stream do you mean?" & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: log_fundClarificationAnswer
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "USER: " & Text(Topic.fundChoice) & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: append_fundClarificationToQuestion
               variable: Global.userQuestion
-              value: |
+              value: |-
                 =Global.userQuestion & Char(10) & "User clarification - funding stream: " & Text(Topic.fundChoice)
 
             - kind: ConditionGroup
@@ -295,19 +295,19 @@ beginDialog:
             - kind: SetVariable
               id: log_domainClarificationPrompt
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "CIDY: Which area should Cidy use for this question?" & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: log_domainClarificationAnswer
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "USER: " & Text(Topic.domainChoice) & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: append_domainClarificationToQuestion
               variable: Global.userQuestion
-              value: |
+              value: |-
                 =Global.userQuestion & Char(10) & "User clarification - knowledge area: " & Text(Topic.domainChoice)
 
             - kind: ConditionGroup
@@ -536,19 +536,19 @@ beginDialog:
             - kind: SetVariable
               id: log_artifactClarificationPrompt
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "CIDY: Which type of document are you asking about?" & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: log_artifactClarificationAnswer
               variable: Global.transcript
-              value: |
+              value: |-
                 =Global.transcript & "USER: " & Text(Topic.artifactChoice) & Char(13) & Char(10) & Char(13) & Char(10)
 
             - kind: SetVariable
               id: append_artifactClarificationToQuestion
               variable: Global.userQuestion
-              value: |
+              value: |-
                 =Global.userQuestion & Char(10) & "User clarification - document type: " & Text(Topic.artifactChoice)
 
             - kind: ConditionGroup
@@ -705,7 +705,7 @@ beginDialog:
         - kind: SetVariable
           id: setIssueSummary_noClarificationBranch
           variable: Global.issueSummary
-          value: |
+          value: |-
             ="Clarification dead end. User question: " & Global.userQuestion & " Clarification type: " & Global.clarificationType
 
         - kind: ConditionGroup

@@ -17,12 +17,12 @@ beginDialog:
       userInput: |-
         ="User question: " & Global.userQuestion & Char(10) & Char(10) &
         "Search terms: Cidy; UN DESA Capacity Development Assistant; how Cidy works; knowledge coverage; good user questions; Copilot Studio architecture; inquiry capture; intent classification; clarification; question enhancement; routing; response generation; confidence assessment; feedback; escalation." & Char(10) & Char(10) &
-        "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-        "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-        "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+        "Question enhancements: " & Global.executiveQuestionEnhancements
       additionalInstructions: |-
         You are Cidy, a UN DESA knowledge assistant. The user is asking about Cidy itself, including what Cidy does, what problem it solves, how it differs from a general-purpose AI chatbot, what knowledge areas it covers, examples of good user questions, or how the application flow and architecture work.
-        Answer using ONLY the provided About Cidy knowledge source and the binding source-use instructions. Do not answer as a generic AI chatbot explanation. Keep the answer specific to Cidy and the documented UN DESA capacity-development assistant.
+        Answer using ONLY the provided About Cidy knowledge source. Do not answer as a generic AI chatbot explanation. Keep the answer specific to Cidy and the documented UN DESA capacity-development assistant.
+        Source-use instructions: {Global.sourceUseInstructions}
+        If the knowledge source does not contain enough reliable information, say so.
         If the question asks about current coverage, classification, clarification, question enhancement, routing, response generation, confidence assessment, feedback, escalation, or maintenance, summarize only what the About Cidy source supports and say when the source does not contain enough detail.
         If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, version, or document date used.
         For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
@@ -52,12 +52,11 @@ beginDialog:
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
                 "Search terms: Cidy; UN DESA Capacity Development Assistant; how Cidy works; knowledge coverage; good user questions; Copilot Studio architecture; inquiry capture; intent classification; clarification; question enhancement; routing; response generation; confidence assessment; feedback; escalation." & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "The folder-specific About Cidy source did not return a result. Search the broader top-level Knowledge source, but answer only from documents that are explicitly about Cidy."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The folder-specific About Cidy search did not return a result, so this is a constrained fallback search across the broader top-level Knowledge source.
                 Answer ONLY if the retrieved source is explicitly about Cidy, the UN DESA Capacity Development Assistant, its knowledge coverage, user question examples, confidence/feedback/escalation behavior, or Copilot Studio architecture. Do not use unrelated DA, RPTC, PDF, Programme Development, or general CDPMO sources unless they explicitly describe Cidy itself.
+                Source-use instructions: {Global.sourceUseInstructions}
                 If no explicitly About Cidy source is found, say the knowledge source does not contain enough reliable information.
                 Format your response as follows:
                 ANSWER: Your detailed answer

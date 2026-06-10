@@ -14,7 +14,7 @@ beginDialog:
             - kind: SetVariable
               id: setSourceUseInstructions_rptcProgressReports
               variable: Global.sourceUseInstructions
-              value: "This folder contains all RPTC progress reports. It answers questions like: What were the main achievements of the Regular Programme of Technical Cooperation in 2024? How many countries, requests, interventions, and people were supported through RPTC in 2024? Which UN implementing entities delivered RPTC activities, and how did their results differ? How did RPTC support least developed countries, landlocked developing countries, and small island developing States? What challenges and recommendations does the report identify for strengthening RPTC in future years?"
+              value: This folder contains all RPTC progress reports covering achievements, countries and entities supported, interventions, requests, people supported, results by SIDS/LDC/LLDC, challenges, and recommendations for strengthening RPTC.
 
             - kind: SearchAndSummarizeContent
               id: search_rptcProgressReports
@@ -22,12 +22,12 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC progress reports, achievements, results, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, or recommendations.
                 Answer using ONLY the provided RPTC progress report knowledge source.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
                 For count questions, count matching records or reported figures from the progress report source where possible. If the source only supports an approximate count, state that limitation clearly.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
@@ -59,12 +59,12 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC guidance, templates, standards, activity proposals, reporting standards, IRA recruitment/administration, activity reports, planning, approval, implementation, proposal revisions, or post-activity reporting.
                 Answer using ONLY the provided RPTC guidance and templates knowledge source.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
@@ -120,17 +120,23 @@ beginDialog:
         - id: conditionItem_rptcNoResult
           condition: =IsBlank(Global.draftResponse)
           actions:
+            - kind: SetVariable
+              id: setSourceUseInstructions_RPTC_noResult
+              variable: Global.sourceUseInstructions
+              value: The specific RPTC knowledge folder did not return a result. Search the broader RPTC knowledge source.
+
             - kind: SearchAndSummarizeContent
               id: search_rptcNoResultFallback
               autoSend: false
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The specific RPTC knowledge folder did not contain a relevant answer. Search the broader RPTC knowledge source.
                 Answer the question using ONLY the provided RPTC knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 Format your response as follows:
                 ANSWER: Your detailed answer
                 SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.

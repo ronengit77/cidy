@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: This topic searches the appropriate knowledge base based on the classified funding stream and generates a draft response with confidence score. It does not display the answer to the user.
+modelDescription: TEST COPY of Formulate_Response_DA. Identical to production except for the project_planning_design userInput suffix (updated from Testing_DA_PPD). Do not push to production until validated.
 beginDialog:
   kind: OnRecognizedIntent
   id: main
@@ -16,18 +16,51 @@ beginDialog:
               variable: Global.sourceUseInstructions
               value: The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.
 
+            - kind: SetVariable
+              id: set_ppdRetrievalQuestion
+              variable: Topic.ppdRetrievalQuestion
+              value: =Global.userQuestion & " Development Account DA concept note CN project document PD guidelines template Excel annex review checklist tranche T19 T18 T17 T16 T15 T14 latest most recent project planning design requirements sections objectives budget results framework quality assurance internal review submission implementing entity"
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_ppd_start
+              conditions:
+                - id: conditionItem_debug_ppd_start
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_ppd_start
+                      activity: |-
+                        DEBUG - DA TEST Project Planning and Design branch entered.
+
+                        Incoming text:
+                        {System.Activity.Text}
+
+                        User question (Global):
+                        {Global.userQuestion}
+
+                        Topic area:
+                        {Global.topicArea}
+
+                        Expanded retrieval question:
+                        {Topic.ppdRetrievalQuestion}
+
+                        Knowledge source under test:
+                        copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK
+
+                        Test plan:
+                        Pass 1 - Specific PPD knowledge source with expanded query.
+                        Pass 2 - Broad DA knowledge source if Pass 1 is blank.
+
             - kind: SearchAndSummarizeContent
               id: iWuL74
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+              userInput: =Topic.ppdRetrievalQuestion
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
@@ -41,7 +74,24 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
+                  - copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_ppd_postSearch
+              conditions:
+                - id: conditionItem_debug_ppd_postSearch
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_ppd_postSearch
+                      activity: |-
+                        DEBUG - Pass 1 result: Specific PPD knowledge source
+
+                        Query sent:
+                        {Topic.ppdRetrievalQuestion}
+
+                        Response:
+                        {Global.draftResponse}
 
         - id: conditionItem_O9CKVo
           condition: =Global.topicArea = "evaluation_design"
@@ -70,12 +120,12 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
@@ -105,12 +155,12 @@ beginDialog:
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
@@ -124,17 +174,21 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.ProjectPlanningandDesign_EdmEHxX8EFurNDo0vdsE2
+                  - copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK
 
       elseActions:
+        - kind: SetVariable
+          id: setSourceUseInstructions_DA_elseActions
+          variable: Global.sourceUseInstructions
+          value: Search the general DA knowledge base for the most relevant answer to this Development Account question.
+
         - kind: SearchAndSummarizeContent
           id: J7vEWX
           autoSend: false
           variable: Global.draftResponse
           userInput: |-
             ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-            "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-            "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+            "Question enhancements: " & Global.executiveQuestionEnhancements
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided DA knowledge sources.
@@ -159,18 +213,24 @@ beginDialog:
         - id: conditionItem_noResult
           condition: =IsBlank(Global.draftResponse)
           actions:
+            - kind: SetVariable
+              id: setSourceUseInstructions_DA_fallback
+              variable: Global.sourceUseInstructions
+              value: The specific DA knowledge folder did not return a result. Search the general DA knowledge base for the most relevant answer.
+
             - kind: SearchAndSummarizeContent
               id: search_DA_fallback
               autoSend: false
               variable: Global.draftResponse
               userInput: |-
                 ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-                "Answer the user question using the applicable knowledge source. If the knowledge source does not contain enough reliable information, say so."
+                "Question enhancements: " & Global.executiveQuestionEnhancements
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 The specific knowledge folder did not contain a relevant answer. Search the general DA knowledge base.
                 Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
                 If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
                 For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
                 Format your response as follows:
@@ -184,7 +244,24 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
+                  - copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_da_fallback_postSearch
+              conditions:
+                - id: conditionItem_debug_da_fallback_postSearch
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_da_fallback_postSearch
+                      activity: |-
+                        DEBUG - Pass 2 result: Broad DA source (Pass 1 was blank)
+
+                        Query sent:
+                        {Topic.ppdRetrievalQuestion}
+
+                        Response:
+                        {Global.draftResponse}
 
     - kind: BeginDialog
       id: goToAssess
