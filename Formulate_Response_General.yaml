@@ -40,7 +40,7 @@ beginDialog:
     - kind: SetVariable
       id: set_responseTimeSeconds
       variable: Global.responseTimeSeconds
-      value: =DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds)
+      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
 
     - kind: ConditionGroup
       id: conditionGroup_debug_responseTime
