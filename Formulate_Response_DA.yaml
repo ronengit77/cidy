@@ -6,6 +6,17 @@ beginDialog:
   intent: {}
   actions:
     - kind: ConditionGroup
+      id: conditionGroup_timer_fallback
+      conditions:
+        - id: conditionItem_timer_fallback
+          condition: =IsBlank(Global.requestStartTime)
+          actions:
+            - kind: SetVariable
+              id: set_requestStartTime_fallback
+              variable: Global.requestStartTime
+              value: =Now()
+
+    - kind: ConditionGroup
       id: conditionGroup_rsyEfm
       conditions:
         - id: conditionItem_mMA5gI
