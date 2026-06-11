@@ -195,6 +195,11 @@ beginDialog:
               variable: Global.userQuestion
               value: =System.Activity.Text
 
+            - kind: SetVariable
+              id: set_requestStartTime_awaiting
+              variable: Global.requestStartTime
+              value: =Now()
+
             - kind: ConditionGroup
               id: conditionGroup_exitCommand_awaitingNewQuestion
               conditions:
@@ -309,6 +314,11 @@ beginDialog:
       entity:
         kind: StringPrebuiltEntity
         sensitivityLevel: None
+
+    - kind: SetVariable
+      id: set_requestStartTime_initial
+      variable: Global.requestStartTime
+      value: =Now()
 
     - kind: SetVariable
       id: setVariable_yWRCNY

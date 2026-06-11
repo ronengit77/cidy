@@ -37,6 +37,21 @@ beginDialog:
         knowledgeSources:
           - copilots_header_3141e.topic.Knowledge_WYTpGldAWsk7o_B4cI6Vn
 
+    - kind: SetVariable
+      id: set_responseTimeSeconds
+      variable: Global.responseTimeSeconds
+      value: =DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds)
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_responseTime
+      conditions:
+        - id: conditionItem_debug_responseTime
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_responseTime
+              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
     - kind: BeginDialog
       id: goToAssess
       dialog: copilots_header_3141e.topic.AssessConfidence
