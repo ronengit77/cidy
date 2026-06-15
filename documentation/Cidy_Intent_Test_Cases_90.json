@@ -9,7 +9,7 @@
     "testCases":  [
                       {
                           "Scenario":  "Happy path - DA project planning",
-                          "Test question":  "What is required in a DA concept note?",
+                          "Test question":  "What is required in a DA* concept note?",
                           "Clarification":  "",
                           "Expected behavior":  "Intent Classifier sets knowledge_domain=da, funding_stream=DA, topic_area=project_planning_design, requires_clarification=No. Intent Clarifier bypasses. Intent Router routes to Formulate Response DA."
                       },
