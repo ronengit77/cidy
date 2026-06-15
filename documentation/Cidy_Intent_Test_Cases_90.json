@@ -14,7 +14,7 @@
                           "Expected behavior":  "Intent Classifier sets knowledge_domain=da, funding_stream=DA, topic_area=project_planning_design, requires_clarification=No. Intent Clarifier bypasses. Intent Router routes to Formulate Response DA."
                       },
                       {
-                          "Scenario":  "Happy path - DA project document",
+                          "Scenario":  "Happy path - DA project documents",
                           "Test question":  "For DA, how do I prepare a project document?",
                           "Clarification":  "",
                           "Expected behavior":  "Routes directly to Formulate Response DA with topic_area=project_planning_design."
