@@ -145,6 +145,10 @@ beginDialog:
                       id: sendActivity_debug_routeAboutCidy
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
+            - kind: SendActivity
+              id: sendActivity_searching_aboutCidy
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
+
             - kind: BeginDialog
               id: goToAboutCidy
               dialog: copilots_header_3141e.topic.FormulateResponseCidyAbout
@@ -169,6 +173,10 @@ beginDialog:
                     - kind: SendActivity
                       id: sendActivity_M2shGu
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: SendActivity
+              id: sendActivity_searching_programmeDevelopment
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
 
             - kind: BeginDialog
               id: EtEXZZ
@@ -195,6 +203,10 @@ beginDialog:
                       id: sendActivity_debug_routeDA
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
+            - kind: SendActivity
+              id: sendActivity_searching_DA
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
+
             - kind: BeginDialog
               id: goToDA
               dialog: copilots_header_3141e.topic.DA
@@ -219,6 +231,10 @@ beginDialog:
                     - kind: SendActivity
                       id: sendActivity_debug_routeRPTC
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: SendActivity
+              id: sendActivity_searching_RPTC
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
 
             - kind: BeginDialog
               id: goToRPTC
@@ -245,6 +261,10 @@ beginDialog:
                       id: sendActivity_debug_routePDF
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
 
+            - kind: SendActivity
+              id: sendActivity_searching_PDF
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
+
             - kind: BeginDialog
               id: goToPDF
               dialog: copilots_header_3141e.topic.FormulateResponse
@@ -269,6 +289,10 @@ beginDialog:
                     - kind: SendActivity
                       id: sendActivity_Fjbd95
                       activity: "DEBUG - Domain: {Global.knowledgeDomain} | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | User question: {Global.userQuestion}"
+
+            - kind: SendActivity
+              id: sendActivity_searching_generalCD
+              activity: I identified a relevant knowledge folder for your question. Searching and generating a response — this may take up to 40 seconds. Thank you for your patience.
 
             - kind: BeginDialog
               id: KveG2l
