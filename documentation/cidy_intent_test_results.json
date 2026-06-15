@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-15T12:02:22-04:00",
+                    "generatedAt":  "2026-06-15T12:09:11-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  100,
@@ -10,7 +10,7 @@
     "results":  [
                     {
                         "id":  "TC01",
-                        "scenario":  "Very Happy path - DA project planning",
+                        "scenario":  "Happy path - DA project planning",
                         "question":  "What is required in a DA concept note?",
                         "clarification":  "",
                         "expectedBehavior":  "Intent Classifier sets knowledge_domain=da, funding_stream=DA, topic_area=project_planning_design, requires_clarification=No. Intent Clarifier bypasses. Intent Router routes to Formulate Response DA.",

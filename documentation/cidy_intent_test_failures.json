@@ -1,6 +1,6 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-15T12:02:22-04:00",
+                    "generatedAt":  "2026-06-15T12:09:11-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  100,
@@ -10,7 +10,7 @@
     "failures":  [
                      {
                          "id":  "TC01",
-                         "scenario":  "Very Happy path - DA project planning",
+                         "scenario":  "Happy path - DA project planning",
                          "question":  "What is required in a DA concept note?",
                          "finalRoute":  {
                                             "routingTarget":  "Formulate Response Development Account",
