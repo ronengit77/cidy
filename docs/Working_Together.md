@@ -100,9 +100,23 @@ The lead reviews, may ask for changes, and then merges your branch into `staging
 
 ---
 
+## Branch protection rules (enforced by GitHub)
+
+These rules are configured directly on the repository and cannot be bypassed by team members:
+
+| Branch | Rule |
+|---|---|
+| `main` | No direct pushes allowed — not even the lead. All changes must come in via a pull request with at least 1 approval. |
+| `staging` | Team members cannot push directly. All contributions must come via a pull request from a personal branch. The lead can push directly to staging when needed. |
+
+If you try to `git push` to `staging` or `main` directly and get a "protected branch" error, that is expected. Open a pull request instead.
+
+---
+
 ## What you should NOT do
 
-- **Do not push directly to `main`** — only the lead merges into main
+- **Do not push directly to `main`** — blocked by GitHub; open a PR instead
+- **Do not push directly to `staging`** — blocked by GitHub for all team members; open a PR from your personal branch
 - **Do not edit `Formulate_Response_[X].yaml` (production files)** — only edit the `Staging` version
 - **Do not publish in Copilot Studio** — only the lead publishes
 - **Do not edit another person's branch** — if you need to coordinate, ask first
