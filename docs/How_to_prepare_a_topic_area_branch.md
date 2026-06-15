@@ -40,7 +40,7 @@ QA/QC, internal review, or pre-submission review questions.
 
 ## Step 2: Create an Isolated Test Topic
 
-Copy `Testing_DA_PPD.yaml` or `Testing_Country_Data.yaml` as a starting template.
+Copy `Testing_DA_PPD.yaml`.
 
 **Critical settings:**
 
