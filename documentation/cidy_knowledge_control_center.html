@@ -488,12 +488,11 @@
   <script id="embeddedInventory" type="application/json">
 {
     "schemaVersion":  "1.1",
-    "generatedAt":  "2026-06-15T12:13:27-04:00",
+    "generatedAt":  "2026-06-15T15:13:05-04:00",
     "generatedFrom":  [
                           "Cidy_Intent_Router.yaml",
                           "Formulate_Response_Cidy_About.yaml",
                           "Formulate_Response_DA.yaml",
-                          "Formulate_Response_DA_Staging.yaml",
                           "Formulate_Response_General.yaml",
                           "Formulate_Response_Programme_Development.yaml",
                           "Formulate_Response_RPTC.yaml"
@@ -533,28 +532,6 @@
                         "firstSeenAt":  ""
                     },
                     {
-                        "id":  "programme_development",
-                        "label":  "Programme Development",
-                        "fundingStream":  "UNCLEAR",
-                        "routerStatus":  "wired",
-                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
-                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
-                        "notes":  "Discovered from Cidy_Intent_Router.yaml.",
-                        "isNewYaml":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
-                        "id":  "da_staging",
-                        "label":  "Da Staging",
-                        "fundingStream":  "UNCLEAR",
-                        "routerStatus":  "not_wired",
-                        "routerDialog":  "",
-                        "yamlFile":  "Formulate_Response_DA_Staging.yaml",
-                        "notes":  "Response YAML exists, but no matching router branch was discovered.",
-                        "isNewYaml":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
                         "id":  "pdf",
                         "label":  "Peace and Development Trust Fund / UNPDF",
                         "fundingStream":  "PDF",
@@ -572,6 +549,17 @@
                         "routerStatus":  "wired",
                         "routerDialog":  "copilots_header_3141e.topic.FormulateResponseCidyAbout",
                         "yamlFile":  "Formulate_Response_Cidy_About.yaml",
+                        "notes":  "Discovered from Cidy_Intent_Router.yaml.",
+                        "isNewYaml":  false,
+                        "firstSeenAt":  ""
+                    },
+                    {
+                        "id":  "programme_development",
+                        "label":  "Programme Development",
+                        "fundingStream":  "UNCLEAR",
+                        "routerStatus":  "wired",
+                        "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
                         "notes":  "Discovered from Cidy_Intent_Router.yaml.",
                         "isNewYaml":  false,
                         "firstSeenAt":  ""
@@ -668,78 +656,6 @@
                         "sourceCount":  1,
                         "yamlConditionId":  "elseActions",
                         "yamlFile":  "Formulate_Response_DA.yaml",
-                        "generatedFromYaml":  true,
-                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
-                        "mappingStatus":  "fallback",
-                        "ownerUnit":  "TBD",
-                        "instructions":  "Search the general DA knowledge base for the most relevant answer to this Development Account question.",
-                        "isNewTopic":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
-                        "id":  "da_staging_evaluation_design",
-                        "domain":  "da_staging",
-                        "topicArea":  "evaluation_design",
-                        "topicName":  "Evaluation Design",
-                        "folderName":  "Evaluation Design",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo",
-                        "sourceIds":  [
-                                          "copilots_header_3141e.topic.Evaluations_zeK4BT8uZXrgHEy5vAivo"
-                                      ],
-                        "sourceLabels":  [
-                                             "Evaluations"
-                                         ],
-                        "sourceCount":  1,
-                        "yamlConditionId":  "conditionItem_O9CKVo",
-                        "yamlFile":  "Formulate_Response_DA_Staging.yaml",
-                        "generatedFromYaml":  true,
-                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
-                        "mappingStatus":  "yaml_exists_not_wired",
-                        "ownerUnit":  "TBD",
-                        "instructions":  "Use the Evaluation knowledge folder. When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche. Use non-tranche general evaluation documents where they apply across tranches. Use guidance notes and annotated templates as primary sources for substantive answers. Do not use unannotated templates unless the user specifically asks for a blank template or template structure. The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward. The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward.",
-                        "isNewTopic":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
-                        "id":  "da_staging_general",
-                        "domain":  "da_staging",
-                        "topicArea":  "general",
-                        "topicName":  "General",
-                        "folderName":  "General",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK",
-                        "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyDAProjectPlanningandDesign_oy_jlk_uCuNf2iko9HdJK"
-                                      ],
-                        "sourceLabels":  [
-                                             "Cidy DA Project Planning And Design Oy Jlk"
-                                         ],
-                        "sourceCount":  1,
-                        "yamlConditionId":  "conditionItem_PGrWf8",
-                        "yamlFile":  "Formulate_Response_DA_Staging.yaml",
-                        "generatedFromYaml":  true,
-                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
-                        "mappingStatus":  "yaml_exists_not_wired",
-                        "ownerUnit":  "TBD",
-                        "instructions":  "The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions. Do not use blank templates unless the user specifically asks for templates. Use Excel annexes for annex-table questions together with Project Document Guidelines. Use review checklists only for QA/QC, internal review, or pre-submission review questions.",
-                        "isNewTopic":  false,
-                        "firstSeenAt":  ""
-                    },
-                    {
-                        "id":  "da_staging_fallback",
-                        "domain":  "da_staging",
-                        "topicArea":  "general",
-                        "topicName":  "General",
-                        "folderName":  "Da Staging Fallback",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ",
-                        "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyDAAll_fNqeT7A_zZXF76sp_dprZ"
-                                      ],
-                        "sourceLabels":  [
-                                             "Cidy DA All F Nqe 7 Z 76 Sp Dpr Z"
-                                         ],
-                        "sourceCount":  1,
-                        "yamlConditionId":  "elseActions",
-                        "yamlFile":  "Formulate_Response_DA_Staging.yaml",
                         "generatedFromYaml":  true,
                         "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "fallback",
@@ -1393,13 +1309,6 @@
                           "title":  "Create PDF response YAML",
                           "yamlFile":  "Formulate_Response_PDF.yaml",
                           "description":  "Router calls copilots_header_3141e.topic.FormulateResponse, but no matching response YAML was discovered."
-                      },
-                      {
-                          "id":  "da_staging_not_wired",
-                          "severity":  "medium",
-                          "title":  "Wire Da Staging route",
-                          "yamlFile":  "Cidy_Intent_Router.yaml",
-                          "description":  "Response YAML exists or is expected, but the router does not currently call it."
                       }
                   ],
     "managerUpdates":  [
