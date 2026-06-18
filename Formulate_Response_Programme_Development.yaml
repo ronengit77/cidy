@@ -294,6 +294,10 @@ beginDialog:
                         userInput sent to SearchAndSummarizeContent:
                         {Global.countryDataEnhancedQuestion}
 
+                        Global.countryDataEnhancedQuestion:
+                        {Global.countryDataEnhancedQuestion}
+
+                        ---------------------------------
                         additionalInstructions sent to SearchAndSummarizeContent:
                         Answer using ONLY the selected Country Data knowledge source.
 

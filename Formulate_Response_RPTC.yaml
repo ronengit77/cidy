@@ -148,7 +148,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf
+                  - copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS
 
     - kind: SetVariable
       id: set_responseTimeSeconds
