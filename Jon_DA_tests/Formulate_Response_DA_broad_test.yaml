@@ -1,0 +1,105 @@
+kind: AdaptiveDialog
+modelDescription: LOCAL TEST COPY for experimenting with single-folder DA retrieval. Searches only the "NR - DA All" knowledge source regardless of topic area. Not wired into the Intent Router. Not for commit/push.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_timer_fallback
+      conditions:
+        - id: conditionItem_timer_fallback
+          condition: =IsBlank(Global.requestStartTime)
+          actions:
+            - kind: SetVariable
+              id: set_requestStartTime_fallback
+              variable: Global.requestStartTime
+              value: =Now()
+
+    - kind: SetVariable
+      id: setSourceUseInstructions_broadTest
+      variable: Global.sourceUseInstructions
+      value: Search the single "NR - DA All" knowledge base for the most relevant answer to this Development Account question, regardless of topic area.
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_broadTest_start
+      conditions:
+        - id: conditionItem_debug_broadTest_start
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_broadTest_start
+              activity: |-
+                DEBUG - DA BROAD TEST branch entered.
+
+                User question (Global):
+                {Global.userQuestion}
+
+                Topic area (ignored by this test - single folder only):
+                {Global.topicArea}
+
+                Knowledge source under test:
+                copilots_header_3141e.topic.NRDAAll_oPYClGpKB4HkWyHxvvzSw
+
+    - kind: SearchAndSummarizeContent
+      id: search_broadTest
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: =Global.userQuestion
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+        Answer the question using ONLY the provided DA knowledge sources.
+        Source-use instructions: {Global.sourceUseInstructions}
+        If the knowledge source does not contain enough reliable information, say so.
+        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.NRDAAll_oPYClGpKB4HkWyHxvvzSw
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_broadTest_postSearch
+      conditions:
+        - id: conditionItem_debug_broadTest_postSearch
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_broadTest_postSearch
+              activity: |-
+                DEBUG - NR - DA All search result
+
+                Query sent:
+                {Global.userQuestion}
+
+                Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+    - kind: SetVariable
+      id: set_responseTimeSeconds
+      variable: Global.responseTimeSeconds
+      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_responseTime
+      conditions:
+        - id: conditionItem_debug_responseTime
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_responseTime
+              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}

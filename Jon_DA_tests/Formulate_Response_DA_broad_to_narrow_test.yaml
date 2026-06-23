@@ -1,0 +1,469 @@
+kind: AdaptiveDialog
+modelDescription: "LOCAL TEST COPY mirroring Formulate_Response_DA, restructured to 3 streams only (project_planning_design, evaluation_design, general). PPD and evaluation_design run broad-then-narrow two-pass retrieval; general runs a single broad-only pass. "
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_timer_fallback
+      conditions:
+        - id: conditionItem_timer_fallback
+          condition: =IsBlank(Global.requestStartTime)
+          actions:
+            - kind: SetVariable
+              id: set_requestStartTime_fallback
+              variable: Global.requestStartTime
+              value: =Now()
+
+    - kind: ConditionGroup
+      id: conditionGroup_streamRouting
+      conditions:
+        - id: conditionItem_ppd
+          condition: =Global.topicArea = "project_planning_design"
+          actions:
+            - kind: SetTextVariable
+              id: set_sourceUseInstructions_ppd
+              variable: Global.sourceUseInstructions
+              value: The Project Planning and Design folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions.
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_ppd_start
+              conditions:
+                - id: conditionItem_debug_ppd_start
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_ppd_start
+                      activity: |-
+                        DEBUG - BROAD TO NARROW TEST: PPD branch entered.
+
+                        User question (Global):
+                        {Global.userQuestion}
+
+                        Topic area:
+                        {Global.topicArea}
+
+                        Test plan:
+                        Pass 1 - Broad DA All knowledge source (KS to be set in Copilot Studio).
+                        Pass 2 - Narrow PPD knowledge source if Pass 1 is blank (KS to be set in Copilot Studio).
+
+            - kind: SearchAndSummarizeContent
+              id: search_ppd_pass1
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.NRDAAll_C8anxzLPWEnQv_kA3liDc
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_ppd_pass1_result
+              conditions:
+                - id: conditionItem_debug_ppd_pass1_result
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_ppd_pass1_result
+                      activity: |-
+                        DEBUG - PPD Pass 1 result: Broad DA All knowledge source
+
+                        Query sent:
+                        {Global.userQuestion}
+
+                        Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+            - kind: ConditionGroup
+              id: conditionGroup_ppd_pass2
+              conditions:
+                - id: conditionItem_ppd_pass2
+                  condition: =IsBlank(Global.draftResponse)
+                  actions:
+                    - kind: SearchAndSummarizeContent
+                      id: search_ppd_pass2
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: =Global.userQuestion
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                        Answer the question using ONLY the provided DA knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.ProjectPlanningandDesign_nLxPpDsosvG7KcsrU8X8M
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_debug_ppd_pass2_result
+                      conditions:
+                        - id: conditionItem_debug_ppd_pass2_result
+                          condition: =Global.testMode = true
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_debug_ppd_pass2_result
+                              activity: |-
+                                DEBUG - PPD Pass 2 result: Narrow PPD knowledge source (Pass 1 was blank)
+
+                                Query sent:
+                                {Global.userQuestion}
+
+                                Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+        - id: conditionItem_evaluationDesign
+          condition: =Global.topicArea = "evaluation_design"
+          actions:
+            - kind: SetTextVariable
+              id: set_sourceUseInstructions_eval
+              variable: Global.sourceUseInstructions
+              value: |-
+                Use the Evaluation knowledge folder.
+
+                When a document is tranche-labeled, use the highest tranche number unless the user explicitly asks about an earlier tranche.
+
+                Use non-tranche general evaluation documents where they apply across tranches.
+
+                Use guidance notes and annotated templates as primary sources for substantive answers.
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_eval_start
+              conditions:
+                - id: conditionItem_debug_eval_start
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_eval_start
+                      activity: |-
+                        DEBUG - BROAD TO NARROW TEST: Evaluation and Design branch entered.
+
+                        User question (Global):
+                        {Global.userQuestion}
+
+                        Topic area:
+                        {Global.topicArea}
+
+                        Test plan:
+                        Pass 1 - Broad DA All knowledge source (KS to be set in Copilot Studio).
+                        Pass 2 - Narrow Evaluation and Design knowledge source if Pass 1 is blank (KS to be set in Copilot Studio).
+
+            - kind: SearchAndSummarizeContent
+              id: search_eval_pass1
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.NRDAAll_C8anxzLPWEnQv_kA3liDc
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_eval_pass1_result
+              conditions:
+                - id: conditionItem_debug_eval_pass1_result
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_eval_pass1_result
+                      activity: |-
+                        DEBUG - Evaluation and Design Pass 1 result: Broad DA All knowledge source
+
+                        Query sent:
+                        {Global.userQuestion}
+
+                        Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+            - kind: ConditionGroup
+              id: conditionGroup_eval_pass2
+              conditions:
+                - id: conditionItem_eval_pass2
+                  condition: =IsBlank(Global.draftResponse)
+                  actions:
+                    - kind: SearchAndSummarizeContent
+                      id: search_eval_pass2
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: =Global.userQuestion
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                        Answer the question using ONLY the provided DA knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.NRDAEvaluationandDesign_MjkmjxulR1d7YONuqsU8J
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_debug_eval_pass2_result
+                      conditions:
+                        - id: conditionItem_debug_eval_pass2_result
+                          condition: =Global.testMode = true
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_debug_eval_pass2_result
+                              activity: |-
+                                DEBUG - Evaluation and Design Pass 2 result: Narrow Evaluation and Design knowledge source (Pass 1 was blank)
+
+                                Query sent:
+                                {Global.userQuestion}
+
+                                Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+        - id: conditionItem_monitoringReporting
+          condition: =Global.topicArea = "monitoring_reporting"
+          actions:
+            - kind: SetTextVariable
+              id: set_sourceUseInstructions_monitoringReporting
+              variable: Global.sourceUseInstructions
+              value: This folder contains progress report and final report templates, guidelines, and budget annexes for Development Account project monitoring and reporting. Use the highest tranche number as the most recent unless the user explicitly asks about an earlier tranche.
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_monitoringReporting_start
+              conditions:
+                - id: conditionItem_debug_monitoringReporting_start
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_monitoringReporting_start
+                      activity: |-
+                        DEBUG - BROAD TO NARROW TEST: Monitoring and Reporting branch entered.
+
+                        User question (Global):
+                        {Global.userQuestion}
+
+                        Topic area:
+                        {Global.topicArea}
+
+                        Test plan:
+                        Pass 1 - Broad DA All knowledge source (KS to be set in Copilot Studio).
+                        Pass 2 - Narrow Monitoring and Reporting knowledge source if Pass 1 is blank (KS to be set in Copilot Studio).
+
+            - kind: SearchAndSummarizeContent
+              id: search_monitoringReporting_pass1
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.NRDAAll_C8anxzLPWEnQv_kA3liDc
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_monitoringReporting_pass1_result
+              conditions:
+                - id: conditionItem_debug_monitoringReporting_pass1_result
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_monitoringReporting_pass1_result
+                      activity: |-
+                        DEBUG - Monitoring and Reporting Pass 1 result: Broad DA All knowledge source
+
+                        Query sent:
+                        {Global.userQuestion}
+
+                        Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+            - kind: ConditionGroup
+              id: conditionGroup_monitoringReporting_pass2
+              conditions:
+                - id: conditionItem_monitoringReporting_pass2
+                  condition: =IsBlank(Global.draftResponse)
+                  actions:
+                    - kind: SearchAndSummarizeContent
+                      id: search_monitoringReporting_pass2
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: =Global.userQuestion
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                        Answer the question using ONLY the provided DA knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.NRDAProjectMonitoringandReporting_DxaUneAMrGK7ZRm5HDd4s
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_debug_monitoringReporting_pass2_result
+                      conditions:
+                        - id: conditionItem_debug_monitoringReporting_pass2_result
+                          condition: =Global.testMode = true
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_debug_monitoringReporting_pass2_result
+                              activity: |-
+                                DEBUG - Monitoring and Reporting Pass 2 result: Narrow Monitoring and Reporting knowledge source (Pass 1 was blank)
+
+                                Query sent:
+                                {Global.userQuestion}
+
+                                Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}                        
+
+        - id: conditionItem_general
+          condition: =Global.topicArea = "general"
+          actions:
+            - kind: SetVariable
+              id: set_sourceUseInstructions_general
+              variable: Global.sourceUseInstructions
+              value: The general folder is organized by tranche. Use the highest tranche number as the most recent unless the user explicitly asks for an earlier tranche. Prefer Concept Note Guidelines for concept note questions and Project Document Guidelines for project document questions.
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_general_start
+              conditions:
+                - id: conditionItem_debug_general_start
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_general_start
+                      activity: |-
+                        DEBUG - BROAD TO NARROW TEST: General branch entered.
+
+                        User question (Global):
+                        {Global.userQuestion}
+
+                        Topic area:
+                        {Global.topicArea}
+
+                        Test plan:
+                        Single pass - General DA knowledge source only (KS to be set in Copilot Studio). No Pass 2.
+
+            - kind: SearchAndSummarizeContent
+              id: search_general_pass1
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: =Global.userQuestion
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
+                Answer the question using ONLY the provided DA knowledge sources.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.NRDAAll_C8anxzLPWEnQv_kA3liDc
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_general_result
+              conditions:
+                - id: conditionItem_debug_general_result
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_general_result
+                      activity: |-
+                        DEBUG - General Pass 1 result: General DA knowledge source (single pass, no Pass 2)
+
+                        Query sent:
+                        {Global.userQuestion}
+
+                        Result: {If(IsBlank(Global.draftResponse), "BLANK", "HAS CONTENT")}
+
+    - kind: SetVariable
+      id: set_responseTimeSeconds
+      variable: Global.responseTimeSeconds
+      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_responseTime
+      conditions:
+        - id: conditionItem_debug_responseTime
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_responseTime
+              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}
