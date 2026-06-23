@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: LOCAL TEST COPY for experimenting with single-folder DA retrieval. Searches only the "NR - DA All" knowledge source regardless of topic area. Not wired into the Intent Router. Not for commit/push.
+modelDescription: LOCAL TEST COPY for experimenting with single-folder DA retrieval. Searches only the "NR - DA All" knowledge source regardless of topic area. 
 beginDialog:
   kind: OnRecognizedIntent
   id: main
