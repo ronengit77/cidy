@@ -1,0 +1,56 @@
+kind: AdaptiveDialog
+modelDescription: Enhances a finalized user question with search hints before routing. It does not classify, clarify, route, search knowledge sources, or answer the user.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_enhanceOnlyReadyQuestions
+      conditions:
+        - id: conditionItem_readyToRoute
+          condition: =Global.intentStatus = "ready_to_route"
+          actions:
+            - kind: InvokeAIBuilderModelAction
+              id: invokeAIBuilderModelAction_questionEnhancer
+              input:
+                binding:
+                  UserQuestion: |
+                    ="You are the Cidy Question Enhancer. Enrich the finalized user question with search metadata before routing and retrieval. Do not answer, classify, route, change existing intent variables, or ask follow-up questions. Do not invent facts, dates, policies, counts, meetings, or document titles. Return ONLY compact valid JSON. No markdown, prose, comments, or code fences." & Char(10) & Char(10) & "Return this exact JSON schema. Every value must be a string. Use empty string when not applicable: {""detected_entities"":"""",""detected_dates"":"""",""recency_intent"":"""",""expanded_acronyms"":"""",""disambiguation_notes"":"""",""synonyms_and_search_terms"":"""",""reformulated_search_query"":"""",""filters"":"""",""source_selection_hints"":"""",""retrieval_strategy"":"""",""confidence_cautions"":"""",""detected_country_iso3"":""""}" & Char(10) & Char(10) & "Field rules: detected_entities=countries, regions, subregions, country groupings, divisions, funds, tranches, projects, report types, meetings, document types, country data record types, travel references, contact people, target groups, development categories, or named bodies explicitly mentioned or strongly implied. detected_dates=explicit years, ranges, relative dates, versions, tranches, meeting dates, proposal/request/activity/travel years, or words like latest/current/previous/historical. recency_intent=latest/current, historical, comparative, date-bounded, or no specific recency. expanded_acronyms=expand only if useful for retrieval. disambiguation_notes=note ambiguity without resolving it as fact. synonyms_and_search_terms=add retrieval terms likely to appear in source documents. reformulated_search_query=Rewrite the user question as a single natural language sentence of 10-20 words optimised for vector search retrieval. Naturally incorporate 1-2 of the most relevant synonyms from synonyms_and_search_terms into the sentence. Write in the style of a sentence that would appear in a knowledge document on this topic. Do not use semicolons, keyword lists, bullet points, or JSON. This field is used directly as the search query sent to vector search, so precision and naturalness matter more than coverage. Example: if the user asks 'What programme design standards apply to RPTC?' write 'What are the design guidelines and activity proposal requirements for planning RPTC activities?' filters=suggest metadata filters such as fund, year, tranche, country, ISO3 code, region, subregion, division, document type, meeting type, record type, status, contact, travel, target group, LDC/LLDC/SIDS flag, count, list, budget, or portfolio/work summary. source_selection_hints=suggest preferred evidence type, not a route. retrieval_strategy=suggest how to search, compare, count, or prioritize evidence. confidence_cautions=warn about recency, incomplete coverage, acronym ambiguity, count accuracy, status definitions, contact currency, travel coverage, or policy changes. detected_country_iso3=output the detected country name followed by its ISO 3166-1 alpha-3 code in uppercase and lowercase, all space-separated (example: Kenya KEN ken). If multiple countries are detected, list all space-separated (example: Kenya KEN ken Tanzania TZA tza). Output empty string if no specific country is detected or the question is not country-specific." & Char(10) & Char(10) & "Acronym guidance: DA=Development Account; RPTC=Regular Programme of Technical Cooperation; IRA=Inter-Regional Adviser in RPTC contexts; XB=Extra-budgetary; CD=Capacity Development; CDPMO=Capacity Development Programme Management Office; RC=Resident Coordinator; RCO=Resident Coordinator Office; UNCT=United Nations Country Team; UNSDCF=United Nations Sustainable Development Cooperation Framework; CCA=Common Country Analysis; LDC=least developed country; LLDC=landlocked developing country; SIDS=small island developing States; TAG=Capacity Development Tag Team only for CDPMO/DESA governance, meetings, decisions, or coordination; PDF or UNPDF may mean Peace and Development Trust Fund when about funding streams, projects, or UN trust funds, otherwise PDF may mean document format." & Char(10) & Char(10) & "Recency guidance: latest/most recent/newest/current/updated means prefer newest approved or dated source; active/current/ongoing project status means use explicit status/date fields in country data; current policy/guidance means prioritize newest official guidance and caution that older sources may be superseded; previous/prior/historical/past means search older sources and do not assume current validity; in YEAR means prioritize that year; since YEAR means that year onward; before YEAR means earlier than that year; after YEAR means later than that year." & Char(10) & Char(10) & "Useful search terms: evaluation=evaluation report; project evaluation; terminal evaluation; lessons learned; recommendations; management response. project design=concept note; project document; prodoc; theory of change; results framework; logframe; workplan; budget. country data=Country Data; country file; country profile; country card; country record; regional record; region; subregion; ISO3; lowercase ISO3; compact country file; projects; project list; active projects; ongoing projects; current projects; proposals; proposal year; requests; request year; activities; activity year; travel; mission; visit; contact person; focal point; counterpart; target group; LDC; LLDC; SIDS; country; status; budget; planned budget; division; portfolio; work; support; what is happening; what do we have. monitoring/reporting=progress report; annual progress report; implementation report; results reporting; indicators; milestones. governance/process=approval; clearance; steering committee; TAG meeting; decision; minutes; guidance note; SOP; workflow. funding=DA; Development Account; RPTC; Regular Programme of Technical Cooperation; XB; extra-budgetary; trust fund. Resident Coordinator/country support=RC; RCO; Resident Coordinator system; UNCT; UNSDCF; CCA; country-level support; country mission; country-level engagement. DESA strategy=capacity development strategy; strategic priorities; action areas; service delivery model; service lines; areas of work; partnerships; AI-enabled Capacity Development Knowledge Hub; Cidy. RPTC guidance=activity proposal template; common reporting standards; Programme Monitoring Tool; Inter-Regional Adviser; IRA; activity report template; post-activity reporting; proposal revision. RPTC progress reports=achievements; countries supported; requests; interventions; people supported; implementing entities; SIDS; LDCs; LLDCs; challenges; recommendations; future years. About Cidy=Cidy; UN DESA Capacity Development Assistant; official documents; knowledge coverage; good user questions; good prompts; intent classification; clarification; question enhancement; routing; response generation; confidence assessment; feedback; escalation; Copilot Studio architecture; user orientation; maintainer orientation." & Char(10) & Char(10) & "Count/list guidance: If the user asks how many, count, list, all, show me, which projects, which countries, which proposals, which requests, which activities, which travels, who are the contacts, what work is happening, what do we have, portfolio, support, or how often, mark this in filters and retrieval_strategy. For counts and country/region portfolio summaries, prefer structured records, compact country files, country cards, regional records, and country-specific documents when available rather than narrative-only retrieval. Add a caution when complete coverage depends on the index, log, Excel sheet, country file, PDF, or metadata quality." & Char(10) & Char(10) & "The following are CONTEXT ONLY — do not include them in your output JSON:" & Char(10) & "Existing finalized intent variables:" & Char(10) & "knowledge_domain: " & Global.knowledgeDomain & Char(10) & "funding_stream: " & Global.fundingStream & Char(10) & "topic_area: " & Global.topicArea & Char(10) & "clarification_answer: " & Global.clarificationAnswer & Char(10) & Char(10) & "Your output must use this exact JSON schema (not the context variables above):" & Char(10) & "{""detected_entities"":"""",""detected_dates"":"""",""recency_intent"":"""",""expanded_acronyms"":"""",""disambiguation_notes"":"""",""synonyms_and_search_terms"":"""",""reformulated_search_query"":"""",""filters"":"""",""source_selection_hints"":"""",""retrieval_strategy"":"""",""confidence_cautions"":"""",""detected_country_iso3"":""""}" & Char(10) & Char(10) & "Finalized user question:" & Char(10) & Global.userQuestion
+
+              output:
+                binding:
+                  predictionOutput: Topic.enhancerResult
+
+              aIModelId: 9ef6e25f-8234-4658-9c83-e711c57f7258
+
+            - kind: SetVariable
+              id: setQuestionEnhancements
+              variable: Global.executiveQuestionEnhancements
+              value: =Text(Topic.enhancerResult.text)
+
+            - kind: ConditionGroup
+              id: conditionGroup_sendActivity_debug_questionEnhancer
+              conditions:
+                - id: conditionItem_sendActivity_debug_questionEnhancer
+                  condition: =Global.testMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_questionEnhancer
+                      activity: "DEBUG - Question Enhancer: {Global.executiveQuestionEnhancements}"
+
+      elseActions:
+        - kind: SetVariable
+          id: clearQuestionEnhancementsNotReady
+          variable: Global.executiveQuestionEnhancements
+          value:
+
+    - kind: BeginDialog
+      id: goToRouter
+      dialog: copilots_header_3141e.topic.Intent-Router
+
+    - kind: EndDialog
+      id: endQuestionEnhancer
+
+inputType: {}
+outputType: {}

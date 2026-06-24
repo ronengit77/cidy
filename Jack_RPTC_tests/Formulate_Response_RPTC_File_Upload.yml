@@ -20,9 +20,7 @@ beginDialog:
               id: search_rptcProgressReports
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC progress reports, achievements, results, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, or recommendations.
                 Answer using ONLY the provided RPTC progress report knowledge source.
@@ -42,7 +40,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS
+                  - copilots_header_3141e.topic.RPTCprogressreports_XYyUtMHo_PJP3fzcGI6Hh
 
         - id: conditionItem_rptcGuidanceTemplates
           condition: =Global.topicArea = "rptc_guidance_templates" || Global.topicArea = "policy_compliance" || Global.topicArea = "policy_guidance_compliance" || Global.topicArea = "reporting_documentation" || Global.topicArea = "process_governance" || Global.topicArea = "budget_finance" || Global.topicArea = "design_evaluation" || Global.topicArea = "definition" || Global.topicArea = "governance_roles" || Global.topicArea = "programme_design_standards" || Global.topicArea = "evaluation_criteria" || Global.topicArea = "reports" || Global.topicArea = "templates" || Global.topicArea = "monitoring_reporting"
@@ -56,9 +54,7 @@ beginDialog:
               id: search_rptcGuidanceTemplates
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC guidance, templates, standards, activity proposals, reporting standards, IRA recruitment/administration, activity reports, planning, approval, implementation, proposal revisions, or post-activity reporting.
                 Answer using ONLY the provided RPTC guidance and templates knowledge source.
@@ -77,7 +73,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk
+                  - copilots_header_3141e.topic.RPTCGuidanceandtemplates_o7qVVnHqFpHKWMZb9RWwK
 
       elseActions:
         - kind: SetVariable
@@ -89,11 +85,7 @@ beginDialog:
           id: search_rptcFallback
           autoSend: false
           variable: Global.draftResponse
-          userInput: |-
-            ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-            "Question enhancements: " & Global.executiveQuestionEnhancements & Char(10) & Char(10) &
-            "Binding source-use instructions: " & Global.sourceUseInstructions & Char(10) & Char(10) &
-            "Answer the user question using the applicable knowledge source and follow the binding source-use instructions. If the knowledge source does not contain enough reliable information, say so."
+          userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided RPTC knowledge sources.
@@ -110,7 +102,7 @@ beginDialog:
           knowledgeSources:
             kind: SearchSpecificKnowledgeSources
             knowledgeSources:
-              - copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS
+              - copilots_header_3141e.topic.RPTCFileUpload_vV7zz8x3_EXkXTX80LY34
 
     - kind: ConditionGroup
       id: conditionGroup_rptcFallbackNoResult
@@ -127,9 +119,7 @@ beginDialog:
               id: search_rptcNoResultFallback
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The specific RPTC knowledge folder did not contain a relevant answer. Search the broader RPTC knowledge source.
                 Answer the question using ONLY the provided RPTC knowledge sources.
@@ -146,22 +136,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyRPTCAll_tRqm_5BANa6OlaqipYIAS
-
-    - kind: SetVariable
-      id: set_responseTimeSeconds
-      variable: Global.responseTimeSeconds
-      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
-
-    - kind: ConditionGroup
-      id: conditionGroup_debug_responseTime
-      conditions:
-        - id: conditionItem_debug_responseTime
-          condition: =Global.testMode = true
-          actions:
-            - kind: SendActivity
-              id: sendActivity_debug_responseTime
-              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+                  - copilots_header_3141e.topic.RPTCFileUpload_vV7zz8x3_EXkXTX80LY34
 
     - kind: BeginDialog
       id: goToAssess
