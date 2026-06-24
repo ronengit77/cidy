@@ -1,0 +1,166 @@
+kind: AdaptiveDialog
+modelDescription: This topic searches the full RPTC knowledge folder first for every question (General → Specific). If the broad pass returns blank, it falls back to the matching specific subfolder based on topic area.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: setSourceUseInstructions_broadPass
+      variable: Global.sourceUseInstructions
+      value: For guidance, templates, standards, activity proposals, reporting, IRA, planning, approval, and process questions draw primarily from RPTC guidelines and template documents. For questions about achievements, results, countries supported, requests, interventions, people supported, implementing entities, SIDS/LDC/LLDC support, challenges, or recommendations draw primarily from RPTC progress reports.
+
+    - kind: SearchAndSummarizeContent
+      id: search_rptcBroadPass
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC), topic area: {Global.topicArea}.
+        Answer using ONLY the provided RPTC knowledge sources.
+        Source-use instructions: {Global.sourceUseInstructions}
+        If the knowledge source does not contain enough reliable information, say so.
+        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+        For count questions, count matching records or reported figures from the source where possible. If the source only supports an approximate count, state that limitation clearly.
+        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.RPTCFileUpload_vV7zz8x3_EXkXTX80LY34
+
+    - kind: ConditionGroup
+      id: conditionGroup_rptcBroadPassBlank
+      conditions:
+        - id: conditionItem_rptcBroadPassBlank
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_rptcNarrowFallback
+              conditions:
+                - id: conditionItem_rptcProgressReportsFallback
+                  condition: =Global.topicArea = "rptc_progress_reports"
+                  actions:
+                    - kind: SetVariable
+                      id: setSourceUseInstructions_progressReportsFallback
+                      variable: Global.sourceUseInstructions
+                      value: This folder contains all RPTC progress reports covering achievements, countries and entities supported, interventions, requests, people supported, results by SIDS/LDC/LLDC, challenges, and recommendations for strengthening RPTC.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_progressReportsFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant. The broad RPTC search did not return a result. Searching the RPTC progress reports folder.
+                        Answer using ONLY the provided RPTC progress report knowledge source.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+                        For count questions, count matching records or reported figures from the progress report source where possible. If the source only supports an approximate count, state that limitation clearly.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.RPTCprogressreports_XYyUtMHo_PJP3fzcGI6Hh
+
+                - id: conditionItem_rptcGuidanceTemplatesFallback
+                  condition: =Global.topicArea = "rptc_guidance_templates" || Global.topicArea = "policy_compliance" || Global.topicArea = "policy_guidance_compliance" || Global.topicArea = "reporting_documentation" || Global.topicArea = "process_governance" || Global.topicArea = "budget_finance" || Global.topicArea = "design_evaluation" || Global.topicArea = "definition" || Global.topicArea = "governance_roles" || Global.topicArea = "programme_design_standards" || Global.topicArea = "evaluation_criteria" || Global.topicArea = "reports" || Global.topicArea = "templates" || Global.topicArea = "monitoring_reporting"
+                  actions:
+                    - kind: SetVariable
+                      id: setSourceUseInstructions_guidanceFallback
+                      variable: Global.sourceUseInstructions
+                      value: This folder contains guidance, templates, and standards for planning, approving, implementing, and reporting DESA Regular Programme of Technical Cooperation (RPTC) activities. Users could find an RPTC activity proposal template for documenting project ID, budget, timeframe, geographic scope, country demand, SDG links, themes, target groups, capacities to be developed, timelines, coherence with other work, inclusion considerations, inputs, and financial requirements; common reporting standards that define minimum RPTC data points, output categories, geographic coverage, participant and beneficiary tracking, outreach, complementarity with DA/XB projects, and Programme Monitoring Tool recommendations; IRA recruitment and administration guidance covering the role, appointment, advertisement, renewal, five-year incumbency rule, reporting lines, and administrative support for Inter-Regional Advisers; an RPTC activity report template for capturing activity dates, budget consumed, RPTC/IRA links, countries supported, SIDS/LDC/LLDC counts, Resident Coordinator consultation, activity type, participants, co-financing, immediate results, policy or strategy outcomes, inclusion, sustainability, collaboration, outreach, lessons, and annexes; and broader RPTC guidelines explaining the programme's purpose, demand-driven nature, eligible short-term capacity-development uses, planning and approval process, proposal revisions, Inter-Regional Adviser use, and post-activity reporting requirements.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_guidanceFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant. The broad RPTC search did not return a result. Searching the RPTC guidance and templates folder.
+                        Answer using ONLY the provided RPTC guidance and templates knowledge source.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.RPTCGuidanceandtemplates_o7qVVnHqFpHKWMZb9RWwK
+
+              elseActions:
+                - kind: SetVariable
+                  id: setSourceUseInstructions_rptcNarrowElse
+                  variable: Global.sourceUseInstructions
+                  value: Use the RPTC guidance and templates source for planning, approval, implementation, reporting, proposals, standards, IRA, and template questions. Use RPTC progress reports for questions about achievements, results, countries supported, requests, interventions, people supported, implementing entities, SIDS/LDC/LLDC support, challenges, or recommendations.
+
+                - kind: SearchAndSummarizeContent
+                  id: search_rptcNarrowElseFallback
+                  autoSend: false
+                  variable: Global.draftResponse
+                  userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+                  additionalInstructions: |-
+                    You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC), topic area: {Global.topicArea}.
+                    Answer the question using ONLY the provided RPTC knowledge sources.
+                    Source-use instructions: {Global.sourceUseInstructions}
+                    If the knowledge source does not contain enough reliable information, say so.
+                    If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
+                    For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                    Format your response as follows:
+                    ANSWER: Your detailed answer
+                    SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                    CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                  fileSearchDataSource:
+                    searchFilesMode:
+                      kind: DoNotSearchFiles
+
+                  knowledgeSources:
+                    kind: SearchSpecificKnowledgeSources
+                    knowledgeSources:
+                      - copilots_header_3141e.topic.RPTCFileUpload_vV7zz8x3_EXkXTX80LY34
+
+    - kind: SetVariable
+      id: set_responseTimeSeconds
+      variable: Global.responseTimeSeconds
+      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_responseTime
+      conditions:
+        - id: conditionItem_debug_responseTime
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_responseTime
+              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}
