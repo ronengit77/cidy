@@ -1,0 +1,429 @@
+kind: AdaptiveDialog
+modelDescription: Tests the General → Specific approach for Programme Development. Searches the full PD knowledge folder first for every question. If that returns blank, falls back to the matching specific subfolder based on topic area.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: setSourceUseInstructions_pdBroadPass
+      variable: Global.sourceUseInstructions
+      value: Search the general Programme Development knowledge base. For steering committee or TAG meeting questions draw from meeting minutes. For guidelines, templates, reporting, or project design questions draw from guidelines and templates. For implementing partners or grants questions draw from the implementing partners guidance. For Resident Coordinator or country mission questions draw from the RC engagement guidance. For CD strategy questions draw from the strategy documents. For evaluation or project questions draw from the evaluations source. For country-level questions draw from the country data source.
+
+    - kind: SearchAndSummarizeContent
+      id: search_pdBroadPass
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: |-
+        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+        "Question enhancements: " & Global.executiveQuestionEnhancements
+      additionalInstructions: |-
+        You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development, topic area: {Global.topicArea}.
+        Answer using ONLY the provided Programme Development knowledge sources.
+        Source-use instructions: {Global.sourceUseInstructions}
+        If the knowledge source does not contain enough reliable information, say so.
+        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+
+    - kind: ConditionGroup
+      id: conditionGroup_pdBroadPassBlank
+      conditions:
+        - id: conditionItem_pdBroadPassBlank
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_pdNarrowFallback
+              conditions:
+                - id: conditionItem_steeringCommitteeFallback
+                  condition: =Global.topicArea = "steering_committee"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_steeringCommitteeFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: This folder contains all historical meetings and minutes of the Capacity Development Steering Committee (CDSC). Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_steeringCommitteeFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA CDPMO knowledge assistant.
+                        The broad PD search did not return a result. Searching the Capacity Development Steering Committee meetings folder.
+                        The user is asking about the capacity development steering committee (CDSC) meetings, minutes, background notes, etc. topic area: {Global.topicArea}.
+                        Answer the question using ONLY the provided knowledge source.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDSteeringCommitteeMeetings_z7GPixGVKf7DyA1Gcfd3R
+
+                - id: conditionItem_tagMeetingsFallback
+                  condition: =Global.topicArea = "tag_meetings"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_tagMeetingsFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: This folder contains all historical meetings and minutes of the Capacity Development Technical Advisory Group (TAG) team. Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_tagMeetingsFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA CDPMO knowledge assistant.
+                        The broad PD search did not return a result. Searching the Technical Advisory Group (TAG) meetings folder.
+                        The user is asking about the Technical Advisory Group (TAG) meetings, minutes, background notes, etc. topic area: {Global.topicArea}.
+                        Answer the question using ONLY the provided knowledge source.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDTAGMeetingsFileUpload_g8Dr4fDRx1UETjikXpbPa
+
+                - id: conditionItem_guidelinesTemplatesFallback
+                  condition: =Global.topicArea = "guidelines_templates"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_guidelinesTemplatesFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: This folder provides templates and guidance for UN Development Account-style project design, monitoring, reporting, budgeting, and closure. Use this knowledge for questions about preparing 2025 annual progress reports, including reporting deadlines, project metadata, implementation rates, revisions, indicators of achievement, output delivery, supplementary funding, staff resources, Resident Coordinator Office involvement, contractor engagement, and country-specific action plans; final report templates covering project features, results narratives, performance indicators, implemented activities, deliverables, challenges, good practices, sustainability, multiplier effects, supplementary funding, and financial information; older generic progress report templates focused on achievements, performance indicators, activity status, supplementary funding, challenges, revisions, and expenditure/implementation-rate tracking; and project-document preparation guidance for designing a development project, including background, SDG alignment, problem analysis, stakeholder/capacity assessment, gender and disability analysis, logical framework, theory of change, risks, governance, sustainability, communications, workplan, and budget justification.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_guidelinesTemplatesFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the Programme Development guidelines and templates folder.
+                        The user is asking about Programme Development guidelines, templates, project design, monitoring, reporting, budgeting, or closure, topic area: {Global.topicArea}.
+                        Answer using the provided Programme Development knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDGuidelinesandtemplates_TZDN7cnLS12tq0nY9ozDR
+
+                - id: conditionItem_implementingPartnersGrantsFallback
+                  condition: =Global.topicArea = "implementing_partners_grants"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_implementingPartnersGrantsFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: This folder provides DESA's 25 September 2018 interim guidance and working templates for using grants and implementing partner agreements. Use this knowledge for questions about when to use a grant, implementing partner modality, or procurement; definitions of implementing partners, grants, and vendors; procedures for identifying, screening, selecting, approving, amending, monitoring, closing, and keeping records for grantees and implementing partners; and the roles of DESA divisions, CDO, OCSS/Procurement, IPGC, OLA, and the Controller's Office in due diligence and agreement approval. The annexes file supplies operational templates needed to apply those guidelines, including a routing slip to CDO, a project cooperation agreement template, required agreement clauses on funds, reporting, audits, anti-fraud/anti-corruption, termination, intellectual property, equipment, and privileges/immunities, plus a due-diligence questionnaire, IPGC decision template, partner evaluation template, and a reference table distinguishing activities that normally fit implementing-partner arrangements versus procurement.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_implementingPartnersGrantsFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the implementing partners and grants folder.
+                        The user is asking about Programme Development implementing partners, grants, grantees, partner agreements, due diligence, or procurement versus partner/grant modalities, topic area: {Global.topicArea}.
+                        Answer using the provided Programme Development knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDImplementingPartnersandGrants_s6lDxcZ6AfXJwO3i9RKyf
+
+                - id: conditionItem_residentCoordinatorFallback
+                  condition: =Global.topicArea = "resident_coordinator"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_residentCoordinatorFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: These files provide guidance on DESA's engagement with the Resident Coordinator system, country-level support, UNCT membership, and procedures for aligning DESA activities with the CCA and UNSDCF processes. Use this knowledge for questions about when DESA should inform the RC or RCO about a planned country mission; how DESA should align country-level support with the UNSDCF; DESA's principles for country-level support; when DESA can become a UNCT member or UNSDCF signatory; CDPMO's role in coordinating DESA country-level engagement; and which countries had DESA UNCT membership or contribution status as of October 2023.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_residentCoordinatorFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the Resident Coordinator engagement folder.
+                        The user is asking about DESA engagement with the Resident Coordinator system, country-level support, UNCT membership, UNSDCF/CCA alignment, country missions, or CDPMO country-level coordination, topic area: {Global.topicArea}.
+                        Answer using the provided Programme Development knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_
+                          - copilots_header_3141e.topic.PDRCFileUpload_NzkQjgVWtvuILEKEDdMvj
+
+                - id: conditionItem_cdStrategyFallback
+                  condition: =Global.topicArea = "cd_strategy"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_cdStrategyFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: These files contain information on DESA's strategic priorities, capacity development approach, service delivery model, and the proposed AI-enabled Capacity Development Knowledge Hub/Cidy. Use this knowledge for questions about DESA's main action areas for 2023; the goals of DESA's capacity development strategy; the five service lines or areas of work; how DESA prioritizes capacity development requests; and the role partnerships play in delivery.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_cdStrategyFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the CD strategy folder.
+                        The user is asking about DESA strategic priorities, capacity development strategy, service delivery model, service lines or areas of work, request prioritization, partnerships in delivery, or the AI-enabled Capacity Development Knowledge Hub/Cidy, topic area: {Global.topicArea}.
+                        Answer using the provided Programme Development knowledge sources.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDStrategyFileUpload_bZ94eM4vrVH5LkZCDRAA1
+
+                - id: conditionItem_projectsEvaluationsFallback
+                  condition: =Global.topicArea = "projects_evaluations"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_projectsEvaluationsFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: "This folder contains an excel file with all project evaluation files. The excel schema contains the following information about the evaluations: Title\tDivision(s)\tEvaluationYear\tCountries\tRecommendationsList\tLessonsLearnedList\tFileName\tShortPath\tFullPath. Use this folder for questions about specific evaluations or evaluation reports, including finding, listing, counting, filtering, or retrieving evaluations by topic, title, country, countries, region, division, year, recommendation, lesson learned, project attribute, FileName, ShortPath, or FullPath. When the user asks how many reports or evaluations match criteria, count matching records from the evaluation file if possible and cite the file. When the user asks to find evaluations about a subject or country, return the most relevant matching evaluation titles with the fields that support the match."
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_projectsEvaluationsFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the project evaluations folder.
+                        The user is asking about project evaluations, evaluation reports, recommendations, or lessons learned, topic area: {Global.topicArea}.
+                        Answer using ONLY the provided Project Evaluations knowledge source.
+                        For count questions, count matching records from the evaluation log where possible. If the source only supports an approximate count, state that limitation clearly.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDFileUpload_2jgoCTVdUcDDKUHd_xM9f
+
+                - id: conditionItem_countryDataFallback
+                  condition: =Global.topicArea = "country_data"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_countryDataFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: |-
+                        Use the Country Data knowledge source for country-level and region-level records about countries, regions, projects, requests, proposals, activities, travel, contacts, target groups, years, statuses, budgets, divisions, and LDC/LLDC/SIDS status.
+                        For broad or vague country/region questions such as list work in Fiji, what is happening in Fiji, show work in the Pacific, or what do we have for SIDS, interpret work broadly as projects, requests, proposals, activities, travel records, contacts, budgets, statuses, divisions, and summary metrics.
+                        Do not treat vague country or region wording as insufficient by itself. Expand retrieval with country/region anchors before searching.
+                        Prefer country-specific records, region-specific records, country-card files, compact country filenames, headings, tables, explicit counts, and summaries.
+                        Answer from explicit source content. If a category has zero records, include it as zero when supported. If only partial information is available, answer with what is available and state the limitation.
+
+                    - kind: SetVariable
+                      id: setVariable_countryDataEnhancedQuestion
+                      variable: Global.countryDataEnhancedQuestion
+                      value: =Trim(If(!IsBlank(Text(ParseJSON(Global.executiveQuestionEnhancements).detected_country_iso3)), Text(ParseJSON(Global.executiveQuestionEnhancements).detected_country_iso3), Global.userQuestion) & " country card country record compact country file region subregion ISO3 lowercase ISO3 projects requests proposals RPTC proposals activities RPTC activities travel contacts budgets statuses divisions current ongoing active planned completed closed SIDS LDC LLDC source file")
+
+                    - kind: ConditionGroup
+                      id: debug_countryDataFallback
+                      conditions:
+                        - id: debug_countryDataFallback_enabled
+                          condition: =Global.testMode = true
+                          actions:
+                            - kind: SendActivity
+                              id: debug_countryDataFallback_message
+                              activity: |-
+                                DEBUG - PD country_data narrow fallback
+
+                                userInput sent to SearchAndSummarizeContent:
+                                {Global.countryDataEnhancedQuestion}
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_countryDataFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: =Global.countryDataEnhancedQuestion
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the Country Data folder.
+                        Answer using ONLY the selected Country Data knowledge source.
+
+                        Use the enhanced retrieval query. It intentionally starts with the detected country, region, grouping, and retrieval anchors because short phrases like "list work in Fiji" are too vague for reliable retrieval.
+
+                        For country or region work queries, interpret "work" broadly as:
+                        projects, requests, proposals, RPTC proposals, activities, RPTC activities, travel records, contacts, budgets, statuses, divisions, current/ongoing/active records, completed/closed records, and summary metrics.
+
+                        Prefer country-specific records, region-specific records, compact country filenames, country-card files, headings, tables, explicit counts, and summary sections.
+
+                        Use country name, region name, ISO3, lowercase ISO3, and compact filename patterns as retrieval clues only. Answer from explicit source content.
+
+                        If the source gives counts, include them. If a category has zero records, include it as zero. If details are missing or unclear, answer with the available information and state the limitation.
+
+                        Format:
+                        ANSWER:
+                        SOURCES:
+                        CONFIDENCE:
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDCountryDataFileUpload_DjIy3ZKRFMnjIw67L9atc
+
+              elseActions:
+                - kind: SetVariable
+                  id: setSourceUseInstructions_pdNarrowElse
+                  variable: Global.sourceUseInstructions
+                  value: Search the general Programme Development knowledge base for the most relevant answer.
+
+                - kind: SearchAndSummarizeContent
+                  id: search_pdNarrowElseFallback
+                  autoSend: false
+                  variable: Global.draftResponse
+                  userInput: |-
+                    ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                    "Question enhancements: " & Global.executiveQuestionEnhancements
+                  additionalInstructions: |-
+                    You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development, topic area: {Global.topicArea}.
+                    Answer the question using ONLY the provided Programme Development knowledge sources.
+                    Source-use instructions: {Global.sourceUseInstructions}
+                    If the knowledge source does not contain enough reliable information, say so.
+                    If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                    For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                    Format your response as follows:
+                    ANSWER: Your detailed answer
+                    SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                    CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                  fileSearchDataSource:
+                    searchFilesMode:
+                      kind: DoNotSearchFiles
+
+                  knowledgeSources:
+                    kind: SearchSpecificKnowledgeSources
+                    knowledgeSources:
+                      - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+
+    - kind: SetVariable
+      id: set_responseTimeSeconds
+      variable: Global.responseTimeSeconds
+      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_responseTime
+      conditions:
+        - id: conditionItem_debug_responseTime
+          condition: =Global.testMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_responseTime
+              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
+    - kind: BeginDialog
+      id: goToAssess
+      dialog: copilots_header_3141e.topic.AssessConfidence
+
+inputType: {}
+outputType: {}
