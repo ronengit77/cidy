@@ -8,7 +8,7 @@ beginDialog:
     - kind: SetVariable
       id: setSourceUseInstructions_pdBroadPass
       variable: Global.sourceUseInstructions
-      value: Search the general Programme Development knowledge base. For steering committee or TAG meeting questions draw from meeting minutes. For guidelines, templates, reporting, or project design questions draw from guidelines and templates. For implementing partners or grants questions draw from the implementing partners guidance. For Resident Coordinator or country mission questions draw from the RC engagement guidance. For CD strategy questions draw from the strategy documents. For evaluation or project questions draw from the evaluations source. For country-level questions draw from the country data source.
+      value: Search the general Programme Development knowledge base. For steering committee or TAG meeting questions draw from meeting minutes. For guidelines, templates, reporting, or project design questions draw from guidelines and templates. For implementing partners or grants questions draw from the implementing partners guidance. For Resident Coordinator or country mission questions draw from the RC engagement guidance. For CD strategy questions draw from the strategy documents. For evaluation or project questions draw from the evaluations source. For country-level questions draw from the country data source. For ACABQ, budget, or PPB questions draw from the ACABQ source.
 
     - kind: SearchAndSummarizeContent
       id: search_pdBroadPass
@@ -35,7 +35,7 @@ beginDialog:
       knowledgeSources:
         kind: SearchSpecificKnowledgeSources
         knowledgeSources:
-          - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+          - copilots_header_3141e.topic.PDFileUpload_2jgoCTVdUcDDKUHd_xM9f
 
     - kind: ConditionGroup
       id: conditionGroup_pdBroadPassBlank
@@ -373,6 +373,43 @@ beginDialog:
                         knowledgeSources:
                           - copilots_header_3141e.topic.PDCountryDataFileUpload_DjIy3ZKRFMnjIw67L9atc
 
+                - id: conditionItem_acabqFallback
+                  condition: =Global.topicArea = "acabq"
+                  actions:
+                    - kind: SetVariable
+                      id: setVariable_acabqFallbackInstructions
+                      variable: Global.sourceUseInstructions
+                      value: This folder contains DESA's submissions to the Advisory Committee on Administrative and Budgetary Questions (ACABQ), including Programme Planning and Budget (PPB) documents, Section 23 RPTC budget presentations, supplementary information, and related budget documentation. Use this knowledge for questions about DESA budget proposals, PPB sections, ACABQ reviews, budget justifications, resource requests, and programme budget implications.
+
+                    - kind: SearchAndSummarizeContent
+                      id: search_acabqFallback
+                      autoSend: false
+                      variable: Global.draftResponse
+                      userInput: |-
+                        ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                        "Question enhancements: " & Global.executiveQuestionEnhancements
+                      additionalInstructions: |-
+                        You are Cidy, a UN DESA knowledge assistant.
+                        The broad PD search did not return a result. Searching the ACABQ folder.
+                        The user is asking about ACABQ submissions, Programme Planning and Budget (PPB) documents, or budget presentations, topic area: {Global.topicArea}.
+                        Answer using ONLY the provided ACABQ knowledge source.
+                        Source-use instructions: {Global.sourceUseInstructions}
+                        If the knowledge source does not contain enough reliable information, say so.
+                        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                        Format your response as follows:
+                        ANSWER: Your detailed answer
+                        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+                      fileSearchDataSource:
+                        searchFilesMode:
+                          kind: DoNotSearchFiles
+
+                      knowledgeSources:
+                        kind: SearchSpecificKnowledgeSources
+                        knowledgeSources:
+                          - copilots_header_3141e.topic.PDACABQFileUpload_eeLRGvmtaLDdUVkkVIiVx
+
               elseActions:
                 - kind: SetVariable
                   id: setSourceUseInstructions_pdNarrowElse
@@ -404,7 +441,7 @@ beginDialog:
                   knowledgeSources:
                     kind: SearchSpecificKnowledgeSources
                     knowledgeSources:
-                      - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+                      - copilots_header_3141e.topic.PDFileUpload_2jgoCTVdUcDDKUHd_xM9f
 
     - kind: SetVariable
       id: set_responseTimeSeconds
