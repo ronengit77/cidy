@@ -717,6 +717,85 @@ beginDialog:
               value: Which funding stream is this question about?
 
     - kind: ConditionGroup
+      id: conditionGroup_explicitPrefixOverride
+      conditions:
+        - id: conditionItem_acabqPrefixOverride
+          condition: =Or(StartsWith(Lower(Trim(Global.userQuestion)), "pd/acabq"), StartsWith(Lower(Trim(Global.userQuestion)), "acabq"))
+          actions:
+            - kind: SetVariable
+              id: override_stripPrefix_acabq
+              variable: Global.userQuestion
+              value: =Trim(If(StartsWith(Lower(Trim(Global.userQuestion)), "pd/acabq:"), Mid(Trim(Global.userQuestion), Len("pd/acabq:") + 1, Len(Trim(Global.userQuestion))), If(StartsWith(Lower(Trim(Global.userQuestion)), "pd/acabq"), Mid(Trim(Global.userQuestion), Len("pd/acabq") + 1, Len(Trim(Global.userQuestion))), If(StartsWith(Lower(Trim(Global.userQuestion)), "acabq:"), Mid(Trim(Global.userQuestion), Len("acabq:") + 1, Len(Trim(Global.userQuestion))), Mid(Trim(Global.userQuestion), Len("acabq") + 1, Len(Trim(Global.userQuestion)))))))
+
+            - kind: SetVariable
+              id: override_knowledgeDomain_acabq
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: override_fundingStream_acabq
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: override_topicArea_acabq
+              variable: Global.topicArea
+              value: acabq
+
+            - kind: SetVariable
+              id: override_requiresClarification_acabq
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: override_clarificationType_acabq
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: override_clarificationQuestion_acabq
+              variable: Global.clarificationQuestion
+              value:
+
+        - id: conditionItem_countryDataPrefixOverride
+          condition: =StartsWith(Lower(Trim(Global.userQuestion)), "country data:")
+          actions:
+            - kind: SetVariable
+              id: override_stripPrefix_countryData
+              variable: Global.userQuestion
+              value: =Trim(Mid(Trim(Global.userQuestion), Len("country data:") + 1, Len(Trim(Global.userQuestion))))
+
+            - kind: SetVariable
+              id: override_knowledgeDomain_countryData
+              variable: Global.knowledgeDomain
+              value: programme_development
+
+            - kind: SetVariable
+              id: override_fundingStream_countryData
+              variable: Global.fundingStream
+              value: UNCLEAR
+
+            - kind: SetVariable
+              id: override_topicArea_countryData
+              variable: Global.topicArea
+              value: country_data
+
+            - kind: SetVariable
+              id: override_requiresClarification_countryData
+              variable: Global.requiresClarification
+              value: No
+
+            - kind: SetVariable
+              id: override_clarificationType_countryData
+              variable: Global.clarificationType
+              value: none
+
+            - kind: SetVariable
+              id: override_clarificationQuestion_countryData
+              variable: Global.clarificationQuestion
+              value:
+
+    - kind: ConditionGroup
       id: conditionGroup_setIntentStatus
       conditions:
         - id: conditionItem_statusOutOfScope

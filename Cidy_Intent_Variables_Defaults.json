@@ -103,6 +103,7 @@
                                                "default":  "unclear",
                                                "allowedValues":  [
                                                                      "about_cidy",
+                                                                     "acabq",
                                                                      "budget_finance",
                                                                      "cd_strategy",
                                                                      "country_data",

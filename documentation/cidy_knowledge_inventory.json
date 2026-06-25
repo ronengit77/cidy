@@ -1,6 +1,6 @@
 {
     "schemaVersion":  "1.1",
-    "generatedAt":  "2026-06-15T15:13:05-04:00",
+    "generatedAt":  "2026-06-24T20:05:54-04:00",
     "generatedFrom":  [
                           "Cidy_Intent_Router.yaml",
                           "Formulate_Response_Cidy_About.yaml",
@@ -206,12 +206,12 @@
                         "topicArea":  "steering_committee",
                         "topicName":  "Steering Committee",
                         "folderName":  "Capacity Development Steering Committee",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.SteeringCommitteeMeetings_A6vL6_OHQKf_M7XeF2S3d",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.PDSteeringCommitteeMeetingsFileUpload_Wari0Bf1k2BIxCgP2tB0Q",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.SteeringCommitteeMeetings_A6vL6_OHQKf_M7XeF2S3d"
+                                          "copilots_header_3141e.topic.PDSteeringCommitteeMeetingsFileUpload_Wari0Bf1k2BIxCgP2tB0Q"
                                       ],
                         "sourceLabels":  [
-                                             "Steering Committee Meetings 6 V 6 OHQ Kf"
+                                             "PD Steering Committee Meetings File Upload"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_mMA5gI",
@@ -230,12 +230,12 @@
                         "topicArea":  "tag_meetings",
                         "topicName":  "Tag Meetings",
                         "folderName":  "Tag Meetings",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.PDTAGMeetingsFileUpload_PXm1Rx5YPn866a1kwiHJH",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF"
+                                          "copilots_header_3141e.topic.PDTAGMeetingsFileUpload_PXm1Rx5YPn866a1kwiHJH"
                                       ],
                         "sourceLabels":  [
-                                             "TAG Meetings"
+                                             "PDTAG Meetings File Upload"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_O9CKVo",
@@ -244,7 +244,7 @@
                         "sourceUseInstructionSource":  "Global.sourceUseInstructions",
                         "mappingStatus":  "review_required",
                         "ownerUnit":  "TBD",
-                        "instructions":  "This folder contains all historical meetings and minutes of the Capacity Development Technical Advisory Group (TAG) team. Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year.",
+                        "instructions":  "This folder contains all historical meetings and minutes of the Capacity Development Technical Advisory Group (TAG) team. Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year. If user asks about latest try to find the latest year in the docs.",
                         "isNewTopic":  false,
                         "firstSeenAt":  ""
                     },
@@ -254,12 +254,12 @@
                         "topicArea":  "projects_evaluations",
                         "topicName":  "Projects Evaluations",
                         "folderName":  "Projects Evaluations",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se"
+                                          "copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj"
                                       ],
                         "sourceLabels":  [
-                                             "Project Evaluations 4 Cj 3 N 0 N Ll 1 O 8 Se"
+                                             "Programme Development"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_QD3pfU",
@@ -278,12 +278,12 @@
                         "topicArea":  "guidelines_templates",
                         "topicName":  "Guidelines Templates",
                         "folderName":  "Guidelines Templates",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.RPTCGuidanceandtemplatesFileUpload_MDHZqgODQS4KqDsd5zSWf",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS"
+                                          "copilots_header_3141e.topic.RPTCGuidanceandtemplatesFileUpload_MDHZqgODQS4KqDsd5zSWf"
                                       ],
                         "sourceLabels":  [
-                                             "Guidelines Andtemplates"
+                                             "RPTC Guidance Andtemplates File Upload"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_guidelinesTemplates",
@@ -302,12 +302,12 @@
                         "topicArea":  "implementing_partners_grants",
                         "topicName":  "Implementing Partners Grants",
                         "folderName":  "Implementing Partners Grants",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.PDGuidelinesandtemplatesFileUpload_QiMbyy1cLSfOL7RyAHTdl",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa"
+                                          "copilots_header_3141e.topic.PDGuidelinesandtemplatesFileUpload_QiMbyy1cLSfOL7RyAHTdl"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy Implementing Partners And Grants"
+                                             "PD Guidelines Andtemplates File Upload"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_implementingPartnersGrants",
@@ -326,12 +326,12 @@
                         "topicArea":  "resident_coordinator",
                         "topicName":  "Resident Coordinator",
                         "folderName":  "Resident Coordinator",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRC_7rVJpBrf5Pzai0ezfF1Xs",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_"
+                                          "copilots_header_3141e.topic.CidyRC_7rVJpBrf5Pzai0ezfF1Xs"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy 3 Ee 3 54 1 R"
+                                             "Cidy RC"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_residentCoordinator",
@@ -350,12 +350,12 @@
                         "topicArea":  "cd_strategy",
                         "topicName":  "Cd Strategy",
                         "folderName":  "Cd Strategy",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyStrategy_9cvi_NciY04r6nZK8apWy",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9"
+                                          "copilots_header_3141e.topic.CidyStrategy_9cvi_NciY04r6nZK8apWy"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy PD Strategy 4 7 Zk 7 K Qdy 8 9 Xg 9"
+                                             "Cidy Strategy 9 Cvi"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_cdStrategy",
@@ -369,17 +369,41 @@
                         "firstSeenAt":  ""
                     },
                     {
+                        "id":  "programme_development_acabq",
+                        "domain":  "programme_development",
+                        "topicArea":  "acabq",
+                        "topicName":  "Acabq",
+                        "folderName":  "Acabq",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy",
+                        "sourceIds":  [
+                                          "copilots_header_3141e.topic.CidyCountryData_VUhURDqxKRX3LM0Lx4RKy"
+                                      ],
+                        "sourceLabels":  [
+                                             "Cidy Country Data"
+                                         ],
+                        "sourceCount":  1,
+                        "yamlConditionId":  "conditionItem_acabq",
+                        "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                        "generatedFromYaml":  true,
+                        "sourceUseInstructionSource":  "Global.sourceUseInstructions",
+                        "mappingStatus":  "review_required",
+                        "ownerUnit":  "TBD",
+                        "instructions":  "This folder contains DESA\u0027s submissions to the Advisory Committee on Administrative and Budgetary Questions (ACABQ), including Programme Planning and Budget (PPB) documents, Section 23 RPTC budget presentations, supplementary information, and related budget documentation. Use this knowledge for questions about DESA budget proposals, PPB sections, ACABQ reviews, budget justifications, resource requests, and programme budget implications.",
+                        "isNewTopic":  true,
+                        "firstSeenAt":  "2026-06-24T20:05:54-04:00"
+                    },
+                    {
                         "id":  "programme_development_fallback",
                         "domain":  "programme_development",
                         "topicArea":  "general",
                         "topicName":  "General",
                         "folderName":  "Programme Development Fallback",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5"
+                                          "copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy PD All"
+                                             "Programme Development"
                                          ],
                         "sourceCount":  1,
                         "yamlConditionId":  "elseActions",
@@ -398,16 +422,14 @@
                         "topicArea":  "rptc_progress_reports",
                         "topicName":  "Rptc Progress Reports",
                         "folderName":  "Rptc Progress Reports",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.progressreports_zzSLrTzDYpILKYSyzN1DS"
                                       ],
                         "sourceLabels":  [
-                                             "Progressreports",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Progressreports"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcProgressReports",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -424,16 +446,14 @@
                         "topicArea":  "rptc_guidance_templates",
                         "topicName":  "Rptc Guidance Templates",
                         "folderName":  "Rptc Guidance Templates",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -450,16 +470,14 @@
                         "topicArea":  "policy_compliance",
                         "topicName":  "Policy Compliance",
                         "folderName":  "Policy Compliance",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -476,16 +494,14 @@
                         "topicArea":  "policy_guidance_compliance",
                         "topicName":  "Policy Guidance Compliance",
                         "folderName":  "Policy Guidance Compliance",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -502,16 +518,14 @@
                         "topicArea":  "reporting_documentation",
                         "topicName":  "Reporting Documentation",
                         "folderName":  "Reporting Documentation",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -528,16 +542,14 @@
                         "topicArea":  "process_governance",
                         "topicName":  "Process Governance",
                         "folderName":  "Process Governance",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -554,16 +566,14 @@
                         "topicArea":  "budget_finance",
                         "topicName":  "Budget Finance",
                         "folderName":  "Budget Finance",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -580,16 +590,14 @@
                         "topicArea":  "design_evaluation",
                         "topicName":  "Design Evaluation",
                         "folderName":  "Design Evaluation",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -606,16 +614,14 @@
                         "topicArea":  "definition",
                         "topicName":  "Definition",
                         "folderName":  "Definition",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -632,16 +638,14 @@
                         "topicArea":  "governance_roles",
                         "topicName":  "Governance Roles",
                         "folderName":  "Governance Roles",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -658,16 +662,14 @@
                         "topicArea":  "programme_design_standards",
                         "topicName":  "Programme Design Standards",
                         "folderName":  "Programme Design Standards",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -684,16 +686,14 @@
                         "topicArea":  "evaluation_criteria",
                         "topicName":  "Evaluation Criteria",
                         "folderName":  "Evaluation Criteria",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -710,16 +710,14 @@
                         "topicArea":  "reports",
                         "topicName":  "Reports",
                         "folderName":  "Reports",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -736,16 +734,14 @@
                         "topicArea":  "templates",
                         "topicName":  "Templates",
                         "folderName":  "Templates",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,
@@ -762,16 +758,14 @@
                         "topicArea":  "monitoring_reporting",
                         "topicName":  "Monitoring Reporting",
                         "folderName":  "Monitoring Reporting",
-                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk; copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf",
+                        "knowledgeSourceId":  "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
                         "sourceIds":  [
-                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk",
-                                          "copilots_header_3141e.topic.RPTC_ng_c2cW2FsuWn_CZ41qlf"
+                                          "copilots_header_3141e.topic.CidyRPTCGuidanceandtemplates_oKZNYKzHMYWToPKwis3yk"
                                       ],
                         "sourceLabels":  [
-                                             "Cidy RPTC Guidance Andtemplates",
-                                             "Ng C 2 C 2 Fsu Wn 41 Qlf"
+                                             "Cidy RPTC Guidance Andtemplates"
                                          ],
-                        "sourceCount":  2,
+                        "sourceCount":  1,
                         "yamlConditionId":  "conditionItem_rptcGuidanceTemplates",
                         "yamlFile":  "Formulate_Response_RPTC.yaml",
                         "generatedFromYaml":  true,

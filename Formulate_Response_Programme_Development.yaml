@@ -42,7 +42,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.SteeringCommitteeMeetings_A6vL6_OHQKf_M7XeF2S3d
+                  - copilots_header_3141e.topic.PDSteeringCommitteeMeetingsFileUpload_Wari0Bf1k2BIxCgP2tB0Q
 
         - id: conditionItem_O9CKVo
           condition: =Global.topicArea = "tag_meetings"
@@ -50,7 +50,7 @@ beginDialog:
             - kind: SetTextVariable
               id: 7XENFr
               variable: Global.sourceUseInstructions
-              value: This folder contains all historical meetings and minutes of the Capacity Development Technical Advisory Group (TAG) team. Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year.
+              value: This folder contains all historical meetings and minutes of the Capacity Development Technical Advisory Group (TAG) team. Use it to find decisions, discussion points, meeting notes, and conclusions from any specific meeting year. If user asks about latest try to find the latest year in the docs.
 
             - kind: SearchAndSummarizeContent
               id: NWnG1Y
@@ -78,7 +78,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.TAGMeetings_EFq0d2SBZNEdI4W5P8DkF
+                  - copilots_header_3141e.topic.PDTAGMeetingsFileUpload_PXm1Rx5YPn866a1kwiHJH
 
         - id: conditionItem_QD3pfU
           condition: =Global.topicArea = "projects_evaluations"
@@ -114,7 +114,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.ProjectEvaluations_4Cj3nKCE0nIEC_Ll1o8Se
+                  - copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj
 
         - id: conditionItem_guidelinesTemplates
           condition: =Global.topicArea = "guidelines_templates"
@@ -149,7 +149,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.Guidelinesandtemplates_iPiEFA1ueLu3wiVtlbIdS
+                  - copilots_header_3141e.topic.RPTCGuidanceandtemplatesFileUpload_MDHZqgODQS4KqDsd5zSWf
 
         - id: conditionItem_implementingPartnersGrants
           condition: =Global.topicArea = "implementing_partners_grants"
@@ -184,7 +184,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyImplementingPartnersandGrants_4lDwybsiRV1xRZ0AAi1Pa
+                  - copilots_header_3141e.topic.PDGuidelinesandtemplatesFileUpload_QiMbyy1cLSfOL7RyAHTdl
 
         - id: conditionItem_residentCoordinator
           condition: =Global.topicArea = "resident_coordinator"
@@ -219,7 +219,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyPDRC_3eeGCP3GTHDQ54COW1rW_
+                  - copilots_header_3141e.topic.CidyRC_7rVJpBrf5Pzai0ezfF1Xs
 
         - id: conditionItem_cdStrategy
           condition: =Global.topicArea = "cd_strategy"
@@ -254,7 +254,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.CidyPDStrategy__W4VIB7zkK7KQdy8_9Xg9
+                  - copilots_header_3141e.topic.CidyStrategy_9cvi_NciY04r6nZK8apWy
 
         - id: conditionItem_countryData
           condition: =Global.topicArea = "country_data"
@@ -343,6 +343,45 @@ beginDialog:
                 ANSWER:
                 SOURCES:
                 CONFIDENCE:
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
+              knowledgeSources:
+                kind: SearchSpecificKnowledgeSources
+                knowledgeSources:
+                  - copilots_header_3141e.topic.CidyCountryData_8lJIlPbq7ls8v4zUgiW2R
+
+        - id: conditionItem_acabq
+          condition: =Global.topicArea = "acabq"
+          actions:
+            - kind: SetVariable
+              id: setVariable_acabqInstructions
+              variable: Global.sourceUseInstructions
+              value: This folder contains DESA's submissions to the Advisory Committee on Administrative and Budgetary Questions (ACABQ), including Programme Planning and Budget (PPB) documents, Section 23 RPTC budget presentations, supplementary information, and related budget documentation. Use this knowledge for questions about DESA budget proposals, PPB sections, ACABQ reviews, budget justifications, resource requests, and programme budget implications.
+
+            - kind: SearchAndSummarizeContent
+              id: search_acabq
+              autoSend: false
+              variable: Global.draftResponse
+              userInput: |-
+                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
+                "Question enhancements: " & Global.executiveQuestionEnhancements
+              additionalInstructions: |-
+                You are Cidy, a UN DESA knowledge assistant. The user is asking about ACABQ submissions, Programme Planning and Budget (PPB) documents, or budget presentations, topic area: {Global.topicArea}.
+                Answer using ONLY the provided ACABQ knowledge source.
+                Source-use instructions: {Global.sourceUseInstructions}
+                If the knowledge source does not contain enough reliable information, say so.
+                If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, tranche, version, or meeting date used.
+                For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+                Format your response as follows:
+                ANSWER: Your detailed answer
+                SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+                CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+              fileSearchDataSource:
+                searchFilesMode:
+                  kind: DoNotSearchFiles
+
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
@@ -377,7 +416,7 @@ beginDialog:
           knowledgeSources:
             kind: SearchSpecificKnowledgeSources
             knowledgeSources:
-              - copilots_header_3141e.topic.CidyPDAll_fpi14G9BVgM81C1jP17J5
+              - copilots_header_3141e.topic.ProgrammeDevelopment_zd1Jyl8JqKf1UrVEW9Qbj
 
     - kind: ConditionGroup
       id: conditionGroup_fallback
@@ -416,22 +455,7 @@ beginDialog:
               knowledgeSources:
                 kind: SearchSpecificKnowledgeSources
                 knowledgeSources:
-                  - copilots_header_3141e.topic.DA_O2GgXHjTkRbV7xlpKWiIF
-
-    - kind: SetVariable
-      id: set_responseTimeSeconds
-      variable: Global.responseTimeSeconds
-      value: =If(IsBlank(Global.requestStartTime), -1, DateDiff(Global.requestStartTime, Now(), TimeUnit.Seconds))
-
-    - kind: ConditionGroup
-      id: conditionGroup_debug_responseTime
-      conditions:
-        - id: conditionItem_debug_responseTime
-          condition: =Global.testMode = true
-          actions:
-            - kind: SendActivity
-              id: sendActivity_debug_responseTime
-              activity: "DEBUG - Response time: {Global.responseTimeSeconds}s | Funding stream: {Global.fundingStream} | Topic area: {Global.topicArea} | Result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+                  - copilots_header_3141e.topic.CidyCountryData_8lJIlPbq7ls8v4zUgiW2R
 
     - kind: BeginDialog
       id: goToAssess

@@ -640,6 +640,34 @@
                           "Clarification":  "",
                           "Expected behavior":  "Routes directly to Formulate Response Programme Development with knowledge_domain=programme_development, funding_stream=UNCLEAR, topic_area=country_data, requires_clarification=No. Response uses the Country Data folder for activity counts by year and LDC target group.",
                           "date-created":  "2026-06-02"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme Development ACABQ RC system country engagement SOPs",
+                          "Test question":  "Can you provide detailed information on standard operating procedures for country-level engagement in the context of the (new) RC system?",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                          "date-created":  "2026-06-24"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme Development ACABQ RPTC application and awareness process",
+                          "Test question":  "How are applications made for support, and how do countries get to know about the requests they can make to RPTC?",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                          "date-created":  "2026-06-24"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme Development ACABQ RPTC consultant oversight and evaluation",
+                          "Test question":  "Please provide the explanation as to the oversight and evaluation of consultants hired under RPTC funding.",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                          "date-created":  "2026-06-24"
+                      },
+                      {
+                          "Scenario":  "Happy path - Programme Development ACABQ Section 23 IE allocation definitions",
+                          "Test question":  "Please remind the Committee on how the amounts to be presented in Section 23 are defined, in particular the allocation between IEs.",
+                          "Clarification":  "",
+                          "Expected behavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                          "date-created":  "2026-06-24"
                       }
                   ]
 }

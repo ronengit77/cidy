@@ -1,10 +1,10 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-15T15:13:07-04:00",
+                    "generatedAt":  "2026-06-24T20:05:56-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
-                    "total":  100,
-                    "passed":  83,
+                    "total":  104,
+                    "passed":  87,
                     "failed":  17
                 },
     "results":  [
@@ -9956,6 +9956,434 @@
                                              "point":  "Formulate Response",
                                              "message":  "Topic area(s) not mapped in Formulate_Response_Programme_Development.yaml: country_data, rptc_progress_reports."
                                          }
+                                     ]
+                    },
+                    {
+                        "id":  "TC101",
+                        "scenario":  "Happy path - Programme Development ACABQ RC system country engagement SOPs",
+                        "question":  "Can you provide detailed information on standard operating procedures for country-level engagement in the context of the (new) RC system?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "acabq",
+                                                                       "resident_coordinator",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "resident_coordinator",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "resident_coordinator",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "acabq",
+                                                                                                      "resident_coordinator"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC102",
+                        "scenario":  "Happy path - Programme Development ACABQ RPTC application and awareness process",
+                        "question":  "How are applications made for support, and how do countries get to know about the requests they can make to RPTC?",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "acabq",
+                                                                       "country_data",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "country_data",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "country_data",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "acabq"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "country_data",
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC103",
+                        "scenario":  "Happy path - Programme Development ACABQ RPTC consultant oversight and evaluation",
+                        "question":  "Please provide the explanation as to the oversight and evaluation of consultants hired under RPTC funding.",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "acabq",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "acabq"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
+                                     ]
+                    },
+                    {
+                        "id":  "TC104",
+                        "scenario":  "Happy path - Programme Development ACABQ Section 23 IE allocation definitions",
+                        "question":  "Please remind the Committee on how the amounts to be presented in Section 23 are defined, in particular the allocation between IEs.",
+                        "clarification":  "",
+                        "expectedBehavior":  "Routes to Programme Development with topic_area=acabq. Note: acabq is not yet a registered topic_area in the production classifier/router config; this documents an ACABQ Committee question pending that addition.",
+                        "status":  "pass",
+                        "finalRoute":  {
+                                           "routingTarget":  "Formulate Response Programme Development",
+                                           "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                           "yamlFile":  "Formulate_Response_Programme_Development.yaml",
+                                           "routerStatus":  "wired",
+                                           "finalTopic":  "Formulate_Response_Programme_Development.yaml"
+                                       },
+                        "finalClassification":  {
+                                                    "knowledgeDomain":  "programme_development",
+                                                    "fundingStream":  "UNCLEAR",
+                                                    "topicAreas":  [
+                                                                       "acabq",
+                                                                       "about_cidy"
+                                                                   ]
+                                                },
+                        "routePath":  [
+                                          "user_inquiry.yaml",
+                                          "Cidy_Intent.yaml",
+                                          "Cidy_Intent_Clarifier.yaml",
+                                          "Question_Enhancer.yaml",
+                                          "Cidy_Intent_Router.yaml",
+                                          "Formulate_Response_Programme_Development.yaml"
+                                      ],
+                        "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_Programme_Development.yaml",
+                        "routeTrace":  [
+                                           {
+                                               "topic":  "user_inquiry.yaml",
+                                               "output":  "Captures user question",
+                                               "decision":  "Begin Cidy_Intent.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent.yaml",
+                                               "output":  {
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "about_cidy"
+                                                                             ],
+                                                              "requiresClarification":  "No",
+                                                              "clarificationType":  "none"
+                                                          },
+                                               "decision":  "Bypass clarification"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Clarifier.yaml",
+                                               "output":  {
+                                                              "clarificationInput":  "",
+                                                              "outcome":  "not_applicable",
+                                                              "knowledgeDomain":  "programme_development",
+                                                              "fundingStream":  "UNCLEAR",
+                                                              "topicAreas":  [
+                                                                                 "acabq",
+                                                                                 "about_cidy"
+                                                                             ]
+                                                          },
+                                               "decision":  "Begin Question_Enhancer.yaml"
+                                           },
+                                           {
+                                               "topic":  "Question_Enhancer.yaml",
+                                               "output":  {
+                                                              "writesVariable":  "Global.executiveQuestionEnhancements",
+                                                              "affectsRouting":  false,
+                                                              "enhancerRuns":  "No"
+                                                          },
+                                               "decision":  "Begin Cidy_Intent_Router.yaml"
+                                           },
+                                           {
+                                               "topic":  "Cidy_Intent_Router.yaml",
+                                               "output":  {
+                                                              "routingTarget":  "Formulate Response Programme Development",
+                                                              "routerDialog":  "copilots_header_3141e.topic.FormulateResponseProgrammeDevelopment",
+                                                              "routerStatus":  "wired",
+                                                              "yamlFile":  "Formulate_Response_Programme_Development.yaml"
+                                                          },
+                                               "decision":  "Begin Formulate_Response_Programme_Development.yaml"
+                                           },
+                                           {
+                                               "topic":  "Formulate_Response_Programme_Development.yaml",
+                                               "output":  {
+                                                              "yamlExists":  true,
+                                                              "topicAreaStatus":  {
+                                                                                      "mapped":  true,
+                                                                                      "matched":  [
+                                                                                                      "acabq"
+                                                                                                  ],
+                                                                                      "unmapped":  [
+                                                                                                       "about_cidy"
+                                                                                                   ]
+                                                                                  }
+                                                          },
+                                               "decision":  "Begin assess_confidence.yaml"
+                                           }
+                                       ],
+                        "failures":  [
+
                                      ]
                     }
                 ]
