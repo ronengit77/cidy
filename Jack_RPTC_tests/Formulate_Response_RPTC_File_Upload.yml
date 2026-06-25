@@ -20,7 +20,7 @@ beginDialog:
               id: search_rptcProgressReports
               autoSend: false
               variable: Global.draftResponse
-              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10)"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC progress reports, achievements, results, supported countries, requests, interventions, people supported, implementing entities, LDC/LLDC/SIDS support, challenges, or recommendations.
                 Answer using ONLY the provided RPTC progress report knowledge source.
@@ -54,7 +54,7 @@ beginDialog:
               id: search_rptcGuidanceTemplates
               autoSend: false
               variable: Global.draftResponse
-              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10)"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about RPTC guidance, templates, standards, activity proposals, reporting standards, IRA recruitment/administration, activity reports, planning, approval, implementation, proposal revisions, or post-activity reporting.
                 Answer using ONLY the provided RPTC guidance and templates knowledge source.
@@ -85,7 +85,7 @@ beginDialog:
           id: search_rptcFallback
           autoSend: false
           variable: Global.draftResponse
-          userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+          userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10)"
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Regular Programme of Technical Cooperation (RPTC) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided RPTC knowledge sources.
@@ -119,7 +119,7 @@ beginDialog:
               id: search_rptcNoResultFallback
               autoSend: false
               variable: Global.draftResponse
-              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10) & \"Question enhancements: \" & Global.executiveQuestionEnhancements"
+              userInput: "=\"User question: \" & Global.userQuestion & Char(10) & Char(10)"
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The specific RPTC knowledge folder did not contain a relevant answer. Search the broader RPTC knowledge source.
                 Answer the question using ONLY the provided RPTC knowledge sources.
