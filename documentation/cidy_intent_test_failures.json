@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-24T20:05:56-04:00",
+                    "generatedAt":  "2026-06-26T09:04:02-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  104,
-                    "passed":  87,
-                    "failed":  17
+                    "passed":  83,
+                    "failed":  21
                 },
     "failures":  [
                      {
@@ -279,6 +279,114 @@
                                                ]
                      },
                      {
+                         "id":  "TC06",
+                         "scenario":  "Happy path - DA evaluation design",
+                         "question":  "How do I design a DA terminal evaluation?",
+                         "finalRoute":  {
+                                            "routingTarget":  "Formulate Response Development Account",
+                                            "routerDialog":  "copilots_header_3141e.topic.DA",
+                                            "yamlFile":  "Formulate_Response_DA.yaml",
+                                            "routerStatus":  "wired",
+                                            "finalTopic":  "Formulate_Response_DA.yaml"
+                                        },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "failures":  [
+                                          {
+                                              "type":  "topic_area_not_mapped",
+                                              "point":  "Formulate Response",
+                                              "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design, projects_evaluations."
+                                          }
+                                      ],
+                         "routeTraceSummary":  [
+                                                   {
+                                                       "topic":  "user_inquiry.yaml",
+                                                       "decision":  "Begin Cidy_Intent.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent.yaml",
+                                                       "decision":  "Bypass clarification"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Router.yaml",
+                                                       "decision":  "Begin Formulate_Response_DA.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Formulate_Response_DA.yaml",
+                                                       "decision":  "Use fallback or update topic-area mapping"
+                                                   }
+                                               ]
+                     },
+                     {
+                         "id":  "TC07",
+                         "scenario":  "Happy path - DA evaluation template",
+                         "question":  "What is the DA evaluation report template?",
+                         "finalRoute":  {
+                                            "routingTarget":  "Formulate Response Development Account",
+                                            "routerDialog":  "copilots_header_3141e.topic.DA",
+                                            "yamlFile":  "Formulate_Response_DA.yaml",
+                                            "routerStatus":  "wired",
+                                            "finalTopic":  "Formulate_Response_DA.yaml"
+                                        },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "failures":  [
+                                          {
+                                              "type":  "topic_area_not_mapped",
+                                              "point":  "Formulate Response",
+                                              "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design, templates."
+                                          }
+                                      ],
+                         "routeTraceSummary":  [
+                                                   {
+                                                       "topic":  "user_inquiry.yaml",
+                                                       "decision":  "Begin Cidy_Intent.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent.yaml",
+                                                       "decision":  "Bypass clarification"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Router.yaml",
+                                                       "decision":  "Begin Formulate_Response_DA.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Formulate_Response_DA.yaml",
+                                                       "decision":  "Use fallback or update topic-area mapping"
+                                                   }
+                                               ]
+                     },
+                     {
                          "id":  "TC10",
                          "scenario":  "Happy path - DA checklist",
                          "question":  "Is there a DA checklist for reviewing concept notes?",
@@ -383,6 +491,60 @@
                                                    {
                                                        "topic":  "Formulate_Response_PDF.yaml",
                                                        "decision":  "Stop: YAML not found"
+                                                   }
+                                               ]
+                     },
+                     {
+                         "id":  "TC39",
+                         "scenario":  "Clarification path - fund to DA",
+                         "question":  "How do I write an evaluation report?",
+                         "finalRoute":  {
+                                            "routingTarget":  "Formulate Response Development Account",
+                                            "routerDialog":  "copilots_header_3141e.topic.DA",
+                                            "yamlFile":  "Formulate_Response_DA.yaml",
+                                            "routerStatus":  "wired",
+                                            "finalTopic":  "Formulate_Response_DA.yaml"
+                                        },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "failures":  [
+                                          {
+                                              "type":  "topic_area_not_mapped",
+                                              "point":  "Formulate Response",
+                                              "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design."
+                                          }
+                                      ],
+                         "routeTraceSummary":  [
+                                                   {
+                                                       "topic":  "user_inquiry.yaml",
+                                                       "decision":  "Begin Cidy_Intent.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Clarifier.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Router.yaml",
+                                                       "decision":  "Begin Formulate_Response_DA.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Formulate_Response_DA.yaml",
+                                                       "decision":  "Use fallback or update topic-area mapping"
                                                    }
                                                ]
                      },
@@ -643,6 +805,60 @@
                                                    {
                                                        "topic":  "Cidy_Intent_Router.yaml",
                                                        "decision":  "Begin "
+                                                   }
+                                               ]
+                     },
+                     {
+                         "id":  "TC54",
+                         "scenario":  "Clarification path - artifact management response",
+                         "question":  "Which form should I use after an evaluation?",
+                         "finalRoute":  {
+                                            "routingTarget":  "Formulate Response Development Account",
+                                            "routerDialog":  "copilots_header_3141e.topic.DA",
+                                            "yamlFile":  "Formulate_Response_DA.yaml",
+                                            "routerStatus":  "wired",
+                                            "finalTopic":  "Formulate_Response_DA.yaml"
+                                        },
+                         "routePath":  [
+                                           "user_inquiry.yaml",
+                                           "Cidy_Intent.yaml",
+                                           "Cidy_Intent_Clarifier.yaml",
+                                           "Question_Enhancer.yaml",
+                                           "Cidy_Intent_Router.yaml",
+                                           "Formulate_Response_DA.yaml"
+                                       ],
+                         "routePathText":  "user_inquiry.yaml \u003e Cidy_Intent.yaml \u003e Cidy_Intent_Clarifier.yaml \u003e Question_Enhancer.yaml \u003e Cidy_Intent_Router.yaml \u003e Formulate_Response_DA.yaml",
+                         "failures":  [
+                                          {
+                                              "type":  "topic_area_not_mapped",
+                                              "point":  "Formulate Response",
+                                              "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design."
+                                          }
+                                      ],
+                         "routeTraceSummary":  [
+                                                   {
+                                                       "topic":  "user_inquiry.yaml",
+                                                       "decision":  "Begin Cidy_Intent.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Clarifier.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Clarifier.yaml",
+                                                       "decision":  "Begin Question_Enhancer.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Question_Enhancer.yaml",
+                                                       "decision":  "Begin Cidy_Intent_Router.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Cidy_Intent_Router.yaml",
+                                                       "decision":  "Begin Formulate_Response_DA.yaml"
+                                                   },
+                                                   {
+                                                       "topic":  "Formulate_Response_DA.yaml",
+                                                       "decision":  "Use fallback or update topic-area mapping"
                                                    }
                                                ]
                      },
