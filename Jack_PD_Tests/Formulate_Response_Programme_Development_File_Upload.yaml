@@ -20,9 +20,7 @@ beginDialog:
               id: iWuL74
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA CDPMO knowledge assistant.
                 The user is asking about the capacity development steering committee (CDSC) meetings, minutes background notes, etc. topic area: {Global.topicArea}.
@@ -56,9 +54,7 @@ beginDialog:
               id: NWnG1Y
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA CDPMO knowledge assistant.
                 The user is asking about the Technical Advisory Group (TAG) meetings, minutes background notes, etc. topic area: {Global.topicArea}.
@@ -92,9 +88,7 @@ beginDialog:
               id: GEdPMK
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about project evaluations, evaluation reports, recommendations, or lessons learned, topic area: {Global.topicArea}.
                 Answer using ONLY the provided Project Evaluations knowledge source.
@@ -128,9 +122,7 @@ beginDialog:
               id: search_guidelinesTemplates
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development guidelines, templates, project design, monitoring, reporting, budgeting, or closure, topic area: {Global.topicArea}.
                 Answer using the provided Programme Development knowledge sources.
@@ -163,9 +155,7 @@ beginDialog:
               id: search_implementingPartnersGrants
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about Programme Development implementing partners, grants, grantees, partner agreements, due diligence, or procurement versus partner/grant modalities, topic area: {Global.topicArea}.
                 Answer using the provided Programme Development knowledge sources.
@@ -198,9 +188,7 @@ beginDialog:
               id: search_residentCoordinator
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about DESA engagement with the Resident Coordinator system, country-level support, UNCT membership, UNSDCF/CCA alignment, country missions, or CDPMO country-level coordination, topic area: {Global.topicArea}.
                 Answer using the provided Programme Development knowledge sources.
@@ -234,9 +222,7 @@ beginDialog:
               id: search_cdStrategy
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about DESA strategic priorities, capacity development strategy, service delivery model, service lines or areas of work, request prioritization, partnerships in delivery, or the AI-enabled Capacity Development Knowledge Hub/Cidy, topic area: {Global.topicArea}.
                 Answer using the provided Programme Development knowledge sources.
@@ -365,9 +351,7 @@ beginDialog:
               id: search_acabq
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about ACABQ submissions, Programme Planning and Budget (PPB) documents, or budget presentations, topic area: {Global.topicArea}.
                 Answer using ONLY the provided ACABQ knowledge source.
@@ -398,9 +382,7 @@ beginDialog:
           id: J7vEWX
           autoSend: false
           variable: Global.draftResponse
-          userInput: |-
-            ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-            "Question enhancements: " & Global.executiveQuestionEnhancements
+          userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
           additionalInstructions: |-
             You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
             Answer the question using ONLY the provided DA knowledge sources.
@@ -434,9 +416,7 @@ beginDialog:
               id: search_DA_fallback
               autoSend: false
               variable: Global.draftResponse
-              userInput: |-
-                ="User question: " & Global.userQuestion & Char(10) & Char(10) &
-                "Question enhancements: " & Global.executiveQuestionEnhancements
+              userInput: ="User question: " & Global.userQuestion & Char(10) & Char(10)
               additionalInstructions: |-
                 You are Cidy, a UN DESA knowledge assistant. The user is asking about the Development Account (DA) funding stream, topic area: {Global.topicArea}.
                 The specific knowledge folder did not contain a relevant answer. Search the general DA knowledge base.

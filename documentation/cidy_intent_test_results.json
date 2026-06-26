@@ -1,11 +1,11 @@
 {
     "summary":  {
-                    "generatedAt":  "2026-06-24T20:05:56-04:00",
+                    "generatedAt":  "2026-06-26T09:04:02-04:00",
                     "runner":  "tools/run_intent_test_cases.ps1",
                     "note":  "Structural route simulation based on expected-behavior fields and current YAML inventory; does not execute Copilot Studio AI classification.",
                     "total":  104,
-                    "passed":  87,
-                    "failed":  17
+                    "passed":  83,
+                    "failed":  21
                 },
     "results":  [
                     {
@@ -548,7 +548,7 @@
                         "question":  "How do I design a DA terminal evaluation?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes directly to Formulate Response DA with topic_area=evaluation_design. This is guidance on designing an evaluation, not actual evaluation evidence.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -631,20 +631,25 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "evaluation_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "evaluation_design",
                                                                                                        "projects_evaluations"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design, projects_evaluations."
+                                         }
                                      ]
                     },
                     {
@@ -653,7 +658,7 @@
                         "question":  "What is the DA evaluation report template?",
                         "clarification":  "",
                         "expectedBehavior":  "Routes to Formulate Response DA with topic_area=evaluation_design or templates.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -736,20 +741,25 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "evaluation_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
+                                                                                                       "evaluation_design",
                                                                                                        "templates"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design, templates."
+                                         }
                                      ]
                     },
                     {
@@ -4026,7 +4036,7 @@
                         "question":  "How do I write an evaluation report?",
                         "clarification":  "Development Account (DA)",
                         "expectedBehavior":  "Classifier asks fund clarification. Clarifier maps Development Account (DA) to knowledge_domain=da, funding_stream=DA, topic_area=evaluation_design, intentStatus=ready_to_route. Router routes to Formulate Response DA.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -4106,20 +4116,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "evaluation_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "evaluation_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design."
+                                         }
                                      ]
                     },
                     {
@@ -5549,7 +5563,7 @@
                         "question":  "Which form should I use after an evaluation?",
                         "clarification":  "Management response",
                         "expectedBehavior":  "Clarifier maps topic_area=evaluation_design. Route depends on clarified/current domain, usually DA if DA is selected later.",
-                        "status":  "pass",
+                        "status":  "fail",
                         "finalRoute":  {
                                            "routingTarget":  "Formulate Response Development Account",
                                            "routerDialog":  "copilots_header_3141e.topic.DA",
@@ -5629,20 +5643,24 @@
                                                "output":  {
                                                               "yamlExists":  true,
                                                               "topicAreaStatus":  {
-                                                                                      "mapped":  true,
+                                                                                      "mapped":  false,
                                                                                       "matched":  [
-                                                                                                      "evaluation_design"
+
                                                                                                   ],
                                                                                       "unmapped":  [
-
+                                                                                                       "evaluation_design"
                                                                                                    ]
                                                                                   }
                                                           },
-                                               "decision":  "Begin assess_confidence.yaml"
+                                               "decision":  "Use fallback or update topic-area mapping"
                                            }
                                        ],
                         "failures":  [
-
+                                         {
+                                             "type":  "topic_area_not_mapped",
+                                             "point":  "Formulate Response",
+                                             "message":  "Topic area(s) not mapped in Formulate_Response_DA.yaml: evaluation_design."
+                                         }
                                      ]
                     },
                     {
