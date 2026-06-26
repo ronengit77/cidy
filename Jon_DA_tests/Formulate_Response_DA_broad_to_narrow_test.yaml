@@ -151,6 +151,12 @@ beginDialog:
 
                 Use guidance notes and annotated templates as primary sources for substantive answers.
 
+                Do not use unannotated templates unless the user specifically asks for a blank template or template structure.
+
+                The DA guidance note on terminal evaluation of joint projects v1 is relevant from T12 onward.
+
+                The DA project evaluation report template 02-2026 and DA suggested management response template 02-2026 are relevant from T15 onward.
+
             - kind: ConditionGroup
               id: conditionGroup_debug_eval_start
               conditions:
