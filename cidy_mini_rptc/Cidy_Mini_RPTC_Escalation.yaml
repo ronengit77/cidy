@@ -1,0 +1,85 @@
+kind: AdaptiveDialog
+modelDescription: Cidy Mini RPTC escalation. Collects the user's issue notes, generates an AI summary, and emails a CDPMO colleague. Reached either via the post-answer menu in Cidy_Mini_RPTC_Process or directly via escalation phrases. TODO before deploying - replace the connectionReference placeholder with the actual shared_sendmail connection reference ID from your Copilot Studio environment, and confirm the recipient email address. NOTE - BeginDialog references use the placeholder prefix 'cidyrptc' - update these to match the actual agent prefix assigned by Copilot Studio.
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escalate
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Talk to agent
+      - Talk to a person
+      - Talk to someone
+      - I need help from a person
+      - Can I talk to a human
+      - Connect me to a live agent
+      - Escalate
+
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_escalateEntry
+      conditions:
+        - id: conditionItem_debug_escalateEntry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_escalateEntry
+              activity: "DEBUG - Escalate topic entered. userQuestion: {Global.userQuestion}"
+
+    - kind: SendActivity
+      id: msg_escalate_intro
+      activity: I understand you might like to speak with someone. Please describe your issue below — a CDPMO colleague will receive a summary by email.
+
+    - kind: Question
+      id: question_userIssueNotes
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.userIssueNotes
+      prompt: "Please briefly describe your issue with Cidy RPTC's response:"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: AnswerQuestionWithAI
+      id: generate_summary
+      autoSend: false
+      variable: Global.issueSummary
+      userInput: |
+        ="User question: " & Global.userQuestion & Char(13) & Char(10) & "User issue notes: " & Topic.userIssueNotes & Char(13) & Char(10) & "Last response: " & Global.draftResponse
+      additionalInstructions: |-
+        You are summarizing an escalated inquiry from the Cidy RPTC knowledge agent.
+        Write 2-3 sentences maximum. Cover: what the user was asking about, why Cidy RPTC could not fully resolve it.
+        Be concise and professional. Address this to a UN DESA CDPMO staff member.
+      input: |
+        ="User question: " & Global.userQuestion & Char(13) & Char(10) & "User issue notes: " & Topic.userIssueNotes & Char(13) & Char(10) & "Last response: " & Global.draftResponse
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_sendEmail
+      input:
+        binding:
+          subject: Cidy RPTC Escalation
+          text: =Global.issueSummary
+          to: ronen.rapoport@un.org    # TODO - update recipient if needed
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.SendEmailResult
+
+      connectionReference: PLACEHOLDER_CONNECTION_REFERENCE    # TODO - replace with actual shared_sendmail connection reference from this environment
+      connectionProperties:
+        mode: Invoker
+
+      operationId: SendEmailV3
+
+    - kind: SendActivity
+      id: msg_escalateClosing
+      activity: Your inquiry has been escalated. A CDPMO staff member will be in touch. Thank you for using Cidy RPTC!
+
+    - kind: BeginDialog
+      id: goToRestart
+      dialog: cidyrptc.topic.Cidy_Mini_RPTC_Restart
+
+inputType: {}
+outputType: {}

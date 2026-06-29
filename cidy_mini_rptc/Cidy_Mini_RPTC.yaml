@@ -1,0 +1,68 @@
+kind: AdaptiveDialog
+modelDescription: Cidy Mini RPTC entry topic. Shows the one-time welcome, asks 'What would you like to know?', then hands the captured question to Cidy_Mini_RPTC_Process. Set Global.debugMode to true below to enable DEBUG trace messages. NOTE - BeginDialog references use the placeholder prefix 'cidyrptc' - update these to match the actual agent prefix assigned by Copilot Studio.
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SetVariable
+      id: setVariable_debugMode
+      variable: Global.debugMode
+      value: false
+
+    - kind: ConditionGroup
+      id: conditionGroup_firstRun
+      conditions:
+        - id: conditionItem_firstRun
+          condition: =IsBlank(Global.sessionStarted)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_welcome
+              activity: |-
+                Hello, {System.User.FirstName}!
+
+                **I'm Cidy RPTC**, a knowledge assistant for the Regular Programme of Technical Cooperation.
+
+                Ask me anything about RPTC — progress reports, guidelines, templates, activity proposals, reporting standards, IRA procedures, or results — and I'll answer from the RPTC knowledge base with sources and a confidence level.
+
+            - kind: SetVariable
+              id: setVariable_sessionStarted
+              variable: Global.sessionStarted
+              value: =true
+
+            - kind: SetVariable
+              id: setVariable_initTranscript
+              variable: Global.transcript
+              value: ="TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: Question
+      id: question_userQuestion
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Global.userQuestion
+      prompt: "**What would you like to know?**"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: log_userQuestion
+      variable: Global.transcript
+      value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_userQuestion
+      conditions:
+        - id: conditionItem_debug_userQuestion
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_userQuestion
+              activity: "DEBUG - Captured question: {Global.userQuestion}"
+
+    - kind: BeginDialog
+      id: goToProcess
+      dialog: cidyrptc.topic.Cidy_Mini_RPTC_Process
+
+inputType: {}
+outputType: {}
