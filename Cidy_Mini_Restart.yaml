@@ -1,0 +1,150 @@
+kind: AdaptiveDialog
+modelDescription: EXPERIMENTAL - Cidy Mini restart. Reachable directly via restart phrases or via the post-answer menu in Cidy_Mini. Confirms with the user, then resets all Cidy Mini global variables and routes back into Cidy_Mini for a fresh welcome and question. Set Global.debugMode = true in the test pane to see DEBUG trace messages at each step.
+startBehavior: UseLatestPublishedContentAndCancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Restart Conversation
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - let's begin again
+      - start over
+      - start again
+      - restart
+      - restart conversation
+
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_restartEntry
+      conditions:
+        - id: conditionItem_debug_restartEntry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_restartEntry
+              activity: "DEBUG - Cidy_Mini_Restart entered. Incoming activity text: {System.Activity.Text}"
+
+    - kind: Question
+      id: question_confirmRestart
+      alwaysPrompt: false
+      variable: init:Topic.Confirm
+      prompt: Are you sure you want to restart the conversation?
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: conditionGroup_confirmRestart
+      conditions:
+        - id: conditionItem_confirmed
+          condition: =Topic.Confirm = true
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_restartConfirmed
+              conditions:
+                - id: conditionItem_debug_restartConfirmed
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_restartConfirmed
+                      activity: DEBUG - Restart confirmed. Resetting all Cidy Mini global variables.
+
+            - kind: SetVariable
+              id: reset_sessionStarted
+              variable: Global.sessionStarted
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_userQuestion
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_transcript
+              variable: Global.transcript
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_followUpDepth
+              variable: Global.followUpDepth
+              value: 0
+
+            - kind: SetVariable
+              id: reset_followUpSummary
+              variable: Global.followUpSummary
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_draftResponse
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_jsonResponse
+              variable: Global.jsonResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_formattedAnswer
+              variable: Global.formattedAnswer
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_formattedSources
+              variable: Global.formattedSources
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_confidenceScore
+              variable: Global.confidenceScore
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_confidenceLabel
+              variable: Global.confidenceLabel
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_issueSummary
+              variable: Global.issueSummary
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_nextAction
+              variable: Global.nextAction
+              value: =Blank()
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_restartComplete
+              conditions:
+                - id: conditionItem_debug_restartComplete
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_restartComplete
+                      activity: "DEBUG - Reset complete. sessionStarted: {Global.sessionStarted} | followUpDepth: {Global.followUpDepth} | Routing back to Cidy_Mini."
+
+            - kind: SendActivity
+              id: msg_resetComplete
+              activity: Conversation state has been reset.
+
+            - kind: BeginDialog
+              id: 6lrV8k
+              dialog: cidypub_CidyMini.topic.Cidy_Mini
+
+      elseActions:
+        - kind: ConditionGroup
+          id: conditionGroup_debug_restartCancelled
+          conditions:
+            - id: conditionItem_debug_restartCancelled
+              condition: =Global.debugMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_restartCancelled
+                  activity: DEBUG - Restart cancelled by user.
+
+        - kind: SendActivity
+          id: msg_restartCancelled
+          activity: Ok. Let's carry on.
+
+inputType: {}
+outputType: {}

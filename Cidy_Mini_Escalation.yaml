@@ -1,0 +1,173 @@
+kind: AdaptiveDialog
+modelDescription: "EXPERIMENTAL - Cidy Mini escalation. Collects the user's issue notes, generates an AI summary, and emails a CDPMO colleague. Reached either via the post-answer menu in Cidy_Mini or directly via escalation phrases. Set Global.debugMode = true in the test pane to see DEBUG trace messages at each step."
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escalate
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Talk to agent
+      - Talk to a person
+      - Talk to someone
+      - Call back
+      - Call customer service
+      - Call me please
+      - Call support
+      - Call technical support
+      - Can an agent call me
+      - Can I call
+      - Can I get in touch with someone else
+      - Can I get real agent support
+      - Can I get transferred to a person to call
+      - Can I have a call in number Or can I be called
+      - Can I have a representative call me
+      - Can I schedule a call
+      - Can I speak to a representative
+      - Can I talk to a human
+      - Can I talk to a human assistant
+      - Can someone call me
+      - Chat with a human
+      - Chat with a representative
+      - Chat with agent
+      - Chat with someone please
+      - Connect me to a live agent
+      - Connect me to a person
+      - Could some one contact me by phone
+      - Customer agent
+      - Customer representative
+      - Customer service
+      - I need a manager to contact me
+      - I need customer service
+      - I need help from a person
+      - I need to speak with a live argent
+      - I need to talk to a specialist please
+      - I want to talk to customer service
+      - I want to proceed with live support
+      - I want to speak with a consultant
+      - I want to speak with a live tech
+      - I would like to speak with an associate
+      - I would like to talk to a technician
+      - Talk with tech support member
+
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_escalateEntry
+      conditions:
+        - id: conditionItem_debug_escalateEntry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_escalateEntry
+              activity: "DEBUG - Escalate topic entered. userQuestion: {Global.userQuestion} | confidenceLabel: {Global.confidenceLabel}"
+
+    - kind: SendActivity
+      id: msg_escalate_intro
+      activity: "I understand you might like to speak with someone. If so, feel free to describe your issue below, a CDPMO colleague will receive a transcript of this conversation by mail."
+
+    - kind: Question
+      id: question_userIssueNotes
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.userIssueNotes
+      prompt: "Please describe in brief your issue with Cidy Mini's response:"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: log_escalateIntro
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY MINI: \" & \"I understand you might like to speak with someone. Let me collect a few details so they can follow up with you.\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: SetVariable
+      id: log_userIssueNotes
+      variable: Global.transcript
+      value: "=Global.transcript & \"USER: \" & Topic.userIssueNotes & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_issueNotes
+      conditions:
+        - id: conditionItem_debug_issueNotes
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_issueNotes
+              activity: "DEBUG - Captured issue notes: {Topic.userIssueNotes}"
+
+    - kind: AnswerQuestionWithAI
+      id: generate_summary
+      autoSend: false
+      variable: Global.issueSummary
+      userInput: =Global.transcript
+      additionalInstructions: |-
+        You are summarizing an escalated inquiry from the Cidy Mini knowledge agent.
+        Write 2-3 sentences maximum. Cover: what the user was asking about, why Cidy Mini could not fully resolve it, and the confidence level (Global.confidenceLabel).
+        Be concise and professional. Address this to a UN DESA support staff member.
+      input: =Global.transcript
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_issueSummary
+      conditions:
+        - id: conditionItem_debug_issueSummary
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_issueSummary
+              activity: "DEBUG - Generated issue summary: {Global.issueSummary}"
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_s31QCv
+      input:
+        binding:
+          subject: Cidy Mini Automated Escalation
+          text: =Global.issueSummary
+          to: ronen.rapoport@un.org
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.SendEmailV3
+
+      connectionReference: cidypub_CidyMini.shared_sendmail.shared-sendmail-516b2a55-4647-4066-a39d-8043ff2b2764
+      connectionProperties:
+        mode: Invoker
+
+      operationId: SendEmailV3
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_emailSent
+      conditions:
+        - id: conditionItem_debug_emailSent
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_emailSent
+              activity: "DEBUG - Escalation email send attempted. Recipient: ronen.rapoport@un.org | Subject: Cidy Mini Automated Escalation"
+
+    - kind: SetVariable
+      id: log_escalateClosing
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY MINI: \" & \"Your inquiry has been escalated. A staff member will be in touch. Thank you for reaching out to Cidy Mini!\" & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: SendActivity
+      id: msg_escalateClosing
+      activity: Your inquiry has been escalated. A staff member will be in touch. Thank you for reaching out to Cidy Mini!
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_escalateExit
+      conditions:
+        - id: conditionItem_debug_escalateExit
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_escalateExit
+              activity: "DEBUG - Escalation complete. Routing to Cidy_Mini_Restart topic."
+
+    - kind: BeginDialog
+      id: kWw4MH
+      dialog: cidypub_CidyMini.topic.Cidy_Mini_Restart_RfB
+
+inputType: {}
+outputType: {}
