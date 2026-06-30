@@ -55,31 +55,13 @@ beginDialog:
       input: |
         ="User question: " & Global.userQuestion & Char(13) & Char(10) & "User issue notes: " & Topic.userIssueNotes & Char(13) & Char(10) & "Last response: " & Global.draftResponse
 
-    - kind: InvokeConnectorAction
-      id: invokeConnectorAction_sendEmail
-      input:
-        binding:
-          subject: Cidy RPTC Escalation
-          text: =Global.issueSummary
-          to: ronen.rapoport@un.org    # TODO - update recipient if needed
-
-      output:
-        kind: SingleVariableOutputBinding
-        variable: Topic.SendEmailResult
-
-      connectionReference: PLACEHOLDER_CONNECTION_REFERENCE    # TODO - replace with actual shared_sendmail connection reference from this environment
-      connectionProperties:
-        mode: Invoker
-
-      operationId: SendEmailV3
-
     - kind: SendActivity
       id: msg_escalateClosing
       activity: Your inquiry has been escalated. A CDPMO staff member will be in touch. Thank you for using Cidy RPTC!
 
     - kind: BeginDialog
       id: goToRestart
-      dialog: cidyrptc.topic.Cidy_Mini_RPTC_Restart
+      dialog: crc0f_CidyMiniRPTC.topic.EndofConversation
 
 inputType: {}
 outputType: {}

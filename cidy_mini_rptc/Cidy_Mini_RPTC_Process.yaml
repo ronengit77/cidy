@@ -21,9 +21,8 @@ beginDialog:
         Conversation context, if any (use it to understand follow-up questions): {Global.followUpSummary}
         For questions about achievements, results, countries supported, requests, interventions, people supported, SIDS/LDC/LLDC support, challenges, or recommendations — draw from RPTC progress reports.
         For questions about guidelines, templates, activity proposals, activity reports, IRA recruitment, common reporting standards, planning, approval, or process — draw from RPTC guidance documents.
-        If the knowledge source does not contain enough reliable information, say so.
         If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. State the source date, year, report year, or version used.
-        For recency-sensitive questions, reduce CONFIDENCE if the best source found is older than expected, undated, or may not reflect the current state. Use CONFIDENCE 5 only when the answer is supported by a clearly dated current/latest source; use 2-3 for older or undated latest-available sources; use 0-1 if no reliable dated source is found.
+        Use CONFIDENCE 5 when there is an answer. use 0 if no reliable dated source is found.
         Format your response as follows:
         ANSWER: Your detailed answer
         SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
@@ -35,7 +34,7 @@ beginDialog:
       knowledgeSources:
         kind: SearchSpecificKnowledgeSources
         knowledgeSources:
-          - copilots_header_3141e.topic.RPTCFileUpload_vV7zz8x3_EXkXTX80LY34
+          - crc0f_CidyMiniRPTC.topic.CidyMiniRPTC_AllFile_Upload_GFg9UQ16FNs62duH00d90
 
     - kind: ConditionGroup
       id: conditionGroup_debug_searchResult
@@ -148,7 +147,7 @@ beginDialog:
 
                     - kind: BeginDialog
                       id: goToAsk_followUpLimitReached
-                      dialog: cidyrptc.topic.Cidy_Mini_RPTC
+                      dialog: crc0f_CidyMiniRPTC.topic.Greeting
 
               elseActions:
                 - kind: ConditionGroup
@@ -192,7 +191,7 @@ beginDialog:
 
                 - kind: BeginDialog
                   id: goToAsk_followup
-                  dialog: cidyrptc.topic.Cidy_Mini_RPTC
+                  dialog: crc0f_CidyMiniRPTC.topic.Greeting
 
         - id: conditionItem_new
           condition: =Global.nextAction = "new"
@@ -214,21 +213,21 @@ beginDialog:
 
             - kind: BeginDialog
               id: goToAsk_new
-              dialog: cidyrptc.topic.Cidy_Mini_RPTC
+              dialog: crc0f_CidyMiniRPTC.topic.Greeting
 
         - id: conditionItem_escalate
           condition: =Global.nextAction = "escalate"
           actions:
             - kind: BeginDialog
               id: goToEscalate
-              dialog: cidyrptc.topic.Cidy_Mini_RPTC_Escalation
+              dialog: crc0f_CidyMiniRPTC.topic.Escalation
 
         - id: conditionItem_restart
           condition: =Global.nextAction = "restart"
           actions:
             - kind: BeginDialog
               id: goToRestart
-              dialog: cidyrptc.topic.Cidy_Mini_RPTC_Restart
+              dialog: crc0f_CidyMiniRPTC.topic.Restart
 
       elseActions:
         - kind: SendActivity
@@ -237,7 +236,7 @@ beginDialog:
 
         - kind: BeginDialog
           id: goToAsk_fallback
-          dialog: cidyrptc.topic.Cidy_Mini_RPTC
+          dialog: crc0f_CidyMiniRPTC.topic.Greeting
 
 inputType: {}
 outputType: {}

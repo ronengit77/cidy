@@ -62,7 +62,7 @@ beginDialog:
 
     - kind: BeginDialog
       id: goToProcess
-      dialog: cidyrptc.topic.Cidy_Mini_RPTC_Process
+      dialog: crc0f_CidyMiniRPTC.topic.RPTCProcess
 
 inputType: {}
 outputType: {}
