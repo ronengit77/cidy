@@ -1,0 +1,85 @@
+kind: AdaptiveDialog
+modelDescription: Cidy Mini DA restart. Confirms with the user, resets all global variables, and routes back to Cidy_Mini_DA for a fresh session. NOTE - BeginDialog references use the placeholder prefix 'cidyminda' - update these to match the actual agent prefix assigned by Copilot Studio.
+startBehavior: UseLatestPublishedContentAndCancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Restart Conversation
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - start over
+      - start again
+      - restart
+      - restart conversation
+      - let's begin again
+
+  actions:
+    - kind: Question
+      id: question_confirmRestart
+      alwaysPrompt: false
+      variable: init:Topic.Confirm
+      prompt: Are you sure you want to restart the conversation?
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: conditionGroup_confirmRestart
+      conditions:
+        - id: conditionItem_confirmed
+          condition: =Topic.Confirm = true
+          actions:
+            - kind: SetVariable
+              id: reset_sessionStarted
+              variable: Global.sessionStarted
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_userQuestion
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_transcript
+              variable: Global.transcript
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_followUpDepth
+              variable: Global.followUpDepth
+              value: 0
+
+            - kind: SetVariable
+              id: reset_followUpSummary
+              variable: Global.followUpSummary
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_draftResponse
+              variable: Global.draftResponse
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_issueSummary
+              variable: Global.issueSummary
+              value: =Blank()
+
+            - kind: SetVariable
+              id: reset_nextAction
+              variable: Global.nextAction
+              value: =Blank()
+
+            - kind: SendActivity
+              id: msg_resetComplete
+              activity: Conversation state has been reset.
+
+            - kind: BeginDialog
+              id: goToEntry
+              dialog: crc0f_CidyMiniDA.topic.Greeting
+
+      elseActions:
+        - kind: SendActivity
+          id: msg_restartCancelled
+          activity: Ok. Let's carry on.
+
+inputType: {}
+outputType: {}

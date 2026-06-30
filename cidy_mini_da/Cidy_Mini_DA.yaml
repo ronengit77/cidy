@@ -1,0 +1,143 @@
+kind: AdaptiveDialog
+modelDescription: Cidy Mini DA entry topic. Shows the one-time welcome, asks 'What would you like to know?', handles the in-chat 'debug on'/'debug off' toggle, then hands the captured question to Cidy_Mini_DA_Process for searching/answering. This topic never calls itself - it only ever BeginDialogs forward into Cidy_Mini_DA_Process (cross-topic), which avoids the InfiniteLoopInBotContent execution-cycle error that a self-targeting BeginDialog triggers in Copilot Studio. Set Global.debugMode = true (type 'debug on' in chat) to see DEBUG trace messages. NOTE - BeginDialog references use the placeholder prefix 'cidyminda' - update these to match the actual agent prefix assigned by Copilot Studio.
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debugModeDefault
+      conditions:
+        - id: conditionItem_debugModeDefault
+          condition: =IsBlank(Global.debugMode)
+          actions:
+            - kind: SetVariable
+              id: setVariable_debugModeDefault
+              variable: Global.debugMode
+              value: false
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_entry
+      conditions:
+        - id: conditionItem_debug_entry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_entry
+              activity: "DEBUG - Cidy_Mini_DA (ask) entered. sessionStarted: {Global.sessionStarted} | followUpDepth: {Global.followUpDepth} | incoming activity text: {System.Activity.Text}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_firstRun
+      conditions:
+        - id: conditionItem_firstRun
+          condition: =IsBlank(Global.sessionStarted)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_welcome
+              activity: |-
+                Hello, {System.User.FirstName}!
+
+                **I'm Cidy DA**, a knowledge assistant for the Development Account.
+
+                Ask me anything about DA projects — concept notes, project documents, evaluations, progress reports, guidelines, templates, eligibility, or budgets — and I'll answer from the DA knowledge base with sources and a confidence level.
+
+            - kind: SetVariable
+              id: setVariable_sessionStarted
+              variable: Global.sessionStarted
+              value: =true
+
+            - kind: SetVariable
+              id: setVariable_initTranscript
+              variable: Global.transcript
+              value: ="TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: Question
+      id: question_userQuestion
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Global.userQuestion
+      prompt: "**What would you like to know?**"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SetVariable
+      id: log_userQuestion
+      variable: Global.transcript
+      value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_debugToggle
+      conditions:
+        - id: conditionItem_debugOn
+          condition: =Or(Lower(Global.userQuestion) = "debug on", Lower(Global.userQuestion) = "enable debug mode")
+          actions:
+            - kind: SetVariable
+              id: setVariable_debugOn
+              variable: Global.debugMode
+              value: true
+
+            - kind: SendActivity
+              id: sendActivity_debugOn
+              activity: Debug mode is now ON. You'll see DEBUG trace messages at each step.
+
+            - kind: Question
+              id: question_userQuestion_postDebugOn
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: Global.userQuestion
+              prompt: "**What would you like to know?**"
+              entity:
+                kind: StringPrebuiltEntity
+                sensitivityLevel: None
+
+            - kind: SetVariable
+              id: log_userQuestion_postDebugOn
+              variable: Global.transcript
+              value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+        - id: conditionItem_debugOff
+          condition: =Or(Lower(Global.userQuestion) = "debug off", Lower(Global.userQuestion) = "disable debug mode")
+          actions:
+            - kind: SetVariable
+              id: setVariable_debugOff
+              variable: Global.debugMode
+              value: false
+
+            - kind: SendActivity
+              id: sendActivity_debugOff
+              activity: Debug mode is now OFF.
+
+            - kind: Question
+              id: question_userQuestion_postDebugOff
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: Global.userQuestion
+              prompt: "**What would you like to know?**"
+              entity:
+                kind: StringPrebuiltEntity
+                sensitivityLevel: None
+
+            - kind: SetVariable
+              id: log_userQuestion_postDebugOff
+              variable: Global.transcript
+              value: "=Global.transcript & \"USER: \" & Global.userQuestion & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_userQuestion
+      conditions:
+        - id: conditionItem_debug_userQuestion
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_userQuestion
+              activity: "DEBUG - Captured question: {Global.userQuestion} | followUpDepth: {Global.followUpDepth}/20 | thread summary going into search: {Global.followUpSummary}"
+
+    - kind: BeginDialog
+      id: goToProcess
+      dialog: crc0f_CidyMiniDA.topic.Process
+
+inputType: {}
+outputType: {}
