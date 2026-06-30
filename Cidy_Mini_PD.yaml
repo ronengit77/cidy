@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: EXPERIMENTAL - Cidy Mini entry topic. Shows the one-time welcome, asks 'What would you like to know?', handles the in-chat 'debug on'/'debug off' toggle, then hands the captured question to Cidy_Mini_Process for searching/answering. This topic never calls itself - it only ever BeginDialogs forward into Cidy_Mini_Process (cross-topic), which avoids the InfiniteLoopInBotContent execution-cycle error that a self-targeting BeginDialog triggers in Copilot Studio. Set Global.debugMode = true (type 'debug on' in chat) to see DEBUG trace messages.
+modelDescription: EXPERIMENTAL - Cidy Mini PD entry topic. Shows the one-time welcome, asks 'What would you like to know?', handles the in-chat 'debug on'/'debug off' toggle, then hands the captured question to Cidy_Mini_PD_Process for searching/answering. This topic never calls itself - it only ever BeginDialogs forward into Cidy_Mini_PD_Process (cross-topic), which avoids the InfiniteLoopInBotContent execution-cycle error that a self-targeting BeginDialog triggers in Copilot Studio. Set Global.debugMode = true (type 'debug on' in chat) to see DEBUG trace messages.
 beginDialog:
   kind: OnConversationStart
   id: main
@@ -28,7 +28,7 @@ beginDialog:
           actions:
             - kind: SendActivity
               id: sendActivity_debug_entry
-              activity: "DEBUG - Cidy_Mini (ask) entered. sessionStarted: {Global.sessionStarted} | followUpDepth: {Global.followUpDepth} | incoming activity text: {System.Activity.Text}"
+              activity: "DEBUG - Cidy_Mini_PD (ask) entered. sessionStarted: {Global.sessionStarted} | followUpDepth: {Global.followUpDepth} | incoming activity text: {System.Activity.Text}"
 
     - kind: ConditionGroup
       id: conditionGroup_firstRun
@@ -177,8 +177,8 @@ beginDialog:
               activity: "DEBUG - Captured question: {Global.userQuestion} | followUpDepth: {Global.followUpDepth}/20 | thread summary going into search: {Global.followUpSummary}"
 
     - kind: BeginDialog
-      id: pcQ6wx
-      dialog: cidypub_CidyMini.topic.CidyMiniProcess
+      id: OzvzV7
+      dialog: eva_CidyMiniPD.topic.Cidy-Mini-PD-Process
 
 inputType:
   properties:

@@ -1,0 +1,160 @@
+kind: AdaptiveDialog
+modelDescription: EXPERIMENTAL - Cidy Mini Orchestrator routing topic. Reached only via BeginDialog from Cidy_Mini_Orchestrator, never triggered directly. Sets Global.orchestratorMode = true, routes to the appropriate Cidy Mini sub-agent based on Global.selectedTopic, then loops back to Cidy_Mini_Orchestrator when the sub-agent returns. Never calls itself.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debug_routeEntry
+      conditions:
+        - id: conditionItem_debug_routeEntry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_routeEntry
+              activity: "DEBUG - Orchestrator Route entered. selectedTopic: {Global.selectedTopic}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_route
+      conditions:
+        - id: conditionItem_DA
+          condition: =Global.selectedTopic = "DA"
+          actions:
+            - kind: SetVariable
+              id: setVariable_orchestratorMode_DA
+              variable: Global.orchestratorMode
+              value: true
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_routeDA
+              conditions:
+                - id: conditionItem_debug_routeDA
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeDA
+                      activity: DEBUG - Routing to Cidy Mini DA sub-agent.
+
+            - kind: BeginDialog
+              id: xfWhj0
+              dialog: eva_CidyMiniOrchestrator.InvokeConnectedAgentTaskAction.CidyMini
+
+            - kind: BeginDialog
+              id: NQ71wn
+              dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator
+
+        - id: conditionItem_RPTC
+          condition: =Global.selectedTopic = "RPTC"
+          actions:
+            - kind: SetVariable
+              id: setVariable_orchestratorMode_RPTC
+              variable: Global.orchestratorMode
+              value: true
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_routeRPTC
+              conditions:
+                - id: conditionItem_debug_routeRPTC
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeRPTC
+                      activity: DEBUG - Routing to Cidy Mini RPTC sub-agent.
+
+            - kind: BeginDialog
+              id: ZpxUqP
+              dialog: eva_CidyMiniOrchestrator.InvokeConnectedAgentTaskAction.CidyMiniRPTC
+
+            - kind: BeginDialog
+              id: W0aP1Q
+              dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator
+
+        - id: conditionItem_PD
+          condition: =Global.selectedTopic = "PD"
+          actions:
+            - kind: SetVariable
+              id: setVariable_orchestratorMode_PD
+              variable: Global.orchestratorMode
+              value: true
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_routePD
+              conditions:
+                - id: conditionItem_debug_routePD
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routePD
+                      activity: DEBUG - Routing to Cidy Mini PD sub-agent.
+
+            - kind: BeginDialog
+              id: 2BP3r7
+              dialog: eva_CidyMiniOrchestrator.InvokeConnectedAgentTaskAction.CidyMiniPD
+
+            - kind: BeginDialog
+              id: t1vynl
+              dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator
+
+        - id: conditionItem_Unsure
+          condition: =Global.selectedTopic = "Unsure"
+          actions:
+            - kind: SetVariable
+              id: setVariable_orchestratorMode_Unsure
+              variable: Global.orchestratorMode
+              value: true
+
+            - kind: ConditionGroup
+              id: conditionGroup_debug_routeUnsure
+              conditions:
+                - id: conditionItem_debug_routeUnsure
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_routeUnsure
+                      activity: DEBUG - Routing to Cidy Mini sub-agent via Unsure.
+
+            - kind: BeginDialog
+              id: iVOsid
+              dialog: eva_CidyMiniOrchestrator.InvokeConnectedAgentTaskAction.CidyMini
+
+            - kind: BeginDialog
+              id: CxV2zH
+              dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator
+
+      elseActions:
+        - kind: ConditionGroup
+          id: conditionGroup_debug_routeFallback
+          conditions:
+            - id: conditionItem_debug_routeFallback
+              condition: =Global.debugMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_routeFallback
+                  activity: "DEBUG - Route fallback. selectedTopic was: {Global.selectedTopic}"
+
+        - kind: SendActivity
+          id: sendActivity_routeFallback
+          activity: I could not determine which topic you selected. Let's try again.
+
+    - kind: SetVariable
+      id: clear_selectedTopic
+      variable: Global.selectedTopic
+      value: =Blank()
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_loopBack
+      conditions:
+        - id: conditionItem_debug_loopBack
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_loopBack
+              activity: DEBUG - Sub-agent returned. Routing back to Cidy_Mini_Orchestrator for topic selection.
+
+    - kind: BeginDialog
+      id: HObS6O
+      dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator
+
+inputType: {}
+outputType: {}

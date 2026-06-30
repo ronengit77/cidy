@@ -1,0 +1,422 @@
+kind: AdaptiveDialog
+modelDescription: "Cidy Mini PD processing topic. Reached only via BeginDialog from Cidy_Mini_PD, never triggered directly. Takes Global.userQuestion, searches the active Knowledge source, shows answer/sources/confidence (Very Low-Very High), then the post-answer menu (follow-up, new question, escalate, restart). Follow-up keeps context via a running AI summary for up to 20 rounds; new question clears it. Never calls itself - loop-back branches BeginDialog to Cidy_Mini_PD (cross-topic) to avoid an execution-cycle error. When switching knowledge sources: update both the knowledgeSources list and activeKnowledgeSourceId, and add new sources to the Switch in setVariable_activeKnowledgeSourceName."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SetVariable
+      id: clear_draftResponse
+      variable: Global.draftResponse
+      value: =Blank()
+
+    - kind: SetVariable
+      id: setVariable_activeKnowledgeSourceId
+      variable: Global.activeKnowledgeSourceId
+      value: eva_CidyMiniPD.topic.CidyMiniPDConnect_QA7hrsDNyY1cB0LxL96Im
+
+    - kind: SetVariable
+      id: setVariable_activeKnowledgeSourceName
+      variable: Global.activeKnowledgeSourceName
+      value: |
+        =Switch(
+          Global.activeKnowledgeSourceId,
+          "eva_CidyMiniPD.topic.CidyMiniPDConnect_QA7hrsDNyY1cB0LxL96Im", "Cidy-Mini-PD-Upload",
+          "Unknown knowledge source"
+        )
+
+    - kind: SearchAndSummarizeContent
+      id: search_knowledge
+      autoSend: false
+      variable: Global.draftResponse
+      userInput: =Global.userQuestion
+      additionalInstructions: |-
+        You are Cidy Mini, a UN DESA knowledge assistant. Answer the question using ONLY the provided Knowledge source.
+        Conversation context, if any (use it to understand follow-up questions): {Global.followUpSummary}
+        If the knowledge source does not contain enough reliable information, say so.
+        If the user asks for latest, most recent, current, newest, updated, or similar, prioritize the most recent dated source available. Use CONFIDENCE 5 when the answer is supported by a clearly dated current/latest source; use 0 if no reliable dated source is found.
+        Format your response as follows:
+        ANSWER: Your detailed answer
+        SOURCES: List each source as a markdown link in this exact format: [name of file](full url). The text in brackets must be the file name or document title. The text in parentheses must be the full URL only, starting with http:// or https://. Do not put titles, descriptions, dates, or file names in parentheses. Do not reverse the markdown link order. If a full URL is not available, list the source title as plain text without brackets.
+        CONFIDENCE: Write ONLY a single number from 0 to 5 on this line, nothing else. No explanation, no asterisks, no additional text. Just the number.
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: DoNotSearchFiles
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+        knowledgeSources:
+          - eva_CidyMiniPD.topic.CidyMiniPDConnect_QA7hrsDNyY1cB0LxL96Im
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_searchResult
+      conditions:
+        - id: conditionItem_debug_searchResult
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_searchResult
+              activity: "DEBUG - Knowledge source: {Global.activeKnowledgeSourceName} ({Global.activeKnowledgeSourceId}) | Query: {Global.userQuestion} | Search result: {If(IsBlank(Global.draftResponse), \"BLANK\", \"HAS CONTENT\")}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_blankDraft
+      conditions:
+        - id: conditionItem_blankDraft
+          condition: =IsBlank(Global.draftResponse)
+          actions:
+            - kind: SetVariable
+              id: setVariable_blankAnswer
+              variable: Global.formattedAnswer
+              value: I was not able to find information in the Knowledge base that could answer this question.
+
+            - kind: SetVariable
+              id: setVariable_blankSources
+              variable: Global.formattedSources
+              value: No sources found.
+
+            - kind: SetVariable
+              id: setVariable_blankConfidenceScore
+              variable: Global.confidenceScore
+              value: 0
+
+            - kind: SetVariable
+              id: setVariable_blankConfidenceLabel
+              variable: Global.confidenceLabel
+              value: Very Low
+
+      elseActions:
+        - kind: InvokeAIBuilderModelAction
+          id: invokeAIBuilderModelAction_formatResponse
+          displayName: Formatting Response JSON
+          input:
+            binding:
+              Raw_20Input: =Global.draftResponse
+
+          output:
+            binding:
+              predictionOutput: Global.jsonResponse
+
+          aIModelId: 98bc018f-3dc0-43ce-b008-0e77f7e85098
+
+        - kind: SetVariable
+          id: setVariable_answer
+          variable: Global.formattedAnswer
+          value: =IfError(Text(ParseJSON(Global.jsonResponse.text).answer), Global.draftResponse)
+
+        - kind: SetVariable
+          id: setVariable_sources
+          variable: Global.formattedSources
+          value: =IfError(Text(ParseJSON(Global.jsonResponse.text).sources), "No sources found.")
+
+        - kind: SetVariable
+          id: setVariable_confidenceScore
+          variable: Global.confidenceScore
+          value: =IfError(Value(Text(ParseJSON(Global.jsonResponse.text).confidence)), 0)
+
+        - kind: SetVariable
+          id: setVariable_confidenceLabel
+          variable: Global.confidenceLabel
+          value: |
+            =Switch(
+              true,
+              Global.confidenceScore >= 5, "Very High",
+              Global.confidenceScore >= 4, "High",
+              Global.confidenceScore >= 2, "Medium",
+              Global.confidenceScore >= 1, "Low",
+              "Very Low"
+            )
+
+        - kind: ConditionGroup
+          id: conditionGroup_debug_parsedResponse
+          conditions:
+            - id: conditionItem_debug_parsedResponse
+              condition: =Global.debugMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_parsedResponse
+                  activity: "DEBUG - Parsed response. confidenceScore: {Global.confidenceScore} | confidenceLabel: {Global.confidenceLabel} | raw model JSON: {Global.jsonResponse.text}"
+
+    - kind: SendActivity
+      id: sendActivity_response
+      activity: |-
+        **Answer:** {Global.formattedAnswer}
+
+        **Sources:**
+        {Global.formattedSources}
+
+        **Confidence:** {Global.confidenceLabel}
+
+    - kind: SetVariable
+      id: log_response
+      variable: Global.transcript
+      value: "=Global.transcript & \"CIDY MINI: \" & Global.formattedAnswer & Char(13) & Char(10) & \"SOURCES: \" & Global.formattedSources & Char(13) & Char(10) & \"CONFIDENCE: \" & Global.confidenceLabel & Char(13) & Char(10) & Char(13) & Char(10)"
+
+    - kind: Question
+      id: question_nextAction
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.nextActionChoice
+      prompt: What would you like to do next?
+      entity:
+        kind: EmbeddedEntity
+        sensitivityLevel: None
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Ask a follow-up question
+              displayName: Ask a follow-up question
+
+            - id: Ask a new question
+              displayName: Ask a new question
+
+            - id: Escalate to a human
+              displayName: Escalate to a human
+
+            - id: Restart conversation
+              displayName: Restart conversation
+
+    - kind: SetVariable
+      id: set_nextAction
+      variable: Global.nextAction
+      value: |
+        =Switch(
+          Text(Topic.nextActionChoice),
+          "Ask a follow-up question", "followup",
+          "Ask a new question", "new",
+          "Escalate to a human", "escalate",
+          "Restart conversation", "restart",
+          "unknown"
+        )
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_nextAction
+      conditions:
+        - id: conditionItem_debug_nextAction
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_nextAction
+              activity: "DEBUG - Menu choice: {Text(Topic.nextActionChoice)} | mapped nextAction: {Global.nextAction}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_nextAction
+      conditions:
+        - id: conditionItem_followup
+          condition: =Global.nextAction = "followup"
+          actions:
+            - kind: SetVariable
+              id: increment_followUpDepth
+              variable: Global.followUpDepth
+              value: =Coalesce(Global.followUpDepth, 0) + 1
+
+            - kind: ConditionGroup
+              id: conditionGroup_followUpLimit
+              conditions:
+                - id: conditionItem_followUpLimitReached
+                  condition: =Global.followUpDepth > 20
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_followUpLimitReached
+                      activity: You've reached the 20-follow-up limit for this thread. Let's start with a new question.
+
+                    - kind: SetVariable
+                      id: reset_followUpDepth_limitReached
+                      variable: Global.followUpDepth
+                      value: 0
+
+                    - kind: SetVariable
+                      id: reset_followUpSummary_limitReached
+                      variable: Global.followUpSummary
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_userQuestion_limitReached
+                      variable: Global.userQuestion
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_formattedAnswer_limitReached
+                      variable: Global.formattedAnswer
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_formattedSources_limitReached
+                      variable: Global.formattedSources
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_confidenceScore_limitReached
+                      variable: Global.confidenceScore
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_confidenceLabel_limitReached
+                      variable: Global.confidenceLabel
+                      value: =Blank()
+
+                    - kind: SetVariable
+                      id: clear_jsonResponse_limitReached
+                      variable: Global.jsonResponse
+                      value: =Blank()
+
+                    - kind: BeginDialog
+                      id: MJfZkN
+                      dialog: eva_CidyMiniPD.topic.CIdy-Mini-PD
+
+              elseActions:
+                - kind: ConditionGroup
+                  id: conditionGroup_debug_followup
+                  conditions:
+                    - id: conditionItem_debug_followup
+                      condition: =Global.debugMode = true
+                      actions:
+                        - kind: SendActivity
+                          id: sendActivity_debug_followup
+                          activity: "DEBUG - Follow-up branch. Depth: {Global.followUpDepth}/20 | Summary before update: {Global.followUpSummary}"
+
+                - kind: AnswerQuestionWithAI
+                  id: summarize_followUpThread
+                  autoSend: false
+                  variable: Global.followUpSummary
+                  userInput: |
+                    ="Existing thread summary (if any): " & Coalesce(Global.followUpSummary, "None.") & Char(13) & Char(10) & "Latest question: " & Global.userQuestion & Char(13) & Char(10) & "Latest answer: " & Global.formattedAnswer
+                  additionalInstructions: |-
+                    You are maintaining a running summary of a follow-up question thread for the Cidy Mini knowledge agent so it can keep context across multiple follow-up turns.
+                    Combine the existing thread summary (if any) with the latest question and answer into a single updated summary.
+                    Keep it concise: 3-5 sentences maximum, focused on the topic and key facts already established that the next follow-up question might refer back to.
+                    Do not include source links or confidence levels. Output ONLY the updated summary text, nothing else.
+                  input: |
+                    ="Existing thread summary (if any): " & Coalesce(Global.followUpSummary, "None.") & Char(13) & Char(10) & "Latest question: " & Global.userQuestion & Char(13) & Char(10) & "Latest answer: " & Global.formattedAnswer
+
+                - kind: ConditionGroup
+                  id: conditionGroup_debug_followupSummary
+                  conditions:
+                    - id: conditionItem_debug_followupSummary
+                      condition: =Global.debugMode = true
+                      actions:
+                        - kind: SendActivity
+                          id: sendActivity_debug_followupSummary
+                          activity: "DEBUG - Updated follow-up thread summary: {Global.followUpSummary}"
+
+                - kind: SetVariable
+                  id: clear_userQuestion_followup
+                  variable: Global.userQuestion
+                  value: =Blank()
+
+                - kind: BeginDialog
+                  id: Ab1hXo
+                  dialog: eva_CidyMiniPD.topic.CIdy-Mini-PD
+
+        - id: conditionItem_new
+          condition: =Global.nextAction = "new"
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_newQuestion
+              conditions:
+                - id: conditionItem_debug_newQuestion
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_newQuestion
+                      activity: DEBUG - New question branch. Clearing followUpDepth, followUpSummary, and answer state.
+
+            - kind: SetVariable
+              id: clear_followUpDepth_new
+              variable: Global.followUpDepth
+              value: 0
+
+            - kind: SetVariable
+              id: clear_followUpSummary_new
+              variable: Global.followUpSummary
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_userQuestion_new
+              variable: Global.userQuestion
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedAnswer_new
+              variable: Global.formattedAnswer
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_formattedSources_new
+              variable: Global.formattedSources
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceScore_new
+              variable: Global.confidenceScore
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_confidenceLabel_new
+              variable: Global.confidenceLabel
+              value: =Blank()
+
+            - kind: SetVariable
+              id: clear_jsonResponse_new
+              variable: Global.jsonResponse
+              value: =Blank()
+
+            - kind: BeginDialog
+              id: 4sfWQr
+              dialog: eva_CidyMiniPD.topic.CIdy-Mini-PD
+
+        - id: conditionItem_escalate
+          condition: =Global.nextAction = "escalate"
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_escalateBranch
+              conditions:
+                - id: conditionItem_debug_escalateBranch
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_escalateBranch
+                      activity: DEBUG - Escalate branch entered. Routing to Escalate topic.
+
+            - kind: BeginDialog
+              id: 1FOO3U
+              dialog: eva_CidyMiniPD.topic.Escalate
+
+        - id: conditionItem_restart
+          condition: =Global.nextAction = "restart"
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_debug_restartBranch
+              conditions:
+                - id: conditionItem_debug_restartBranch
+                  condition: =Global.debugMode = true
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_debug_restartBranch
+                      activity: DEBUG - Restart branch entered. Routing to Cidy_Mini_PD_Restart topic.
+
+            - kind: BeginDialog
+              id: 0c6R6t
+              dialog: eva_CidyMiniPD.topic.Cidy-Mini-PD-Restart
+
+      elseActions:
+        - kind: ConditionGroup
+          id: conditionGroup_debug_fallbackBranch
+          conditions:
+            - id: conditionItem_debug_fallbackBranch
+              condition: =Global.debugMode = true
+              actions:
+                - kind: SendActivity
+                  id: sendActivity_debug_fallbackBranch
+                  activity: "DEBUG - Fallback branch entered. Raw menu choice: {Text(Topic.nextActionChoice)} | nextAction: {Global.nextAction}"
+
+        - kind: SendActivity
+          id: sendActivity_fallback
+          activity: I could not determine what you would like to do next. Let's try again.
+
+        - kind: BeginDialog
+          id: gvK3UO
+          dialog: eva_CidyMiniPD.topic.CIdy-Mini-PD
+
+inputType: {}
+outputType: {}

@@ -1,5 +1,5 @@
 kind: AdaptiveDialog
-modelDescription: EXPERIMENTAL - Cidy Mini restart. Reachable directly via restart phrases or via the post-answer menu in Cidy_Mini. Confirms with the user, then resets all Cidy Mini global variables and routes back into Cidy_Mini for a fresh welcome and question. Set Global.debugMode = true in the test pane to see DEBUG trace messages at each step.
+modelDescription: "EXPERIMENTAL - Cidy Mini PD restart. Reachable directly via restart phrases or via the post-answer menu in Cidy_Mini_PD_Process. Confirms with the user, then resets all Cidy Mini PD global variables and routes back into Cidy_Mini_PD for a fresh welcome and question. Set Global.debugMode = true in the test pane to see DEBUG trace messages at each step."
 startBehavior: UseLatestPublishedContentAndCancelOtherTopics
 beginDialog:
   kind: OnRecognizedIntent
@@ -23,7 +23,7 @@ beginDialog:
           actions:
             - kind: SendActivity
               id: sendActivity_debug_restartEntry
-              activity: "DEBUG - Cidy_Mini_Restart entered. Incoming activity text: {System.Activity.Text}"
+              activity: "DEBUG - Cidy_Mini_PD_Restart entered. Incoming activity text: {System.Activity.Text}"
 
     - kind: Question
       id: question_confirmRestart
@@ -46,7 +46,7 @@ beginDialog:
                   actions:
                     - kind: SendActivity
                       id: sendActivity_debug_restartConfirmed
-                      activity: DEBUG - Restart confirmed. Resetting all Cidy Mini global variables.
+                      activity: DEBUG - Restart confirmed. Resetting all Cidy Mini PD global variables.
 
             - kind: SetVariable
               id: reset_sessionStarted
@@ -138,8 +138,8 @@ beginDialog:
                       activity: Returning to the main menu.
               elseActions:
                 - kind: BeginDialog
-                  id: 6lrV8k
-                  dialog: cidypub_CidyMini.topic.Cidy_Mini
+                  id: goToAsk
+                  dialog: REPLACE_WITH_CIDY_MINI_PD_TOPIC_ID
 
       elseActions:
         - kind: ConditionGroup

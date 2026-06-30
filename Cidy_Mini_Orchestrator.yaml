@@ -1,0 +1,101 @@
+kind: AdaptiveDialog
+modelDescription: EXPERIMENTAL - Cidy Mini Orchestrator entry. Welcomes the user once, presents a topic selection menu (DA, RPTC, PD, Unsure), then hands off to Cidy_Mini_Orchestrator_Route for routing to the appropriate sub-agent. Never calls itself — only BeginDialogs forward into Cidy_Mini_Orchestrator_Route to avoid execution-cycle errors. When sub-agents restart, they return control here for a fresh topic selection.
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_debugModeDefault
+      conditions:
+        - id: conditionItem_debugModeDefault
+          condition: =IsBlank(Global.debugMode)
+          actions:
+            - kind: SetVariable
+              id: setVariable_debugModeDefault
+              variable: Global.debugMode
+              value: false
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_entry
+      conditions:
+        - id: conditionItem_debug_entry
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_entry
+              activity: "DEBUG - Cidy_Mini_Orchestrator entered. sessionStarted: {Global.sessionStarted} | orchestratorMode: {Global.orchestratorMode} | incoming activity text: {System.Activity.Text}"
+
+    - kind: ConditionGroup
+      id: conditionGroup_firstRun
+      conditions:
+        - id: conditionItem_firstRun
+          condition: =IsBlank(Global.sessionStarted)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_welcome
+              activity: |-
+                Hello, {System.User.FirstName}!
+
+                **I'm Cidy**, your UN DESA capacity development assistant.
+
+                I can answer questions on the following topics:
+
+            - kind: SetVariable
+              id: setVariable_sessionStarted
+              variable: Global.sessionStarted
+              value: =true
+
+    - kind: Question
+      id: question_topicChoice
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.topicChoice
+      prompt: "**Which topic would you like to ask about?**"
+      entity:
+        kind: EmbeddedEntity
+        sensitivityLevel: None
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: DA
+              displayName: Development Account (DA)
+
+            - id: RPTC
+              displayName: RPTC
+
+            - id: PD
+              displayName: Programme Development (PD)
+
+            - id: Unsure
+              displayName: Unsure / General
+
+    - kind: SetVariable
+      id: set_selectedTopic
+      variable: Global.selectedTopic
+      value: |
+        =Switch(
+          Text(Topic.topicChoice),
+          "Development Account (DA)", "DA",
+          "RPTC", "RPTC",
+          "Programme Development (PD)", "PD",
+          "Unsure / General", "Unsure",
+          "unknown"
+        )
+
+    - kind: ConditionGroup
+      id: conditionGroup_debug_topicChoice
+      conditions:
+        - id: conditionItem_debug_topicChoice
+          condition: =Global.debugMode = true
+          actions:
+            - kind: SendActivity
+              id: sendActivity_debug_topicChoice
+              activity: "DEBUG - Topic selected: {Global.selectedTopic} | Routing to Cidy_Mini_Orchestrator_Route."
+
+    - kind: BeginDialog
+      id: CU4QUa
+      dialog: eva_CidyMiniOrchestrator.topic.Cidy_Mini_Orchestrator_Route
+
+inputType: {}
+outputType: {}
