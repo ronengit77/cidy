@@ -41,7 +41,7 @@ beginDialog:
               activity: |-
                 Hello, {System.User.FirstName}!
 
-                **I'm Cidy Mini**, an experimental single-knowledge-base version of Cidy.
+                **I'm Cidy Mini PD**, an experimental single-knowledge-base version of Cidy.
 
                 Ask me anything and I'll answer from the Knowledge base, with sources and a confidence level for each response.
 
@@ -57,10 +57,10 @@ beginDialog:
 
     - kind: Question
       id: question_userQuestion
-      alwaysPrompt: true
       interruptionPolicy:
         allowInterruption: true
 
+      alwaysPrompt: true
       variable: Global.userQuestion
       prompt: "**What would you like to know?**"
       entity:
@@ -89,10 +89,10 @@ beginDialog:
 
             - kind: Question
               id: question_userQuestion_postDebugOn
-              alwaysPrompt: true
               interruptionPolicy:
                 allowInterruption: true
 
+              alwaysPrompt: true
               variable: Global.userQuestion
               prompt: "**What would you like to know?**"
               entity:
@@ -118,10 +118,10 @@ beginDialog:
 
             - kind: Question
               id: question_userQuestion_postDebugOff
-              alwaysPrompt: true
               interruptionPolicy:
                 allowInterruption: true
 
+              alwaysPrompt: true
               variable: Global.userQuestion
               prompt: "**What would you like to know?**"
               entity:
@@ -151,10 +151,10 @@ beginDialog:
 
             - kind: Question
               id: question_userQuestion_postMenuLabelLeak
-              alwaysPrompt: true
               interruptionPolicy:
                 allowInterruption: true
 
+              alwaysPrompt: true
               variable: Global.userQuestion
               prompt: "**What would you like to know?**"
               entity:
@@ -183,7 +183,7 @@ beginDialog:
 inputType:
   properties:
     orchestratorMode:
+      type: Boolean
       title: orchestratorMode
-      type: boolean
 
 outputType: {}
