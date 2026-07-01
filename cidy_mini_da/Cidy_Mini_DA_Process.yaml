@@ -222,7 +222,7 @@ beginDialog:
           actions:
             - kind: BeginDialog
               id: goToEscalate
-              dialog: crc0f_CidyMiniDA.topic.Escalate_1
+              dialog: crc0f_CidyMiniDA.topic.Escalate
 
         - id: conditionItem_restart
           condition: =Global.nextAction = "restart"
