@@ -1,0 +1,29 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SetVariable
+      id: log_userMessage
+      variable: Global.transcript
+      value: =Coalesce(Global.transcript, "TRANSCRIPT" & Char(13) & Char(10) & Char(13) & Char(10)) & "USER: " & System.Activity.Text & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+
+    - kind: SetVariable
+      id: log_agentResponse
+      variable: Global.transcript
+      value: =Global.transcript & "CIDY: " & Coalesce(Topic.Answer, "[No answer found]") & Char(13) & Char(10) & Char(13) & Char(10)
+
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic

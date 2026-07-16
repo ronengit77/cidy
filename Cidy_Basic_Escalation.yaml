@@ -1,0 +1,125 @@
+kind: AdaptiveDialog
+modelDescription: |-
+  Escalation topic for Cidy Mini Basic General. Triggered via escalation phrases or a menu option.
+  Collects a description of the user's issue, generates a 2-3 sentence AI summary of the interaction,
+  then sends a formatted HTML email to ronen.rapoport@un.org with the issue description, interaction
+  summary, and conversation transcript. The user is CC'd automatically via System.User.Email.
+  Uses the shared Office 365 connector (SendEmailV2) on crc0f_CidyMiniBasicGeneral.
+  NOTE: This version does not require Global.transcript or Global.userQuestion. The transcript section
+  of the email shows the user's issue description. To include the full conversation transcript, add
+  Global.transcript logging to the entry topic and restore the Coalesce expressions in this topic.
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escalate
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Talk to an agent
+      - Talk to a person
+      - Talk to someone
+      - I need help from a person
+      - Can I talk to a human
+      - Connect me to a live agent
+      - Escalate
+      - Speak to a colleague
+      - I need more help
+      - Transfer me
+
+  actions:
+    - kind: SendActivity
+      id: msg_escalate_intro
+      activity: I understand you'd like to escalate this to a colleague. I'll put together a summary and send it by email — they'll be in touch with you directly.
+
+    - kind: Question
+      id: question_userIssueNotes
+      interruptionPolicy:
+        allowInterruption: true
+      variable: Topic.userIssueNotes
+      prompt: "Please briefly describe the issue or what you were unable to find:"
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SendActivity
+      id: debug_transcript
+      activity: "DEBUG – Global.transcript value: {Global.transcript}"
+z
+    - kind: AnswerQuestionWithAI
+      id: generate_summary
+      autoSend: false
+      variable: Global.issueSummary
+      userInput: |
+        =Coalesce(Global.transcript, "Issue described by user: " & Topic.userIssueNotes)
+      additionalInstructions: |-
+        You are summarizing an escalated inquiry from a Cidy knowledge assistant.
+        Write 4-5 sentences maximum. Cover what the user was looking for, what the agent told them, and why it did not fully resolve their need.
+        Be concise and professional. This will be read by a UN DESA CDPMO staff member.
+      input: |
+        =Coalesce(Global.transcript, "Issue described by user: " & Topic.userIssueNotes)
+
+    - kind: SetVariable
+      id: build_emailBody
+      variable: Topic.emailBody
+      value: |
+        ="<html><body style='font-family: Arial, sans-serif; color: #333333; max-width: 720px; margin: 0 auto; padding: 0;'>" &
+        "<table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'><tr><td style='background-color: #003366; padding: 16px 24px;'>" &
+        "<span style='color: #ffffff; font-size: 17px; font-weight: bold;'>Cidy Knowledge Assistant &#8211; Escalated Inquiry</span>" &
+        "</td></tr></table>" &
+        "<div style='padding: 4px 0;'>" &
+        "<p>Dear colleague,</p>" &
+        "<p>The following inquiry has been escalated from the Cidy knowledge assistant by " &
+        "<strong>" & System.User.FirstName & " " & System.User.LastName & "</strong>" &
+        " (" & System.User.Email & ").</p>" &
+        "<table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse; margin: 16px 0;'><tr>" &
+        "<td style='background-color: #fff3f3; border-left: 4px solid #cc0000; padding: 12px 16px;'>" &
+        "<p style='font-weight: bold; color: #cc0000; margin: 0 0 6px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;'>Issue Description</p>" &
+        "<p style='margin: 0;'>" & Topic.userIssueNotes & "</p>" &
+        "</td></tr></table>" &
+        "<table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse; margin: 16px 0;'><tr>" &
+        "<td style='background-color: #f0f5ff; border-left: 4px solid #003366; padding: 12px 16px;'>" &
+        "<p style='font-weight: bold; color: #003366; margin: 0 0 6px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;'>Interaction Summary</p>" &
+        "<p style='margin: 0;'>" & Coalesce(Global.issueSummary, "Summary not available.") & "</p>" &
+        "</td></tr></table>" &
+        "<table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse; margin: 16px 0; border: 1px solid #dddddd;'><tr>" &
+        "<td style='padding: 12px 16px; background-color: #f9f9f9;'>" &
+        "<p style='font-weight: bold; margin: 0 0 10px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;'>Conversation Transcript</p>" &
+        "<pre style='white-space: pre-wrap; font-size: 12px; color: #444444; margin: 0; font-family: Courier New, monospace; line-height: 1.6;'>" &
+        Coalesce(Global.transcript, "No transcript available.") &
+        "</pre></td></tr></table>" &
+        "<p style='color: #999999; font-size: 11px; border-top: 1px solid #eeeeee; padding-top: 12px; margin-top: 16px;'>" &
+        "This message was sent automatically by the Cidy knowledge assistant. " &
+        "Please respond directly to " & System.User.Email & " &#8212; do not reply to this email." &
+        "</p></div></body></html>"
+
+    - kind: InvokeConnectorAction
+      id: send_escalation_email
+      input:
+        binding:
+          To: ronen.rapoport@un.org
+          Cc: =System.User.Email & ";jack.wood@un.org;jonathan.parks@un.org"
+          Subject: |
+            ="Cidy – Escalated Inquiry from " & System.User.FirstName & " " & System.User.LastName
+          Body: =Topic.emailBody
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.SendEmailV2
+
+      connectionReference: crc0f_CidyMiniBasicGeneral.shared_office365.a94c50194b03441196c2150afce3826d
+      connectionProperties:
+        mode: Invoker
+
+      operationId: SendEmailV2
+
+    - kind: SendActivity
+      id: msg_escalate_confirmation
+      conversationOutcome: Escalated
+      activity: |-
+        Done — your inquiry has been escalated and a summary has been sent by email.
+
+        A CDPMO colleague will be in touch with you at **{System.User.Email}**. Thank you for using Cidy!
+
+inputType: {}
+outputType: {}
