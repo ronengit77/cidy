@@ -49,14 +49,14 @@ Compose an HTML email body using the template below. Replace all placeholders in
   <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
     <tr>
       <td style="background-color: #003366; padding: 16px 24px;">
-        <span style="color: #ffffff; font-size: 17px; font-weight: bold;">Cidy Knowledge Assistant &#8211; Escalated Inquiry</span>
+        <span style="color: #ffffff; font-size: 17px; font-weight: bold;">{{ your agent name }} &#8211; Escalated Inquiry</span>
       </td>
     </tr>
   </table>
 
   <div style="padding: 4px 0;">
     <p>Dear colleague,</p>
-    <p>The following inquiry has been escalated from the Cidy knowledge assistant by <strong>{{ user full name }}</strong> ({{ user email }}).</p>
+    <p>The following inquiry has been escalated from <strong>{{ your agent name }}</strong> by <strong>{{ user full name }}</strong> ({{ user email }}).</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin: 16px 0;">
       <tr>
@@ -86,7 +86,7 @@ Compose an HTML email body using the template below. Replace all placeholders in
     </table>
 
     <p style="color: #999999; font-size: 11px; border-top: 1px solid #eeeeee; padding-top: 12px; margin-top: 16px;">
-      This message was sent automatically by the Cidy knowledge assistant.
+      This message was sent automatically by {{ your agent name }}.
       Please respond directly to {{ user email }} &#8212; do not reply to this email.
     </p>
   </div>
@@ -99,7 +99,7 @@ Compose an HTML email body using the template below. Replace all placeholders in
 Call the Outlook send email tool with:
 - **To:** ronen.rapoport@un.org
 - **Cc:** {{ user email }}; jack.wood@un.org; jonathan.parks@un.org
-- **Subject:** Cidy – Escalated Inquiry from {{ user full name }}
+- **Subject:** {{ your agent name }} – Escalated Inquiry from {{ user full name }}
 - **Body:** the HTML email body composed in Step 5
 - **Is HTML:** true
 
@@ -108,6 +108,7 @@ Tell the user:
 > "Done — your inquiry has been escalated and a summary has been sent by email. A CDPMO colleague will be in touch with you directly. Thank you for using Cidy!"
 
 ## Notes
+- **{{ your agent name }}** should be replaced with this agent's name as defined in its instructions (e.g., "Cidy RPTC", "Cidy PD", "Cidy DA", "Cidy General"). Use the exact name — do not invent or abbreviate it.
 - If the user's name or email is not available from the conversation context, omit those fields gracefully rather than leaving a visible placeholder.
 - If the Outlook tool call fails, tell the user: "I was unable to send the escalation email automatically. Please contact ronen.rapoport@un.org directly and describe your issue."
 - Do not escalate unless the user has explicitly asked to do so.
