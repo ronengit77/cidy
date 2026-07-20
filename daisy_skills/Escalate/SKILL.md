@@ -1,5 +1,5 @@
 ---
-name: escalate
+name: escalate-daisy-v-1.0
 description: Handle escalation requests from users who need to speak with a human colleague. Collects a brief description of the issue, generates a summary and conversation log, and sends a formatted HTML email to a CDPMO colleague using the Outlook tool. Use this skill whenever the user says something like "escalate", "talk to a person", "talk to an agent", "speak to a colleague", "I need help from a human", "connect me to someone", "transfer me", or "I need more help". Do not escalate unless the user has explicitly asked to do so.
 ---
 
