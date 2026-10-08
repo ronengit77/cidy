@@ -153,13 +153,15 @@ After list creation, manually set the following column types in List Settings:
 
 **Must be Single line of text (not Number):**
 
-| Column |
-|--------|
-| budget |
-| ref_number |
-| consumed_budget |
-| participants |
-| women_participants |
+| Column | Reason |
+|--------|--------|
+| budget | Contains currency text |
+| ref_number | Contains text/mixed values |
+| consumed_budget | Contains currency text |
+| participants | May be blank |
+| women_participants | May be blank |
+| travel_code | Contains text codes (e.g. T-2026-001) |
+| year | Stored as text string |
 
 All other columns will auto-detect correctly as Single line of text.
 
