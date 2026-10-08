@@ -25,7 +25,7 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 
-DOCX_FOLDER = Path(__file__).parent.parent / "Knowledge" / "Programme Development" / "Cidy - Country Data"
+DOCX_FOLDER = Path(__file__).parent / "new_source_docs"
 OUTPUT_PATH = Path(__file__).parent / "country_data_sharepoint.xlsx"
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
@@ -80,6 +80,8 @@ SECTIONS = {
     "requests":        "requests",
     "rptc proposals":  "proposals",
     "rptc activities": "activities",
+    "travel":          "travel",
+    "evaluation":      "evaluations",
     "unct":            "contacts",
     "contacts":        "contacts",
     "data quality":    "data_quality",
@@ -126,12 +128,57 @@ def _parse_projects(rows):
             continue
         results.append({
             "title":             _get(row, cols, "title"),
+            "project_code":      _get(row, cols, "project code"),
+            "scope":             _get(row, cols, "scope"),
             "division":          _get(row, cols, "division"),
             "status":            _get(row, cols, "status"),
             "start_date":        _parse_date(_get(row, cols, "start")),
             "end_date":          _parse_date(_get(row, cols, "end")),
             "budget":            _clean_money(_get(row, cols, "budget")),
             "partner_countries": _get(row, cols, "countr"),
+        })
+    return results
+
+
+def _parse_travel(rows):
+    if len(rows) < 2:
+        return []
+    cols = _header_map(rows[0])
+    results = []
+    for row in rows[1:]:
+        if not any(c.strip() for c in row):
+            continue
+        results.append({
+            "title":         _get(row, cols, "title"),
+            "travel_code":   _get(row, cols, "travel code"),
+            "past_forecast": _get(row, cols, "past", "forecast"),
+            "country":       _get(row, cols, "country"),
+            "city":          _get(row, cols, "city"),
+            "division":      _get(row, cols, "division"),
+            "travel_reason": _get(row, cols, "reason", "event"),
+            "event_type":    _get(row, cols, "event type"),
+            "start_date":    _parse_date(_get(row, cols, "start")),
+            "end_date":      _parse_date(_get(row, cols, "end")),
+        })
+    return results
+
+
+def _parse_evaluations(rows):
+    if len(rows) < 2:
+        return []
+    cols = _header_map(rows[0])
+    results = []
+    for row in rows[1:]:
+        if not any(c.strip() for c in row):
+            continue
+        results.append({
+            "title":           _get(row, cols, "title"),
+            "year":            _get(row, cols, "year"),
+            "division":        _get(row, cols, "division"),
+            "partner_countries": _get(row, cols, "countr"),
+            "recommendations": _get(row, cols, "recommend"),
+            "lessons_learned": _get(row, cols, "lesson"),
+            "document_link":   _get(row, cols, "document"),
         })
     return results
 
@@ -219,6 +266,8 @@ def parse_docx(filepath):
         "requests":      [],
         "proposals":     [],
         "activities":    [],
+        "travel":        [],
+        "evaluations":   [],
     }
 
     body_items = []
@@ -269,15 +318,19 @@ def parse_docx(filepath):
             if not content or current_section is None:
                 continue
             if current_section == "key_metrics":
-                result["metrics"]    = _parse_metrics(content)
+                result["metrics"]      = _parse_metrics(content)
             elif current_section == "projects":
-                result["projects"]   = _parse_projects(content)
+                result["projects"]     = _parse_projects(content)
             elif current_section == "requests":
-                result["requests"]   = _parse_requests(content)
+                result["requests"]     = _parse_requests(content)
             elif current_section == "proposals":
-                result["proposals"]  = _parse_proposals(content)
+                result["proposals"]    = _parse_proposals(content)
             elif current_section == "activities":
-                result["activities"] = _parse_activities(content)
+                result["activities"]   = _parse_activities(content)
+            elif current_section == "travel":
+                result["travel"]       = _parse_travel(content)
+            elif current_section == "evaluations":
+                result["evaluations"]  = _parse_evaluations(content)
 
     return result
 
@@ -287,6 +340,16 @@ def parse_docx(filepath):
 def build_flat_list(all_results):
     """One row per record (Project / Request / Proposal / Activity). Country fields repeated on every row."""
     rows = []
+
+    # Columns that don't apply to a record type are None (blank in Excel)
+    BLANK = {
+        "status": None, "budget": None, "partner_countries": None,
+        "ref_number": None, "request_date": None, "contact": None, "summary": None,
+        "project_id": None, "consumed_budget": None, "participants": None, "women_participants": None,
+        "project_code": None, "scope": None,
+        "travel_code": None, "past_forecast": None, "city": None, "travel_reason": None, "event_type": None,
+        "year": None, "recommendations": None, "lessons_learned": None, "document_link": None,
+    }
 
     for r in all_results:
         ctx = {
@@ -298,54 +361,64 @@ def build_flat_list(all_results):
         }
 
         for p in r["projects"]:
-            rows.append({**ctx, "record_type": "Project",
+            rows.append({**ctx, **BLANK, "record_type": "Project",
                 "title": p.get("title"), "division": p.get("division"),
                 "status": p.get("status"), "start_date": p.get("start_date"),
                 "end_date": p.get("end_date"), "budget": p.get("budget"),
                 "partner_countries": p.get("partner_countries"),
-                "ref_number": None, "request_date": None, "contact": None, "summary": None,
-                "project_id": None, "consumed_budget": None,
-                "participants": None, "women_participants": None,
+                "project_code": p.get("project_code"), "scope": p.get("scope"),
             })
 
         for req in r["requests"]:
-            rows.append({**ctx, "record_type": "Request",
+            rows.append({**ctx, **BLANK, "record_type": "Request",
                 "title": req.get("title"), "division": req.get("division"),
                 "status": req.get("status"), "start_date": req.get("start_date"),
-                "end_date": req.get("end_date"), "budget": None,
-                "partner_countries": None,
+                "end_date": req.get("end_date"),
                 "ref_number": req.get("ref_number"), "request_date": req.get("request_date"),
                 "contact": req.get("contact"), "summary": req.get("summary"),
-                "project_id": None, "consumed_budget": None,
-                "participants": None, "women_participants": None,
             })
 
         for prop in r["proposals"]:
-            rows.append({**ctx, "record_type": "Proposal",
+            rows.append({**ctx, **BLANK, "record_type": "Proposal",
                 "title": prop.get("title"), "division": prop.get("division"),
-                "status": None, "start_date": prop.get("planned_start"),
-                "end_date": prop.get("planned_end"), "budget": prop.get("budget"),
-                "partner_countries": prop.get("partner_countries"),
-                "ref_number": None, "request_date": None, "contact": None, "summary": None,
-                "project_id": prop.get("project_id"), "consumed_budget": None,
-                "participants": None, "women_participants": None,
+                "start_date": prop.get("planned_start"), "end_date": prop.get("planned_end"),
+                "budget": prop.get("budget"), "partner_countries": prop.get("partner_countries"),
+                "project_id": prop.get("project_id"),
             })
 
         for act in r["activities"]:
-            rows.append({**ctx, "record_type": "Activity",
+            rows.append({**ctx, **BLANK, "record_type": "Activity",
                 "title": act.get("title"), "division": act.get("division"),
-                "status": None, "start_date": act.get("start_date"),
-                "end_date": act.get("end_date"), "budget": None,
-                "partner_countries": None,
-                "ref_number": None, "request_date": None, "contact": None, "summary": None,
+                "start_date": act.get("start_date"), "end_date": act.get("end_date"),
                 "project_id": act.get("project_id"),
                 "consumed_budget": act.get("consumed_budget"),
                 "participants": act.get("participants"),
                 "women_participants": act.get("women_participants"),
             })
 
+        for trv in r["travel"]:
+            rows.append({**ctx, **BLANK, "record_type": "Travel",
+                "title": trv.get("title"), "division": trv.get("division"),
+                "start_date": trv.get("start_date"), "end_date": trv.get("end_date"),
+                "travel_code": trv.get("travel_code"),
+                "past_forecast": trv.get("past_forecast"),
+                "city": trv.get("city"),
+                "travel_reason": trv.get("travel_reason"),
+                "event_type": trv.get("event_type"),
+            })
+
+        for ev in r["evaluations"]:
+            rows.append({**ctx, **BLANK, "record_type": "Evaluation",
+                "title": ev.get("title"), "division": ev.get("division"),
+                "partner_countries": ev.get("partner_countries"),
+                "year": ev.get("year"),
+                "recommendations": ev.get("recommendations"),
+                "lessons_learned": ev.get("lessons_learned"),
+                "document_link": ev.get("document_link"),
+            })
+
     df = pd.DataFrame(rows)
-    for col in ("ref_number", "project_id"):
+    for col in ("ref_number", "project_id", "travel_code", "year"):
         df[col] = df[col].where(df[col].isna(), df[col].astype(str))
     return df
 
@@ -384,7 +457,8 @@ def main(single_file=None):
             all_results.append(r)
             print(f"  {r['country_code']:12s} projects={len(r['projects']):3d}  "
                   f"requests={len(r['requests']):3d}  proposals={len(r['proposals']):3d}  "
-                  f"activities={len(r['activities']):3d}")
+                  f"activities={len(r['activities']):3d}  "
+                  f"travel={len(r['travel']):3d}  evaluations={len(r['evaluations']):3d}")
         except Exception as e:
             errors.append((f.name, str(e)))
             print(f"  ERROR {f.name}: {e}")
